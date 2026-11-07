@@ -1,0 +1,39 @@
+# CroXY master parameters. Units mm. Every part in build.py reads from here.
+# World frame: origin at the centre of the top plate's underside, +X right, +Y back, +Z up.
+# The XY system hangs under the plate (z < 0); motors sit above it (z > plate_t).
+
+build: {x: 180, y: 180, z: 180}
+
+frame:
+  plate_w: 380          # top plate, square; also the frame outline
+  plate_t: 12           # mild steel, waterjet then machined
+  post: 3030
+  post_center: 175      # posts at (+-175, +-175)
+  chamber_h: 430        # top plate underside to floor plate top
+
+xy:
+  belt_line: 144        # each belt's centre line is this far from the machine centre
+  pulley_pos: 127       # drive and idler centres at +-127 along their belt
+  pitch_r: 6.37         # 20T GT2 pitch radius
+  belt_w: 12
+  belt_t: 1.4
+  belt_z: -20           # belt centre height
+  tension_travel: 6     # idler slot travel (moves away from its drive)
+  rail_off: 128         # MGN12 perimeter rails at +-128
+  rail_len: 230
+  motor_standoff: 30    # G10 thermal-break standoffs between plate and NEMA23 face
+  motor_len: 76
+
+gantry:
+  beam_len: 280
+  beam_w: 25
+  beam_h: 25
+  beam_t: 3             # bent U channel, mild steel or 4130 (Send Cut Send)
+  beam_rail_len: 260    # MGN9
+  x_beam_top: -27       # X beam (spans Y, moves in X) hangs from the X-end adapters
+  y_beam_top: -70       # Y beam (spans X, moves in Y) hangs from the Y-end drop blocks, under the X beam
+  travel: 90            # toolhead centre travels +-90 in X and Y
+
+toolhead:
+  envelope: [60, 60]    # Chube Conduction + Sherpa Heavy stand-in footprint
+  nozzle_z: -195

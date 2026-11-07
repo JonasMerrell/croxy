@@ -1,0 +1,125 @@
+{
+ "studios": [
+  "Top plate",
+  "Corner pulley block",
+  "X-end adapter",
+  "Y-end drop block",
+  "Beam backer",
+  "Toolhead yoke",
+  "Toolhead envelope",
+  "MGN12 rail",
+  "MGN12H carriage",
+  "MGN9 rail",
+  "MGN9H carriage",
+  "GT2 pulley 20T",
+  "GT2 idler 20T",
+  "Belt",
+  "Shaft coupling",
+  "Motor standoff"
+ ],
+ "layout": {
+  "drive_FL": [
+   -127,
+   -144
+  ],
+  "idler_FL": [
+   -144,
+   -127
+  ],
+  "pulley_z": [
+   -28,
+   -12
+  ],
+  "belt_z": -20,
+  "x_carriage_face": -62,
+  "y_carriage_face": -105,
+  "nozzle_z": -195
+ },
+ "moving": {
+  "xcar_back": 62,
+  "xend_back": 63,
+  "xcar_front": 64,
+  "xend_front": 65,
+  "ycar_right": 66,
+  "yend_right": 67,
+  "ycar_left": 68,
+  "yend_left": 69,
+  "xbeam": 70,
+  "xrail": 71,
+  "ybeam": 72,
+  "yrail": 73,
+  "xcar9": 74,
+  "ycar9": 75,
+  "yoke": 76,
+  "tool": 77
+ },
+ "start": [
+  40,
+  -30
+ ],
+ "sweep": [
+  {
+   "pose": [
+    0,
+    0
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    -90
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    -90
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    90
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    90
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    0
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    0
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    0,
+    -90
+   ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    0,
+    90
+   ],
+   "clashes": []
+  }
+ ]
+}

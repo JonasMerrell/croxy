@@ -1,0 +1,406 @@
+<title>CroXY Layout Sketches</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a drawing sheet. Title block, three schematic views, then spec table and open decisions. */
+:root{
+  --paper:#f5f6f3; --sheet:#ffffff; --ink:#1d2329; --ink-2:#56606a; --rule:#c9cfd3;
+  --hot:#f3d7c6; --hot-ink:#b4532a; --cool:#d6e4ee; --cool-ink:#2d6a92;
+  --insul:#e9dc9f; --steel:#7d8a96; --belt:#2b2f33; --accent:#b4532a;
+  --f-display:"Archivo Narrow","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#15191d; --sheet:#1c2126; --ink:#e4e8eb; --ink-2:#9aa5ae; --rule:#39424a;
+  --hot:#4a2e22; --hot-ink:#f0996d; --cool:#1f3442; --cool-ink:#7fb6dc;
+  --insul:#4d4526; --steel:#8f9ba6; --belt:#d6dadd; --accent:#f0996d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#15191d; --sheet:#1c2126; --ink:#e4e8eb; --ink-2:#9aa5ae; --rule:#39424a;
+  --hot:#4a2e22; --hot-ink:#f0996d; --cool:#1f3442; --cool-ink:#7fb6dc;
+  --insul:#4d4526; --steel:#8f9ba6; --belt:#d6dadd; --accent:#f0996d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px}
+.wrap{max-width:1080px;margin:0 auto;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0}
+h1{font-size:2.3rem;line-height:1.05}
+h2{font-size:1.45rem}
+h3{font-size:1.1rem}
+p{margin:0;max-width:68ch}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.titleblock{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:end;border:1.5px solid var(--ink);background:var(--sheet);padding:18px 20px}
+.titleblock .meta{display:grid;grid-template-columns:auto auto;gap:2px 14px;font-family:var(--f-mono);font-size:12px;color:var(--ink-2)}
+.titleblock .meta b{color:var(--ink);font-weight:500}
+.lede{color:var(--ink-2);margin-top:8px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:1px solid var(--ink-2);display:inline-block}
+.views{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:20px}
+figure{margin:0;background:var(--sheet);border:1px solid var(--rule);display:grid;grid-template-rows:auto 1fr auto}
+figure header{display:flex;justify-content:space-between;gap:10px;padding:10px 14px;border-bottom:1px solid var(--rule)}
+figure header .mono{font-size:12px;color:var(--ink-2)}
+.svgbox{overflow-x:auto;padding:8px}
+.svgbox svg{display:block;width:100%;min-width:420px;height:auto}
+figcaption{padding:10px 14px 14px;font-size:13.5px;color:var(--ink-2);border-top:1px solid var(--rule)}
+figure.wide{grid-column:1/-1}
+/* svg styles */
+svg text{font-family:var(--f-mono);font-size:10px;fill:var(--ink)}
+svg .lbl2{fill:var(--ink-2);font-size:9px}
+svg .ttl{font-family:var(--f-display);font-size:12px;font-weight:600}
+.skin{fill:none;stroke:var(--ink);stroke-width:1.6}
+.ins{fill:var(--insul);stroke:none}
+.hot{fill:var(--hot)}
+.cool{fill:var(--cool)}
+.frame{fill:none;stroke:var(--ink);stroke-width:1}
+.post{fill:var(--steel);stroke:var(--ink);stroke-width:.6}
+.plate{fill:var(--steel);opacity:.55;stroke:var(--ink);stroke-width:.8}
+.rail{fill:var(--sheet);stroke:var(--cool-ink);stroke-width:1.1}
+.beam{fill:var(--cool-ink);opacity:.85}
+.belt{fill:none;stroke:var(--belt);stroke-width:1.8}
+.pulley{fill:var(--sheet);stroke:var(--belt);stroke-width:1.4}
+.motor{fill:none;stroke:var(--accent);stroke-width:1.3;stroke-dasharray:4 3}
+.motor-s{fill:var(--sheet);stroke:var(--accent);stroke-width:1.3}
+.tool{fill:var(--accent);opacity:.9}
+.bed{fill:var(--steel);stroke:var(--ink);stroke-width:.8}
+.build{fill:none;stroke:var(--hot-ink);stroke-width:1;stroke-dasharray:5 4}
+.dim{stroke:var(--ink-2);stroke-width:.7;fill:none}
+.lead{stroke:var(--ink-2);stroke-width:.6;fill:none}
+.arrow{stroke:var(--hot-ink);stroke-width:1.2;fill:none}
+.flow{stroke:var(--cool-ink);stroke-width:1.3;fill:none;stroke-dasharray:6 3}
+.module{fill:var(--cool);stroke:var(--ink);stroke-width:1}
+.hidden{fill:none;stroke:var(--ink-2);stroke-width:.9;stroke-dasharray:3 3}
+.zmark{fill:var(--sheet);stroke:var(--ink);stroke-width:1.1}
+.tens{stroke:var(--accent);stroke-width:1.2;fill:none}
+/* sections */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px;align-items:start}
+.panel{background:var(--sheet);border:1px solid var(--rule);padding:18px 20px;display:grid;gap:12px;min-width:0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:6px 8px 6px 0;border-bottom:1px solid var(--rule)}
+th{font-family:var(--f-display);font-weight:600;font-size:13px;color:var(--ink-2);white-space:nowrap;padding-right:14px;letter-spacing:.02em}
+td .tag{font-family:var(--f-mono);font-size:11px;color:var(--accent);margin-left:6px}
+ol.flags{margin:0;padding-left:1.3em;display:grid;gap:10px}
+ol.flags li{padding-left:4px}
+ol.flags b{font-weight:600}
+.q{display:grid;gap:10px}
+.q div{border-left:3px solid var(--accent);padding:2px 0 2px 12px}
+.q b{font-family:var(--f-display);font-size:1.02rem;font-weight:600;display:block}
+.note{font-size:13px;color:var(--ink-2)}
+@media (max-width:560px){.titleblock{grid-template-columns:1fr}h1{font-size:1.9rem}}
+</style>
+
+<div class="wrap">
+
+  <section class="titleblock">
+    <div>
+      <h1>CroXY: layout sketches, rev B</h1>
+      <p class="lede">Schematic layout of the cross-XY enclosed printer for approval before detailed modeling in rCAD. Sizes are first-pass estimates in millimetres, roughly to scale. Nothing here is final.</p>
+    </div>
+    <div class="meta">
+      <span>Build vol.</span><b>180 × 180 × 180</b>
+      <span>Chamber</span><b>150 °C, active</b>
+      <span>Outer (est.)</span><b>406 W × 506 D × 606 H</b>
+      <span>Rev / date</span><b>B · 2026-11-07</b>
+    </div>
+  </section>
+
+  <div class="legend" aria-label="Legend">
+    <span><i class="sw" style="background:var(--hot)"></i>Heated zone (150 °C)</span>
+    <span><i class="sw" style="background:var(--cool)"></i>Cool zone (motors, electronics, filter)</span>
+    <span><i class="sw" style="background:var(--insul)"></i>PIR insulation</span>
+    <span><i class="sw" style="background:var(--steel)"></i>Machined plate / 3030 post</span>
+    <span><i class="sw" style="background:var(--cool-ink)"></i>Rails and gantry beams</span>
+    <span><i class="sw" style="border-color:var(--accent);border-style:dashed"></i>Motor (above or below the plate)</span>
+  </div>
+
+  <div class="views">
+
+    <!-- TOP VIEW -->
+    <figure class="wide">
+      <header><h3>View 1: Top plate plan (looking down, front at bottom)</h3><span class="mono">schematic · ≈1:4</span></header>
+      <div class="svgbox">
+      <svg viewBox="-330 -335 660 590" role="img" aria-label="Top view of the top plate showing gantry, belts, motors and back module">
+        <defs>
+          <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--accent)"/></marker>
+          <marker id="ad" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink-2)"/></marker>
+        </defs>
+        <!-- back module -->
+        <rect class="module" x="-203" y="-303" width="406" height="97"/>
+        <text x="0" y="-262" text-anchor="middle" class="ttl">Back module: filter (upper) + electronics (lower)</text>
+        <text x="0" y="-246" text-anchor="middle" class="lbl2">hinged rear cover, BTT Kraken, 48 V PSU, fans</text>
+        <!-- skin & insulation -->
+        <rect class="ins" x="-203" y="-203" width="406" height="406"/>
+        <rect class="hot" x="-170" y="-170" width="340" height="340"/>
+        <rect class="skin" x="-203" y="-203" width="406" height="406"/>
+        <rect class="frame" x="-170" y="-170" width="340" height="340"/>
+        <!-- posts -->
+        <rect class="post" x="-170" y="-170" width="30" height="30"/><rect class="post" x="140" y="-170" width="30" height="30"/>
+        <rect class="post" x="-170" y="140" width="30" height="30"/><rect class="post" x="140" y="140" width="30" height="30"/>
+        <rect class="post" x="-15" y="-170" width="30" height="30"/>
+        <!-- bed & build -->
+        <rect class="bed" x="-100" y="-100" width="200" height="200" opacity=".35"/>
+        <rect class="build" x="-90" y="-90" width="180" height="180"/>
+        <text x="-86" y="84" class="lbl2" fill="var(--hot-ink)">180 × 180 build</text>
+        <!-- bed arms to Z -->
+        <path class="lead" d="M-100,100 L-140,140 M100,100 L140,140 M0,-100 L0,-140" stroke-width="2"/>
+        <!-- perimeter rails -->
+        <rect class="rail" x="-110" y="122" width="220" height="12"/>
+        <rect class="rail" x="-110" y="-134" width="220" height="12"/>
+        <rect class="rail" x="-134" y="-110" width="12" height="220"/>
+        <rect class="rail" x="122" y="-110" width="12" height="220"/>
+        <!-- belts -->
+        <line class="belt" x1="-110" y1="142" x2="110" y2="142"/>
+        <line class="belt" x1="-110" y1="-142" x2="110" y2="-142"/>
+        <line class="belt" x1="-142" y1="-110" x2="-142" y2="110"/>
+        <line class="belt" x1="142" y1="-110" x2="142" y2="110"/>
+        <circle class="pulley" cx="-110" cy="142" r="8"/><circle class="pulley" cx="110" cy="142" r="8"/>
+        <circle class="pulley" cx="110" cy="-142" r="8"/><circle class="pulley" cx="-110" cy="-142" r="8"/>
+        <circle class="pulley" cx="-142" cy="-110" r="8"/><circle class="pulley" cx="-142" cy="110" r="8"/>
+        <circle class="pulley" cx="142" cy="110" r="8"/><circle class="pulley" cx="142" cy="-110" r="8"/>
+        <!-- beams: X beam at x=30, Y beam at y=-20 -->
+        <rect class="beam" x="22" y="-128" width="16" height="256"/>
+        <rect class="beam" x="-128" y="-28" width="256" height="16" opacity=".6"/>
+        <!-- end carriages + belt clamps -->
+        <rect class="rail" x="18" y="120" width="24" height="16" style="fill:var(--cool-ink)"/>
+        <rect class="rail" x="18" y="-136" width="24" height="16" style="fill:var(--cool-ink)"/>
+        <rect class="rail" x="-136" y="-32" width="16" height="24" style="fill:var(--cool-ink)"/>
+        <rect class="rail" x="120" y="-32" width="16" height="24" style="fill:var(--cool-ink)"/>
+        <path class="lead" d="M30,136 L30,142 M30,-136 L30,-142 M-136,-20 L-142,-20 M136,-20 L142,-20" stroke-width="2.2" style="stroke:var(--belt)"/>
+        <!-- toolhead -->
+        <rect class="tool" x="-5" y="-55" width="70" height="70" rx="4"/>
+        <text x="30" y="-17" text-anchor="middle" style="fill:var(--sheet);font-weight:500">TOOLHEAD</text>
+        <text x="30" y="-5" text-anchor="middle" style="fill:var(--sheet)" class="lbl2">Chube + Sherpa Hvy</text>
+        <!-- motors (above plate), pinwheel -->
+        <rect class="motor" x="-138.5" y="113.5" width="57" height="57"/>
+        <rect class="motor" x="81.5" y="-170.5" width="57" height="57"/>
+        <rect class="motor" x="-170.5" y="-138.5" width="57" height="57"/>
+        <rect class="motor" x="113.5" y="81.5" width="57" height="57"/>
+        <!-- tensioners at idlers -->
+        <path class="tens" d="M96,154 L124,154" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <path class="tens" d="M-124,-154 L-96,-154" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <path class="tens" d="M-154,96 L-154,124" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <path class="tens" d="M154,-124 L154,-96" marker-start="url(#ah)" marker-end="url(#ah)"/>
+        <!-- Z marks -->
+        <circle class="zmark" cx="-155" cy="155" r="9"/><text x="-155" y="158.5" text-anchor="middle" style="font-size:9px">Z1</text>
+        <circle class="zmark" cx="155" cy="155" r="9"/><text x="155" y="158.5" text-anchor="middle" style="font-size:9px">Z2</text>
+        <circle class="zmark" cx="0" cy="-155" r="9"/><text x="0" y="-151.5" text-anchor="middle" style="font-size:9px">Z3</text>
+        <!-- callouts left -->
+        <path class="lead" d="M-110,142 L-230,190"/><text x="-322" y="194">X motor A (FL)</text>
+        <path class="lead" d="M-142,-110 L-230,-140"/><text x="-322" y="-136">Y motor A (BL)</text>
+        <path class="lead" d="M-128,0 L-230,20"/><text x="-322" y="16">Y-end rail</text><text x="-322" y="28" class="lbl2">MGN12 (proposed)</text>
+        <path class="lead" d="M-154,110 L-230,90"/><text x="-322" y="86">Tension slot</text><text x="-322" y="98" class="lbl2">adjust from above</text>
+        <!-- callouts right -->
+        <path class="lead" d="M110,-142 L230,-190"/><text x="236" y="-186">X motor B (BR)</text>
+        <path class="lead" d="M142,110 L230,140"/><text x="236" y="144">Y motor B (FR)</text>
+        <path class="lead" d="M38,60 L230,60"/><text x="236" y="56">X beam</text><text x="236" y="68" class="lbl2">MGN9 + backer</text>
+        <path class="lead" d="M128,-20 L230,-60"/><text x="236" y="-64">Y beam</text><text x="236" y="-52" class="lbl2">MGN9 + backer</text>
+        <path class="lead" d="M170,0 L230,0" /><text x="236" y="4">Insulation</text><text x="236" y="16" class="lbl2">30 PIR + skin</text>
+        <!-- dims -->
+        <path class="dim" d="M-203,222 L203,222" marker-start="url(#ad)" marker-end="url(#ad)"/><text x="0" y="238" text-anchor="middle">406 outer</text>
+        <text x="0" y="190" text-anchor="middle" class="lbl2">340 frame / top plate</text>
+        <text x="0" y="252" text-anchor="middle" class="ttl">FRONT (door)</text>
+      </svg>
+      </div>
+      <figcaption>Two crossed beams, each driven at both ends. The X beam runs front to back and moves in X; the Y beam runs side to side and moves in Y. The toolhead rides MGN9 on both beams where they cross. Four NEMA23s sit on top of the plate in a pinwheel, one per belt, so every corner has one motor and one idler. Idlers ride in slots in the plate and are tensioned from above with a single screw, without opening the chamber. Z1 and Z2 are on the front posts, and Z3 is on a back center post.</figcaption>
+    </figure>
+
+    <!-- FRONT VIEW -->
+    <figure>
+      <header><h3>View 2: Front section</h3><span class="mono">section at Y = 0</span></header>
+      <div class="svgbox">
+      <svg viewBox="-300 -20 600 660" role="img" aria-label="Front section showing thermal zones, Z drive, bed, gantry and XY motors">
+        <defs><marker id="ad2" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--ink-2)"/></marker></defs>
+        <!-- y = 620 - h -->
+        <!-- zones -->
+        <rect class="cool" x="-200" y="560" width="400" height="52"/>   <!-- Z bay h8-60 -->
+        <rect class="ins" x="-200" y="530" width="400" height="30"/>    <!-- floor ins h60-90 -->
+        <rect class="plate" x="-170" y="520" width="340" height="10"/>  <!-- floor plate h90-100 -->
+        <rect class="hot" x="-170" y="160" width="340" height="360"/>   <!-- chamber h100-460 -->
+        <rect class="plate" x="-170" y="148" width="340" height="12"/>  <!-- top plate h460-472 -->
+        <rect class="ins" x="-170" y="118" width="340" height="30"/>    <!-- top ins h472-502 -->
+        <rect class="cool" x="-200" y="20" width="400" height="98"/>    <!-- top bay h502-600 -->
+        <rect class="ins" x="-200" y="118" width="30" height="442"/><rect class="ins" x="170" y="118" width="30" height="442"/>
+        <rect class="skin" x="-203" y="14" width="406" height="606"/>
+        <rect class="plate" x="-203" y="612" width="406" height="8"/>
+        <!-- posts -->
+        <rect class="post" x="-170" y="160" width="30" height="360"/><rect class="post" x="140" y="160" width="30" height="360"/>
+        <!-- Z rails on posts -->
+        <rect class="rail" x="-140" y="170" width="8" height="340"/><rect class="rail" x="132" y="170" width="8" height="340"/>
+        <!-- Z belts -->
+        <line class="belt" x1="-124" y1="170" x2="-124" y2="575"/><line class="belt" x1="124" y1="170" x2="124" y2="575"/>
+        <circle class="pulley" cx="-124" cy="170" r="6"/><circle class="pulley" cx="124" cy="170" r="6"/>
+        <!-- Z motors -->
+        <rect class="motor-s" x="-145" y="562" width="42" height="46"/><rect class="motor-s" x="103" y="562" width="42" height="46"/>
+        <circle class="pulley" cx="-124" cy="575" r="6"/><circle class="pulley" cx="124" cy="575" r="6"/>
+        <!-- bed at mid travel: top h=230 -> y=390 -->
+        <rect class="bed" x="-100" y="390" width="200" height="8"/>
+        <rect x="-100" y="398" width="200" height="4" style="fill:var(--hot-ink)"/>
+        <path class="lead" d="M-100,404 L-132,404 M100,404 L132,404" stroke-width="5" style="stroke:var(--steel)"/>
+        <!-- build envelope -->
+        <rect class="build" x="-90" y="300" width="180" height="180" opacity=".7"/>
+        <!-- toolhead nozzle tip h320 -> y300 -->
+        <rect class="tool" x="-5" y="200" width="70" height="92" rx="3"/>
+        <path d="M24,292 L36,292 L30,300 z" style="fill:var(--accent)"/>
+        <text x="30" y="250" text-anchor="middle" style="fill:var(--sheet)">TOOL</text>
+        <!-- server fan duct (motor outside) -->
+        <path class="flow" d="M-5,284 L-40,284 L-40,166"/>
+        <!-- gantry: Y beam (full span) h420-436 -> y184-200 ; X beam section h436-452 -> y168-184 -->
+        <rect class="beam" x="-128" y="184" width="256" height="14" opacity=".6"/>
+        <rect class="beam" x="22" y="168" width="16" height="16"/>
+        <rect class="rail" x="-134" y="160" width="12" height="8"/><rect class="rail" x="122" y="160" width="12" height="8"/>
+        <!-- XY motors above plate on standoffs -->
+        <rect x="-130" y="118" width="40" height="15" style="fill:var(--ink-2)"/>
+        <rect class="motor-s" x="-138.5" y="56" width="57" height="62"/>
+        <line class="belt" x1="-110" y1="118" x2="-110" y2="172" style="stroke-width:3"/>
+        <circle class="pulley" cx="-110" cy="172" r="7"/>
+        <rect x="122" y="118" width="40" height="15" style="fill:var(--ink-2)"/>
+        <rect class="motor-s" x="113.5" y="56" width="57" height="62"/>
+        <!-- top vent fan -->
+        <rect x="-20" y="22" width="40" height="8" style="fill:var(--cool-ink)"/>
+        <!-- labels -->
+        <path class="lead" d="M-138,80 L-230,60"/><text x="-296" y="50">NEMA23 XY</text><text x="-296" y="62" class="lbl2">on thermal-break</text><text x="-296" y="72" class="lbl2">standoffs</text>
+        <path class="lead" d="M-170,154 L-230,140"/><text x="-296" y="136">Top plate</text><text x="-296" y="148" class="lbl2">12 mm mild steel</text>
+        <path class="lead" d="M-140,300 L-230,300"/><text x="-296" y="296">Z rail</text><text x="-296" y="308" class="lbl2">MGN12 (proposed)</text>
+        <path class="lead" d="M-124,440 L-230,440"/><text x="-296" y="436">Z belt loop</text><text x="-296" y="448" class="lbl2">tension at top idler</text>
+        <path class="lead" d="M-145,585 L-230,590"/><text x="-296" y="586">Z motor</text><text x="-296" y="598" class="lbl2">cool bay</text>
+        <path class="lead" d="M100,394 L230,380"/><text x="234" y="376">MIC6 bed</text><text x="234" y="388" class="lbl2">200 × 200</text>
+        <path class="lead" d="M65,250 L230,250"/><text x="234" y="246">Toolhead</text><text x="234" y="258" class="lbl2">nozzle fixed Z</text>
+        <path class="lead" d="M38,176 L230,190"/><text x="234" y="190">X beam</text>
+        <path class="lead" d="M-40,200 L-60,40 L-20,26"/><text x="-56" y="44" class="lbl2" text-anchor="end">part-fan air</text>
+        <!-- height dims -->
+        <path class="dim" d="M270,14 L270,620" marker-start="url(#ad2)" marker-end="url(#ad2)"/>
+        <text x="276" y="320" class="lbl2" transform="rotate(90 276 320)" text-anchor="middle">≈606 overall</text>
+        <path class="dim" d="M206,160 L206,520" marker-start="url(#ad2)" marker-end="url(#ad2)" opacity=".7"/>
+        <text x="212" y="340" class="lbl2" transform="rotate(90 212 340)" text-anchor="middle">360 chamber</text>
+      </svg>
+      </div>
+      <figcaption>Three stacked zones: a cool Z motor bay, the heated chamber, and a cool top bay for the XY motors. The structure (3030 posts plus floor and top plates) sits entirely inside the insulation, so the whole frame heats evenly. The nozzle stays at a fixed height and the bed moves down.</figcaption>
+    </figure>
+
+    <!-- SIDE VIEW -->
+    <figure>
+      <header><h3>View 3: Side section</h3><span class="mono">section at X = 0, front at left</span></header>
+      <div class="svgbox">
+      <svg viewBox="-300 -20 640 660" role="img" aria-label="Side section showing door, back Z, heater, filter loop and back module">
+        <defs><marker id="ad3" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--cool-ink)"/></marker></defs>
+        <!-- zones -->
+        <rect class="cool" x="-200" y="560" width="400" height="52"/>
+        <rect class="ins" x="-200" y="530" width="400" height="30"/>
+        <rect class="plate" x="-170" y="520" width="340" height="10"/>
+        <rect class="hot" x="-170" y="160" width="340" height="360"/>
+        <rect class="plate" x="-170" y="148" width="340" height="12"/>
+        <rect class="ins" x="-170" y="118" width="340" height="30"/>
+        <rect class="cool" x="-200" y="20" width="400" height="98"/>
+        <!-- door (front, left) -->
+        <rect class="ins" x="-200" y="160" width="30" height="360"/>
+        <rect x="-203" y="230" width="33" height="200" style="fill:var(--cool);opacity:.8;stroke:var(--ink);stroke-width:.8"/>
+        <rect class="ins" x="-200" y="118" width="30" height="42"/>
+        <!-- back wall -->
+        <rect class="ins" x="170" y="118" width="30" height="442"/>
+        <rect class="skin" x="-203" y="14" width="406" height="606"/>
+        <rect class="plate" x="-203" y="612" width="406" height="8"/>
+        <!-- back module -->
+        <rect class="module" x="206" y="14" width="97" height="606"/>
+        <line x1="206" y1="300" x2="303" y2="300" stroke="var(--ink)"/>
+        <text x="254" y="150" text-anchor="middle" class="ttl">FILTER</text>
+        <text x="254" y="164" text-anchor="middle" class="lbl2">HEPA + carbon</text>
+        <text x="254" y="176" text-anchor="middle" class="lbl2">+ cooler, blower</text>
+        <text x="254" y="440" text-anchor="middle" class="ttl">ELECTRONICS</text>
+        <text x="254" y="454" text-anchor="middle" class="lbl2">Kraken, 48 V PSU</text>
+        <text x="254" y="466" text-anchor="middle" class="lbl2">fans, hinged cover</text>
+        <!-- posts -->
+        <rect class="post" x="-170" y="160" width="30" height="360"/><rect class="post" x="140" y="160" width="30" height="360"/>
+        <!-- back Z3 -->
+        <rect class="rail" x="132" y="170" width="8" height="340"/>
+        <line class="belt" x1="124" y1="170" x2="124" y2="575"/>
+        <circle class="pulley" cx="124" cy="170" r="6"/><circle class="pulley" cx="124" cy="575" r="6"/>
+        <rect class="motor-s" x="103" y="562" width="42" height="46"/>
+        <!-- bed -->
+        <rect class="bed" x="-100" y="390" width="200" height="8"/>
+        <rect x="-100" y="398" width="200" height="4" style="fill:var(--hot-ink)"/>
+        <path class="lead" d="M100,404 L132,404" stroke-width="5" style="stroke:var(--steel)"/>
+        <rect class="build" x="-90" y="300" width="180" height="180" opacity=".7"/>
+        <!-- toolhead at d=+20 -->
+        <rect class="tool" x="-15" y="200" width="70" height="92" rx="3"/>
+        <path d="M14,292 L26,292 L20,300 z" style="fill:var(--accent)"/>
+        <!-- gantry: X beam full span here, Y beam section -->
+        <rect class="beam" x="-128" y="168" width="256" height="16"/>
+        <rect class="beam" x="12" y="184" width="16" height="14" opacity=".6"/>
+        <!-- heater (behind section plane) -->
+        <rect class="hidden" x="100" y="430" width="36" height="80"/>
+        <text x="96" y="470" text-anchor="end" class="lbl2" fill="var(--hot-ink)">PTC heater</text>
+        <text x="96" y="482" text-anchor="end" class="lbl2">(beside Z3)</text>
+        <circle cx="160" cy="470" r="4" style="fill:var(--accent)"/>
+        <line x1="160" y1="470" x2="216" y2="470" stroke="var(--accent)" stroke-width="2"/>
+        <rect x="216" y="460" width="18" height="20" style="fill:var(--sheet);stroke:var(--accent)"/>
+        <!-- filter loop -->
+        <path class="flow" d="M150,200 L240,200 L240,90" marker-end="url(#ad3)"/>
+        <path class="flow" d="M270,90 L270,250 L150,250" marker-end="url(#ad3)"/>
+        <!-- XY motors -->
+        <rect x="-130" y="118" width="40" height="15" style="fill:var(--ink-2)"/>
+        <rect class="motor-s" x="-138.5" y="56" width="57" height="62"/>
+        <rect x="122" y="118" width="40" height="15" style="fill:var(--ink-2)"/>
+        <rect class="motor-s" x="113.5" y="56" width="57" height="62"/>
+        <!-- labels -->
+        <path class="lead" d="M-200,330 L-230,330"/><text x="-296" y="326">Front door</text><text x="-296" y="338" class="lbl2">insulated,</text><text x="-296" y="348" class="lbl2">double glazed</text>
+        <path class="lead" d="M-128,176 L-230,190"/><text x="-296" y="186">X beam</text><text x="-296" y="198" class="lbl2">full span here</text>
+        <path class="lead" d="M216,470 L322,520"/><text x="248" y="534" class="lbl2">fan motor outside,</text><text x="248" y="546" class="lbl2">impeller inside</text>
+        <text x="150" y="214" class="lbl2" fill="var(--cool-ink)">out</text>
+        <text x="150" y="264" class="lbl2" fill="var(--cool-ink)">return</text>
+        <path class="dim" d="M-203,634 L303,634" marker-start="url(#ad3)" marker-end="url(#ad3)" style="stroke:var(--ink-2)"/>
+        <text x="50" y="630" text-anchor="middle" class="lbl2">≈506 overall depth</text>
+      </svg>
+      </div>
+      <figcaption>The back module carries the filter loop on top and the electronics underneath. Chamber air goes out to the filter, is cooled and filtered, then returns. The heater's fan motor sits outside the hot zone and drives an impeller inside, like an oven convection fan.</figcaption>
+    </figure>
+  </div>
+
+  <div class="cols">
+    <section class="panel">
+      <h2>Spec so far</h2>
+      <table>
+        <tr><th>Kinematics</th><td>Cross-XY, two crossed beams, each driven at both ends</td></tr>
+        <tr><th>Build volume</th><td class="mono">180 × 180 × 180 mm</td></tr>
+        <tr><th>Chamber</th><td>150 °C, PTC heater with fan, PIR foam board insulation</td></tr>
+        <tr><th>Structure</th><td>Mild steel top plate (waterjet, then machined) carries all XY parts; steel floor plate; 3030 corner posts</td></tr>
+        <tr><th>XY drive</th><td>NEMA23, Gates EPDM GT2 12 mm, pulleys and idlers in double shear, tension from above, 4 motors (one per belt, pinwheel)</td></tr>
+        <tr><th>XY rails</th><td>MGN9 on steel backers (Send Cut Send, mild steel or 4130, rail face finish-machined), sized by dynamic sim; MGN12 perimeter rails<span class="tag">MGN12: proposed</span></td></tr>
+        <tr><th>Z</th><td>3 belted NEMA17 motors, Klipper z-tilt, 2 front + 1 back, one rail per belt</td></tr>
+        <tr><th>Bed</th><td>MIC6, magnetic sheet (clips as backup)<span class="tag">200 × 200: proposed</span></td></tr>
+        <tr><th>Toolhead</th><td>Chube Conduction, Sherpa Heavy or CNC equivalent, high-temp LDO motor, server-fan part cooling, Beacon3D</td></tr>
+        <tr><th>Electronics</th><td>BTT Kraken, 48 V steppers, enclosed back box with fans and full access</td></tr>
+        <tr><th>Fumes</th><td>Filter system for toxic gases</td></tr>
+        <tr><th>Materials</th><td>Your CNC (aluminium) and PPS-CF / PET-CF prints</td></tr>
+        <tr><th>Files</th><td>New GitHub repo (name pending)</td></tr>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Engineering flags at 150 °C</h2>
+      <ol class="flags">
+        <li><b>Rail vs plate expansion: resolved.</b> The top plate, floor plate and beam backers are all steel, so they grow with the rails. Z rails on 3030 aluminium posts still mismatch over 340 mm, so those need steel strips under the rails or mounts fixed at one end.</li>
+        <li><b>Steel plate stability.</b> Hot-rolled plate holds rolling stress and moves when you machine it. Rough both faces, stress-relieve (or heat-cycle to about 200 °C a few times), then finish-machine. Blacken or paint everything except the mating faces.</li>
+        <li><b>Motors on a hot plate.</b> The NEMA23 faces would conduct heat straight from a 150 °C plate. The sketch puts them on G10 or PEEK thermal-break standoffs with a ventilated top bay. The double-shear lower bearing sits under the plate.</li>
+        <li><b>Fans in the chamber.</b> Normal server fans and PTC heater fans won't survive 150 °C. The sketch keeps both fan motors outside: part-cooling air is ducted in from the top bay, and the heater uses a shaft-through convection impeller.</li>
+        <li><b>Belts at the hottest spot.</b> The XY belts run just under the plate, where the air is hottest. Check the Gates EPDM rated maximum temperature.</li>
+        <li><b>PIR foam limit.</b> Many PIR boards are rated near or below 150 °C continuous. Check your board's datasheet. A thin high-temp hot-face layer such as ceramic fiber or aerogel may be needed.</li>
+        <li><b>Hot carbon gives fumes back.</b> Activated carbon releases what it adsorbed when it's hot, so the filter loop cools the air before it reaches the filter.</li>
+        <li><b>Beacon in a hot chamber.</b> Confirm Beacon's rated operating temperature for a 150 °C chamber.</li>
+        <li><b>Driver count.</b> The Kraken's 8 drivers fit 4 XY + 3 Z + 1 E exactly, with none spare.</li>
+      </ol>
+    </section>
+  </div>
+
+  <section class="panel">
+    <h2>Decisions before modeling</h2>
+    <div class="q">
+      <div><b>A. XY motors.</b>Decided: four NEMA23s, one per belt, pinwheeled around the corners.</div>
+      <div><b>B. Frame inside the insulation?</b>The sketch puts the posts and plates inside the insulation so they heat evenly, with insulation and an outer skin wrapped around them.</div>
+      <div><b>C. Top plate thickness.</b>Decided: mild steel. Proposed: 12 mm (about 11 kg). 10 mm would save weight if the sim allows it.</div>
+      <div><b>D. Small items.</b>Decided: NEMA17 for Z, and an insulated front door with a double-glazed window. Proposed: a 200 × 200 bed.</div>
+    </div>
+    <p class="note">All dimensions are first estimates for layout only. Detailed modeling in rCAD starts after you approve this layout.</p>
+  </section>
+
+</div>
