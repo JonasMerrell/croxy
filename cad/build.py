@@ -357,11 +357,39 @@ res = r("add_feature", kind="extrude", name="Z belt", params={"profiles": [{"ske
 zbelt_body = new_body(res)
 name_part(zbelt_body, "Gates EPDM GT2 12 mm Z belt", None, "#22262a", "satin")
 
-S_ZMOUNT = studio("Z motor mount")
+# Z drive with a 1:3 belt reduction, in the column frame: the jackshaft J carries the 20T Z drive
+# pulley inboard and a 60T pulley outboard; the NEMA17 sits inboard of the mount at J + (0, C, 0)
+# and drives the 60T with a 20T through a closed 6 mm GT2 loop.
 mz = Z["motor_z"]
-res = box(-6, 0, Z["belt_offset"] - 21, Z["belt_offset"] + 21, mz - 21, FLOOR[0], "new", "Plate")
+RD = Z["reduction"]
+R60, R20 = RD["big_t"] * 2 / (2 * math.pi), RD["small_t"] * 2 / (2 * math.pi)
+JY, MY = Z["belt_offset"], Z["belt_offset"] + RD["centre"]
+RX0 = -6 - 10 - 8                     # outboard face of the reduction pulleys (plate 6, bearing boss 10, pulley 8)
+S_ZMOUNT = studio("Z motor mount")
+res = box(-6, 0, JY - 21, MY + 21, mz - 21, FLOOR[0], "new", "Plate")
 zmount_body = new_body(res)
-name_part(zmount_body, "Z motor mount", "Steel", "#7a8691", "metal")
+box(-16, -6, JY - 14, JY + 14, mz - 14, mz + 14, "add", "Bearing boss")   # two 608s for the jackshaft
+name_part(zmount_body, "Z motor mount (motor holes slotted for reduction belt tension)", "Steel", "#7a8691", "metal")
+
+S_P60 = studio("GT2 pulley 60T 6 mm")
+res = cyl(0, 0, R60 + 1.4, 0, 0.75, "new", "Flange"); cyl(0, 0, R60 - 0.4, 0.75, 7.25, "add"); cyl(0, 0, R60 + 1.4, 7.25, 8, "add")
+p60_body = new_body(res); name_part(p60_body, f"GT2 {RD['big_t']}T pulley, 6 mm belt, 8 mm bore", "Aluminium 6061", "#b8bec4", "satin")
+S_P20 = studio("GT2 pulley 20T 6 mm")
+res = cyl(0, 0, 8, 0, 0.75, "new", "Flange"); cyl(0, 0, R20 - 0.4, 0.75, 7.25, "add"); cyl(0, 0, 8, 7.25, 8, "add")
+p20_body = new_body(res); name_part(p20_body, f"GT2 {RD['small_t']}T pulley, 6 mm belt, 5 mm bore", "Aluminium 6061", "#b8bec4", "satin")
+
+# open belt around two pulleys of different radius: big at the origin, small at (C, 0)
+def open_belt(Rb, rs, C):
+    a = math.acos((Rb - rs) / C)
+    pt = lambda cx, rr, ang: [cx + rr * math.cos(ang), rr * math.sin(ang)]
+    return [{"type": "line", "from": pt(0, Rb, a), "to": pt(C, rs, a)},
+            {"type": "arc", "center": [C, 0], "start": pt(C, rs, -a), "end": pt(C, rs, a)},
+            {"type": "line", "from": pt(C, rs, -a), "to": pt(0, Rb, -a)},
+            {"type": "arc", "center": [0, 0], "start": pt(0, Rb, a), "end": pt(0, Rb, -a)}]
+S_RBELT = studio("Z reduction belt")
+sid = sketch("top", open_belt(R60 + bt / 2, R20 + bt / 2, RD["centre"]) + open_belt(R60 - bt / 2, R20 - bt / 2, RD["centre"]), "Belt")
+res = r("add_feature", kind="extrude", name="Belt", params={"profiles": [{"sketch": sid}], "depth": "6", "op": "new"})
+rbelt_body = new_body(res); name_part(rbelt_body, f"GT2 6 mm closed loop {RD['loop']}", None, "#22262a", "satin")
 
 S_MIC6 = studio("Bed")
 res = box(BX - hb, BX + hb, BY - hb, BY + hb, -BD["t"], 0, "new", "MIC6")
@@ -465,7 +493,14 @@ for col in COLS:
     place_col(col, buy["pulley"], [Z["belt_x"] - 8, Z["belt_offset"], Z["motor_z"]], RY90, f"{nm} Z drive pulley")
     place_col(col, (S_ZBELT, zbelt_body), [Z["belt_x"] - BW / 2, Z["belt_offset"], (Z["idler_z"] + Z["motor_z"]) / 2], RAILV, f"{nm} Z belt")
     place_col(col, (S_ZMOUNT, zmount_body), [0, 0, 0], I3, f"{nm} Z motor mount")
-    place_col(col, None, [-6, Z["belt_offset"], Z["motor_z"]], mm(RY90, RX180), f"{nm} NEMA17", std=("NEMA", "NEMA 17"), length=40)
+    # 1:3 reduction: jackshaft in two 608s, 60T outboard, NEMA17 inboard of the mount driving a 20T
+    place_col(col, None, [RX0 - 2, JY, mz], RY90, f"{nm} Z jackshaft", std=("Shaft", "Ø8"), length=round(Z["belt_x"] + 10 - (RX0 - 2), 1))
+    for xb in (-16, -9):
+        place_col(col, None, [xb, JY, mz], RY90, f"{nm} Z 608 {xb}", std=("Bearing", "608"))
+    place_col(col, (S_P60, p60_body), [RX0, JY, mz], RY90, f"{nm} Z reduction 60T")
+    place_col(col, (S_P20, p20_body), [RX0, MY, mz], RY90, f"{nm} Z reduction 20T")
+    place_col(col, (S_RBELT, rbelt_body), [RX0 + 1, JY, mz], [[0, 0, 1], [1, 0, 0], [0, 1, 0]], f"{nm} Z reduction belt")
+    place_col(col, None, [0, MY, mz], mm(RY90, RX180), f"{nm} NEMA17", std=("NEMA", "NEMA 17"), length=40)
 
 # moving gantry at (tx, ty): (key, studio/body, position fn, rotation, name)
 def gantry_parts():
@@ -513,7 +548,7 @@ def pose(tx, ty):
         r("assembly_move", assembly=A, instance=moving[k], position=[round(v, 4) for v in f(tx, ty)])
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
-EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17")
+EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z motor mount", "Z jackshaft", "Z 608", "Z reduction")
 def unexpected(info):
     names = {i["id"]: i["name"] for i in info["instances"]}
     bad = []
@@ -559,6 +594,9 @@ r("render_assembly", assembly=A, view="iso_front_left", width=1400, height=1050,
   fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, MOTOR_FACE + 80]], path="render-gantry.png")
 r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height=1050,
   fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, 0]], path="render-below.png")
+# one Z drive (Z1) close up: 1:3 reduction under the floor
+r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height=1050,
+  fit_box=[[-SPF - 30, Z["z12_y"] - 40, mz - 30], [-SPF + 45, Z["z12_y"] + MY + 25, FLOOR[1]]], path="render-zdrive.png")
 r("export", format="step", assembly=A, path="CroXY.step")
 info = r("assembly_info", assembly=A, interference=True)
 json.dump(info, open(os.path.join(OUT, "assembly-info.json"), "w"), indent=1)

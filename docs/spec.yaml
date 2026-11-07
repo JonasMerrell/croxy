@@ -49,7 +49,8 @@ z:
   columns: {Z1: "left plate, y -60", Z2: "right plate, y -60", Z3: "back plate, x 18"}
   drive: "closed GT2 12 mm loop per column: 20T drive below the floor, 20T idler at z -85; the bed arm clamps the inner strand"
   rails: {type: MGN12, count: 3, length: 230, mount: "screwed straight to the steel shear plates"}
-  holding: "TBD: a belted Z with NEMA17s back-drives; add a reduction (e.g. 1:3) or a brake so the bed doesn't drop at power-off"
+  reduction: "1:3 per column: NEMA17 20T -> 60T on an 8 mm jackshaft (two 608s in the steel mount), GT2 6 mm 188 mm closed loop, tensioned by slotted motor holes"
+  holding: "with ~2 kg moving, each motor sees ~0.014 N.m at power-off, about equal to a NEMA17's detent torque; add a brake or go 1:4 if the bed creeps"
   leveling: klipper_z_tilt
   travel: 180
 

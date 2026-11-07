@@ -9724,52 +9724,52 @@
         "points": [
          {
           "id": 1,
-          "x": -152.5,
+          "x": -141.5,
           "y": -7.07
          },
          {
           "id": 2,
-          "x": 152.5,
+          "x": 141.5,
           "y": -7.07
          },
          {
           "id": 4,
-          "x": 152.5,
+          "x": 141.5,
           "y": 0.0
          },
          {
           "id": 6,
-          "x": 152.5,
+          "x": 141.5,
           "y": 7.07
          },
          {
           "id": 9,
-          "x": -152.5,
+          "x": -141.5,
           "y": 7.07
          },
          {
           "id": 11,
-          "x": -152.5,
+          "x": -141.5,
           "y": 0.0
          },
          {
           "id": 15,
-          "x": -152.5,
+          "x": -141.5,
           "y": -5.67
          },
          {
           "id": 16,
-          "x": 152.5,
+          "x": 141.5,
           "y": -5.67
          },
          {
           "id": 20,
-          "x": 152.5,
+          "x": 141.5,
           "y": 5.67
          },
          {
           "id": 23,
-          "x": -152.5,
+          "x": -141.5,
           "y": 5.67
          }
         ],
@@ -9875,7 +9875,7 @@
          "kind": "region",
          "sketch": 1,
          "point": [
-          51.32331188469385,
+          47.65664521802719,
           6.085167845729335
          ]
         }
@@ -9918,7 +9918,7 @@
     "features": [
      {
       "id": 1,
-      "name": "Plane z=-411",
+      "name": "Plane z=-389",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -9927,7 +9927,7 @@
         "kind": "origin_plane",
         "plane": "Top"
        },
-       "offset": "-411",
+       "offset": "-389",
        "mode": "offset",
        "refs": [],
        "angle": "45",
@@ -9960,12 +9960,12 @@
          {
           "id": 3,
           "x": 0.0,
-          "y": -4.0
+          "y": 48.45
          },
          {
           "id": 4,
           "x": -6.0,
-          "y": -4.0
+          "y": 48.45
          }
         ],
         "curves": [
@@ -10023,7 +10023,7 @@
         "origin": [
          0.0,
          0.0,
-         -411.0
+         -389.0
         ],
         "x": [
          1.0,
@@ -10056,12 +10056,995 @@
          "sketch": 2,
          "point": [
           -2.0,
-          -32.0
+          -14.516666666666666
          ]
         }
        ],
        "end": "blind",
-       "depth": "81",
+       "depth": "59",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
+      "name": "Plane z=-382",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-382",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Bearing boss",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -16.0,
+          "y": -39.0
+         },
+         {
+          "id": 2,
+          "x": -6.0,
+          "y": -39.0
+         },
+         {
+          "id": 3,
+          "x": -6.0,
+          "y": -11.0
+         },
+         {
+          "id": 4,
+          "x": -16.0,
+          "y": -11.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -382.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Bearing boss",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          -9.333333333333334,
+          -29.666666666666668
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "28",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 6,
+    "parts": {
+     "3:0": {
+      "name": "Z motor mount (motor holes slotted for reduction belt tension)",
+      "color": [
+       122,
+       134,
+       145
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "GT2 pulley 60T 6 mm",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 20.49859317102744,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 2,
+      "name": "Flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 1,
+         "point": [
+          -3.6162539733089467,
+          -4.016256919557709
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "0.75",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plane z=0.75",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "0.75",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 4,
+      "name": "Sketch 2",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 3
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 18.698593171027444,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.75
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 5,
+      "name": "Extrude 2",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 4,
+         "point": [
+          -3.5605645522495535,
+          -1.4461763521752935
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6.5",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 6,
+      "name": "Plane z=7.25",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "7.25",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 7,
+      "name": "Sketch 3",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 6
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 20.49859317102744,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         7.25
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 8,
+      "name": "Extrude 3",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 7,
+         "point": [
+          -3.6162539733089467,
+          -4.016256919557709
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "0.75",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 8,
+    "parts": {
+     "2:0": {
+      "name": "GT2 60T pulley, 6 mm belt, 8 mm bore",
+      "color": [
+       184,
+       190,
+       196
+      ],
+      "material": "Aluminium 6061",
+      "finish": "satin"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "GT2 pulley 20T 6 mm",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 8.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 2,
+      "name": "Flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 1,
+         "point": [
+          0.8822011862256801,
+          -1.358660217068323
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "0.75",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plane z=0.75",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "0.75",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 4,
+      "name": "Sketch 2",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 3
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 5.966197723675814,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.75
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 5,
+      "name": "Extrude 2",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 4,
+         "point": [
+          -0.2740210196380917,
+          -1.7794490947374957
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6.5",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 6,
+      "name": "Plane z=7.25",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "7.25",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 7,
+      "name": "Sketch 3",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 6
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 8.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         7.25
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 8,
+      "name": "Extrude 3",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 7,
+         "point": [
+          0.8822011862256801,
+          -1.358660217068323
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "0.75",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 8,
+    "parts": {
+     "2:0": {
+      "name": "GT2 20T pulley, 6 mm belt, 5 mm bore",
+      "color": [
+       184,
+       190,
+       196
+      ],
+      "material": "Aluminium 6061",
+      "finish": "satin"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Z reduction belt",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Belt",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 4.806168113532064,
+          "y": 19.206380179938176
+         },
+         {
+          "id": 2,
+          "x": 54.165340776492215,
+          "y": 6.854834519562406
+         },
+         {
+          "id": 4,
+          "x": 52.45,
+          "y": 0.0
+         },
+         {
+          "id": 5,
+          "x": 54.165340776492215,
+          "y": -6.854834519562406
+         },
+         {
+          "id": 9,
+          "x": 4.806168113532064,
+          "y": -19.206380179938176
+         },
+         {
+          "id": 11,
+          "x": 0.0,
+          "y": 0.0
+         },
+         {
+          "id": 15,
+          "x": 4.4663138975875025,
+          "y": 17.848256801189137
+         },
+         {
+          "id": 16,
+          "x": 53.82548656054765,
+          "y": 5.496711140813366
+         },
+         {
+          "id": 19,
+          "x": 53.82548656054765,
+          "y": -5.496711140813366
+         },
+         {
+          "id": 23,
+          "x": 4.4663138975875025,
+          "y": -17.848256801189137
+         }
+        ],
+        "curves": [
+         {
+          "id": 3,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "arc",
+          "c": 4,
+          "a": 5,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 10,
+          "type": "line",
+          "a": 5,
+          "b": 9,
+          "construction": false
+         },
+         {
+          "id": 14,
+          "type": "arc",
+          "c": 11,
+          "a": 1,
+          "b": 9,
+          "construction": false
+         },
+         {
+          "id": 17,
+          "type": "line",
+          "a": 15,
+          "b": 16,
+          "construction": false
+         },
+         {
+          "id": 21,
+          "type": "arc",
+          "c": 4,
+          "a": 19,
+          "b": 16,
+          "construction": false
+         },
+         {
+          "id": 24,
+          "type": "line",
+          "a": 19,
+          "b": 23,
+          "construction": false
+         },
+         {
+          "id": 28,
+          "type": "arc",
+          "c": 11,
+          "a": 15,
+          "b": 23,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 28,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 2,
+      "name": "Belt",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 1,
+         "point": [
+          37.54424765528994,
+          10.25954036673766
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -10072,17 +11055,17 @@
      }
     ],
     "rollback": null,
-    "next_id": 3,
+    "next_id": 2,
     "parts": {
-     "3:0": {
-      "name": "Z motor mount",
+     "2:0": {
+      "name": "GT2 6 mm closed loop 188 mm GT2 6 mm",
       "color": [
-       122,
-       134,
-       145
+       34,
+       38,
+       42
       ],
-      "material": "Steel",
-      "finish": "metal"
+      "material": null,
+      "finish": "satin"
      }
     },
     "configs": [],
@@ -11989,6 +12972,23 @@
      },
      {
       "id": 5,
+      "name": "Shaft \u00d88x50",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "custom",
+       "name": "Shaft precision shaft (h6)",
+       "values": {
+        "length": "50",
+        "size": "8"
+       },
+       "refs": [],
+       "select": "",
+       "op": "new"
+      }
+     },
+     {
+      "id": 6,
       "name": "NEMA 17 stepper, 40 mm",
       "suppressed": false,
       "hidden": false,
@@ -12006,7 +13006,7 @@
      }
     ],
     "rollback": null,
-    "next_id": 5,
+    "next_id": 6,
     "parts": {
      "1:0": {
       "name": "Shaft \u00d88x74",
@@ -12049,6 +13049,16 @@
       "hidden": true
      },
      "5:0": {
+      "name": "Shaft \u00d88x50",
+      "color": [
+       205,
+       208,
+       213
+      ],
+      "material": "Steel",
+      "hidden": true
+     },
+     "6:0": {
       "name": "NEMA 17 stepper, 40 mm",
       "color": [
        52,
@@ -12280,7 +13290,7 @@
     {
      "id": 6,
      "name": "Drive shaft FL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       1,
       0
@@ -12309,7 +13319,7 @@
     {
      "id": 7,
      "name": "608 FL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12338,7 +13348,7 @@
     {
      "id": 8,
      "name": "608 FL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12396,7 +13406,7 @@
     {
      "id": 10,
      "name": "NEMA23 FL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       3,
       0
@@ -12425,7 +13435,7 @@
     {
      "id": 11,
      "name": "Post FL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       4,
       0
@@ -12570,7 +13580,7 @@
     {
      "id": 16,
      "name": "Drive shaft FR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       1,
       0
@@ -12599,7 +13609,7 @@
     {
      "id": 17,
      "name": "608 FR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12628,7 +13638,7 @@
     {
      "id": 18,
      "name": "608 FR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12686,7 +13696,7 @@
     {
      "id": 20,
      "name": "NEMA23 FR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       3,
       0
@@ -12715,7 +13725,7 @@
     {
      "id": 21,
      "name": "Post FR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       4,
       0
@@ -12860,7 +13870,7 @@
     {
      "id": 26,
      "name": "Drive shaft BR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       1,
       0
@@ -12889,7 +13899,7 @@
     {
      "id": 27,
      "name": "608 BR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12918,7 +13928,7 @@
     {
      "id": 28,
      "name": "608 BR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -12976,7 +13986,7 @@
     {
      "id": 30,
      "name": "NEMA23 BR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       3,
       0
@@ -13005,7 +14015,7 @@
     {
      "id": 31,
      "name": "Post BR",
-     "studio": 28,
+     "studio": 31,
      "body": [
       4,
       0
@@ -13150,7 +14160,7 @@
     {
      "id": 36,
      "name": "Drive shaft BL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       1,
       0
@@ -13179,7 +14189,7 @@
     {
      "id": 37,
      "name": "608 BL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -13208,7 +14218,7 @@
     {
      "id": 38,
      "name": "608 BL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       2,
       0
@@ -13266,7 +14276,7 @@
     {
      "id": 40,
      "name": "NEMA23 BL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       3,
       0
@@ -13295,7 +14305,7 @@
     {
      "id": 41,
      "name": "Post BL",
-     "studio": 28,
+     "studio": 31,
      "body": [
       4,
       0
@@ -13750,7 +14760,7 @@
       "t": [
        -148.0,
        -85.0,
-       -390.0
+       -368.0
       ]
      },
      "fixed": true,
@@ -13779,7 +14789,7 @@
       "t": [
        -146.0,
        -85.0,
-       -237.5
+       -226.5
       ]
      },
      "fixed": true,
@@ -13816,10 +14826,184 @@
     },
     {
      "id": 59,
-     "name": "Z1 NEMA17",
-     "studio": 28,
+     "name": "Z1 Z jackshaft",
+     "studio": 31,
      "body": [
       5,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -180.0,
+       -85.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 60,
+     "name": "Z1 Z 608 -16",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -170.0,
+       -85.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 61,
+     "name": "Z1 Z 608 -9",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -163.0,
+       -85.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 62,
+     "name": "Z1 Z reduction 60T",
+     "studio": 23,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -178.0,
+       -85.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 63,
+     "name": "Z1 Z reduction 20T",
+     "studio": 24,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -178.0,
+       -32.55,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 64,
+     "name": "Z1 Z reduction belt",
+     "studio": 25,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       0.0,
+       0.0,
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       1.0000000000000002,
+       0.0,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -177.0,
+       -85.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 65,
+     "name": "Z1 NEMA17",
+     "studio": 31,
+     "body": [
+      6,
       0
      ],
      "pose": {
@@ -13835,16 +15019,16 @@
        2.220446049250313e-16
       ],
       "t": [
-       -160.0,
-       -85.0,
-       -390.0
+       -154.0,
+       -32.55,
+       -368.0
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 60,
+     "id": 66,
      "name": "Z2 rail",
      "studio": 10,
      "body": [
@@ -13873,7 +15057,7 @@
      "hidden": false
     },
     {
-     "id": 61,
+     "id": 67,
      "name": "Z2 Z idler",
      "studio": 15,
      "body": [
@@ -13902,7 +15086,7 @@
      "hidden": false
     },
     {
-     "id": 62,
+     "id": 68,
      "name": "Z2 Z drive pulley",
      "studio": 14,
      "body": [
@@ -13924,14 +15108,14 @@
       "t": [
        148.0,
        -35.0,
-       -390.0
+       -368.0
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 63,
+     "id": 69,
      "name": "Z2 Z belt",
      "studio": 21,
      "body": [
@@ -13953,14 +15137,14 @@
       "t": [
        146.0,
        -35.0,
-       -237.5
+       -226.5
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 64,
+     "id": 70,
      "name": "Z2 Z motor mount",
      "studio": 22,
      "body": [
@@ -13989,11 +15173,185 @@
      "hidden": false
     },
     {
-     "id": 65,
-     "name": "Z2 NEMA17",
-     "studio": 28,
+     "id": 71,
+     "name": "Z2 Z jackshaft",
+     "studio": 31,
      "body": [
       5,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       180.0,
+       -35.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 72,
+     "name": "Z2 Z 608 -16",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       170.0,
+       -35.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 73,
+     "name": "Z2 Z 608 -9",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       163.0,
+       -35.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 74,
+     "name": "Z2 Z reduction 60T",
+     "studio": 23,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       178.0,
+       -35.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 75,
+     "name": "Z2 Z reduction 20T",
+     "studio": 24,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       178.0,
+       -87.45,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 76,
+     "name": "Z2 Z reduction belt",
+     "studio": 25,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       -1.0000000000000002,
+       0.0,
+       0.0,
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       -1.0000000000000002,
+       0.0,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       177.0,
+       -35.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 77,
+     "name": "Z2 NEMA17",
+     "studio": 31,
+     "body": [
+      6,
       0
      ],
      "pose": {
@@ -14009,16 +15367,16 @@
        6.123233995736766e-17
       ],
       "t": [
-       160.0,
-       -35.0,
-       -390.0
+       154.0,
+       -87.45,
+       -368.0
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 66,
+     "id": 78,
      "name": "Z3 rail",
      "studio": 10,
      "body": [
@@ -14047,7 +15405,7 @@
      "hidden": false
     },
     {
-     "id": 67,
+     "id": 79,
      "name": "Z3 Z idler",
      "studio": 15,
      "body": [
@@ -14076,7 +15434,7 @@
      "hidden": false
     },
     {
-     "id": 68,
+     "id": 80,
      "name": "Z3 Z drive pulley",
      "studio": 14,
      "body": [
@@ -14098,14 +15456,14 @@
       "t": [
        -7.0,
        148.0,
-       -390.0
+       -368.0
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 69,
+     "id": 81,
      "name": "Z3 Z belt",
      "studio": 21,
      "body": [
@@ -14127,14 +15485,14 @@
       "t": [
        -7.0,
        146.0,
-       -237.5
+       -226.5
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 70,
+     "id": 82,
      "name": "Z3 Z motor mount",
      "studio": 22,
      "body": [
@@ -14163,11 +15521,185 @@
      "hidden": false
     },
     {
-     "id": 71,
-     "name": "Z3 NEMA17",
-     "studio": 28,
+     "id": 83,
+     "name": "Z3 Z jackshaft",
+     "studio": 31,
      "body": [
       5,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       180.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 84,
+     "name": "Z3 Z 608 -16",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       170.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 85,
+     "name": "Z3 Z 608 -9",
+     "studio": 31,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       163.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 86,
+     "name": "Z3 Z reduction 60T",
+     "studio": 23,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       178.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 87,
+     "name": "Z3 Z reduction 20T",
+     "studio": 24,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       45.45,
+       178.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 88,
+     "name": "Z3 Z reduction belt",
+     "studio": 25,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       6.123233995736766e-17,
+       1.0,
+       0.0,
+       -1.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -7.0,
+       177.0,
+       -368.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 89,
+     "name": "Z3 NEMA17",
+     "studio": 31,
+     "body": [
+      6,
       0
      ],
      "pose": {
@@ -14183,16 +15715,16 @@
        3.3306690738754696e-16
       ],
       "t": [
-       -7.0,
-       160.0,
-       -390.0
+       45.45,
+       154.0,
+       -368.0
       ]
      },
      "fixed": true,
      "hidden": false
     },
     {
-     "id": 72,
+     "id": 90,
      "name": "MGN12H X back",
      "studio": 11,
      "body": [
@@ -14221,7 +15753,7 @@
      "hidden": false
     },
     {
-     "id": 73,
+     "id": 91,
      "name": "X-end tower back",
      "studio": 3,
      "body": [
@@ -14250,7 +15782,7 @@
      "hidden": false
     },
     {
-     "id": 74,
+     "id": 92,
      "name": "MGN12H X front",
      "studio": 11,
      "body": [
@@ -14279,7 +15811,7 @@
      "hidden": false
     },
     {
-     "id": 75,
+     "id": 93,
      "name": "X-end tower front",
      "studio": 3,
      "body": [
@@ -14308,7 +15840,7 @@
      "hidden": false
     },
     {
-     "id": 76,
+     "id": 94,
      "name": "MGN12H Y right",
      "studio": 11,
      "body": [
@@ -14337,7 +15869,7 @@
      "hidden": false
     },
     {
-     "id": 77,
+     "id": 95,
      "name": "Y-end tower right",
      "studio": 4,
      "body": [
@@ -14366,7 +15898,7 @@
      "hidden": false
     },
     {
-     "id": 78,
+     "id": 96,
      "name": "MGN12H Y left",
      "studio": 11,
      "body": [
@@ -14395,7 +15927,7 @@
      "hidden": false
     },
     {
-     "id": 79,
+     "id": 97,
      "name": "Y-end tower left",
      "studio": 4,
      "body": [
@@ -14424,7 +15956,7 @@
      "hidden": false
     },
     {
-     "id": 80,
+     "id": 98,
      "name": "X beam",
      "studio": 5,
      "body": [
@@ -14453,7 +15985,7 @@
      "hidden": false
     },
     {
-     "id": 81,
+     "id": 99,
      "name": "MGN9 rail X beam",
      "studio": 12,
      "body": [
@@ -14482,7 +16014,7 @@
      "hidden": false
     },
     {
-     "id": 82,
+     "id": 100,
      "name": "Y beam",
      "studio": 5,
      "body": [
@@ -14511,7 +16043,7 @@
      "hidden": false
     },
     {
-     "id": 83,
+     "id": 101,
      "name": "MGN9 rail Y beam",
      "studio": 12,
      "body": [
@@ -14540,7 +16072,7 @@
      "hidden": false
     },
     {
-     "id": 84,
+     "id": 102,
      "name": "MGN9H on X beam",
      "studio": 13,
      "body": [
@@ -14569,7 +16101,7 @@
      "hidden": false
     },
     {
-     "id": 85,
+     "id": 103,
      "name": "MGN9H on Y beam",
      "studio": 13,
      "body": [
@@ -14598,7 +16130,7 @@
      "hidden": false
     },
     {
-     "id": 86,
+     "id": 104,
      "name": "Toolhead yoke",
      "studio": 6,
      "body": [
@@ -14627,7 +16159,7 @@
      "hidden": false
     },
     {
-     "id": 87,
+     "id": 105,
      "name": "Toolhead neck",
      "studio": 7,
      "body": [
@@ -14656,7 +16188,7 @@
      "hidden": false
     },
     {
-     "id": 88,
+     "id": 106,
      "name": "Toolhead envelope",
      "studio": 8,
      "body": [
@@ -14685,7 +16217,7 @@
      "hidden": false
     },
     {
-     "id": 89,
+     "id": 107,
      "name": "Filament tube",
      "studio": 9,
      "body": [
@@ -14714,9 +16246,9 @@
      "hidden": false
     },
     {
-     "id": 90,
+     "id": 108,
      "name": "Bed",
-     "studio": 23,
+     "studio": 26,
      "body": [
       3,
       0
@@ -14743,9 +16275,9 @@
      "hidden": false
     },
     {
-     "id": 91,
+     "id": 109,
      "name": "Bed heater",
-     "studio": 24,
+     "studio": 27,
      "body": [
       3,
       0
@@ -14772,9 +16304,9 @@
      "hidden": false
     },
     {
-     "id": 92,
+     "id": 110,
      "name": "Bed arm Z1",
-     "studio": 25,
+     "studio": 28,
      "body": [
       3,
       0
@@ -14801,7 +16333,7 @@
      "hidden": false
     },
     {
-     "id": 93,
+     "id": 111,
      "name": "Z1 MGN12H",
      "studio": 11,
      "body": [
@@ -14830,9 +16362,9 @@
      "hidden": false
     },
     {
-     "id": 94,
+     "id": 112,
      "name": "Bed arm Z2",
-     "studio": 26,
+     "studio": 29,
      "body": [
       3,
       0
@@ -14859,7 +16391,7 @@
      "hidden": false
     },
     {
-     "id": 95,
+     "id": 113,
      "name": "Z2 MGN12H",
      "studio": 11,
      "body": [
@@ -14888,9 +16420,9 @@
      "hidden": false
     },
     {
-     "id": 96,
+     "id": 114,
      "name": "Bed arm Z3",
-     "studio": 27,
+     "studio": 30,
      "body": [
       3,
       0
@@ -14917,7 +16449,7 @@
      "hidden": false
     },
     {
-     "id": 97,
+     "id": 115,
      "name": "Z3 MGN12H",
      "studio": 11,
      "body": [
@@ -14947,7 +16479,7 @@
     }
    ],
    "mates": [],
-   "next_id": 97,
+   "next_id": 115,
    "relations": []
   }
  ],

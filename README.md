@@ -15,7 +15,7 @@ toolhead reaches down into the chamber through a cutout in the plate. It is desi
 | Top plate, corner pulley blocks, motor towers, XY drive, gantry, toolhead yoke | modelled on top of the plate, clearance-checked over full travel |
 | Sliding shutter over the plate cutout | space reserved (15 mm), not modelled |
 | Frame | 3030 posts, steel side and back shear plates, steel floor plate |
-| Z system and bed | modelled: 3 belted columns (NEMA17 below the floor), MIC6 bed on 3 arms, clearance-checked over full Z travel. Holding brake / reduction TBD |
+| Z system and bed | modelled: 3 belted columns (NEMA17 below the floor), MIC6 bed on 3 arms, clearance-checked over full Z travel. 1:3 belt reduction at each motor |
 | Enclosure, insulation, door, back module (filter + electronics) | not started |
 | Toolhead | envelope stand-in only (Chube Conduction + Sherpa Heavy) |
 
@@ -49,9 +49,10 @@ All key sizes are in [`cad/params.yaml`](cad/params.yaml). Change a number and r
 
 - **Three columns.** Z1 and Z2 are on the left and right shear plates at y = -60, Z3 is on the back shear plate under the build centre. That is the 2 front / 1 back layout for Klipper `z_tilt`.
 - **Rails on steel.** Each MGN12 Z rail screws straight to a 6 mm steel shear plate, so rail and mount grow together at 150 °C.
-- **Belts.** Each column is a closed GT2 12 mm loop: a 20T drive pulley on a NEMA17 below the floor plate, and an idler at the top of the chamber. The belts pass through slots in the floor. Each bed arm clamps the inner strand.
+- **Belts.** Each column is a closed GT2 12 mm loop: a 20T drive pulley on a jackshaft below the floor plate, and an idler at the top of the chamber. The belts pass through slots in the floor. Each bed arm clamps the inner strand.
+- **1:3 reduction.** Each NEMA17 drives a 60T pulley on the jackshaft through a 20T and a 188 mm GT2 6 mm loop. The jackshaft runs in two 608s in the steel motor mount, and the motor holes are slotted to tension the loop.
 - **Bed.** MIC6 200 × 200 × 8 with a silicone heater, centred at (18, 25) under the nozzle, carried on three steel arms.
-- **Open item.** NEMA17s on a direct belt will back-drive, so the bed can drop when the motors are off. This needs a reduction (for example 1:3) or a brake.
+- **Open item.** With about 2 kg moving, each motor sees roughly its own detent torque at power-off through the 1:3. If the bed still creeps, go 1:4 or add a brake.
 
 ## Decisions made so far
 
