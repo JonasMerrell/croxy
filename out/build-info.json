@@ -17,7 +17,17 @@
   "GT2 pulley 20T",
   "GT2 idler 20T",
   "Belt",
-  "Shaft coupling"
+  "Shaft coupling",
+  "Side shear plate",
+  "Back shear plate",
+  "Floor plate",
+  "Z belt",
+  "Z motor mount",
+  "Bed",
+  "Bed heater",
+  "Bed arm Z1",
+  "Bed arm Z2",
+  "Bed arm Z3"
  ],
  "layout": {
   "drive_FL": [
@@ -54,24 +64,24 @@
   ]
  },
  "moving": {
-  "xcar_back": 50,
-  "xend_back": 51,
-  "xcar_front": 52,
-  "xend_front": 53,
-  "ycar_right": 54,
-  "yend_right": 55,
-  "ycar_left": 56,
-  "yend_left": 57,
-  "xbeam": 58,
-  "xrail": 59,
-  "ybeam": 60,
-  "yrail": 61,
-  "xcar9": 62,
-  "ycar9": 63,
-  "yoke": 64,
-  "neck": 65,
-  "tool": 66,
-  "tube": 67
+  "xcar_back": 72,
+  "xend_back": 73,
+  "xcar_front": 74,
+  "xend_front": 75,
+  "ycar_right": 76,
+  "yend_right": 77,
+  "ycar_left": 78,
+  "yend_left": 79,
+  "xbeam": 80,
+  "xrail": 81,
+  "ybeam": 82,
+  "yrail": 83,
+  "xcar9": 84,
+  "ycar9": 85,
+  "yoke": 86,
+  "neck": 87,
+  "tool": 88,
+  "tube": 89
  },
  "start": [
   40,
@@ -139,6 +149,86 @@
     0,
     90
    ],
+   "clashes": []
+  },
+  {
+   "pose": [
+    0,
+    0
+   ],
+   "bed_top": -86.5,
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    -90
+   ],
+   "bed_top": -86.5,
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    -90
+   ],
+   "bed_top": -86.5,
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    90
+   ],
+   "bed_top": -86.5,
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    90
+   ],
+   "bed_top": -86.5,
+   "clashes": []
+  },
+  {
+   "pose": [
+    0,
+    0
+   ],
+   "bed_top": -266,
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    -90
+   ],
+   "bed_top": -266,
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    -90
+   ],
+   "bed_top": -266,
+   "clashes": []
+  },
+  {
+   "pose": [
+    90,
+    90
+   ],
+   "bed_top": -266,
+   "clashes": []
+  },
+  {
+   "pose": [
+    -90,
+    90
+   ],
+   "bed_top": -266,
    "clashes": []
   }
  ]

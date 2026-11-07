@@ -21,7 +21,7 @@ insulation:
 frame:
   posts: {profile: "3030", count: 4, positions: [FL, FR, BL, BR]}
   post_length: 320
-  back_shear_plate: {material: mild_steel, note: "carries the Z3 rail; replaces the back centre post, which clashed with the X-back belt"}
+  shear_plates: {material: mild_steel, thickness: 6, sides: [left, right, back], note: "bolted inside the posts; the side plates carry Z1/Z2, the back plate carries Z3 (replaces the back centre post). Steel, so the MGN12 Z rails match CTE"}
   top_plate: {material: mild_steel, thickness: 12, size: [380, 380], process: "waterjet + stress relieve + finish machine"}
   floor_plate: {material: mild_steel, thickness: 10, size: [380, 380]}
 
@@ -45,9 +45,11 @@ xy:
   yoke: "aluminium yoke carries both MGN9H carriages and wraps the Y beam"
 
 z:
-  motors: {type: NEMA17, count: 3, positions: [FL, FR, BC], location: below_chamber}
-  drive: belted_loop
-  rails: {type: MGN12, count: 3, mount: "3030 posts via steel strip or single-end fix"}
+  motors: {type: NEMA17, count: 3, location: "below the floor plate, on steel mounts; belts pass through slots in the floor"}
+  columns: {Z1: "left plate, y -60", Z2: "right plate, y -60", Z3: "back plate, x 18"}
+  drive: "closed GT2 12 mm loop per column: 20T drive below the floor, 20T idler at z -85; the bed arm clamps the inner strand"
+  rails: {type: MGN12, count: 3, length: 230, mount: "screwed straight to the steel shear plates"}
+  holding: "TBD: a belted Z with NEMA17s back-drives; add a reduction (e.g. 1:3) or a brake so the bed doesn't drop at power-off"
   leveling: klipper_z_tilt
   travel: 180
 
@@ -55,6 +57,9 @@ bed:
   material: MIC6
   size: [200, 200]
   thickness: 8
+  centre: [18, 25]   # under the nozzle
+  heater: silicone, under the plate
+  arms: "one steel arm per column, from the MGN12H to a pad under the bed; 20 mm in from the bed edge"
   surface: magnetic_sheet   # clips as backup
 
 toolhead:

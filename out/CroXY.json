@@ -8865,6 +8865,3055 @@
    }
   },
   {
+   "name": "Side shear plate",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-320",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-320",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -160.0,
+          "y": -160.0
+         },
+         {
+          "id": 2,
+          "x": -154.0,
+          "y": -160.0
+         },
+         {
+          "id": 3,
+          "x": -154.0,
+          "y": 160.0
+         },
+         {
+          "id": 4,
+          "x": -160.0,
+          "y": 160.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -320.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          -156.0,
+          -53.333333333333336
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "320",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 3,
+    "parts": {
+     "3:0": {
+      "name": "Side shear plate",
+      "color": [
+       88,
+       98,
+       107
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Back shear plate",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-320",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-320",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -154.0,
+          "y": 154.0
+         },
+         {
+          "id": 2,
+          "x": 154.0,
+          "y": 154.0
+         },
+         {
+          "id": 3,
+          "x": 154.0,
+          "y": 160.0
+         },
+         {
+          "id": 4,
+          "x": -154.0,
+          "y": 160.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -320.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          51.333333333333336,
+          156.0
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "320",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 3,
+    "parts": {
+     "3:0": {
+      "name": "Back shear plate",
+      "color": [
+       88,
+       98,
+       107
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Floor plate",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-330",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-330",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -190.0,
+          "y": -190.0
+         },
+         {
+          "id": 2,
+          "x": 190.0,
+          "y": -190.0
+         },
+         {
+          "id": 3,
+          "x": 190.0,
+          "y": 190.0
+         },
+         {
+          "id": 4,
+          "x": -190.0,
+          "y": 190.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -330.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          63.333333333333336,
+          -63.333333333333336
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "10",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
+      "name": "Plane z=-320",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-320",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Z belt slots",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -150.0,
+          "y": -100.0
+         },
+         {
+          "id": 2,
+          "x": -130.0,
+          "y": -100.0
+         },
+         {
+          "id": 3,
+          "x": -130.0,
+          "y": -70.0
+         },
+         {
+          "id": 4,
+          "x": -150.0,
+          "y": -70.0
+         },
+         {
+          "id": 9,
+          "x": 150.0,
+          "y": -20.0
+         },
+         {
+          "id": 10,
+          "x": 130.0,
+          "y": -20.0
+         },
+         {
+          "id": 11,
+          "x": 130.0,
+          "y": -50.0
+         },
+         {
+          "id": 12,
+          "x": 150.0,
+          "y": -50.0
+         },
+         {
+          "id": 17,
+          "x": -22.0,
+          "y": 150.0
+         },
+         {
+          "id": 18,
+          "x": 8.0,
+          "y": 150.0
+         },
+         {
+          "id": 19,
+          "x": 8.0,
+          "y": 130.0
+         },
+         {
+          "id": 20,
+          "x": -22.0,
+          "y": 130.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         },
+         {
+          "id": 13,
+          "type": "line",
+          "a": 9,
+          "b": 10,
+          "construction": false
+         },
+         {
+          "id": 14,
+          "type": "line",
+          "a": 10,
+          "b": 11,
+          "construction": false
+         },
+         {
+          "id": 15,
+          "type": "line",
+          "a": 11,
+          "b": 12,
+          "construction": false
+         },
+         {
+          "id": 16,
+          "type": "line",
+          "a": 12,
+          "b": 9,
+          "construction": false
+         },
+         {
+          "id": 21,
+          "type": "line",
+          "a": 17,
+          "b": 18,
+          "construction": false
+         },
+         {
+          "id": 22,
+          "type": "line",
+          "a": 18,
+          "b": 19,
+          "construction": false
+         },
+         {
+          "id": 23,
+          "type": "line",
+          "a": 19,
+          "b": 20,
+          "construction": false
+         },
+         {
+          "id": 24,
+          "type": "line",
+          "a": 20,
+          "b": 17,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         },
+         {
+          "type": "horizontal",
+          "l": 13
+         },
+         {
+          "type": "horizontal",
+          "l": 15
+         },
+         {
+          "type": "vertical",
+          "l": 14
+         },
+         {
+          "type": "vertical",
+          "l": 16
+         },
+         {
+          "type": "horizontal",
+          "l": 21
+         },
+         {
+          "type": "horizontal",
+          "l": 23
+         },
+         {
+          "type": "vertical",
+          "l": 22
+         },
+         {
+          "type": "vertical",
+          "l": 24
+         }
+        ],
+        "next_id": 24,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -320.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Z belt slots",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          -136.66666666666666,
+          -90.0
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          136.66666666666666,
+          -30.0
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          -12.0,
+          143.33333333333334
+         ]
+        }
+       ],
+       "end": "through_all",
+       "depth": "10",
+       "opposite": true,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 6,
+    "parts": {
+     "3:0": {
+      "name": "Floor plate",
+      "color": [
+       88,
+       98,
+       107
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Z belt",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Z belt",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -152.5,
+          "y": -7.07
+         },
+         {
+          "id": 2,
+          "x": 152.5,
+          "y": -7.07
+         },
+         {
+          "id": 4,
+          "x": 152.5,
+          "y": 0.0
+         },
+         {
+          "id": 6,
+          "x": 152.5,
+          "y": 7.07
+         },
+         {
+          "id": 9,
+          "x": -152.5,
+          "y": 7.07
+         },
+         {
+          "id": 11,
+          "x": -152.5,
+          "y": 0.0
+         },
+         {
+          "id": 15,
+          "x": -152.5,
+          "y": -5.67
+         },
+         {
+          "id": 16,
+          "x": 152.5,
+          "y": -5.67
+         },
+         {
+          "id": 20,
+          "x": 152.5,
+          "y": 5.67
+         },
+         {
+          "id": 23,
+          "x": -152.5,
+          "y": 5.67
+         }
+        ],
+        "curves": [
+         {
+          "id": 3,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "arc",
+          "c": 4,
+          "a": 2,
+          "b": 6,
+          "construction": false
+         },
+         {
+          "id": 10,
+          "type": "line",
+          "a": 6,
+          "b": 9,
+          "construction": false
+         },
+         {
+          "id": 14,
+          "type": "arc",
+          "c": 11,
+          "a": 9,
+          "b": 1,
+          "construction": false
+         },
+         {
+          "id": 17,
+          "type": "line",
+          "a": 15,
+          "b": 16,
+          "construction": false
+         },
+         {
+          "id": 21,
+          "type": "arc",
+          "c": 4,
+          "a": 16,
+          "b": 20,
+          "construction": false
+         },
+         {
+          "id": 24,
+          "type": "line",
+          "a": 20,
+          "b": 23,
+          "construction": false
+         },
+         {
+          "id": 28,
+          "type": "arc",
+          "c": 11,
+          "a": 23,
+          "b": 15,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 28,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 2,
+      "name": "Z belt",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 1,
+         "point": [
+          51.32331188469385,
+          6.085167845729335
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "12",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 2,
+    "parts": {
+     "2:0": {
+      "name": "Gates EPDM GT2 12 mm Z belt",
+      "color": [
+       34,
+       38,
+       42
+      ],
+      "material": null,
+      "finish": "satin"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Z motor mount",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-411",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-411",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -6.0,
+          "y": -46.0
+         },
+         {
+          "id": 2,
+          "x": 0.0,
+          "y": -46.0
+         },
+         {
+          "id": 3,
+          "x": 0.0,
+          "y": -4.0
+         },
+         {
+          "id": 4,
+          "x": -6.0,
+          "y": -4.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -411.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          -2.0,
+          -32.0
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "81",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 3,
+    "parts": {
+     "3:0": {
+      "name": "Z motor mount",
+      "color": [
+       122,
+       134,
+       145
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Bed",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-8",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-8",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "MIC6",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -82.0,
+          "y": -75.0
+         },
+         {
+          "id": 2,
+          "x": 118.0,
+          "y": -75.0
+         },
+         {
+          "id": 3,
+          "x": 118.0,
+          "y": 125.0
+         },
+         {
+          "id": 4,
+          "x": -82.0,
+          "y": 125.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -8.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "MIC6",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          51.333333333333336,
+          -8.333333333333334
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "8",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 3,
+    "parts": {
+     "3:0": {
+      "name": "Bed, MIC6 200 x 200 x 8",
+      "color": [
+       185,
+       192,
+       198
+      ],
+      "material": "Aluminium 6061",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Bed heater",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-10",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-10",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Heater",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -77.0,
+          "y": -70.0
+         },
+         {
+          "id": 2,
+          "x": 113.0,
+          "y": -70.0
+         },
+         {
+          "id": 3,
+          "x": 113.0,
+          "y": 120.0
+         },
+         {
+          "id": 4,
+          "x": -77.0,
+          "y": 120.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -10.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Heater",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          49.666666666666664,
+          -6.666666666666667
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "2",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 3,
+    "parts": {
+     "3:0": {
+      "name": "Silicone bed heater",
+      "color": [
+       181,
+       72,
+       43
+      ],
+      "material": null,
+      "finish": "matte"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Bed arm Z1",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-42.7",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-42.7",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 13.0,
+          "y": -13.5
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": 13.5
+         },
+         {
+          "id": 4,
+          "x": 13.0,
+          "y": 13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -42.7
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          17.0,
+          -4.5
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "45.400000000000006",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 19.0,
+          "y": -10.0
+         },
+         {
+          "id": 2,
+          "x": 102.0,
+          "y": -10.0
+         },
+         {
+          "id": 3,
+          "x": 102.0,
+          "y": 10.0
+         },
+         {
+          "id": 4,
+          "x": 19.0,
+          "y": 10.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          74.33333333333333,
+          -3.3333333333333335
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 7,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 8,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 7
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 6.0,
+          "y": -23.13
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -23.13
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 4,
+          "x": 6.0,
+          "y": -13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 9,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 8,
+         "point": [
+          14.666666666666666,
+          -19.919999999999998
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 9,
+    "parts": {
+     "3:0": {
+      "name": "Bed arm Z1",
+      "color": [
+       138,
+       150,
+       161
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Bed arm Z2",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-42.7",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-42.7",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 13.0,
+          "y": -13.5
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": 13.5
+         },
+         {
+          "id": 4,
+          "x": 13.0,
+          "y": 13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -42.7
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          17.0,
+          -4.5
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "45.400000000000006",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 19.0,
+          "y": -10.0
+         },
+         {
+          "id": 2,
+          "x": 66.0,
+          "y": -10.0
+         },
+         {
+          "id": 3,
+          "x": 66.0,
+          "y": 10.0
+         },
+         {
+          "id": 4,
+          "x": 19.0,
+          "y": 10.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          50.333333333333336,
+          -3.3333333333333335
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 7,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 8,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 7
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 6.0,
+          "y": -23.13
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -23.13
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 4,
+          "x": 6.0,
+          "y": -13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 9,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 8,
+         "point": [
+          14.666666666666666,
+          -19.919999999999998
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 9,
+    "parts": {
+     "3:0": {
+      "name": "Bed arm Z2",
+      "color": [
+       138,
+       150,
+       161
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
+   "name": "Bed arm Z3",
+   "doc": {
+    "format": "cad-rust-app/1",
+    "units": "mm",
+    "variables": [],
+    "features": [
+     {
+      "id": 1,
+      "name": "Plane z=-42.7",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-42.7",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 13.0,
+          "y": -13.5
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": 13.5
+         },
+         {
+          "id": 4,
+          "x": 13.0,
+          "y": 13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -42.7
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Carriage plate",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          17.0,
+          -4.5
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "45.400000000000006",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 19.0,
+          "y": -10.0
+         },
+         {
+          "id": 2,
+          "x": 59.0,
+          "y": -10.0
+         },
+         {
+          "id": 3,
+          "x": 59.0,
+          "y": 10.0
+         },
+         {
+          "id": 4,
+          "x": 19.0,
+          "y": 10.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Arm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          45.666666666666664,
+          -3.3333333333333335
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 7,
+      "name": "Plane z=-30",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-30",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 8,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 7
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 6.0,
+          "y": -23.13
+         },
+         {
+          "id": 2,
+          "x": 19.0,
+          "y": -23.13
+         },
+         {
+          "id": 3,
+          "x": 19.0,
+          "y": -13.5
+         },
+         {
+          "id": 4,
+          "x": 6.0,
+          "y": -13.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -30.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 9,
+      "name": "Belt clamp",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 8,
+         "point": [
+          14.666666666666666,
+          -19.919999999999998
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     }
+    ],
+    "rollback": null,
+    "next_id": 9,
+    "parts": {
+     "3:0": {
+      "name": "Bed arm Z3",
+      "color": [
+       138,
+       150,
+       161
+      ],
+      "material": "Steel",
+      "finish": "metal"
+     }
+    },
+    "configs": [],
+    "active_config": null
+   }
+  },
+  {
    "name": "Standard parts",
    "doc": {
     "format": "cad-rust-app/1",
@@ -8937,10 +11986,27 @@
        "select": "",
        "op": "new"
       }
+     },
+     {
+      "id": 5,
+      "name": "NEMA 17 stepper, 40 mm",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "custom",
+       "name": "NEMA stepper motor",
+       "values": {
+        "length": "40",
+        "size": "17"
+       },
+       "refs": [],
+       "select": "",
+       "op": "new"
+      }
      }
     ],
     "rollback": null,
-    "next_id": 4,
+    "next_id": 5,
     "parts": {
      "1:0": {
       "name": "Shaft \u00d88x74",
@@ -8978,6 +12044,16 @@
        205,
        208,
        213
+      ],
+      "material": "Aluminium 6061",
+      "hidden": true
+     },
+     "5:0": {
+      "name": "NEMA 17 stepper, 40 mm",
+      "color": [
+       52,
+       54,
+       58
       ],
       "material": "Aluminium 6061"
      }
@@ -9204,7 +12280,7 @@
     {
      "id": 6,
      "name": "Drive shaft FL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       1,
       0
@@ -9233,7 +12309,7 @@
     {
      "id": 7,
      "name": "608 FL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9262,7 +12338,7 @@
     {
      "id": 8,
      "name": "608 FL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9320,7 +12396,7 @@
     {
      "id": 10,
      "name": "NEMA23 FL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       3,
       0
@@ -9349,7 +12425,7 @@
     {
      "id": 11,
      "name": "Post FL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       4,
       0
@@ -9494,7 +12570,7 @@
     {
      "id": 16,
      "name": "Drive shaft FR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       1,
       0
@@ -9523,7 +12599,7 @@
     {
      "id": 17,
      "name": "608 FR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9552,7 +12628,7 @@
     {
      "id": 18,
      "name": "608 FR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9610,7 +12686,7 @@
     {
      "id": 20,
      "name": "NEMA23 FR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       3,
       0
@@ -9639,7 +12715,7 @@
     {
      "id": 21,
      "name": "Post FR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       4,
       0
@@ -9784,7 +12860,7 @@
     {
      "id": 26,
      "name": "Drive shaft BR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       1,
       0
@@ -9813,7 +12889,7 @@
     {
      "id": 27,
      "name": "608 BR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9842,7 +12918,7 @@
     {
      "id": 28,
      "name": "608 BR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -9900,7 +12976,7 @@
     {
      "id": 30,
      "name": "NEMA23 BR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       3,
       0
@@ -9929,7 +13005,7 @@
     {
      "id": 31,
      "name": "Post BR",
-     "studio": 18,
+     "studio": 28,
      "body": [
       4,
       0
@@ -10074,7 +13150,7 @@
     {
      "id": 36,
      "name": "Drive shaft BL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       1,
       0
@@ -10103,7 +13179,7 @@
     {
      "id": 37,
      "name": "608 BL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -10132,7 +13208,7 @@
     {
      "id": 38,
      "name": "608 BL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       2,
       0
@@ -10190,7 +13266,7 @@
     {
      "id": 40,
      "name": "NEMA23 BL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       3,
       0
@@ -10219,7 +13295,7 @@
     {
      "id": 41,
      "name": "Post BL",
-     "studio": 18,
+     "studio": 28,
      "body": [
       4,
       0
@@ -10479,6 +13555,644 @@
     },
     {
      "id": 50,
+     "name": "Shear plate left",
+     "studio": 18,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 51,
+     "name": "Shear plate right",
+     "studio": 18,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 52,
+     "name": "Shear plate back",
+     "studio": 19,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 53,
+     "name": "Floor plate",
+     "studio": 20,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 54,
+     "name": "Z1 rail",
+     "studio": 10,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       -154.0,
+       -60.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 55,
+     "name": "Z1 Z idler",
+     "studio": 15,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -148.0,
+       -85.0,
+       -85.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 56,
+     "name": "Z1 Z drive pulley",
+     "studio": 14,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       -148.0,
+       -85.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 57,
+     "name": "Z1 Z belt",
+     "studio": 21,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       -146.0,
+       -85.0,
+       -237.5
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 58,
+     "name": "Z1 Z motor mount",
+     "studio": 22,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       -154.0,
+       -60.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 59,
+     "name": "Z1 NEMA17",
+     "studio": 28,
+     "body": [
+      5,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       -160.0,
+       -85.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 60,
+     "name": "Z2 rail",
+     "studio": 10,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       -1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       154.0,
+       -60.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 61,
+     "name": "Z2 Z idler",
+     "studio": 15,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       148.0,
+       -35.0,
+       -85.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 62,
+     "name": "Z2 Z drive pulley",
+     "studio": 14,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       -8.659560562354934e-17,
+       -1.0000000000000002,
+       8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       -1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       148.0,
+       -35.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 63,
+     "name": "Z2 Z belt",
+     "studio": 21,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       -1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       146.0,
+       -35.0,
+       -237.5
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 64,
+     "name": "Z2 Z motor mount",
+     "studio": 22,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       154.0,
+       -60.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 65,
+     "name": "Z2 NEMA17",
+     "studio": 28,
+     "body": [
+      5,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       -1.0,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       160.0,
+       -35.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 66,
+     "name": "Z3 rail",
+     "studio": 10,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       1.0000000000000002,
+       -1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       18.0,
+       154.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 67,
+     "name": "Z3 Z idler",
+     "studio": 15,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       148.0,
+       -85.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 68,
+     "name": "Z3 Z drive pulley",
+     "studio": 14,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       148.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 69,
+     "name": "Z3 Z belt",
+     "studio": 21,
+     "body": [
+      2,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       1.0000000000000002,
+       -1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       146.0,
+       -237.5
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 70,
+     "name": "Z3 Z motor mount",
+     "studio": 22,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       -1.0,
+       0.0,
+       1.0,
+       6.123233995736766e-17,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       18.0,
+       154.0,
+       0.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 71,
+     "name": "Z3 NEMA17",
+     "studio": 28,
+     "body": [
+      5,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       -1.0000000000000002,
+       -1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       -7.0,
+       160.0,
+       -390.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 72,
      "name": "MGN12H X back",
      "studio": 11,
      "body": [
@@ -10507,7 +14221,7 @@
      "hidden": false
     },
     {
-     "id": 51,
+     "id": 73,
      "name": "X-end tower back",
      "studio": 3,
      "body": [
@@ -10536,7 +14250,7 @@
      "hidden": false
     },
     {
-     "id": 52,
+     "id": 74,
      "name": "MGN12H X front",
      "studio": 11,
      "body": [
@@ -10565,7 +14279,7 @@
      "hidden": false
     },
     {
-     "id": 53,
+     "id": 75,
      "name": "X-end tower front",
      "studio": 3,
      "body": [
@@ -10594,7 +14308,7 @@
      "hidden": false
     },
     {
-     "id": 54,
+     "id": 76,
      "name": "MGN12H Y right",
      "studio": 11,
      "body": [
@@ -10623,7 +14337,7 @@
      "hidden": false
     },
     {
-     "id": 55,
+     "id": 77,
      "name": "Y-end tower right",
      "studio": 4,
      "body": [
@@ -10652,7 +14366,7 @@
      "hidden": false
     },
     {
-     "id": 56,
+     "id": 78,
      "name": "MGN12H Y left",
      "studio": 11,
      "body": [
@@ -10681,7 +14395,7 @@
      "hidden": false
     },
     {
-     "id": 57,
+     "id": 79,
      "name": "Y-end tower left",
      "studio": 4,
      "body": [
@@ -10710,7 +14424,7 @@
      "hidden": false
     },
     {
-     "id": 58,
+     "id": 80,
      "name": "X beam",
      "studio": 5,
      "body": [
@@ -10739,7 +14453,7 @@
      "hidden": false
     },
     {
-     "id": 59,
+     "id": 81,
      "name": "MGN9 rail X beam",
      "studio": 12,
      "body": [
@@ -10768,7 +14482,7 @@
      "hidden": false
     },
     {
-     "id": 60,
+     "id": 82,
      "name": "Y beam",
      "studio": 5,
      "body": [
@@ -10797,7 +14511,7 @@
      "hidden": false
     },
     {
-     "id": 61,
+     "id": 83,
      "name": "MGN9 rail Y beam",
      "studio": 12,
      "body": [
@@ -10826,7 +14540,7 @@
      "hidden": false
     },
     {
-     "id": 62,
+     "id": 84,
      "name": "MGN9H on X beam",
      "studio": 13,
      "body": [
@@ -10855,7 +14569,7 @@
      "hidden": false
     },
     {
-     "id": 63,
+     "id": 85,
      "name": "MGN9H on Y beam",
      "studio": 13,
      "body": [
@@ -10884,7 +14598,7 @@
      "hidden": false
     },
     {
-     "id": 64,
+     "id": 86,
      "name": "Toolhead yoke",
      "studio": 6,
      "body": [
@@ -10913,7 +14627,7 @@
      "hidden": false
     },
     {
-     "id": 65,
+     "id": 87,
      "name": "Toolhead neck",
      "studio": 7,
      "body": [
@@ -10942,7 +14656,7 @@
      "hidden": false
     },
     {
-     "id": 66,
+     "id": 88,
      "name": "Toolhead envelope",
      "studio": 8,
      "body": [
@@ -10971,7 +14685,7 @@
      "hidden": false
     },
     {
-     "id": 67,
+     "id": 89,
      "name": "Filament tube",
      "studio": 9,
      "body": [
@@ -10998,10 +14712,242 @@
      },
      "fixed": true,
      "hidden": false
+    },
+    {
+     "id": 90,
+     "name": "Bed",
+     "studio": 23,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       -176.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 91,
+     "name": "Bed heater",
+     "studio": 24,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       0.0,
+       0.0,
+       -176.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 92,
+     "name": "Bed arm Z1",
+     "studio": 25,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       -154.0,
+       -60.0,
+       -176.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 93,
+     "name": "Z1 MGN12H",
+     "studio": 11,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       -1.0,
+       8.659560562354934e-17,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       2.220446049250313e-16
+      ],
+      "t": [
+       -154.0,
+       -60.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 94,
+     "name": "Bed arm Z2",
+     "studio": 26,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       154.0,
+       -60.0,
+       -176.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 95,
+     "name": "Z2 MGN12H",
+     "studio": 11,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       0.0,
+       1.0,
+       0.0,
+       1.0,
+       0.0,
+       -1.0,
+       0.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       154.0,
+       -60.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 96,
+     "name": "Bed arm Z3",
+     "studio": 27,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       -1.0,
+       0.0,
+       1.0,
+       6.123233995736766e-17,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       18.0,
+       154.0,
+       -176.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 97,
+     "name": "Z3 MGN12H",
+     "studio": 11,
+     "body": [
+      3,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       0.0,
+       1.0000000000000002,
+       -1.0000000000000002,
+       3.3306690738754696e-16,
+       0.0,
+       0.0,
+       -1.0000000000000002,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       18.0,
+       154.0,
+       -196.25
+      ]
+     },
+     "fixed": true,
+     "hidden": false
     }
    ],
    "mates": [],
-   "next_id": 67,
+   "next_id": 97,
    "relations": []
   }
  ],

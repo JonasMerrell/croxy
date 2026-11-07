@@ -61,5 +61,85 @@
    90
   ],
   "clashes": []
+ },
+ {
+  "pose": [
+   0,
+   0
+  ],
+  "bed_top": -86.5,
+  "clashes": []
+ },
+ {
+  "pose": [
+   -90,
+   -90
+  ],
+  "bed_top": -86.5,
+  "clashes": []
+ },
+ {
+  "pose": [
+   90,
+   -90
+  ],
+  "bed_top": -86.5,
+  "clashes": []
+ },
+ {
+  "pose": [
+   90,
+   90
+  ],
+  "bed_top": -86.5,
+  "clashes": []
+ },
+ {
+  "pose": [
+   -90,
+   90
+  ],
+  "bed_top": -86.5,
+  "clashes": []
+ },
+ {
+  "pose": [
+   0,
+   0
+  ],
+  "bed_top": -266,
+  "clashes": []
+ },
+ {
+  "pose": [
+   -90,
+   -90
+  ],
+  "bed_top": -266,
+  "clashes": []
+ },
+ {
+  "pose": [
+   90,
+   -90
+  ],
+  "bed_top": -266,
+  "clashes": []
+ },
+ {
+  "pose": [
+   90,
+   90
+  ],
+  "bed_top": -266,
+  "clashes": []
+ },
+ {
+  "pose": [
+   -90,
+   90
+  ],
+  "bed_top": -266,
+  "clashes": []
  }
 ]

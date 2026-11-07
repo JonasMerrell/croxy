@@ -17,6 +17,7 @@ OUT = os.path.abspath(sys.argv[2] if len(sys.argv) > 2 else os.path.join(HERE, "
 os.makedirs(OUT, exist_ok=True)
 P = yaml.safe_load(open(os.path.join(HERE, "params.yaml")))
 F, XY, G, TH = P["frame"], P["xy"], P["gantry"], P["toolhead"]
+SH, Z, BD = P["shell"], P["z"], P["bed"]
 
 r = RCad(RCAD, cwd=OUT, log=open(os.path.join(OUT, "build.log"), "w"))
 r("new_document", units="mm")
@@ -302,6 +303,92 @@ bought("belt", res, "Gates EPDM GT2 12 mm belt", "#22262a")
 studio("Shaft coupling")
 bought("coupling", cyl(0, 0, 12.5, 0, 25, "new", "Coupling"), "Shaft coupling 6.35-8", "#b8bec4", "Aluminium 6061")
 
+
+# ================================================================ Frame, Z and bed
+CH = F["chamber_h"]
+SPI = PC - 15                       # inner face of the posts
+SPF = SPI - SH["shear_t"]           # inner face of the shear plates
+FLOOR = (-CH - SH["floor_t"], -CH)
+BX, BY = FX, FY                      # build / bed centre (the toolhead's nozzle offset)
+Z_TOP = NOZ - 0.5                    # bed top at Z = 0 (just under the nozzle)
+Z_BOT = NOZ - P["build"]["z"]        # bed top at Z = 180
+RAILV = [[0, 0, 1], [0, -1, 0], [1, 0, 0]]     # part X -> world Z, part Z -> inward (column frame X)
+RY90 = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]      # part Z -> column X
+# the three Z columns: origin on the shear plate face, column X points into the chamber
+COLS = [("Z1", [-SPF, Z["z12_y"], 0], Rz(0)), ("Z2", [SPF, Z["z12_y"], 0], Rz(180)), ("Z3", [Z["z3_x"], SPF, 0], Rz(-90))]
+def col_world(col, p):
+    _, o, Rc = col
+    return [o[i] + sum(Rc[i][k] * p[k] for k in range(3)) for i in range(3)]
+# where each arm meets the bed, in the column frame (distance from the plate face)
+hb = BD["size"] / 2
+ARM_REACH = {k: round(SPF - v, 3) for k, v in {"Z1": abs(BX - hb) - BD["arm_inset"],
+                                               "Z2": (BX + hb) - BD["arm_inset"],
+                                               "Z3": (BY + hb) - BD["arm_inset"]}.items()}
+
+S_SIDE = studio("Side shear plate")
+res = box(-SPI, -SPF, -SPI, SPI, -CH, 0, "new", "Plate")
+side_body = new_body(res)
+name_part(side_body, "Side shear plate", "Steel", "#58626b", "metal")
+
+S_BACK = studio("Back shear plate")
+res = box(-SPF, SPF, SPF, SPI, -CH, 0, "new", "Plate")
+back_body = new_body(res)
+name_part(back_body, "Back shear plate", "Steel", "#58626b", "metal")
+
+S_FLOOR = studio("Floor plate")
+res = box(-W / 2, W / 2, -W / 2, W / 2, FLOOR[0], FLOOR[1], "new", "Plate")
+floor_body = new_body(res)
+slots = []
+for col in COLS:
+    a = col_world(col, [Z["belt_x"] - 10, Z["belt_offset"] - 15, 0]); b = col_world(col, [Z["belt_x"] + 10, Z["belt_offset"] + 15, 0])
+    slots.append({"type": "rect", "corner1": a[:2], "corner2": b[:2]})
+cut_through(slots, FLOOR[1], "Z belt slots")
+name_part(floor_body, "Floor plate", "Steel", "#58626b", "metal")
+
+zc_span = Z["idler_z"] - Z["motor_z"]
+S_ZBELT = studio("Z belt")
+def stadium_z(rad, h):
+    return [{"type": "line", "from": [-h, -rad], "to": [h, -rad]},
+            {"type": "arc", "center": [h, 0], "start": [h, -rad], "end": [h, rad]},
+            {"type": "line", "from": [h, rad], "to": [-h, rad]},
+            {"type": "arc", "center": [-h, 0], "start": [-h, rad], "end": [-h, -rad]}]
+sid = sketch("top", stadium_z(XY["pitch_r"] + XY["belt_t"] / 2, zc_span / 2) + stadium_z(XY["pitch_r"] - XY["belt_t"] / 2, zc_span / 2), "Z belt")
+res = r("add_feature", kind="extrude", name="Z belt", params={"profiles": [{"sketch": sid}], "depth": str(BW), "op": "new"})
+zbelt_body = new_body(res)
+name_part(zbelt_body, "Gates EPDM GT2 12 mm Z belt", None, "#22262a", "satin")
+
+S_ZMOUNT = studio("Z motor mount")
+mz = Z["motor_z"]
+res = box(-6, 0, Z["belt_offset"] - 21, Z["belt_offset"] + 21, mz - 21, FLOOR[0], "new", "Plate")
+zmount_body = new_body(res)
+name_part(zmount_body, "Z motor mount", "Steel", "#7a8691", "metal")
+
+S_MIC6 = studio("Bed")
+res = box(BX - hb, BX + hb, BY - hb, BY + hb, -BD["t"], 0, "new", "MIC6")
+bed_body = new_body(res)
+name_part(bed_body, "Bed, MIC6 200 x 200 x 8", "Aluminium 6061", "#b9c0c6", "metal")
+S_HEATER = studio("Bed heater")
+res = box(BX - hb + 5, BX + hb - 5, BY - hb + 5, BY + hb - 5, -BD["t"] - BD["heater_t"], -BD["t"], "new", "Heater")
+heater_body = new_body(res)
+name_part(heater_body, "Silicone bed heater", None, "#b5482b", "matte")
+
+# bed arms, one Part Studio each, in their column's frame with the bed top at z = 0
+arm_s = {}
+aw = BD["arm"]
+zd = Z["carriage_drop"]
+under = -BD["t"] - BD["heater_t"]
+for nm, _, _ in COLS:
+    st = studio(f"Bed arm {nm}")
+    L = ARM_REACH[nm]
+    res = box(13, 19, -13.5, 13.5, -zd - 22.7, -zd + 22.7, "new", "Carriage plate")
+    b = new_body(res)
+    box(19, L + aw / 2, -aw / 2, aw / 2, under - aw, under, "add", "Arm")
+    # belt clamp tab reaching the inner strand
+    yb = Z["belt_offset"] + XY["pitch_r"]
+    res2 = box(Z["belt_x"] - 8, 19, yb - 4.5, -13.5, -zd - 10, -zd + 10, "add", "Belt clamp")
+    name_part(b, f"Bed arm {nm}", "Steel", "#8a96a1", "metal")
+    arm_s[nm] = (st, b)
+
 # ================================================================ Assembly
 A = r("create_assembly", name="CroXY")["assembly"]
 inst = []
@@ -354,6 +441,32 @@ for nm, pos, R in [("X belt front", [0, -B, BZ - BW / 2], I3), ("X belt back", [
                    ("Y belt left", [-B, 0, BZ - BW / 2], Rz(90)), ("Y belt right", [B, 0, BZ - BW / 2], Rz(90))]:
     place(*buy["belt"], pos, R, name=nm)
 
+
+# frame shell
+place(S_SIDE, side_body, [0, 0, 0], I3, name="Shear plate left")
+place(S_SIDE, side_body, [0, 0, 0], Rz(180), name="Shear plate right")
+place(S_BACK, back_body, [0, 0, 0], I3, name="Shear plate back")
+place(S_FLOOR, floor_body, [0, 0, 0], I3, name="Floor plate")
+
+# Z columns: rail, top idler, belt, drive pulley, NEMA17 and its mount
+def place_col(col, studio_body, p, Rl, name, std=None, **kw):
+    _, o, Rc = col
+    pos = col_world(col, p)
+    R = mm(Rc, Rl)
+    if std:
+        return place_std(std[0], std[1], pos, R, name=name, **kw)
+    return place(*studio_body, pos, R, name=name)
+
+rail_mid = (Z_TOP - zd + Z_BOT - zd) / 2
+for col in COLS:
+    nm = col[0]
+    place_col(col, buy["mgn12_rail"], [0, 0, rail_mid], RAILV, f"{nm} rail")
+    place_col(col, buy["idler"], [Z["belt_x"] - 8, Z["belt_offset"], Z["idler_z"]], RY90, f"{nm} Z idler")
+    place_col(col, buy["pulley"], [Z["belt_x"] - 8, Z["belt_offset"], Z["motor_z"]], RY90, f"{nm} Z drive pulley")
+    place_col(col, (S_ZBELT, zbelt_body), [Z["belt_x"] - BW / 2, Z["belt_offset"], (Z["idler_z"] + Z["motor_z"]) / 2], RAILV, f"{nm} Z belt")
+    place_col(col, (S_ZMOUNT, zmount_body), [0, 0, 0], I3, f"{nm} Z motor mount")
+    place_col(col, None, [-6, Z["belt_offset"], Z["motor_z"]], mm(RY90, RX180), f"{nm} NEMA17", std=("NEMA", "NEMA 17"), length=40)
+
 # moving gantry at (tx, ty): (key, studio/body, position fn, rotation, name)
 def gantry_parts():
     g = []
@@ -381,18 +494,35 @@ GP = gantry_parts()
 TX0, TY0 = 40, -30
 moving = {k: place(st, bd, f(TX0, TY0), R, name=nm) for k, (st, bd), f, R, nm in GP}
 
+# moving bed at bed-top height zt: bed, heater, arms and Z carriages
+BEDP = [("bed", (S_MIC6, bed_body), lambda zt: [0, 0, zt], I3, "Bed"),
+        ("heater", (S_HEATER, heater_body), lambda zt: [0, 0, zt], I3, "Bed heater")]
+for col in COLS:
+    nm, o, Rc = col
+    BEDP.append((f"arm_{nm}", arm_s[nm], lambda zt, c=col: col_world(c, [0, 0, zt]), Rc, f"Bed arm {nm}"))
+    BEDP.append((f"zcar_{nm}", buy["mgn12h"], lambda zt, c=col: col_world(c, [0, 0, zt - zd]), mm(col[2], RAILV), f"{nm} MGN12H"))
+ZT0 = (Z_TOP + Z_BOT) / 2
+moving_bed = {k: place(st, bd, f(ZT0), R, name=nm) for k, (st, bd), f, R, nm in BEDP}
+def pose_bed(zt):
+    for k, _, f, _, _ in BEDP:
+        r("assembly_move", assembly=A, instance=moving_bed[k], position=[round(v, 4) for v in f(zt)])
+
+
 def pose(tx, ty):
     for k, _, f, _, _ in GP:
         r("assembly_move", assembly=A, instance=moving[k], position=[round(v, 4) for v in f(tx, ty)])
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
-EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt")
+EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17")
 def unexpected(info):
     names = {i["id"]: i["name"] for i in info["instances"]}
     bad = []
     for x in info["interference"]:
         na, nb = names[x["a"]], names[x["b"]]
         if any(e in na for e in EXPECTED) and any(e in nb for e in EXPECTED):
+            continue
+        # each Z belt's inner strand passes through its own arm's clamp
+        if {na, nb} in ({f"{c} Z belt", f"Bed arm {c}"} for c in ("Z1", "Z2", "Z3")):
             continue
         bad.append([na, nb, round(x["volume_mm3"], 2)])
     return bad
@@ -403,7 +533,14 @@ for tx, ty in [(0, 0), (-T_, -T_), (T_, -T_), (T_, T_), (-T_, T_), (-T_, 0), (T_
     pose(tx, ty)
     bad = unexpected(r("assembly_info", assembly=A, interference=True))
     sweep.append({"pose": [tx, ty], "clashes": bad})
+for zt in (Z_TOP, Z_BOT):
+    pose_bed(zt)
+    for tx, ty in [(0, 0), (-T_, -T_), (T_, -T_), (T_, T_), (-T_, T_)]:
+        pose(tx, ty)
+        bad = unexpected(r("assembly_info", assembly=A, interference=True))
+        sweep.append({"pose": [tx, ty], "bed_top": zt, "clashes": bad})
 pose(TX0, TY0)
+pose_bed(ZT0)
 json.dump(sweep, open(os.path.join(OUT, "clearance-sweep.json"), "w"), indent=1)
 
 r("save_document", path="CroXY.json")
@@ -415,14 +552,14 @@ json.dump(doc, open(os.path.join(OUT, "CroXY.json"), "w"), indent=1)
 json.dump({"studios": studios, "layout": layout, "moving": moving, "start": [TX0, TY0], "sweep": sweep},
           open(os.path.join(OUT, "build-info.json"), "w"), indent=1)
 
-for view in ("iso_front_left", "top", "front"):
+for view in ("iso_front_left", "top", "front", "right"):
     r("render_assembly", assembly=A, view=view, width=1400, height=1050, path=f"render-{view}.png")
 # the gantry from below, close up
 r("render_assembly", assembly=A, view="iso_front_left", width=1400, height=1050,
   fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, MOTOR_FACE + 80]], path="render-gantry.png")
 r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height=1050,
   fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, 0]], path="render-below.png")
-r("export", format="step", assembly=A, path="CroXY-xy.step")
+r("export", format="step", assembly=A, path="CroXY.step")
 info = r("assembly_info", assembly=A, interference=True)
 json.dump(info, open(os.path.join(OUT, "assembly-info.json"), "w"), indent=1)
 r.close()

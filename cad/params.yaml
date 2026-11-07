@@ -43,3 +43,27 @@ toolhead:
   body_top: -2          # the toolhead body hangs fully below the plate on a neck from the yoke
   neck: [44, 43]        # neck footprint through the cutout (x, y)
   filament_top: 110     # PTFE tube modelled straight up to here (below the motor plates); it bends to the lid port above
+
+shell:
+  shear_t: 6            # steel shear plates on the inner faces of the posts: left, right, back (front is the door)
+  floor_t: 10           # steel floor plate under the posts
+  floor_insulation: 30
+  z_bay: 60             # cool bay under the floor for the Z motors
+  tray_t: 8
+
+z:
+  z12_y: -60            # Z1 (left) and Z2 (right) rails sit on the side plates at this Y
+  z3_x: 18              # Z3 rail sits on the back plate at this X (the build centre's X)
+  rail_len: 230
+  belt_offset: -25      # belt loop beside the rail, in the column's own frame
+  belt_x: 14            # belt centre plane, inward from the shear plate face
+  idler_z: -85          # top idler, kept below the toolhead
+  motor_z: -390         # NEMA17 drive pulley, in the bay under the floor
+  carriage_drop: 20     # Z carriage centre below the bed top
+
+bed:
+  size: 200             # MIC6, centred on the build centre (toolhead offset)
+  t: 8
+  heater_t: 2
+  arm: 20               # square steel arms from each Z carriage to the bed
+  arm_inset: 20         # arm reaches this far in under the bed edge
