@@ -10,7 +10,7 @@ build:
 
 chamber:
   temp_max: 150
-  interior: {x: 380, y: 380, h: 430}   # inside the frame (frame sits inside insulation)
+  interior: {x: 380, y: 380, h: 290}   # inside the frame (frame sits inside insulation)
   heater: {type: PTC, fan: shaft_through_impeller, motor_location: back_module}
 
 insulation:
@@ -20,7 +20,7 @@ insulation:
 
 frame:
   posts: {profile: "3030", count: 4, positions: [FL, FR, BL, BR]}
-  post_length: 430
+  post_length: 290
   back_shear_plate: {material: mild_steel, note: "carries the Z3 rail; replaces the back centre post, which clashed with the X-back belt"}
   top_plate: {material: mild_steel, thickness: 12, size: [380, 380], process: "waterjet + stress relieve + finish machine"}
   floor_plate: {material: mild_steel, thickness: 10, size: [380, 380]}
@@ -29,16 +29,17 @@ xy:
   kinematics: cross_xy
   motors: {type: NEMA23, count: 4, layout: pinwheel, mount: top_of_plate, standoff: {material: G10, height: 30}, coupling: "motor drives an 8 mm shaft through a coupling; shaft runs in two 608s in the corner block (double shear)"}
   belt: {type: "Gates EPDM GT2", width: 12}
+  location: "on top of the plate, out of the chamber; toolhead drops through a 246 mm cutout with a sliding insulated shutter"
   pulley_support: double_shear
-  belt_offset_from_center: 144
-  pulley_offset_along_belt: 127
+  belt_offset_from_center: 143   # directly above the MGN12 rail
+  pulley_offset_along_belt: 126
   tensioning: "slotted idler in the corner block, 6 mm travel, adjusted from above the plate"
   corner_block: "one steel block per corner carries that corner's drive pulley and the other belt's idler"
-  perimeter_rails: {type: MGN12, offset_from_center: 128, length: 230}
+  perimeter_rails: {type: MGN12, offset_from_center: 143, length: 230, mount: plate_top}
   beams:
     rail: MGN9
     backer: {material: [mild_steel, "4130"], source: SendCutSend, form: bent_U_channel_TBD, rail_face: finish_machined}
-    span: 280
+    span: 290
     sizing: dynamic_sim_TBD
   toolhead_envelope: [60, 60, 84]
   yoke: "aluminium yoke carries both MGN9H carriages and wraps the Y beam"
@@ -68,12 +69,11 @@ stack_heights:        # from the floor up (h)
   z_motor_bay: [8, 60]
   floor_insulation: [60, 90]
   floor_plate: [90, 100]
-  chamber: [100, 530]
-  top_plate: [530, 542]
-  top_insulation: [542, 572]
-  top_bay: [572, 662]
-  cover: [662, 668]
-  nozzle_tip: 335
+  chamber: [100, 390]
+  top_plate: [390, 402]
+  gantry_bay: [402, 610]   # motors to about z 200 above the plate; insulated lid above
+  cover: [610, 650]
+  nozzle_tip: 337
 
 back_module:
   depth: 97
@@ -84,4 +84,4 @@ door:
   location: front
   type: insulated_double_glazed
 
-outer_envelope: {w: 446, d: 543, h: 668}   # estimate, enclosure not modelled yet
+outer_envelope: {w: 446, d: 543, h: 650}   # estimate, enclosure not modelled yet

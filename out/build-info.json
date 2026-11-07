@@ -2,8 +2,9 @@
  "studios": [
   "Top plate",
   "Corner pulley block",
-  "X-end adapter",
-  "Y-end drop block",
+  "Motor tower",
+  "X-end tower",
+  "Y-end tower",
   "Beam backer",
   "Toolhead yoke",
   "Toolhead envelope",
@@ -14,44 +15,51 @@
   "GT2 pulley 20T",
   "GT2 idler 20T",
   "Belt",
-  "Shaft coupling",
-  "Motor standoff"
+  "Shaft coupling"
  ],
  "layout": {
   "drive_FL": [
-   -127,
-   -144
+   -126,
+   -143
   ],
   "idler_FL": [
-   -144,
-   -127
+   -143,
+   -126
   ],
   "pulley_z": [
-   -28,
-   -12
+   31,
+   47
   ],
-  "belt_z": -20,
-  "x_carriage_face": -62,
-  "y_carriage_face": -105,
-  "nozzle_z": -195
+  "belt_z": 39,
+  "x_beam": [
+   90,
+   115
+  ],
+  "y_beam": [
+   47,
+   72
+  ],
+  "motor_face": 122,
+  "toolhead_top": 31,
+  "nozzle_z": -53
  },
  "moving": {
-  "xcar_back": 62,
-  "xend_back": 63,
-  "xcar_front": 64,
-  "xend_front": 65,
-  "ycar_right": 66,
-  "yend_right": 67,
-  "ycar_left": 68,
-  "yend_left": 69,
-  "xbeam": 70,
-  "xrail": 71,
-  "ybeam": 72,
-  "yrail": 73,
-  "xcar9": 74,
-  "ycar9": 75,
-  "yoke": 76,
-  "tool": 77
+  "xcar_back": 50,
+  "xend_back": 51,
+  "xcar_front": 52,
+  "xend_front": 53,
+  "ycar_right": 54,
+  "yend_right": 55,
+  "ycar_left": 56,
+  "yend_left": 57,
+  "xbeam": 58,
+  "xrail": 59,
+  "ybeam": 60,
+  "yrail": 61,
+  "xcar9": 62,
+  "ycar9": 63,
+  "yoke": 64,
+  "tool": 65
  },
  "start": [
   40,

@@ -110,31 +110,40 @@ RX180 = [[1, 0, 0], [0, -1, 0], [0, 0, -1]]
 I3 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
 
 # ---------------------------------------------------------------- derived layout
+# Everything that moves in XY sits ON TOP of the plate, out of the hot chamber. The toolhead
+# hangs from the beams down through a central cutout in the plate.
 W, T = F["plate_w"], F["plate_t"]
+PT = T                                    # plate top face
 B, PP, TT = XY["belt_line"], XY["pulley_pos"], XY["tension_travel"]
 BZ, BW = XY["belt_z"], XY["belt_w"]
 RO, RL = XY["rail_off"], XY["rail_len"]
 PC = F["post_center"]
+CUT = F["cutout"] / 2
 # FL corner of the pinwheel; the other three are this rotated by 90, 180, 270 degrees about Z
 D_FL = [-PP, -B]          # X-front belt drive
 I_FL = [-B, -PP]          # Y-left belt idler (tension moves it towards -Y)
-PUL_Z0, PUL_Z1 = BZ - 8, BZ + 8          # pulley with flanges
-BLK_TOP = (-8, 0)                        # corner block top plate
-BLK_BOT = (PUL_Z0 - 11, PUL_Z0 - 3)      # corner block bottom plate
-SEAT_R = 11.0                            # 608 bearing seat
-CARR_FACE = -13                          # MGN12H carriage mounting face (hanging)
-XB_TOP, YB_TOP = G["x_beam_top"], G["y_beam_top"]
+PUL_Z0, PUL_Z1 = BZ - 8, BZ + 8           # pulley with flanges
+BLK_BOT = (PUL_Z0 - 10, PUL_Z0 - 2)       # corner block bottom plate (clears the MGN12 carriages)
+BLK_TOP = (PUL_Z1 + 2, PUL_Z1 + 10)       # corner block top plate
+BOSS_R = 12.5
+SEAT_R = 11.0                             # 608 bearing seat
+CARR_FACE = PT + 13                       # MGN12H carriage mounting face (rail on the plate)
+BASE_T = 6                                # tower base plate on the carriage
 BH, BWD, BT, BL = G["beam_h"], G["beam_w"], G["beam_t"], G["beam_len"]
-XB_BOT, YB_BOT = XB_TOP - BH, YB_TOP - BH
-X_CAR_FACE = XB_BOT - 10                 # MGN9H face under the X beam
-Y_CAR_FACE = YB_BOT - 10                 # MGN9H face under the Y beam
+YB_BOT, XB_BOT = G["y_beam_bot"], G["x_beam_bot"]
+YB_TOP, XB_TOP = YB_BOT + BH, XB_BOT + BH
+X_CAR_FACE = XB_BOT - 10                  # MGN9H face under the X beam
+Y_CAR_FACE = YB_BOT - 10                  # MGN9H face under the Y beam
 YOKE_T = 6
-NOZ = TH["nozzle_z"]
-MOTOR_FACE = T + XY["motor_standoff"]
-NEMA23_HOLE = 47.14 / 2
+TH_TOP = Y_CAR_FACE - YOKE_T              # top of the toolhead, under the yoke
+NOZ = TH_TOP - TH["height"]
+MOTOR_PLATE = (XB_TOP + 1, XB_TOP + 7)    # motor plate clears the X beam
+MOTOR_FACE = MOTOR_PLATE[1]
+assert BLK_BOT[0] > CARR_FACE - 10 and TH_TOP > PT + F["shutter_h"], "stack does not fit"
 
 layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "belt_z": BZ,
-          "x_carriage_face": X_CAR_FACE, "y_carriage_face": Y_CAR_FACE, "nozzle_z": NOZ}
+          "x_beam": [XB_BOT, XB_TOP], "y_beam": [YB_BOT, YB_TOP], "motor_face": MOTOR_FACE,
+          "toolhead_top": TH_TOP, "nozzle_z": NOZ}
 
 # ================================================================ Part Studios
 # ---- 0. Top plate
@@ -146,46 +155,30 @@ sid = sketch("top", [{"type": "center_rect", "center": [0, 0], "corner": [W / 2,
 res = r("add_feature", kind="extrude", name="Plate", params={"profiles": [{"sketch": sid}], "depth": "plate_t", "op": "new"})
 plate_body = new_body(res)
 
-holes = []
+holes = [{"type": "rect", "corner1": [-CUT, -CUT], "corner2": [CUT, CUT]}]   # toolhead cutout
 for k in range(4):
     a = 90 * k
-    d = rot_z(a, D_FL)
-    holes.append({"type": "circle", "center": d, "radius": 6.0})                      # drive shaft clearance
-    for sx in (-1, 1):
-        for sy in (-1, 1):                                                              # NEMA23 standoff screws
-            holes.append({"type": "circle", "center": [d[0] + sx * NEMA23_HOLE, d[1] + sy * NEMA23_HOLE], "radius": 2.75})
-    # idler bolt slot (8.5 wide) running from nominal towards -Y in the FL frame
-    i0, i1 = rot_z(a, I_FL), rot_z(a, [I_FL[0], I_FL[1] - TT])
-    c0 = rot_z(a, [I_FL[0] - 4.25, I_FL[1] - TT]); c1 = rot_z(a, [I_FL[0] + 4.25, I_FL[1]])
-    holes.append({"type": "rect", "corner1": c0, "corner2": c1})
-    holes.append({"type": "circle", "center": i0, "radius": 4.25})
-    holes.append({"type": "circle", "center": i1, "radius": 4.25})
-    # corner block screws (M5 clearance)
-    for p in ([-155.5, -140], [-140, -155.5], [-118.5, -118.5], [-155.5, -155.5]):
+    for p in ([-155.5, -140], [-140, -155.5], [-125.5, -125.5], [-155.5, -155.5]):    # corner block screws
         holes.append({"type": "circle", "center": rot_z(a, p), "radius": 2.75})
-    # corner post bolt
-    holes.append({"type": "circle", "center": rot_z(a, [-PC, -PC]), "radius": 4.25})
-    # perimeter rail screws (M3 tapped, 25 pitch); FL frame: X-front rail at y=-RO
-    for n in range(-4, 5):
+    holes.append({"type": "circle", "center": rot_z(a, [-PC, -PC]), "radius": 4.25})  # corner post bolt
+    for n in range(-4, 5):                                                              # MGN12 rail screws, M3 tapped
         holes.append({"type": "circle", "center": rot_z(a, [n * 25, -RO]), "radius": 1.25})
-cut_through(holes, T, "Plate holes")
+cut_through(holes, T, "Cutout and holes")
 name_part(plate_body, "Top plate", "Steel", "#5b6670", "metal")
 
-# ---- 1. Corner pulley block (one design, pinwheeled)
+# ---- 1. Corner pulley block (one design, pinwheeled), standing on the plate
 S_BLOCK = studio("Corner pulley block")
-x0, x1 = -158.0, -116.0
-for zz, nm in ((BLK_TOP, "top"), (BLK_BOT, "bottom")):
-    op = "new" if nm == "top" else "add"
-    res = box(x0, x1, x0, x1, zz[0], zz[1], op, f"Block {nm} plate")
-    if nm == "top":
+x0, x1 = -158.0, -123.0
+for zz, nm in ((BLK_BOT, "bottom"), (BLK_TOP, "top")):
+    res = box(x0, x1, x0, x1, zz[0], zz[1], "new" if nm == "bottom" else "add", f"Block {nm} plate")
+    if nm == "bottom":
         block_body = new_body(res)
-    cyl(D_FL[0], D_FL[1], 13, zz[0], zz[1], "add", f"Drive boss {nm}")
-    cyl(I_FL[0], I_FL[1], 13, zz[0], zz[1], "add", f"Idler boss {nm}")
-    cyl(I_FL[0], I_FL[1] - TT, 13, zz[0], zz[1], "add", f"Idler boss tensioned {nm}")
-box(x0, x1, x0, x0 + 5, BLK_BOT[1], BLK_TOP[0], "add", "Wall front")
-box(x0, x0 + 5, x0, x1, BLK_BOT[1], BLK_TOP[0], "add", "Wall left")
-res = box(-121, -116, -121, -116, BLK_BOT[1], BLK_TOP[0], "add", "Inner post")
-# bearing seats (608: 22 x 7) on the inside faces, shaft clearance, idler slot, screws
+    cyl(D_FL[0], D_FL[1], BOSS_R, zz[0], zz[1], "add", f"Drive boss {nm}")
+    cyl(I_FL[0], I_FL[1], BOSS_R, zz[0], zz[1], "add", f"Idler boss {nm}")
+    cyl(I_FL[0], I_FL[1] - TT, BOSS_R, zz[0], zz[1], "add", f"Idler boss tensioned {nm}")
+box(x0, x1, x0, x0 + 5, PT, BLK_TOP[1], "add", "Wall front")
+box(x0, x0 + 5, x0, x1, PT, BLK_TOP[1], "add", "Wall left")
+box(-128, -123, -128, -123, PT, BLK_TOP[1], "add", "Inner post")
 sid = sketch(plane(BLK_TOP[0]), [{"type": "circle", "center": D_FL, "radius": SEAT_R}], "Top bearing seat")
 r("add_feature", kind="extrude", name="Top bearing seat", params={"profiles": [{"sketch": sid}], "depth": "7", "op": "remove"})
 sid = sketch(plane(BLK_BOT[1]), [{"type": "circle", "center": D_FL, "radius": SEAT_R}], "Bottom bearing seat")
@@ -193,27 +186,39 @@ r("add_feature", kind="extrude", name="Bottom bearing seat", params={"profiles":
 cut_through([{"type": "circle", "center": D_FL, "radius": 5.0},
              {"type": "rect", "corner1": [I_FL[0] - 4.25, I_FL[1] - TT], "corner2": [I_FL[0] + 4.25, I_FL[1]]},
              {"type": "circle", "center": I_FL, "radius": 4.25},
-             {"type": "circle", "center": [I_FL[0], I_FL[1] - TT], "radius": 4.25}], 0, "Shaft and idler slot")
-sid = sketch("top", [{"type": "circle", "center": p, "radius": 2.1} for p in
-                     ([-155.5, -140], [-140, -155.5], [-118.5, -118.5], [-155.5, -155.5])], "M5 tapped holes")
-r("add_feature", kind="extrude", name="M5 tapped holes", params={"profiles": [{"sketch": sid}], "depth": "12", "op": "remove", "opposite": True})
+             {"type": "circle", "center": [I_FL[0], I_FL[1] - TT], "radius": 4.25}], BLK_TOP[1], "Shaft and idler slot")
+sid = sketch(plane(PT), [{"type": "circle", "center": p, "radius": 2.1} for p in
+                         ([-155.5, -140], [-140, -155.5], [-125.5, -125.5], [-155.5, -155.5])], "M5 tapped holes")
+r("add_feature", kind="extrude", name="M5 tapped holes", params={"profiles": [{"sketch": sid}], "depth": "12", "op": "remove"})
 name_part(block_body, "Corner pulley block", "Steel", "#7a8691", "metal")
 
-# ---- 2. X-end adapter (local = world, back end, X beam at x = 0)
-S_XEND = studio("X-end adapter")
-inner = B - XY["pitch_r"]           # inner belt strand, clamped by the adapter
-res = box(-22.7, 22.7, RO - 15, RO + 13, XB_TOP, CARR_FACE, "new", "Adapter body")
-xend_body = new_body(res)
-box(-22.7, 22.7, inner - 1.2, inner + 1.2, XB_TOP, BZ + BW / 2, "remove", "Belt clamp slot")
-name_part(xend_body, "X-end adapter", "Steel", "#8a96a1", "metal")
+# ---- 1b. Motor tower: L-shaped walls on the block's outer edges, motor plate above the X beam
+S_MTOWER = studio("Motor tower")
+mh = 57.0 / 2
+res = box(D_FL[0] - mh, D_FL[0] + mh, D_FL[1] - mh, D_FL[1] + mh, MOTOR_PLATE[0], MOTOR_PLATE[1], "new", "Motor plate")
+mtower_body = new_body(res)
+box(x0, x0 + 5, x0, x1, BLK_TOP[1], MOTOR_PLATE[0], "add", "Wall left")
+box(x0, D_FL[0] + mh, x0, x0 + 5, BLK_TOP[1], MOTOR_PLATE[0], "add", "Wall front")
+cut_through([{"type": "circle", "center": D_FL, "radius": 19.3}], MOTOR_PLATE[1], "Pilot bore")
+name_part(mtower_body, "Motor tower", "Steel", "#7a8691", "metal")
 
-# ---- 3. Y-end drop block (local = world, right end, Y beam at y = 0)
-S_YEND = studio("Y-end drop block")
-res = box(RO - 15, RO + 13, -22.7, 22.7, YB_TOP, CARR_FACE, "new", "Drop block body")
+# ---- 2. X-end tower (local = world for the back end with the X beam at x = 0): stands on the MGN12H,
+#         clamps the inner strand of the X belt, carries the X beam on top
+S_XEND = studio("X-end tower")
+inner = B - XY["pitch_r"]           # inner belt strand, clamped by the tower
+res = box(-22.7, 22.7, RO - 13.5, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
+xend_body = new_body(res)
+box(-17.5, 17.5, RO - 13.5, B + 2, CARR_FACE + BASE_T, XB_BOT, "add", "Upright")
+box(-17.5, 17.5, inner - 1.2, inner + 1.2, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
+name_part(xend_body, "X-end tower", "Steel", "#8a96a1", "metal")
+
+# ---- 3. Y-end tower (local = world for the right end with the Y beam at y = 0)
+S_YEND = studio("Y-end tower")
+res = box(RO - 13.5, RO + 13.5, -22.7, 22.7, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
 yend_body = new_body(res)
-box(inner - 1.2, inner + 1.2, -22.7, 22.7, BZ - BW / 2 - 1, BZ + BW / 2, "remove", "Belt clamp slot")
-box(RO - 15, RO - 3, -22.7, 22.7, YB_TOP + 3, BZ - BW / 2 - 4, "remove", "Lightening pocket")
-name_part(yend_body, "Y-end drop block", "Steel", "#8a96a1", "metal")
+box(RO - 13.5, B + 2, -17.5, 17.5, CARR_FACE + BASE_T, YB_BOT, "add", "Upright")
+box(inner - 1.2, inner + 1.2, -17.5, 17.5, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
+name_part(yend_body, "Y-end tower", "Steel", "#8a96a1", "metal")
 
 # ---- 4. Beam backer: bent U channel along X, web at the bottom (z 0..t), flanges up
 S_BEAM = studio("Beam backer")
@@ -239,8 +244,7 @@ name_part(yoke_body, "Toolhead yoke", "Aluminium 7075", "#c0c6cc", "metal")
 # ---- 6. Toolhead envelope (Chube Conduction + Sherpa Heavy, stand-in)
 S_TOOL = studio("Toolhead envelope")
 ex, ey = TH["envelope"]
-th_top = Y_CAR_FACE - YOKE_T
-res = box(-ex / 2, ex / 2, -ey / 2, ey / 2, NOZ + 12, th_top, "new", "Envelope")
+res = box(-ex / 2, ex / 2, -ey / 2, ey / 2, NOZ + 12, TH_TOP, "new", "Envelope")
 tool_body = new_body(res)
 cyl(0, 0, 4, NOZ, NOZ + 12, "add", "Nozzle")
 name_part(tool_body, "Toolhead envelope (stand-in)", None, "#c4572a", "satin")
@@ -282,8 +286,6 @@ res = r("add_feature", kind="extrude", name="Belt", params={"profiles": [{"sketc
 bought("belt", res, "Gates EPDM GT2 12 mm belt", "#22262a")
 studio("Shaft coupling")
 bought("coupling", cyl(0, 0, 12.5, 0, 25, "new", "Coupling"), "Shaft coupling 6.35-8", "#b8bec4", "Aluminium 6061")
-studio("Motor standoff")
-bought("standoff", cyl(0, 0, 5, 0, XY["motor_standoff"], "new", "Standoff"), "G10 thermal-break standoff", "#d9c27a")
 
 # ================================================================ Assembly
 A = r("create_assembly", name="CroXY")["assembly"]
@@ -315,23 +317,21 @@ for k in range(4):
     R = Rz(a)
     corner = ["FL", "FR", "BR", "BL"][k]
     place(S_BLOCK, block_body, [0, 0, 0], R, name=f"Corner block {corner}")
+    place(S_MTOWER, mtower_body, [0, 0, 0], R, name=f"Motor tower {corner}")
     d, i_ = rot_z(a, D_FL), rot_z(a, I_FL)
     place(*buy["pulley"], [d[0], d[1], PUL_Z0], name=f"Drive pulley {corner}")
     place(*buy["idler"], [i_[0], i_[1], PUL_Z0], name=f"Idler {corner}")
-    place_std("Shaft", "Ø8", [d[0], d[1], BLK_BOT[0]], length=round(MOTOR_FACE - 16 - BLK_BOT[0], 1), name=f"Drive shaft {corner}")
+    shaft_top = MOTOR_FACE - 27
+    place_std("Shaft", "Ø8", [d[0], d[1], BLK_BOT[0]], length=round(shaft_top - BLK_BOT[0], 1), name=f"Drive shaft {corner}")
     for zb in (BLK_TOP[0], BLK_BOT[1] - 7):
         place_std("Bearing", "608", [d[0], d[1], zb], name=f"608 {corner}")
-    place(*buy["coupling"], [d[0], d[1], MOTOR_FACE - 28], name=f"Coupling {corner}")
-    for sx in (-1, 1):
-        for sy in (-1, 1):
-            place(*buy["standoff"], [d[0] + sx * NEMA23_HOLE, d[1] + sy * NEMA23_HOLE, T], name=f"Standoff {corner}")
+    place(*buy["coupling"], [d[0], d[1], MOTOR_PLATE[0] - 25], name=f"Coupling {corner}")
     place_std("NEMA", "NEMA 23", [d[0], d[1], MOTOR_FACE], RX180, length=XY["motor_len"], name=f"NEMA23 {corner}")
     pc = rot_z(a, [-PC, -PC])
     place_std("Extrusion", "3030", [pc[0], pc[1], -F["chamber_h"]], length=F["chamber_h"], name=f"Post {corner}")
 
-# perimeter rails: X rails along X at y = +-RO, Y rails along Y at x = +-RO, hanging under the plate
-for k, (pos, R) in enumerate([([0, -RO, 0], RX180), ([0, RO, 0], RX180),
-                              ([-RO, 0, 0], mm(Rz(90), RX180)), ([RO, 0, 0], mm(Rz(90), RX180))]):
+# perimeter rails on the plate: X rails along X at y = +-RO, Y rails along Y at x = +-RO
+for k, (pos, R) in enumerate([([0, -RO, PT], I3), ([0, RO, PT], I3), ([-RO, 0, PT], Rz(90)), ([RO, 0, PT], Rz(90))]):
     place(*buy["mgn12_rail"], pos, R, name=["X rail front", "X rail back", "Y rail left", "Y rail right"][k])
 
 # belts: X belts along X at y = +-B, Y belts along Y at x = +-B
@@ -344,12 +344,12 @@ def gantry_parts():
     g = []
     for sgn, nm in ((1, "back"), (-1, "front")):
         R = I3 if sgn > 0 else Rz(180)
-        g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, 0], RX180, f"MGN12H X {nm}"))
-        g.append((f"xend_{nm}", (S_XEND, xend_body), lambda tx, ty: [tx, 0, 0], R, f"X-end adapter {nm}"))
+        g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
+        g.append((f"xend_{nm}", (S_XEND, xend_body), lambda tx, ty: [tx, 0, 0], R, f"X-end tower {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
-        g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, 0], mm(Rz(90), RX180), f"MGN12H Y {nm}"))
-        g.append((f"yend_{nm}", (S_YEND, yend_body), lambda tx, ty: [0, ty, 0], R, f"Y-end drop block {nm}"))
+        g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
+        g.append((f"yend_{nm}", (S_YEND, yend_body), lambda tx, ty: [0, ty, 0], R, f"Y-end tower {nm}"))
     g += [("xbeam", (S_BEAM, beam_body), lambda tx, ty: [tx, 0, XB_BOT], Rz(90), "X beam"),
           ("xrail", buy["mgn9_rail"], lambda tx, ty: [tx, 0, XB_BOT], mm(Rz(90), RX180), "MGN9 rail X beam"),
           ("ybeam", (S_BEAM, beam_body), lambda tx, ty: [0, ty, YB_BOT], I3, "Y beam"),
@@ -401,8 +401,10 @@ json.dump({"studios": studios, "layout": layout, "moving": moving, "start": [TX0
 for view in ("iso_front_left", "top", "front"):
     r("render_assembly", assembly=A, view=view, width=1400, height=1050, path=f"render-{view}.png")
 # the gantry from below, close up
+r("render_assembly", assembly=A, view="iso_front_left", width=1400, height=1050,
+  fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, MOTOR_FACE + 80]], path="render-gantry.png")
 r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height=1050,
-  fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, 0]], path="render-gantry-below.png")
+  fit_box=[[-W / 2, -W / 2, NOZ - 5], [W / 2, W / 2, 0]], path="render-below.png")
 r("export", format="step", assembly=A, path="CroXY-xy.step")
 info = r("assembly_info", assembly=A, interference=True)
 json.dump(info, open(os.path.join(OUT, "assembly-info.json"), "w"), indent=1)
