@@ -14,7 +14,7 @@ toolhead reaches down into the chamber through a cutout in the plate. It is desi
 | Layout sketches (rev B) | approved, [docs/layout-sketches.html](docs/layout-sketches.html) |
 | Top plate, corner pulley blocks, motor towers, XY drive, gantry, toolhead yoke | modelled on top of the plate, clearance-checked over full travel |
 | Sliding shutter over the plate cutout | space reserved (15 mm), not modelled |
-| Frame posts | placed (3030 × 290); floor plate, back shear plate, panels not yet |
+| Frame posts | placed (3030 × 320); floor plate, back shear plate, panels not yet |
 | Z system and bed | not started |
 | Enclosure, insulation, door, back module (filter + electronics) | not started |
 | Toolhead | envelope stand-in only (Chube Conduction + Sherpa Heavy) |
@@ -36,7 +36,8 @@ All key sizes are in [`cad/params.yaml`](cad/params.yaml). Change a number and r
 ## How the XY works
 
 - **Above the plate.** The MGN12 rails, belts, pulleys and beams all sit on top of the plate, outside the heated chamber. The plate has a 246 mm square cutout, and the toolhead hangs from the beams down through it. A sliding insulated shutter over the cutout (15 mm of height kept clear for it) keeps chamber air out of the gantry bay.
-- **Cross gantry.** The Y beam spans side to side on the Y-end towers and moves in Y. The X beam spans front to back on the taller X-end towers, above the Y beam, and moves in X. The toolhead yoke rides an MGN9H on the bottom of each beam and wraps around the Y beam. The toolhead hangs below the yoke.
+- **Cross gantry.** The Y beam spans side to side on the Y-end towers and moves in Y. The X beam spans front to back on the taller X-end towers, above the Y beam, and moves in X. The toolhead yoke rides an MGN9H on the bottom of each beam and wraps around the Y beam.
+- **Toolhead and filament.** The beams cross right above the yoke, so the extruder and hotend sit offset into one open quadrant, 18 mm in X and 25 mm in Y from the cross. Filament drops straight down a PTFE tube through that quadrant to the extruder. A narrow neck carries the toolhead body down through the cutout, so the whole body hangs below the plate and can travel past the cutout edge without growing the frame. The build area is centred under the nozzle offset, at (18, 25) from the frame centre.
 - **Beams.** Bent U-channel backers (mild steel or 4130, Send Cut Send) carry the MGN9 rails. Their size will be set by the dynamic simulation. The rail face is left for finish machining.
 - **Perimeter rails and towers.** Four MGN12 rails are screwed to the top of the plate. Each belt runs directly above its rail, and each tower stands on its MGN12H and clamps the inner strand of its belt.
 - **Drive.** There are four NEMA23s, one per belt, pinwheeled around the corners on steel motor towers above the X beam. Each motor turns an 8 mm shaft through a coupling. The shaft runs in two 608 bearings in the corner block, so the pulley is in double shear and the motor only sees torque.
@@ -50,4 +51,4 @@ See [docs/spec.yaml](docs/spec.yaml) for the full spec. Changes from the approve
 
 - The frame is 380 mm (was 340) so each corner block fits its drive pulley, the other belt's idler, and 6 mm of tension travel.
 - The back centre post is replaced by a steel back shear plate carrying the Z3 rail. The post would have cut through the X-back belt.
-- The XY system moved from under the plate to on top of it (belts and rails out of the chamber), with a cutout for the toolhead. That lets the chamber shrink to 290 mm tall, because the beams no longer take up chamber height.
+- The XY system moved from under the plate to on top of it (belts and rails out of the chamber), with a cutout for the toolhead. That lets the chamber shrink to 320 mm tall (beams no longer take up chamber height; 33 mm goes to hanging the toolhead below the plate).

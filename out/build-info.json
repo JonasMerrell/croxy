@@ -7,7 +7,9 @@
   "Y-end tower",
   "Beam backer",
   "Toolhead yoke",
+  "Toolhead neck",
   "Toolhead envelope",
+  "Filament tube",
   "MGN12 rail",
   "MGN12H carriage",
   "MGN9 rail",
@@ -40,8 +42,16 @@
    72
   ],
   "motor_face": 122,
-  "toolhead_top": 31,
-  "nozzle_z": -53
+  "toolhead_top": -2,
+  "nozzle_z": -86,
+  "nozzle_offset": [
+   18,
+   25
+  ],
+  "build_centre": [
+   18,
+   25
+  ]
  },
  "moving": {
   "xcar_back": 50,
@@ -59,7 +69,9 @@
   "xcar9": 62,
   "ycar9": 63,
   "yoke": 64,
-  "tool": 65
+  "neck": 65,
+  "tool": 66,
+  "tube": 67
  },
  "start": [
   40,

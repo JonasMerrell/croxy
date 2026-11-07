@@ -12,7 +12,7 @@ frame:
   shutter_h: 15         # height kept clear above the plate for a sliding insulated shutter over the cutout
   post: 3030
   post_center: 175      # posts at (+-175, +-175)
-  chamber_h: 290        # top plate underside to floor plate top
+  chamber_h: 320        # top plate underside to floor plate top
 
 xy:
   belt_line: 143        # each belt runs directly above its MGN12 rail
@@ -38,4 +38,8 @@ gantry:
 
 toolhead:
   envelope: [60, 60]    # Chube Conduction + Sherpa Heavy stand-in footprint
-  height: 84            # yoke underside to nozzle tip
+  height: 84            # top of the extruder to nozzle tip
+  offset: [18, 25]      # nozzle / filament axis from the beam cross, so the filament drops through an open quadrant
+  body_top: -2          # the toolhead body hangs fully below the plate on a neck from the yoke
+  neck: [44, 43]        # neck footprint through the cutout (x, y)
+  filament_top: 110     # PTFE tube modelled straight up to here (below the motor plates); it bends to the lid port above

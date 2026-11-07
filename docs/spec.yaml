@@ -10,7 +10,7 @@ build:
 
 chamber:
   temp_max: 150
-  interior: {x: 380, y: 380, h: 290}   # inside the frame (frame sits inside insulation)
+  interior: {x: 380, y: 380, h: 320}   # inside the frame (frame sits inside insulation)
   heater: {type: PTC, fan: shaft_through_impeller, motor_location: back_module}
 
 insulation:
@@ -20,7 +20,7 @@ insulation:
 
 frame:
   posts: {profile: "3030", count: 4, positions: [FL, FR, BL, BR]}
-  post_length: 290
+  post_length: 320
   back_shear_plate: {material: mild_steel, note: "carries the Z3 rail; replaces the back centre post, which clashed with the X-back belt"}
   top_plate: {material: mild_steel, thickness: 12, size: [380, 380], process: "waterjet + stress relieve + finish machine"}
   floor_plate: {material: mild_steel, thickness: 10, size: [380, 380]}
@@ -63,6 +63,7 @@ toolhead:
   extruder_motor: LDO_high_temp
   part_cooling: server_fan_remote_ducted   # fan motor kept out of the 150 C zone
   probe: Beacon3D
+  layout: "extruder and hotend offset (18, 25) from the beam cross into an open quadrant; straight PTFE feed from above; body hangs below the plate on a neck"
 
 stack_heights:        # from the floor up (h)
   base_tray: [0, 8]

@@ -135,15 +135,18 @@ YB_TOP, XB_TOP = YB_BOT + BH, XB_BOT + BH
 X_CAR_FACE = XB_BOT - 10                  # MGN9H face under the X beam
 Y_CAR_FACE = YB_BOT - 10                  # MGN9H face under the Y beam
 YOKE_T = 6
-TH_TOP = Y_CAR_FACE - YOKE_T              # top of the toolhead, under the yoke
+TH_TOP = TH["body_top"]                   # toolhead body hangs below the plate
+NECK_TOP = Y_CAR_FACE - YOKE_T            # underside of the yoke
+FX, FY = TH["offset"]                     # nozzle / filament axis relative to the beam cross
 NOZ = TH_TOP - TH["height"]
 MOTOR_PLATE = (XB_TOP + 1, XB_TOP + 7)    # motor plate clears the X beam
 MOTOR_FACE = MOTOR_PLATE[1]
-assert BLK_BOT[0] > CARR_FACE - 10 and TH_TOP > PT + F["shutter_h"], "stack does not fit"
+assert BLK_BOT[0] > CARR_FACE - 10 and NECK_TOP > PT + F["shutter_h"] and TH_TOP < 0, "stack does not fit"
 
 layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "belt_z": BZ,
           "x_beam": [XB_BOT, XB_TOP], "y_beam": [YB_BOT, YB_TOP], "motor_face": MOTOR_FACE,
-          "toolhead_top": TH_TOP, "nozzle_z": NOZ}
+          "toolhead_top": TH_TOP, "nozzle_z": NOZ, "nozzle_offset": [FX, FY],
+          "build_centre": [FX, FY]}
 
 # ================================================================ Part Studios
 # ---- 0. Top plate
@@ -232,7 +235,7 @@ name_part(beam_body, "Beam backer (U channel)", "Steel", "#6d7a86", "metal")
 
 # ---- 5. Toolhead yoke (carries both MGN9H carriages, wraps the Y beam)
 S_YOKE = studio("Toolhead yoke")
-yw, ylen = 22.0, 30.0
+yw, ylen = 22.0, BWD / 2 + 9
 leg_in, leg_out = BWD / 2 + 3, BWD / 2 + 9
 res = box(-yw, yw, -ylen, ylen, X_CAR_FACE - YOKE_T, X_CAR_FACE, "new", "Top plate")
 yoke_body = new_body(res)
@@ -241,13 +244,25 @@ box(-yw, yw, -leg_out, -leg_in, Y_CAR_FACE, X_CAR_FACE - YOKE_T, "add", "Front l
 box(-yw, yw, -ylen, ylen, Y_CAR_FACE - YOKE_T, Y_CAR_FACE, "add", "Bottom plate")
 name_part(yoke_body, "Toolhead yoke", "Aluminium 7075", "#c0c6cc", "metal")
 
-# ---- 6. Toolhead envelope (Chube Conduction + Sherpa Heavy, stand-in)
+# ---- 6. Toolhead neck (yoke down through the cutout) and envelope (Chube Conduction + Sherpa Heavy, stand-in)
+S_NECK = studio("Toolhead neck")
+nx, ny = TH["neck"]
+res = box(-nx / 2, nx / 2, -ny / 2, ny / 2, TH_TOP, NECK_TOP, "new", "Neck")
+neck_body = new_body(res)
+box(-nx / 2 + 4, nx / 2 - 4, -ny / 2 + 4, ny / 2 - 4, TH_TOP, NECK_TOP, "remove", "Lightening")
+name_part(neck_body, "Toolhead neck", "Aluminium 7075", "#c0c6cc", "metal")
+
 S_TOOL = studio("Toolhead envelope")
 ex, ey = TH["envelope"]
-res = box(-ex / 2, ex / 2, -ey / 2, ey / 2, NOZ + 12, TH_TOP, "new", "Envelope")
+res = box(FX - ex / 2, FX + ex / 2, FY - ey / 2, FY + ey / 2, NOZ + 12, TH_TOP, "new", "Envelope")
 tool_body = new_body(res)
-cyl(0, 0, 4, NOZ, NOZ + 12, "add", "Nozzle")
+cyl(FX, FY, 4, NOZ, NOZ + 12, "add", "Nozzle")
 name_part(tool_body, "Toolhead envelope (stand-in)", None, "#c4572a", "satin")
+
+S_TUBE = studio("Filament tube")
+res = cyl(FX, FY, 2, TH_TOP, TH["filament_top"], "new", "PTFE tube")
+tube_body = new_body(res)
+name_part(tube_body, "PTFE filament tube 4 mm", None, "#e8e4d8", "satin")
 
 # ---- 7. Bought parts (stand-ins), one Part Studio each, modelled in their own frames
 buy = {}
@@ -357,7 +372,9 @@ def gantry_parts():
           ("xcar9", buy["mgn9h"], lambda tx, ty: [tx, ty, XB_BOT], mm(Rz(90), RX180), "MGN9H on X beam"),
           ("ycar9", buy["mgn9h"], lambda tx, ty: [tx, ty, YB_BOT], RX180, "MGN9H on Y beam"),
           ("yoke", (S_YOKE, yoke_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead yoke"),
-          ("tool", (S_TOOL, tool_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead envelope")]
+          ("neck", (S_NECK, neck_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead neck"),
+          ("tool", (S_TOOL, tool_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead envelope"),
+          ("tube", (S_TUBE, tube_body), lambda tx, ty: [tx, ty, 0], I3, "Filament tube")]
     return g
 
 GP = gantry_parts()
