@@ -20,11 +20,16 @@ insulation:
   floor: "same build-up under the floor plate; the floor plate stands on four G10 blocks (thermal breaks) on 3030 legs"
 
 frame:
-  posts: {profile: "3030", count: 4, positions: [FL, FR, BL, BR]}
+  posts: {profile: "steel square tube 30 x 30 x 3", count: 4, positions: [FL, FR, BL, BR], tie_rod: "M8 from the top plate through the post, floor plate and G10 block into the bay leg"}
   post_length: 320
-  shear_plates: {material: mild_steel, thickness: 6, sides: [left, right, back], note: "bolted inside the posts; the side plates carry Z1/Z2, the back plate carries Z3 (replaces the back centre post). Steel, so the MGN12 Z rails match CTE"}
+  shear_plates: {material: mild_steel, thickness: 6, sides: [left, right, back], note: "SCS laser cut; joined to the top and floor plates by bought 30 x 30 x 3 steel angles outside the plates; the side plates carry Z1/Z2, the back plate carries Z3 (replaces the back centre post). Steel, so the MGN12 Z rails match CTE"}
   top_plate: {material: mild_steel, thickness: 12, size: [380, 380], process: "waterjet + stress relieve + finish machine"}
   floor_plate: {material: mild_steel, thickness: 6, size: [380, 380]}
+
+manufacturing:
+  methods: ["3-axis mill", "Send Cut Send laser cut and bend", "waterjet", "FDM printed without supports (PPS-CF hot zone, PET-CF outside)", "bought"]
+  not_used: [welding, lathe]
+  fasteners: "every screw, nut, washer, rivet, rod and spacer is modelled; see docs/manufacturing.md"
 
 xy:
   kinematics: cross_xy
@@ -34,8 +39,8 @@ xy:
   pulley_support: double_shear
   belt_offset_from_center: 143   # directly above the MGN12 rail
   pulley_offset_along_belt: 126
-  tensioning: "slotted idler in the corner block, 6 mm travel, adjusted from above the plate"
-  corner_block: "one steel block per corner carries that corner's drive pulley and the other belt's idler"
+  tensioning: "idler axle in a 6 mm slot, pushed by an M4 set screw in a tab on the upper plate"
+  corner_block: "two milled 8 mm steel plates on four M5 rods with spacers; motor plate on G10 tubes above; carries the drive pulley (two 608s) and the other belt's idler on an M8 axle"
   perimeter_rails: {type: MGN12, offset_from_center: 143, length: 230, mount: plate_top}
   beams:
     rail: MGN9
@@ -43,10 +48,10 @@ xy:
     span: 290
     sizing: dynamic_sim_TBD
   toolhead_envelope: [60, 60, 84]
-  yoke: "aluminium yoke carries both MGN9H carriages and wraps the Y beam"
+  yoke: "7075 U plus a top plate carry both MGN9H carriages and wrap the Y beam; 7075 neck pocketed from below; separate toolhead plate"
 
 z:
-  motors: {type: NEMA17, count: 3, location: "below the floor plate, on steel mounts; belts pass through slots in the floor"}
+  motors: {type: NEMA17, count: 3, location: "below the floor plate on bent 5 mm steel brackets hung from three G10 tubes; belts pass through slots in the floor"}
   columns: {Z1: "left plate, y -60", Z2: "right plate, y -60", Z3: "back plate, x 18"}
   drive: "closed GT2 12 mm loop per column: 20T drive below the floor, 20T idler at z -85; the bed arm clamps the inner strand"
   rails: {type: MGN12, count: 3, length: 230, mount: "screwed straight to the steel shear plates"}
@@ -61,7 +66,7 @@ bed:
   thickness: 8
   centre: [18, 25]   # under the nozzle
   heater: silicone, under the plate
-  arms: "one steel arm per column, from the MGN12H to a pad under the bed; 20 mm in from the bed edge"
+  arms: "one milled 7075 arm per column with a separate belt clamp plate; countersunk M4 into the arm over a G10 washer, 20 mm in from the bed edge"
   surface: magnetic_sheet   # clips as backup
 
 toolhead:

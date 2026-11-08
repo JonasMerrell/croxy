@@ -292,8 +292,8 @@ S_TPL = studio("Toolhead plate")
 res = box(-nx / 2, FX + 30, -ny / 2, FY + 30, TP_BOT, TP_TOP, "new", "Plate")
 tpl_body = new_body(res)
 EXT_H = [[FX - 15, FY - 8], [FX + 15, FY - 8], [FX - 15, FY + 5], [FX + 15, FY + 5]]
-BCN_H = [[FX + 20, FY - 6], [FX + 20, FY + 6]]
-DUCT_H = [[-10.5, -14], [-10.5, 14]]
+BCN_H = [[43.5, 3.0], [43.5, 19.0]]
+DUCT_H = [[-10.5, 16], [-10.5, 31]]
 AIR = (-nx / 2 + NW, -4, -ny / 2 + NW, 10)
 cut_through([{"type": "rect", "corner1": [AIR[0], AIR[2]], "corner2": [AIR[1], AIR[3]]}, circ([FX, FY], 4.5)]
             + [circ(p, CLR["M3"]) for p in TPN + EXT_H + BCN_H + DUCT_H], TP_TOP, "Holes")

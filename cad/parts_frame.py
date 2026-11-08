@@ -106,7 +106,9 @@ for col in COLS:
     slots.append({"type": "rect", "corner1": a[:2], "corner2": b[:2]})
 ZSO = [[35, JY - 5], [35, 10], [35, MY + 14]]          # Z bracket standoffs, column frame (x inward, y)
 zso_w = [col_world(col, [p[0], p[1], 0])[:2] for col in COLS for p in ZSO]
-cut_through(slots + [circ(p, CLR["M5"]) for p in zso_w] + [circ(p, TAP["M5"]) for p in ANG_PTS]
+HSX_, HSY_ = (HT["x"][0] + HT["x"][1]) / 2, (HT["y"][0] + HT["y"][1]) / 2
+HEAT_H = [[x_, y_] for x_ in (HT["x"][0] + 6, HT["x"][1] - 6) for y_ in (HT["y"][0] + 6, HT["y"][1] - 6)]
+cut_through([circ([HSX_, HSY_], 12.0)] + [circ(p, TAP["M4"]) for p in HEAT_H] + slots + [circ(p, CLR["M5"]) for p in zso_w] + [circ(p, TAP["M5"]) for p in ANG_PTS]
             + [circ([sx * PC, sy * PC], CLR["M8"]) for sx in (-1, 1) for sy in (-1, 1)], FLOOR[1], "Holes")
 name_part(floor_body, "Floor plate", "Steel", "#58626b", "metal", method="SCS",
           notes="6 mm mild steel, SCS laser cut with all holes; hand-tap the M5 angle holes")

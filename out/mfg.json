@@ -1,0 +1,532 @@
+{
+ "Top plate": {
+  "method": "waterjet + mill",
+  "material": "Steel",
+  "notes": "12 mm mild steel, waterjet blank (cutout, holes undersize), stress relieve, face both sides, drill/tap M3/M5, mill roller pockets. 1 setup per face"
+ },
+ "Corner block plate, lower": {
+  "method": "mill",
+  "material": "Steel",
+  "notes": "8 mm mild steel plate. 2D contour, \u00d810 shaft hole, 8.5 mm idler slot, \u00d85.5 rod holes, \u00d822 x 7 608 seat from the top face (1 setup)"
+ },
+ "Corner block plate, upper": {
+  "method": "mill",
+  "material": "Steel",
+  "notes": "8 mm mild steel plate. 2D contour, \u00d810 shaft hole, 8.5 mm idler slot, \u00d85.5 rod holes, \u00d822 x 7 608 seat from the bottom face, M3 tapped tab holes (flip once)"
+ },
+ "Tension tab": {
+  "method": "mill",
+  "material": "Steel",
+  "notes": "18 x 6 x 10 steel bar. 2 drilled holes from the top, M4 tapped hole from the side (2 setups)"
+ },
+ "Motor plate": {
+  "method": "SCS + mill",
+  "material": "Steel",
+  "notes": "6 mm mild steel, SCS laser blank, bore the \u00d838.6 pilot and tap M5 on the mill (1 setup)"
+ },
+ "Spacer 8 x 5.3 x 9": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": "steel round spacer"
+ },
+ "Spacer 8 x 5.3 x 20": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": "steel round spacer"
+ },
+ "G10 tube 10 x 5.3 x 54.3": {
+  "method": "buy",
+  "material": "",
+  "notes": "G10/FR4 tube, thermal break under the motor"
+ },
+ "Shim 8 x 14 x 2": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": "DIN 988 shim washer"
+ },
+ "X-end tower": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block 45.4 x 27 x 65. From the top: contour, step to the base, cbores; then M4 tapped from the top and the side (3 setups)"
+ },
+ "X-end strand clamp": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075, profile milled from the side, GT2 tooth grooves on the belt face with a 1 mm end mill (2 setups)"
+ },
+ "Y-end tower": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block. From the top: contour, base step, beam seat slot, cbores; M4 tapped from the top and the side (3 setups)"
+ },
+ "Y-end strand clamp": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075, U profile milled from the side, GT2 tooth grooves on the belt face (2 setups)"
+ },
+ "Beam backer (U channel)": {
+  "method": "SCS + mill",
+  "material": "Steel",
+  "notes": "3 mm mild steel or 4130, SCS laser cut with holes and bent to a 25 x 25 U. Mill the rail face flat (1 setup, long vise or fixture)"
+ },
+ "Yoke U": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups)"
+ },
+ "Yoke top plate": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups)"
+ },
+ "Toolhead neck": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups)"
+ },
+ "Toolhead plate": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups)"
+ },
+ "Neck air adapter": {
+  "method": "print",
+  "material": "PPS-CF",
+  "notes": "PPS-CF, printed standing on the mounting face; internal channel teardrop-shaped, no supports"
+ },
+ "PTFE filament tube 4 mm": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "MGN12 rail 230": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": ""
+ },
+ "MGN12H carriage": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": ""
+ },
+ "MGN9 rail 250": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": ""
+ },
+ "MGN9H carriage": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": ""
+ },
+ "GT2 20T pulley, 12 mm belt": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "GT2 20T toothed idler, 12 mm belt": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": ""
+ },
+ "Gates EPDM GT2 12 mm belt": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Rigid shaft coupling D20 L25, 6.35-8": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "Gates EPDM GT2 12 mm Z belt": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "GT2 60T pulley, 6 mm belt, 8 mm bore": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "GT2 20T pulley, 6 mm belt, 5 mm bore": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "GT2 6 mm closed loop 188 mm GT2 6 mm": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Bed, MIC6 200 x 200 x 8": {
+  "method": "mill",
+  "material": "Aluminium 6061",
+  "notes": "bought MIC6 cast plate cut to size; 3 countersunk M4 holes drilled on the mill (1 setup)"
+ },
+ "Silicone bed heater": {
+  "method": "buy",
+  "material": "",
+  "notes": "custom silicone heater, 3 notches for the arm screws"
+ },
+ "Side shear plate left": {
+  "method": "SCS",
+  "material": "Steel",
+  "notes": "6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension"
+ },
+ "Side shear plate right": {
+  "method": "SCS",
+  "material": "Steel",
+  "notes": "6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension"
+ },
+ "Back shear plate": {
+  "method": "SCS",
+  "material": "Steel",
+  "notes": "6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes"
+ },
+ "Steel angle 30 x 30 x 3 x 319": {
+  "method": "buy + drill",
+  "material": "Steel",
+  "notes": "bought mild steel angle, cut to length, 8 holes drilled on the mill with a stop (1 setup per leg)"
+ },
+ "Post, steel square tube 30 x 30 x 3 x 320": {
+  "method": "buy + mill",
+  "material": "Steel",
+  "notes": "bought mild steel tube, cut and both ends faced square to length on the mill (1 setup per end)"
+ },
+ "Floor plate": {
+  "method": "SCS",
+  "material": "Steel",
+  "notes": "6 mm mild steel, SCS laser cut with all holes; hand-tap the M5 angle holes"
+ },
+ "Z drive bracket": {
+  "method": "SCS",
+  "material": "Steel",
+  "notes": "5 mm mild steel, SCS laser cut and bent 90 deg; motor holes slotted for the reduction belt tension; hand-tap the 3 M5 flange holes"
+ },
+ "Z bearing block, outboard": {
+  "method": "mill",
+  "material": "Steel",
+  "notes": "10 mm steel plate: contour, \u00d822 x 7 seat and holes from one side (1 setup)"
+ },
+ "Z bearing block, inboard": {
+  "method": "mill",
+  "material": "Steel",
+  "notes": "10 mm steel plate: contour, \u00d822 x 7 seat and holes from one side, M4 tapped (1 setup)"
+ },
+ "G10 tube 10 x 5.3 x 50": {
+  "method": "buy",
+  "material": "",
+  "notes": "G10/FR4 tube, thermal break"
+ },
+ "Spacer 12 x 8.2 x 10": {
+  "method": "buy",
+  "material": "Steel",
+  "notes": "steel round spacer"
+ },
+ "Bed arm Z1": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig)"
+ },
+ "Bed arm Z2": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig)"
+ },
+ "Bed arm Z3": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig)"
+ },
+ "Z belt clamp plate": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "5 mm 7075: contour, 2 holes, GT2 tooth grooves on the belt face (1 setup)"
+ },
+ "G10 washer 12 x 4.5 x 2": {
+  "method": "buy",
+  "material": "",
+  "notes": "G10 washer, keeps the arm off the heater layer"
+ },
+ "Blind rivet 4.0 x 8, aluminium, open end": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "Hot-face insulation 20 mm (mineral wool board)": {
+  "method": "cut",
+  "material": "",
+  "notes": "rated >= 250 C board, cut with a knife to fit between the frame and the PIR; held captive, no fixings"
+ },
+ "PIR insulation walls 30 mm": {
+  "method": "cut",
+  "material": "",
+  "notes": "foil-faced PIR board, cut with a saw; held captive between the hot-face layer and the skin"
+ },
+ "PIR insulation floor 30 mm": {
+  "method": "cut",
+  "material": "",
+  "notes": "foil-faced PIR board, cut with a saw; held captive between the hot-face layer and the skin"
+ },
+ "Skin side left": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat"
+ },
+ "Skin side right": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat"
+ },
+ "Skin back wall (between the chamber and the back module)": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut and bent: flanges point back into the module so all fixings sit outside the insulation"
+ },
+ "Skin front strip, top bay": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut (and bent), riveted to the side jambs"
+ },
+ "Skin front strip, Z bay": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut (and bent), riveted to the side jambs"
+ },
+ "Lid (removable)": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052 flat, SCS cut; M4 screws into rivnuts"
+ },
+ "Back cover, filter bay (vented)": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut with vent slots"
+ },
+ "Back cover, electronics bay": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut with fan openings"
+ },
+ "Module divider (filter bay over electronics)": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut and bent, riveted to the side skins"
+ },
+ "Electronics backplate": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS cut with all holes and bent"
+ },
+ "Base plate": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "6 mm 6061, SCS laser cut with holes; hand-tap the M4 skin holes"
+ },
+ "Rubber foot 30 x 15, M6 insert": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Floor support block (G10, thermal break)": {
+  "method": "buy + mill",
+  "material": "",
+  "notes": "G10/FR4 30 mm square bar, cut to 50 mm, faced and drilled \u00d89 on the mill (2 setups)"
+ },
+ "Door outer pan": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "2 mm 5052, SCS laser cut and bent into a tray (4 bends, corner reliefs), window cut out"
+ },
+ "Door inner sheet (hot face)": {
+  "method": "SCS",
+  "material": "Stainless steel",
+  "notes": "1 mm 304 stainless, SCS laser cut and bent, riveted to the pan walls"
+ },
+ "Door core, hot-face board": {
+  "method": "cut",
+  "material": "",
+  "notes": ""
+ },
+ "Door core, PIR board": {
+  "method": "cut",
+  "material": "",
+  "notes": ""
+ },
+ "Door glass, inner (borosilicate)": {
+  "method": "buy",
+  "material": "",
+  "notes": "cut to size, bonded to the inner sheet with high-temperature RTV silicone"
+ },
+ "Door glass, outer (tempered)": {
+  "method": "buy",
+  "material": "",
+  "notes": "cut to size, bonded behind the pan face with RTV silicone"
+ },
+ "Door hinge, lift-off, stainless": {
+  "method": "buy",
+  "material": "Stainless steel",
+  "notes": ""
+ },
+ "Door handle with roller catch": {
+  "method": "buy",
+  "material": "Stainless steel",
+  "notes": ""
+ },
+ "Shutter strip with X-cover spring reels (moves in Y)": {
+  "method": "print",
+  "material": "PPS-CF",
+  "notes": "PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it"
+ },
+ "Shutter neck plate (X covers attach here)": {
+  "method": "SCS",
+  "material": "Aluminium 6061",
+  "notes": "1.5 mm aluminium, SCS cut; rides on the strip, pushed by the neck, X tapes bonded to it"
+ },
+ "Y-cover spring reel, stainless tape (in a plate pocket)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Chamber heater: 2 x PTC, 800 W + blower wheel (stand-in)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Heater blower motor (BLDC, foot-mounted, in the cool bay)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Air-to-air cooler (finned, ambient side vented)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "HEPA H13 filter": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Activated carbon filter": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Filter loop blower (radial 97 mm)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Cradle for Air-to-air cooler": {
+  "method": "print",
+  "material": "PET-CF",
+  "notes": "PET-CF, printed as it sits (open tray, no overhangs)"
+ },
+ "Cradle for HEPA H13 filter": {
+  "method": "print",
+  "material": "PET-CF",
+  "notes": "PET-CF, printed as it sits (open tray, no overhangs)"
+ },
+ "Cradle for Activated carbon filter": {
+  "method": "print",
+  "material": "PET-CF",
+  "notes": "PET-CF, printed as it sits (open tray, no overhangs)"
+ },
+ "Cradle for Filter loop blower": {
+  "method": "print",
+  "material": "PET-CF",
+  "notes": "PET-CF, printed as it sits (open tray, no overhangs)"
+ },
+ "Filter duct, chamber outlet (stainless tube 40 x 1.5)": {
+  "method": "buy",
+  "material": "Stainless steel",
+  "notes": "bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone"
+ },
+ "Filter duct, chamber return (stainless tube 40 x 1.5)": {
+  "method": "buy",
+  "material": "Stainless steel",
+  "notes": "bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone"
+ },
+ "BTT Kraken (on standoffs)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "PSU 48 V (LRS-350-48 class)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "PSU 24 V (LRS-350-24 class)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Electronics fan 80 mm, intake": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Electronics fan 80 mm, exhaust": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Raspberry Pi / host + relays": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Top bay fan 80 mm, intake": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Top bay fan 80 mm, exhaust": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Part-cooling blower (server type, hose to the neck)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Part-cooling duct (fed through the hollow neck)": {
+  "method": "print",
+  "material": "PPS-CF",
+  "notes": "PPS-CF, printed mount face down; channel roofs are <= 11 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts"
+ },
+ "Extruder (Sherpa Heavy style)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Extruder motor (LDO high-temp)": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Chube Conduction hotend": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Nozzle": {
+  "method": "buy",
+  "material": "Brass",
+  "notes": ""
+ },
+ "Beacon3D probe": {
+  "method": "buy",
+  "material": "",
+  "notes": ""
+ },
+ "Beacon bracket": {
+  "method": "print",
+  "material": "PPS-CF",
+  "notes": "PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts"
+ }
+}

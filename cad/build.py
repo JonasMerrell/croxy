@@ -264,7 +264,7 @@ def stadium_z(rad, h):
 sid = sketch("top", stadium_z(XY["pitch_r"] + XY["belt_t"] / 2, zc_span / 2) + stadium_z(XY["pitch_r"] - XY["belt_t"] / 2, zc_span / 2), "Z belt")
 res = r("add_feature", kind="extrude", name="Z belt", params={"profiles": [{"sketch": sid}], "depth": str(BW), "op": "new"})
 zbelt_body = new_body(res)
-name_part(zbelt_body, "Gates EPDM GT2 12 mm Z belt", None, "#22262a", "satin")
+name_part(zbelt_body, "Gates EPDM GT2 12 mm Z belt", None, "#22262a", "satin", method="buy")
 
 # Z drive with a 1:3 belt reduction, in the column frame: the jackshaft J carries the 20T Z drive
 # pulley inboard and a 60T pulley outboard; the NEMA17 sits inboard of the mount at J + (0, C, 0)
@@ -276,10 +276,10 @@ JY, MY = Z["belt_offset"], Z["belt_offset"] + RD["centre"]
 RX0 = -6 - 10 - 8                     # outboard face of the reduction pulleys (plate 6, bearing boss 10, pulley 8)
 S_P60 = studio("GT2 pulley 60T 6 mm")
 res = cyl(0, 0, R60 + 1.4, 0, 0.75, "new", "Flange"); cyl(0, 0, R60 - 0.4, 0.75, 7.25, "add"); cyl(0, 0, R60 + 1.4, 7.25, 8, "add")
-p60_body = new_body(res); name_part(p60_body, f"GT2 {RD['big_t']}T pulley, 6 mm belt, 8 mm bore", "Aluminium 6061", "#b8bec4", "satin")
+p60_body = new_body(res); name_part(p60_body, f"GT2 {RD['big_t']}T pulley, 6 mm belt, 8 mm bore", "Aluminium 6061", "#b8bec4", "satin", method="buy")
 S_P20 = studio("GT2 pulley 20T 6 mm")
 res = cyl(0, 0, 8, 0, 0.75, "new", "Flange"); cyl(0, 0, R20 - 0.4, 0.75, 7.25, "add"); cyl(0, 0, 8, 7.25, 8, "add")
-p20_body = new_body(res); name_part(p20_body, f"GT2 {RD['small_t']}T pulley, 6 mm belt, 5 mm bore", "Aluminium 6061", "#b8bec4", "satin")
+p20_body = new_body(res); name_part(p20_body, f"GT2 {RD['small_t']}T pulley, 6 mm belt, 5 mm bore", "Aluminium 6061", "#b8bec4", "satin", method="buy")
 
 # open belt around two pulleys of different radius: big at the origin, small at (C, 0)
 def open_belt(Rb, rs, C):
@@ -292,7 +292,7 @@ def open_belt(Rb, rs, C):
 S_RBELT = studio("Z reduction belt")
 sid = sketch("top", open_belt(R60 + bt / 2, R20 + bt / 2, RD["centre"]) + open_belt(R60 - bt / 2, R20 - bt / 2, RD["centre"]), "Belt")
 res = r("add_feature", kind="extrude", name="Belt", params={"profiles": [{"sketch": sid}], "depth": "6", "op": "new"})
-rbelt_body = new_body(res); name_part(rbelt_body, f"GT2 6 mm closed loop {RD['loop']}", None, "#22262a", "satin")
+rbelt_body = new_body(res); name_part(rbelt_body, f"GT2 6 mm closed loop {RD['loop']}", None, "#22262a", "satin", method="buy")
 
 S_MIC6 = studio("Bed")
 res = box(BX - hb, BX + hb, BY - hb, BY + hb, -BD["t"], 0, "new", "MIC6")
@@ -305,7 +305,7 @@ S_HEATER = studio("Bed heater")
 res = box(BX - hb + 5, BX + hb - 5, BY - hb + 5, BY + hb - 5, -BD["t"] - BD["heater_t"], -BD["t"], "new", "Heater")
 heater_body = new_body(res)
 cut_through([circ(p, 14.0) for p in BED_SCR], 0, "Arm screw clearances")
-name_part(heater_body, "Silicone bed heater", None, "#b5482b", "matte")
+name_part(heater_body, "Silicone bed heater", None, "#b5482b", "matte", method="buy", notes="custom silicone heater, 3 notches for the arm screws")
 
 aw = BD["arm"]
 zd = Z["carriage_drop"]
@@ -336,204 +336,7 @@ floor_holes += [circ(p, 11.0) for p in zso_w]
 floor_holes += slots
 floor_holes.append({"type": "circle", "center": [HSX, HSY], "radius": 6})
 
-# ---- hot-face layer: walls (left, back, right) and floor, one body
-S_HOT = studio("Hot-face insulation")
-res = box(-W / 2 - HL, -W / 2, -W / 2, W / 2, FI[0], PT, "new", "Left")
-hot_body = new_body(res)
-box(-W / 2 - HL, W / 2 + HL, W / 2, W / 2 + HL, FI[0], PT, "add", "Back")
-box(W / 2, W / 2 + HL, -W / 2, W / 2, FI[0], PT, "add", "Right")
-box(-W / 2, W / 2, -W / 2, W / 2, FLOOR[0] - HL, FLOOR[0], "add", "Floor")
-cut_through(floor_holes, FLOOR[0], "Floor pass-throughs")
-name_part(hot_body, f"Hot-face insulation {HL} mm (aerogel blanket / mineral wool board)", None, "#d9d2bf", "matte")
-
-# ---- PIR board: walls and floor
-S_PIR = studio("PIR insulation")
-o = W / 2 + HL
-res = box(-o - PIR, -o, -W / 2, o + PIR, FI[0], PT, "new", "Left")
-pir_body = new_body(res)
-box(-o, o, o, o + PIR, FI[0], PT, "add", "Back")
-box(o, o + PIR, -W / 2, o + PIR, FI[0], PT, "add", "Right")
-res = box(-W / 2, W / 2, -W / 2, W / 2, FI[0], FLOOR[0] - HL, "new", "Floor")
-pirf_body = new_body(res)
-cut_through(floor_holes, FLOOR[0] - HL, "Floor pass-throughs")
-name_part(pir_body, f"PIR insulation walls {PIR} mm", None, "#e2c75a", "matte")
-name_part(pirf_body, f"PIR insulation floor {PIR} mm", None, "#e2c75a", "matte")
-
-# ---- outer skin: sides, back, front above and below the door, lid
-S_SKIN = studio("Outer skin")
-res = box(-OW, -OW + SK, -OW, OW, BAY[0], LID, "new", "Left")
-skin_body = new_body(res)
-box(-OW + SK, OW - SK, OW - SK, OW, BAY[0], LID, "add", "Back")
-box(OW - SK, OW, -OW, OW, BAY[0], LID, "add", "Right")
-box(-OW + SK, OW - SK, -OW, -OW + SK, PT, LID, "add", "Front top")
-box(-OW + SK, OW - SK, -OW, -OW + SK, BAY[0], FI[0], "add", "Front bay")
-box(-OW, OW, -OW, OW, LID, LID + SK, "add", "Lid")
-name_part(skin_body, "Outer skin (aluminium sheet, powder coated)", "Aluminium 6061", "#56636f", "satin")
-
-S_BASE = studio("Base plate")
-res = box(-OW, OW, -OW, OW, BASE[0], BASE[1], "new", "Base")
-base_body = new_body(res)
-FEET = [[sx * (OW - 30), sy * (OW - 30)] for sx in (-1, 1) for sy in (-1, 1)]
-cut_through([circ([sx * PC, sy * PC], CLR["M8"]) for sx in (-1, 1) for sy in (-1, 1)] + [circ(p, CLR["M6"]) for p in FEET], BASE[1], "Holes")
-name_part(base_body, "Base plate", "Aluminium 6061", "#3a434c", "satin", method="SCS",
-          notes="6 mm 6061, SCS laser cut with holes")
-S_FOOT = studio("Rubber foot")
-res = cyl(0, 0, 15, 0, EN["feet_h"], "new", "Foot")
-foot_body = new_body(res)
-name_part(foot_body, "Rubber foot 30 x 15, M6 insert", None, "#1d1d1d", "satin", method="buy")
-for p in FEET:
-    J("feet", "ISO 4762", "M6", [p[0], p[1], BASE[1]], "-z", L=16, label="foot screw")
-
-S_SUP = studio("Floor support block")
-res = box(-SUP / 2, SUP / 2, -SUP / 2, SUP / 2, FI[0], FLOOR[0], "new", "Block")
-sup_body = new_body(res)
-cut_through([circ([0, 0], CLR["M8"])], FLOOR[0], "Tie rod bore")
-name_part(sup_body, "Floor support block (G10, thermal break)", None, "#c9c27a", "satin", method="buy + mill",
-          notes="G10/FR4 30 mm square bar, cut to 50 mm, faced and drilled Ø9 on the mill (2 setups)")
-
-# ---- door: built flat (local x across, local y = world z, local z = thickness outwards)
-DW = OW - SK
-S_DOOR = studio("Door")
-res = box(-DW, DW, FI[0], PT, 0, WT, "new", "Door")
-door_body = new_body(res)
-win = EN["window"]
-wx0, wx1 = BX - win["w"] / 2, BX + win["w"] / 2
-wz0, wz1 = win["cz"] - win["h"] / 2, win["cz"] + win["h"] / 2
-cut_through([{"type": "rect", "corner1": [wx0, wz0], "corner2": [wx1, wz1]}], WT, "Window")
-name_part(door_body, "Front door (insulated: hot layer + PIR + skins)", None, "#4b5865", "satin")
-S_GLASS = studio("Door glass")
-gt = EN["glass_t"]
-res = box(wx0, wx1, wz0, wz1, 3, 3 + gt, "new", "Inner pane")
-glass_in = new_body(res)
-res = box(wx0, wx1, wz0, wz1, WT - 3 - gt, WT - 3, "new", "Outer pane")
-glass_out = new_body(res)
-name_part(glass_in, "Door glass, inner (borosilicate)", None, "#9fc3d6", "glass")
-name_part(glass_out, "Door glass, outer (tempered)", None, "#9fc3d6", "glass")
-S_HW = studio("Door hardware")
-res = cyl(-DW + 6, -OW - 6, 6, FI[0] + 40, FI[0] + 100, "new", "Hinge low")
-hinge_lo = new_body(res)
-res = cyl(-DW + 6, -OW - 6, 6, PT - 100, PT - 40, "new", "Hinge high")
-hinge_hi = new_body(res)
-res = box(DW - 40, DW - 25, -OW - 30, -OW - 22, -230, -110, "new", "Handle bar")
-handle_body = new_body(res)
-box(DW - 40, DW - 25, -OW - 22, -OW, -230, -220, "add", "Handle foot low")
-box(DW - 40, DW - 25, -OW - 22, -OW, -120, -110, "add", "Handle foot high")
-for b_, n_ in ((hinge_lo, "Door hinge, lower"), (hinge_hi, "Door hinge, upper")):
-    name_part(b_, n_, "Stainless steel", "#a7adb3", "metal")
-name_part(handle_body, "Door handle and latch", "Stainless steel", "#a7adb3", "metal")
-
-# ---- shutter over the cutout
-ST = SHU["strip_t"]
-SZ0 = PT + 0.5
-SXE = CUT + 4                          # strip ends overlap the plate by 4 mm and slide on PTFE pads
-S_STRIP = studio("Shutter strip")
-SB0, SB1 = -(ny / 2 + 6.5), FY + 7.5          # band around the neck and the filament tube
-res = box(-SXE, SXE, SB0, SB1, SZ0, SZ0 + ST, "new", "Strip")
-strip_body = new_body(res)
-cut_through([{"type": "rect", "corner1": [-(G["travel"] + nx / 2 + 2), -(ny / 2 + 1.5)],
-              "corner2": [G["travel"] + nx / 2 + 2, FY + 3.5]}], SZ0 + ST, "Neck and tube slot")
-rr = SHU["roller_r"]
-for sx in (-1, 1):
-    sid = sketch(plane_y(SB1 - 2), [{"type": "circle", "center": [sx * (CUT - rr), SZ0 + ST + rr], "radius": rr}], "X cover roller")
-    extrude(sid, SB1 - SB0 - 4, "add", "X cover roller")
-name_part(strip_body, "Shutter strip with X-cover spring rollers (moves in Y)", None, "#8c6f4e", "satin")
-S_NPLATE = studio("Shutter neck plate")
-res = box(-nx / 2 - 2, nx / 2 + 2, -ny / 2 - 6, FY + 6, SZ0 + ST + 0.5, SZ0 + ST + 2, "new", "Plate")
-nplate_body = new_body(res)
-box(-nx / 2, nx / 2, -ny / 2, ny / 2, SZ0 + ST + 0.5, SZ0 + ST + 2, "remove", "Neck hole")
-cyl(FX, FY, 3, SZ0 + ST + 0.5, SZ0 + ST + 2, "remove", "Filament tube hole")
-name_part(nplate_body, "Shutter neck plate (X covers attach here)", "Aluminium 6061", "#c0c6cc", "metal")
-S_YROLL = studio("Shutter Y roller")
-yr = SHU["y_roller_r"]
-res = cyl_x(0, 7, yr, -(CUT - 3), CUT - 3, "new", "Roller")
-yroll_body = new_body(res)
-name_part(yroll_body, "Y-cover spring roller, stainless tape (in a plate pocket)", None, "#8c6f4e", "satin")
-YROLL_Y = CUT + 6
-
-# ---- chamber heater: PTC block + blower on the floor, motor in the cool bay
-S_HEAT = studio("Chamber heater")
-res = box(HT["x"][0], HT["x"][1], HT["y"][0], HT["y"][1], FLOOR[1], HT["top"], "new", "Housing")
-cheat_body = new_body(res)
-name_part(cheat_body, f"Chamber heater: 2 x PTC, {HT['power_w']} W + blower wheel (stand-in)", None, "#8d8f91", "metal")
-S_HMOT = studio("Heater fan motor")
-res = box(HSX - 25, HSX + 25, HSY - 25, HSY + 25, BAY[0] + 8, BAY[0] + 48, "new", "Motor")
-hmot_body = new_body(res)
-name_part(hmot_body, "Heater blower motor (BLDC, in the cool bay)", None, "#2b2b2b", "satin")
-
-# ---- back module: filter loop above, electronics below, rear covers
-BY0, BY1 = OW, OW + BM["depth"]
-SPL = BM["split_z"]
-S_BMOD = studio("Back module housing")
-res = box(-OW, OW, BY0, BY1, BAY[0], PT, "new", "Housing")
-bmod_body = new_body(res)
-box(-OW + 2, OW - 2, BY0, BY1, BAY[0] + 2, PT - 2, "remove", "Inside")
-box(-OW + 2, OW - 2, BY0, BY1, SPL - 1, SPL + 1, "add", "Divider")
-name_part(bmod_body, "Back module housing", "Aluminium 6061", "#56636f", "satin")
-S_BCOV = studio("Back module covers")
-res = box(-OW, OW, BY1, BY1 + 2, SPL, PT, "new", "Upper cover")
-bcov_up = new_body(res)
-res = box(-OW, OW, BY1, BY1 + 2, BAY[0], SPL - 0.5, "new", "Lower cover")
-bcov_lo = new_body(res)
-name_part(bcov_up, "Filter bay cover (filter change)", "Aluminium 6061", "#66737f", "satin")
-name_part(bcov_lo, "Electronics bay cover (hinged)", "Aluminium 6061", "#66737f", "satin")
-
-FZ = (SPL + 15, PT - 20)              # filter parts height
-S_FILT = studio("Filter loop")
-fparts = []
-for x0_, x1_, y0_, y1_, nm_, col_ in ((-175, -65, BY0 + 6, BY1 - 6, "Air-to-air cooler (finned, ambient side vented)", "#9aa3ab"),
-                                      (-60, -20, BY0 + 10, BY1 - 10, "HEPA H13 filter", "#e9e6dc"),
-                                      (-15, 65, BY0 + 10, BY1 - 10, "Activated carbon filter", "#3b3b3b"),
-                                      (80, 180, BY0 + 8, BY0 + 42, "Filter loop blower (radial 97 mm)", "#2b2b2b")):
-    res = box(x0_, x1_, y0_, y1_, FZ[0], FZ[1], "new", nm_)
-    b_ = new_body(res); name_part(b_, nm_, None, col_, "satin"); fparts.append((b_, nm_))
-S_DUCT = studio("Filter ducts")
-res = cyl_y(-120, DUCT_Z, 20, SPF, BY0 + 6, "new", "Outlet")
-duct_out = new_body(res)
-res = cyl_y(130, DUCT_Z, 20, SPF, BY0 + 8, "new", "Return")
-duct_ret = new_body(res)
-cyl_y(-120, DUCT_Z, 18.5, SPF, BY0 + 6, "remove", "Outlet bore")
-cyl_y(130, DUCT_Z, 18.5, SPF, BY0 + 8, "remove", "Return bore")
-name_part(duct_out, "Filter duct, chamber outlet (stainless)", "Stainless steel", "#a7adb3", "metal")
-name_part(duct_ret, "Filter duct, chamber return (stainless)", "Stainless steel", "#a7adb3", "metal")
-
-EZ = (BAY[0] + 10, SPL - 10)
-S_ELEC = studio("Electronics")
-eparts = []
-for x0_, x1_, y0_, y1_, z0_, z1_, nm_, col_ in (
-        (-200, -40, BY0 + 6, BY0 + 26, -330, -230, "BTT Kraken (on standoffs)", "#1d5c3a"),
-        (-20, 195, BY0 + 6, BY0 + 36, -300, -185, "PSU 48 V (LRS-350-48 class)", "#a7adb3"),
-        (-20, 195, BY0 + 6, BY0 + 36, -420, -320, "PSU 24 V (LRS-350-24 class)", "#a7adb3"),
-        (-200, -120, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, intake", "#2b2b2b"),
-        (-110, -30, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, exhaust", "#2b2b2b"),
-        (-200, -130, BY0 + 6, BY0 + 46, -222, -180, "Raspberry Pi / host + relays", "#1d5c3a")):
-    res = box(x0_, x1_, y0_, y1_, z0_, z1_, "new", nm_)
-    b_ = new_body(res); name_part(b_, nm_, None, col_, "satin"); eparts.append((b_, nm_))
-
-# ---- top bay: fans in the back skin, part-cooling blower (fixed, hose to the neck)
-S_TBAY = studio("Top bay")
-tparts = []
-for x0_, x1_, y0_, y1_, z0_, z1_, nm_ in ((-160, -80, OW - SK - 25, OW - SK, 60, 140, "Top bay fan 80 mm, intake"),
-                                          (80, 160, OW - SK - 25, OW - SK, 60, 140, "Top bay fan 80 mm, exhaust"),
-                                          (-40, 57, OW - SK - 40, OW - SK - 7, 120, 205, "Part-cooling blower (server type, hose to the neck)")):
-    res = box(x0_, x1_, y0_, y1_, z0_, z1_, "new", nm_)
-    b_ = new_body(res); name_part(b_, nm_, None, "#2b2b2b", "satin"); tparts.append((b_, nm_))
-
-# ---- toolhead detail (inside the 60 x 60 envelope), relative to the neck centre
-S_TDET = studio("Toolhead")
-tdet = []
-def tpart(nm_, res, color, material=None):
-    b_ = new_body(res); name_part(b_, nm_, material, color, "satin"); tdet.append((b_, nm_))
-res = box(FX - 30, FX - 21, FY - 30, FY + 10, NOZ + 4, TP_BOT, "new", "Duct riser")
-cyl(FX, FY, 14, NOZ + 2, NOZ + 8, "add", "Duct ring")
-box(FX - 21, FX - 8, FY - 5, FY + 5, NOZ + 2, NOZ + 8, "add", "Duct feed")
-cyl(FX, FY, 7, NOZ + 2, NOZ + 8, "remove", "Ring bore")
-tpart("Part-cooling duct (fed through the hollow neck)", res, "#3c3f44", "PPS-CF")
-tpart("Extruder (Sherpa Heavy style)", box(FX - 20, FX + 20, FY - 14, FY + 10, -42, TP_BOT, "new", "Extruder"), "#c4572a")
-tpart("Extruder motor (LDO high-temp)", box(FX - 18, FX + 18, FY + 10, FY + 30, -40, TP_BOT, "new", "Extruder motor"), "#2b2b2b")
-res = cyl(FX, FY, 11, NOZ + 12, -42, "new", "Chube")
-tpart("Chube Conduction hotend", res, "#b8bec4")
-tpart("Nozzle", cyl(FX, FY, 3.5, NOZ, NOZ + 12, "new", "Nozzle"), "#c9a227", "Brass")
-tpart("Beacon3D probe", box(FX + 16, FX + 30, FY - 27, FY - 1, NOZ + 3, NOZ + 15, "new", "Beacon"), "#1d1d1d")
+exec(open(os.path.join(HERE, "parts_enclosure.py")).read())
 
 # ================================================================ Assembly
 A = r("create_assembly", name="CroXY")["assembly"]
@@ -655,16 +458,25 @@ def penc(*a, **kw):
 penc(S_HOT, hot_body, [0, 0, 0], name="Hot-face insulation")
 penc(S_PIR, pir_body, [0, 0, 0], name="PIR insulation walls")
 penc(S_PIR, pirf_body, [0, 0, 0], name="PIR insulation floor")
-penc(S_SKIN, skin_body, [0, 0, 0], name="Outer skin")
+penc(S_SKL, skl_body, [0, 0, 0], name="Skin side left")
+penc(S_SKR, skr_body, [0, 0, 0], name="Skin side right")
+penc(S_SKB, skb_body, [0, 0, 0], name="Skin back wall")
+penc(S_SKF, skft_body, [0, 0, 0], name="Skin front strip top")
+penc(S_SKF, skfb_body, [0, 0, 0], name="Skin front strip bay")
+penc(S_LID, lid_body, [0, 0, 0], name="Lid")
+penc(S_BCOV, bcov_up, [0, 0, 0], name="Back cover upper")
+penc(S_BCOV, bcov_lo, [0, 0, 0], name="Back cover lower")
+ENC += [i for i, _ in jplace("skin")]
 RDOOR = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]          # local y -> world z, local z -> world -y
-penc(S_DOOR, door_body, [0, -W / 2, 0], RDOOR, name="Front door")
-penc(S_GLASS, glass_in, [0, -W / 2, 0], RDOOR, name="Door glass inner")
-penc(S_GLASS, glass_out, [0, -W / 2, 0], RDOOR, name="Door glass outer")
-penc(S_HW, hinge_lo, [0, 0, 0], name="Door hinge lower")
-penc(S_HW, hinge_hi, [0, 0, 0], name="Door hinge upper")
+DPOS = [0, -W / 2, 0]
+for st_, b_, n_ in ((S_DOOR, door_pan, "Door pan"), (S_DINNER, door_inner, "Door inner sheet"), (S_DCORE, door_core_h, "Door core hot"),
+                    (S_DCORE, door_core_p, "Door core PIR"), (S_GLASS, glass_in, "Door glass inner"), (S_GLASS, glass_out, "Door glass outer")):
+    penc(st_, b_, DPOS, RDOOR, name=n_)
+ENC += [i for i, _ in jplace("door", RDOOR, DPOS, tag="door")]
+for k, h_ in enumerate(hinges):
+    penc(S_HW, h_, [0, 0, 0], name=f"Door hinge {k + 1}")
 penc(S_HW, handle_body, [0, 0, 0], name="Door handle")
-penc(S_BCOV, bcov_up, [0, 0, 0], name="Filter bay cover")
-penc(S_BCOV, bcov_lo, [0, 0, 0], name="Electronics bay cover")
+ENC += [i for i, _ in jplace("doorhw")]
 penc(S_BASE, base_body, [0, 0, 0], name="Base plate")
 for sx in (-1, 1):
     for sy in (-1, 1):
@@ -677,11 +489,14 @@ for (yy, nm_) in ((YROLL_Y, "back"), (-YROLL_Y, "front")):
     place(S_YROLL, yroll_body, [0, yy, 0], name=f"Shutter Y roller {nm_}")
 place(S_HEAT, cheat_body, [0, 0, 0], name="Chamber heater")
 place(S_HMOT, hmot_body, [0, 0, 0], name="Heater fan motor")
+jplace("heat")
 place_std("Shaft", "Ø8", [HSX, HSY, BAY[0] + 48], length=round(FLOOR[1] + 20 - (BAY[0] + 48), 1), name="Heater shaft")
-place(S_BMOD, bmod_body, [0, 0, 0], name="Back module housing")
-for st_, parts_ in ((S_FILT, fparts), (S_ELEC, eparts), (S_TBAY, tparts)):
+place(S_DIV, div_body, [0, 0, 0], name="Module divider")
+place(S_EPL, epl_body, [0, 0, 0], name="Electronics backplate")
+for st_, parts_ in ((S_FILT, fparts), (S_ELEC, eparts), (S_TBAY, tparts), (S_CRAD, cradles)):
     for b_, nm_ in parts_:
         place(st_, b_, [0, 0, 0], name=nm_)
+jplace("module")
 place(S_DUCT, duct_out, [0, 0, 0], name="Filter duct outlet")
 place(S_DUCT, duct_ret, [0, 0, 0], name="Filter duct return")
 
@@ -720,6 +535,7 @@ def gantry_parts():
           ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter neck plate"),
           ("tube", (S_TUBE, tube_body), fh, I3, "Filament tube")]
     g += [(f"tdet{k}", (S_TDET, b_), fh, I3, nm_) for k, (b_, nm_) in enumerate(tdet)]
+    g.append(("bcnb", (S_BCNB, bcnb_body), fh, I3, "Beacon bracket"))
     jg += [("beam", Rz(90), fx_, "X beam"), ("beam", I3, fy_, "Y beam"),
            ("yoke", I3, fh, "yoke"), ("neck", I3, fh, "neck")]
     return g, jg
@@ -763,13 +579,15 @@ def pose(tx, ty):
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
 EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z jackshaft", "Z 608", "Z reduction")
-PASS = [("Filter duct", "insulation"), ("Filter duct", "Outer skin"),
-        ("Filter duct", "Back module housing"), ("Heater shaft", "Floor plate"), ("Heater shaft", "Chamber heater"),
-        ("Heater shaft", "Heater fan motor")]
+PASS = [("Heater shaft", "Chamber heater"), ("Heater shaft", "Heater fan motor")]
 # fasteners that thread into a stand-in without modelled holes, or into a tapped hole modelled at nominal size
 FX_PASS = [("post bolt", "Post"), ("NEMA23 motor screw", "NEMA23"), ("NEMA17 screw", "NEMA17"),
            ("extruder screw", "Extruder"), ("duct screw", "Part-cooling duct"), ("Beacon bracket screw", "Beacon"),
-           ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate"), ("M8 tie rod", "Bay leg")]
+           ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate"), ("M8 tie rod", "Bay leg"),
+           ("heater screw", "Chamber heater"), ("heater motor screw", "Heater fan motor"), ("fan screw", "fan"),
+           ("blower screw", "blower"), ("electronics screw", "Kraken"), ("electronics screw", "PSU"), ("electronics screw", "Raspberry"),
+           ("rivet", "Door core"), ("hinge nut", "Door core"), ("handle screw", "Door core"), ("handle screw", "Door handle"),
+           ("Beacon screw", "Beacon")]
 def unexpected(info):
     names = {i["id"]: i["name"] for i in info["instances"]}
     bad = []
@@ -809,6 +627,7 @@ doc = json.load(open(os.path.join(OUT, "CroXY.json")))
 doc["studios"][0]["name"] = studios[0]
 json.dump(doc, open(os.path.join(OUT, "CroXY.json"), "w"), indent=1)
 
+json.dump(MFG, open(os.path.join(OUT, "mfg.json"), "w"), indent=1)
 json.dump({"studios": studios, "layout": layout, "moving": moving, "start": [TX0, TY0], "sweep": sweep},
           open(os.path.join(OUT, "build-info.json"), "w"), indent=1)
 
