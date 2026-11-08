@@ -11,10 +11,10 @@ build:
 chamber:
   temp_max: 150
   interior: {x: 380, y: 380, h: 320}   # inside the frame (frame sits inside insulation)
-  heater: {type: PTC, power_w: 300, location: "chamber floor, left side, beside the bed", fan: "blower wheel on a shaft through the floor; BLDC motor in the cool Z bay"}
+  heater: {type: "2 x PTC", power_w: 800, location: "chamber floor, left side, beside the bed", fan: "blower wheel on a shaft through the floor; BLDC motor in the cool Z bay"}
 
 insulation:
-  hot_face: {thickness: 15, material: "aerogel blanket (Pyrogel XTE class) or mineral wool board, rated >= 250 C"}
+  hot_face: {thickness: 20, material: "aerogel blanket (Pyrogel XTE class) or mineral wool board, rated >= 250 C"}
   pir: {thickness: 30, note: "kept below its continuous limit by the hot-face layer"}
   skin: {thickness: 2, material: "aluminium sheet, powder coated"}
   floor: "same build-up under the floor plate; the floor plate stands on four G10 blocks (thermal breaks) on 3030 legs"
@@ -24,7 +24,7 @@ frame:
   post_length: 320
   shear_plates: {material: mild_steel, thickness: 6, sides: [left, right, back], note: "bolted inside the posts; the side plates carry Z1/Z2, the back plate carries Z3 (replaces the back centre post). Steel, so the MGN12 Z rails match CTE"}
   top_plate: {material: mild_steel, thickness: 12, size: [380, 380], process: "waterjet + stress relieve + finish machine"}
-  floor_plate: {material: mild_steel, thickness: 10, size: [380, 380]}
+  floor_plate: {material: mild_steel, thickness: 6, size: [380, 380]}
 
 xy:
   kinematics: cross_xy
@@ -72,17 +72,17 @@ toolhead:
   probe: Beacon3D
   layout: "extruder and hotend offset (18, 25) from the beam cross into an open quadrant; straight PTFE feed from above; body hangs below the plate on a neck"
 
-stack_heights:        # from the floor up (h); world z = h - 456
+stack_heights:        # from the floor up (h); world z = h - 457
   feet: [0, 15]
   base_plate: [15, 21]
   z_bay: [21, 81]          # Z drives, heater blower motor (cool)
-  floor_insulation: [81, 126]
-  floor_plate: [126, 136]
-  chamber: [136, 456]
-  top_plate: [456, 468]
-  gantry_bay: [468, 666]   # ventilated by two 80 mm fans; part-cooling blower lives here
-  lid: [666, 668]
-  nozzle_tip: 370
+  floor_insulation: [81, 131]
+  floor_plate: [131, 137]
+  chamber: [137, 457]
+  top_plate: [457, 469]
+  gantry_bay: [469, 667]   # ventilated by two 80 mm fans; part-cooling blower lives here
+  lid: [667, 669]
+  nozzle_tip: 371
 
 shutter:
   concept: "a strip moving in Y with the neck covers the cutout's middle band; 0.05 mm stainless spring-tape covers close it front/back (rollers in 10 mm pockets in the plate top, just outside the cutout) and left/right of the neck (rollers on the strip ends)"
@@ -91,11 +91,11 @@ shutter:
 back_module:
   depth: 110
   upper: {contents: filter_loop, parts: [air-to-air cooler, HEPA H13, activated_carbon, radial blower 97 mm], ducts: "two 40 mm stainless ducts through the back wall at z -45 (outlet x -120, return x 130)"}
-  lower: {contents: electronics, parts: [BTT_Kraken, PSU 48 V (LRS-350-48 class), PSU 24 V (LRS-150-24 class), host + relays, two 80 mm fans], access: hinged_rear_cover}
+  lower: {contents: electronics, parts: [BTT_Kraken, PSU 48 V (LRS-350-48 class), PSU 24 V (LRS-350-24 class), host + relays, two 80 mm fans], access: hinged_rear_cover}
 
 door:
   location: front
   type: "insulated (same build-up as the walls), hinged on the left"
   window: {w: 260, h: 230, glazing: "double: borosilicate inner, tempered outer, 4 mm each, ~31 mm air gap"}
 
-outer_envelope: {w: 474, d: 586, h: 668}   # modelled; the door handle adds 30 in front
+outer_envelope: {w: 484, d: 596, h: 669}   # modelled; the door handle adds 30 in front

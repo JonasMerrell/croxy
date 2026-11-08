@@ -46,7 +46,7 @@ toolhead:
 
 shell:
   shear_t: 6            # steel shear plates on the inner faces of the posts: left, right, back (front is the door)
-  floor_t: 10           # steel floor plate under the posts
+  floor_t: 6            # steel floor plate under the posts (6 mm: less thermal mass, still stiff)
   floor_insulation: 30
   z_bay: 60             # cool bay under the floor for the Z motors
   tray_t: 8
@@ -70,7 +70,7 @@ bed:
   arm_inset: 20         # arm reaches this far in under the bed edge
 
 enclosure:
-  hot_layer: 15         # hot-face layer (aerogel blanket or mineral wool board, rated >= 250 C) so the PIR stays below its limit
+  hot_layer: 20         # hot-face layer (aerogel blanket or mineral wool board, rated >= 250 C) so the PIR stays below its limit
   pir: 30               # polyisocyanurate board
   skin: 2               # aluminium sheet, outside
   bay_h: 60             # cool Z bay under the floor insulation (Z drives, heater fan motor)
@@ -90,7 +90,7 @@ heater:                 # PTC heater + blower on the chamber floor, left side; b
   x: [-150, -92]
   y: [5, 135]
   top: -200
-  power_w: 300
+  power_w: 800         # 2 x 400 W PTC; heat-up about 50 min (300 W would take about 3 h)
 
 back_module:
   depth: 110

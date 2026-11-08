@@ -45,7 +45,7 @@ All key sizes are in [`cad/params.yaml`](cad/params.yaml). Change a number and r
 - **Drive.** There are four NEMA23s, one per belt, pinwheeled around the corners on steel motor towers above the X beam. Each motor turns an 8 mm shaft through a coupling. The shaft runs in two 608 bearings in the corner block, so the pulley is in double shear and the motor only sees torque.
 - **Corner blocks.** One design is used four times. Each block stands on the plate and holds its corner's drive pulley and the idler for the neighbouring belt.
 - **Tensioning.** Each idler sits in a 6 mm slot and is adjusted from above.
-- **Thermal matching.** The top plate, floor plate, corner blocks, towers and beam backers are all steel, so the steel rails don't bow as things heat up.
+- **Thermal matching.** Everything that carries a steel rail is steel: the top plate, shear plates, corner blocks and beam backers. The towers don't carry rails, so they are 7075 to save moving mass.
 
 ## How the Z works
 
@@ -61,10 +61,14 @@ All key sizes are in [`cad/params.yaml`](cad/params.yaml). Change a number and r
 - **Walls.** Outside the frame: 15 mm hot-face layer (aerogel blanket or mineral wool board) so the 30 mm PIR board stays below its temperature limit, then a 2 mm aluminium skin. The front door has the same build-up and a double-glazed window.
 - **Floor.** The floor plate stands on four G10 blocks (thermal breaks) through the floor insulation, on 3030 legs in the cool Z bay. The Z drives hang from the floor plate on G10 hangers, so the steel floor doesn't heat the motors.
 - **Shutter.** A strip moves in Y with the toolhead neck. Thin stainless spring-tape covers close the rest of the cutout: front and back from rollers sunk into pockets in the plate top, left and right of the neck from rollers on the strip ends.
-- **Heater.** A 300 W PTC heater and blower wheel sit on the chamber floor to the left of the bed. The blower motor is below the floor in the cool bay.
+- **Heater.** An 800 W PTC heater (two elements) and blower wheel sit on the chamber floor to the left of the bed. The blower motor is below the floor in the cool bay.
 - **Gantry bay.** Ventilated with two 80 mm fans in the back wall. The part-cooling blower sits here and feeds the toolhead through the hollow neck.
 - **Back module.** The filter loop (air-to-air cooler, HEPA, carbon, blower) sits above the electronics bay (Kraken, 48 V and 24 V PSUs, host, fans). Each has its own rear cover.
-- **Outside size.** 474 W × 586 D × 668 H mm (plus the door handle).
+- **Outside size.** 484 W × 596 D × 669 H mm (plus the door handle).
+
+## Engineering checks
+
+First-pass numbers (heat loss, heat-up time, PIR temperature, moving mass, beam stiffness, power) are in [docs/analysis.md](docs/analysis.md).
 
 ## Decisions made so far
 

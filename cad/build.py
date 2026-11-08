@@ -216,7 +216,7 @@ res = box(-22.7, 22.7, RO - 13.5, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new
 xend_body = new_body(res)
 box(-17.5, 17.5, RO - 13.5, B + 2, CARR_FACE + BASE_T, XB_BOT, "add", "Upright")
 box(-17.5, 17.5, inner - 1.2, inner + 1.2, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
-name_part(xend_body, "X-end tower", "Steel", "#8a96a1", "metal")
+name_part(xend_body, "X-end tower", "Aluminium 7075", "#c0c6cc", "metal")
 
 # ---- 3. Y-end tower (local = world for the right end with the Y beam at y = 0)
 S_YEND = studio("Y-end tower")
@@ -224,7 +224,7 @@ res = box(RO - 13.5, RO + 13.5, -22.7, 22.7, CARR_FACE, CARR_FACE + BASE_T, "new
 yend_body = new_body(res)
 box(RO - 13.5, B + 2, -17.5, 17.5, CARR_FACE + BASE_T, YB_BOT, "add", "Upright")
 box(inner - 1.2, inner + 1.2, -17.5, 17.5, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
-name_part(yend_body, "Y-end tower", "Steel", "#8a96a1", "metal")
+name_part(yend_body, "Y-end tower", "Aluminium 7075", "#c0c6cc", "metal")
 
 # ---- 4. Beam backer: bent U channel along X, web at the bottom (z 0..t), flanges up
 S_BEAM = studio("Beam backer")
@@ -577,7 +577,7 @@ YROLL_Y = CUT + 6
 S_HEAT = studio("Chamber heater")
 res = box(HT["x"][0], HT["x"][1], HT["y"][0], HT["y"][1], FLOOR[1], HT["top"], "new", "Housing")
 cheat_body = new_body(res)
-name_part(cheat_body, f"Chamber heater: PTC {HT['power_w']} W + blower wheel (housing)", "Stainless steel", "#8d8f91", "metal")
+name_part(cheat_body, f"Chamber heater: 2 x PTC, {HT['power_w']} W + blower wheel (stand-in)", None, "#8d8f91", "metal")
 S_HMOT = studio("Heater fan motor")
 res = box(HSX - 25, HSX + 25, HSY - 25, HSY + 25, BAY[0] + 8, BAY[0] + 48, "new", "Motor")
 hmot_body = new_body(res)
@@ -615,6 +615,8 @@ res = cyl_y(-120, DUCT_Z, 20, SPF, BY0 + 6, "new", "Outlet")
 duct_out = new_body(res)
 res = cyl_y(130, DUCT_Z, 20, SPF, BY0 + 8, "new", "Return")
 duct_ret = new_body(res)
+cyl_y(-120, DUCT_Z, 18.5, SPF, BY0 + 6, "remove", "Outlet bore")
+cyl_y(130, DUCT_Z, 18.5, SPF, BY0 + 8, "remove", "Return bore")
 name_part(duct_out, "Filter duct, chamber outlet (stainless)", "Stainless steel", "#a7adb3", "metal")
 name_part(duct_ret, "Filter duct, chamber return (stainless)", "Stainless steel", "#a7adb3", "metal")
 
@@ -624,10 +626,10 @@ eparts = []
 for x0_, x1_, y0_, y1_, z0_, z1_, nm_, col_ in (
         (-200, -40, BY0 + 6, BY0 + 26, -330, -230, "BTT Kraken (on standoffs)", "#1d5c3a"),
         (-20, 195, BY0 + 6, BY0 + 36, -300, -185, "PSU 48 V (LRS-350-48 class)", "#a7adb3"),
-        (-20, 140, BY0 + 6, BY0 + 36, -420, -320, "PSU 24 V (LRS-150-24 class)", "#a7adb3"),
+        (-20, 195, BY0 + 6, BY0 + 36, -420, -320, "PSU 24 V (LRS-350-24 class)", "#a7adb3"),
         (-200, -120, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, intake", "#2b2b2b"),
         (-110, -30, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, exhaust", "#2b2b2b"),
-        (150, 210, BY0 + 6, BY0 + 46, -420, -330, "Raspberry Pi / host + relays", "#1d5c3a")):
+        (-200, -130, BY0 + 6, BY0 + 46, -222, -180, "Raspberry Pi / host + relays", "#1d5c3a")):
     res = box(x0_, x1_, y0_, y1_, z0_, z1_, "new", nm_)
     b_ = new_body(res); name_part(b_, nm_, None, col_, "satin"); eparts.append((b_, nm_))
 
