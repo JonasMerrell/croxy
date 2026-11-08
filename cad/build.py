@@ -71,7 +71,10 @@ def cut_through(items, z_top, name):
 def new_body(res):
     return [res["feature_id"], 0]
 
-def name_part(body, name, material=None, color=None, finish=None):
+MFG = {}   # part name -> how it is made (written to docs/manufacturing.md)
+def name_part(body, name, material=None, color=None, finish=None, method=None, notes=""):
+    if method:
+        MFG[name] = {"method": method, "material": material or "", "notes": notes}
     a = {"body": body, "name": name}
     if material: a["material"] = material
     if color: a["color"] = color
@@ -102,6 +105,27 @@ def mat_to_axis_angle(m):
 
 def mm(a, b):
     return [[sum(a[i][k] * b[k][j] for k in range(3)) for j in range(3)] for i in range(3)]
+
+# ---- fasteners. A joint list holds screws, nuts, washers, rods and spacers in one frame;
+# jplace() instantiates it with a rotation and an offset. Screws: p = where the head seats,
+# d = the shank direction. Stack items (nuts, washers, bearings, rods, spacer studios): p = the
+# face they sit on, d = the direction they grow.
+RYm90 = [[0, 0, -1], [0, 1, 0], [1, 0, 0]]
+RYp90 = [[0, 0, 1], [0, 1, 0], [-1, 0, 0]]
+RXp90 = [[1, 0, 0], [0, 0, -1], [0, 1, 0]]
+RXm90 = [[1, 0, 0], [0, 0, 1], [0, -1, 0]]
+I3_ = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+RX180_ = [[1, 0, 0], [0, -1, 0], [0, 0, -1]]
+SHANK = {"-z": I3_, "+z": RX180_, "+x": RYm90, "-x": RYp90, "+y": RXp90, "-y": RXm90}
+STACK = {"+z": I3_, "-z": RX180_, "+x": RYp90, "-x": RYm90, "+y": RXm90, "-y": RXp90}
+SCREWS = ("ISO 4762", "ISO 7380", "ISO 10642", "ISO 4017", "ISO 4026")
+JOINTS = {}
+def J(key, std, size, p, d, L=None, label=None):
+    """Add a fastener to joint list key. std is a standard key or ('studio', (studio, body))."""
+    JOINTS.setdefault(key, []).append((std, size, L, list(p), d, label))
+
+def mvec(R, p):
+    return [sum(R[i][k] * p[k] for k in range(3)) for i in range(3)]
 
 def Rz(d):
     c, s = round(math.cos(math.radians(d)), 12), round(math.sin(math.radians(d)), 12)
@@ -150,146 +174,41 @@ layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "bel
           "build_centre": [FX, FY]}
 
 # ================================================================ Part Studios
-# ---- 0. Top plate
-S_PLATE = studio("Top plate")
-r("set_variable", name="plate_w", expr=str(W))
-r("set_variable", name="plate_t", expr=str(T))
-sid = sketch("top", [{"type": "center_rect", "center": [0, 0], "corner": [W / 2, W / 2],
-                      "dims": {"width": "plate_w", "height": "plate_w"}}], "Plate outline")
-res = r("add_feature", kind="extrude", name="Plate", params={"profiles": [{"sketch": sid}], "depth": "plate_t", "op": "new"})
-plate_body = new_body(res)
-
-holes = [{"type": "rect", "corner1": [-CUT, -CUT], "corner2": [CUT, CUT]}]   # toolhead cutout
-for k in range(4):
-    a = 90 * k
-    for p in ([-155.5, -140], [-140, -155.5], [-125.5, -125.5], [-155.5, -155.5]):    # corner block screws
-        holes.append({"type": "circle", "center": rot_z(a, p), "radius": 2.75})
-    holes.append({"type": "circle", "center": rot_z(a, [-PC, -PC]), "radius": 4.25})  # corner post bolt
-    for n in range(-4, 5):                                                              # MGN12 rail screws, M3 tapped
-        holes.append({"type": "circle", "center": rot_z(a, [n * 25, -RO]), "radius": 1.25})
-cut_through(holes, T, "Cutout and holes")
-for sy in (-1, 1):   # pockets for the shutter's Y-cover spring rollers, just outside the cutout edges
-    box(-(CUT - 2), CUT - 2, min(sy * (CUT + 1), sy * (CUT + 11)), max(sy * (CUT + 1), sy * (CUT + 11)), 2, T, "remove", "Roller pocket")
-name_part(plate_body, "Top plate", "Steel", "#5b6670", "metal")
-
-# ---- 1. Corner pulley block (one design, pinwheeled), standing on the plate
-S_BLOCK = studio("Corner pulley block")
-x0, x1 = -158.0, -123.0
-for zz, nm in ((BLK_BOT, "bottom"), (BLK_TOP, "top")):
-    res = box(x0, x1, x0, x1, zz[0], zz[1], "new" if nm == "bottom" else "add", f"Block {nm} plate")
-    if nm == "bottom":
-        block_body = new_body(res)
-    cyl(D_FL[0], D_FL[1], BOSS_R, zz[0], zz[1], "add", f"Drive boss {nm}")
-    cyl(I_FL[0], I_FL[1], BOSS_R, zz[0], zz[1], "add", f"Idler boss {nm}")
-    cyl(I_FL[0], I_FL[1] - TT, BOSS_R, zz[0], zz[1], "add", f"Idler boss tensioned {nm}")
-box(x0, x1, x0, x0 + 5, PT, BLK_TOP[1], "add", "Wall front")
-box(x0, x0 + 5, x0, x1, PT, BLK_TOP[1], "add", "Wall left")
-box(-128, -123, -128, -123, PT, BLK_TOP[1], "add", "Inner post")
-sid = sketch(plane(BLK_TOP[0]), [{"type": "circle", "center": D_FL, "radius": SEAT_R}], "Top bearing seat")
-r("add_feature", kind="extrude", name="Top bearing seat", params={"profiles": [{"sketch": sid}], "depth": "7", "op": "remove"})
-sid = sketch(plane(BLK_BOT[1]), [{"type": "circle", "center": D_FL, "radius": SEAT_R}], "Bottom bearing seat")
-r("add_feature", kind="extrude", name="Bottom bearing seat", params={"profiles": [{"sketch": sid}], "depth": "7", "op": "remove", "opposite": True})
-cut_through([{"type": "circle", "center": D_FL, "radius": 5.0},
-             {"type": "rect", "corner1": [I_FL[0] - 4.25, I_FL[1] - TT], "corner2": [I_FL[0] + 4.25, I_FL[1]]},
-             {"type": "circle", "center": I_FL, "radius": 4.25},
-             {"type": "circle", "center": [I_FL[0], I_FL[1] - TT], "radius": 4.25}], BLK_TOP[1], "Shaft and idler slot")
-sid = sketch(plane(PT), [{"type": "circle", "center": p, "radius": 2.1} for p in
-                         ([-155.5, -140], [-140, -155.5], [-125.5, -125.5], [-155.5, -155.5])], "M5 tapped holes")
-r("add_feature", kind="extrude", name="M5 tapped holes", params={"profiles": [{"sketch": sid}], "depth": "12", "op": "remove"})
-name_part(block_body, "Corner pulley block", "Steel", "#7a8691", "metal")
-
-# ---- 1b. Motor tower: L-shaped walls on the block's outer edges, motor plate above the X beam
-S_MTOWER = studio("Motor tower")
-mh = 57.0 / 2
-res = box(D_FL[0] - mh, D_FL[0] + mh, D_FL[1] - mh, D_FL[1] + mh, MOTOR_PLATE[0], MOTOR_PLATE[1], "new", "Motor plate")
-mtower_body = new_body(res)
-box(x0, x0 + 5, x0, x1, BLK_TOP[1], MOTOR_PLATE[0], "add", "Wall left")
-box(x0, D_FL[0] + mh, x0, x0 + 5, BLK_TOP[1], MOTOR_PLATE[0], "add", "Wall front")
-cut_through([{"type": "circle", "center": D_FL, "radius": 19.3}], MOTOR_PLATE[1], "Pilot bore")
-name_part(mtower_body, "Motor tower", "Steel", "#7a8691", "metal")
-
-# ---- 2. X-end tower (local = world for the back end with the X beam at x = 0): stands on the MGN12H,
-#         clamps the inner strand of the X belt, carries the X beam on top
-S_XEND = studio("X-end tower")
-inner = B - XY["pitch_r"]           # inner belt strand, clamped by the tower
-res = box(-22.7, 22.7, RO - 13.5, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
-xend_body = new_body(res)
-box(-17.5, 17.5, RO - 13.5, B + 2, CARR_FACE + BASE_T, XB_BOT, "add", "Upright")
-box(-17.5, 17.5, inner - 1.2, inner + 1.2, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
-name_part(xend_body, "X-end tower", "Aluminium 7075", "#c0c6cc", "metal")
-
-# ---- 3. Y-end tower (local = world for the right end with the Y beam at y = 0)
-S_YEND = studio("Y-end tower")
-res = box(RO - 13.5, RO + 13.5, -22.7, 22.7, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
-yend_body = new_body(res)
-box(RO - 13.5, B + 2, -17.5, 17.5, CARR_FACE + BASE_T, YB_BOT, "add", "Upright")
-box(inner - 1.2, inner + 1.2, -17.5, 17.5, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Belt clamp slot")
-name_part(yend_body, "Y-end tower", "Aluminium 7075", "#c0c6cc", "metal")
-
-# ---- 4. Beam backer: bent U channel along X, web at the bottom (z 0..t), flanges up
-S_BEAM = studio("Beam backer")
-r("set_variable", name="beam_len", expr=str(BL))
-sid = sketch("right", [{"type": "polyline", "closed": True, "points": [
-    [-BWD / 2, 0], [BWD / 2, 0], [BWD / 2, BH], [BWD / 2 - BT, BH], [BWD / 2 - BT, BT],
-    [-BWD / 2 + BT, BT], [-BWD / 2 + BT, BH], [-BWD / 2, BH]]}], "Channel section")
-res = r("add_feature", kind="extrude", name="Channel", params={"profiles": [{"sketch": sid}], "depth": "beam_len", "op": "new", "end": "symmetric"})
-beam_body = new_body(res)
-name_part(beam_body, "Beam backer (U channel)", "Steel", "#6d7a86", "metal")
-
-# ---- 5. Toolhead yoke (carries both MGN9H carriages, wraps the Y beam)
-S_YOKE = studio("Toolhead yoke")
-yw, ylen = 22.0, BWD / 2 + 9
-leg_in, leg_out = BWD / 2 + 3, BWD / 2 + 9
-res = box(-yw, yw, -ylen, ylen, X_CAR_FACE - YOKE_T, X_CAR_FACE, "new", "Top plate")
-yoke_body = new_body(res)
-box(-yw, yw, leg_in, leg_out, Y_CAR_FACE, X_CAR_FACE - YOKE_T, "add", "Back leg")
-box(-yw, yw, -leg_out, -leg_in, Y_CAR_FACE, X_CAR_FACE - YOKE_T, "add", "Front leg")
-box(-yw, yw, -ylen, ylen, Y_CAR_FACE - YOKE_T, Y_CAR_FACE, "add", "Bottom plate")
-name_part(yoke_body, "Toolhead yoke", "Aluminium 7075", "#c0c6cc", "metal")
-
-# ---- 6. Toolhead neck (yoke down through the cutout) and envelope (Chube Conduction + Sherpa Heavy, stand-in)
-S_NECK = studio("Toolhead neck")
-nx, ny = TH["neck"]
-res = box(-nx / 2, nx / 2, -ny / 2, ny / 2, TH_TOP, NECK_TOP, "new", "Neck")
-neck_body = new_body(res)
-box(-nx / 2 + 4, nx / 2 - 4, -ny / 2 + 4, ny / 2 - 4, TH_TOP, NECK_TOP, "remove", "Lightening")
-name_part(neck_body, "Toolhead neck", "Aluminium 7075", "#c0c6cc", "metal")
-
-S_TOOL = studio("Toolhead envelope")
-ex, ey = TH["envelope"]
-res = box(FX - ex / 2, FX + ex / 2, FY - ey / 2, FY + ey / 2, NOZ + 12, TH_TOP, "new", "Envelope")
-tool_body = new_body(res)
-cyl(FX, FY, 4, NOZ, NOZ + 12, "add", "Nozzle")
-name_part(tool_body, "Toolhead envelope (stand-in)", None, "#c4572a", "satin")
-
-S_TUBE = studio("Filament tube")
-res = cyl(FX, FY, 2, TH_TOP, TH["filament_top"], "new", "PTFE tube")
-tube_body = new_body(res)
-name_part(tube_body, "PTFE filament tube 4 mm", None, "#e8e4d8", "satin")
+exec(open(os.path.join(HERE, "parts_gantry.py")).read())
 
 # ---- 7. Bought parts (stand-ins), one Part Studio each, modelled in their own frames
 buy = {}
 def bought(key, res, name, color, material=None):
-    b = new_body(res); buy[key] = (len(studios) - 1, b); name_part(b, name, material, color, "satin")
+    b = new_body(res); buy[key] = (len(studios) - 1, b); name_part(b, name, material, color, "satin", method="buy")
 
 studio("MGN12 rail")
-bought("mgn12_rail", box(-RL / 2, RL / 2, -6, 6, 0, 8, "new", "MGN12 rail"), f"MGN12 rail {RL}", "#9aa3ab", "Steel")
+res = box(-RL / 2, RL / 2, -6, 6, 0, 8, "new", "MGN12 rail")
+cut_through([circ([n * 25, 0], 3.5) for n in range(-4, 5)], 8, "Rail holes")
+pocket_z([circ([n * 25, 0], 6.0) for n in range(-4, 5)], 8, 4.5, "Rail cbores")
+bought("mgn12_rail", res, f"MGN12 rail {RL}", "#9aa3ab", "Steel")
 studio("MGN12H carriage")
 res = box(-22.7, 22.7, -13.5, 13.5, 8.5, 13, "new", "MGN12H block")
 box(-22.7, 22.7, -13.5, -6.5, 3, 8.5, "add"); box(-22.7, 22.7, 6.5, 13.5, 3, 8.5, "add")
+cut_through([circ(c, 3.0) for c in CAR12], 13, "M3 tapped")
 bought("mgn12h", res, "MGN12H carriage", "#3d4a57", "Steel")
 bl9 = G["beam_rail_len"]
 studio("MGN9 rail")
-bought("mgn9_rail", box(-bl9 / 2, bl9 / 2, -4.5, 4.5, 0, 6.5, "new", "MGN9 rail"), f"MGN9 rail {bl9}", "#9aa3ab", "Steel")
+res = box(-bl9 / 2, bl9 / 2, -4.5, 4.5, 0, 6.5, "new", "MGN9 rail")
+cut_through([circ([x, 0], 3.5) for x in RAIL9_X], 6.5, "Rail holes")
+pocket_z([circ([x, 0], 6.0) for x in RAIL9_X], 6.5, 3.5, "Rail cbores")
+bought("mgn9_rail", res, f"MGN9 rail {bl9}", "#9aa3ab", "Steel")
 studio("MGN9H carriage")
 res = box(-19.95, 19.95, -10, 10, 7, 10, "new", "MGN9H block")
 box(-19.95, 19.95, -10, -5, 2, 7, "add"); box(-19.95, 19.95, 5, 10, 2, 7, "add")
+cut_through([circ(c, 3.0) for c in CAR9], 10, "M3 tapped")
 bought("mgn9h", res, "MGN9H carriage", "#3d4a57", "Steel")
 studio("GT2 pulley 20T")
 res = cyl(0, 0, 9, 0, 1.5, "new", "Pulley"); cyl(0, 0, 6.1, 1.5, 14.5, "add"); cyl(0, 0, 9, 14.5, 16, "add")
+cyl(0, 0, 4, 0, 16, "remove", "Bore 8")
 bought("pulley", res, "GT2 20T pulley, 12 mm belt", "#b8bec4", "Aluminium 6061")
 studio("GT2 idler 20T")
 res = cyl(0, 0, 9, 0, 1.5, "new", "Idler"); cyl(0, 0, 6.1, 1.5, 14.5, "add"); cyl(0, 0, 9, 14.5, 16, "add")
+cyl(0, 0, 4, 0, 16, "remove", "Bore 8")
 bought("idler", res, "GT2 20T toothed idler, 12 mm belt", "#b8bec4", "Steel")
 # belt loop: pulley centres 2*PP apart along X, pitch radius pr, thickness bt, z = 0..BW
 pr, bt = XY["pitch_r"], XY["belt_t"]
@@ -303,7 +222,7 @@ sid = sketch("top", stadium(pr + bt / 2) + stadium(pr - bt / 2), "Belt")
 res = r("add_feature", kind="extrude", name="Belt", params={"profiles": [{"sketch": sid}], "depth": str(BW), "op": "new"})
 bought("belt", res, "Gates EPDM GT2 12 mm belt", "#22262a")
 studio("Shaft coupling")
-bought("coupling", cyl(0, 0, 12.5, 0, 25, "new", "Coupling"), "Shaft coupling 6.35-8", "#b8bec4", "Aluminium 6061")
+bought("coupling", cyl(0, 0, 10, 0, 25, "new", "Coupling"), "Rigid shaft coupling D20 L25, 6.35-8", "#b8bec4", "Aluminium 6061")
 
 
 # ================================================================ Frame, Z and bed
@@ -428,18 +347,6 @@ for nm, _, _ in COLS:
     arm_s[nm] = (st, b)
 
 # ================================================================ Enclosure, shutter, heater, back module, toolhead detail
-def plane_y(y):
-    """Sketch plane at world y; sketch (u, v) = (x, z); a positive extrude goes towards -y."""
-    f = r("add_feature", kind="plane", name=f"Plane y={y:g}",
-          params={"mode": "offset", "base": {"kind": "origin_plane", "plane": "Front"}, "offset": str(-y)})
-    return {"kind": "feature_plane", "feature": f["feature_id"]}
-
-def plane_x(x):
-    """Sketch plane at world x; sketch (u, v) = (y, z); a positive extrude goes towards +x."""
-    f = r("add_feature", kind="plane", name=f"Plane x={x:g}",
-          params={"mode": "offset", "base": {"kind": "origin_plane", "plane": "Right"}, "offset": str(x)})
-    return {"kind": "feature_plane", "feature": f["feature_id"]}
-
 def cyl_y(cx, cz, rad, y0, y1, op="new", name=None):
     sid = sketch(plane_y(y1), [{"type": "circle", "center": [cx, cz], "radius": rad}], name)
     return extrude(sid, y1 - y0, op, name)
@@ -647,13 +554,13 @@ S_TDET = studio("Toolhead")
 tdet = []
 def tpart(nm_, res, color, material=None):
     b_ = new_body(res); name_part(b_, nm_, material, color, "satin"); tdet.append((b_, nm_))
-res = box(FX - 30, FX - 21, FY - 30, FY + 10, NOZ + 4, TH_TOP, "new", "Duct riser")
+res = box(FX - 30, FX - 21, FY - 30, FY + 10, NOZ + 4, TP_BOT, "new", "Duct riser")
 cyl(FX, FY, 14, NOZ + 2, NOZ + 8, "add", "Duct ring")
 box(FX - 21, FX - 8, FY - 5, FY + 5, NOZ + 2, NOZ + 8, "add", "Duct feed")
 cyl(FX, FY, 7, NOZ + 2, NOZ + 8, "remove", "Ring bore")
 tpart("Part-cooling duct (fed through the hollow neck)", res, "#3c3f44", "PPS-CF")
-tpart("Extruder (Sherpa Heavy style)", box(FX - 20, FX + 20, FY - 14, FY + 10, -42, TH_TOP, "new", "Extruder"), "#c4572a")
-tpart("Extruder motor (LDO high-temp)", box(FX - 18, FX + 18, FY + 10, FY + 30, -40, -4, "new", "Extruder motor"), "#2b2b2b")
+tpart("Extruder (Sherpa Heavy style)", box(FX - 20, FX + 20, FY - 14, FY + 10, -42, TP_BOT, "new", "Extruder"), "#c4572a")
+tpart("Extruder motor (LDO high-temp)", box(FX - 18, FX + 18, FY + 10, FY + 30, -40, TP_BOT, "new", "Extruder motor"), "#2b2b2b")
 res = cyl(FX, FY, 11, NOZ + 12, -42, "new", "Chube")
 tpart("Chube Conduction hotend", res, "#b8bec4")
 tpart("Nozzle", cyl(FX, FY, 3.5, NOZ, NOZ + 12, "new", "Nozzle"), "#c9a227", "Brass")
@@ -683,16 +590,34 @@ def place_std(standard, size, pos, R=I3, length=None, name=None):
     inst.append({"id": i, "name": name})
     return i
 
+def jplace(key, R=I3, pos=(0, 0, 0), tag=""):
+    """Instantiate joint list key rotated by R and offset by pos. Returns [(instance, local point)]."""
+    out = []
+    for std, size, L, p, d, label in JOINTS[key]:
+        w = [a + b for a, b in zip(mvec(R, p), pos)]
+        nm = f"fx {label} {size or ''} {tag}".replace("  ", " ").strip()
+        if isinstance(std, tuple):
+            i = place(*std[1], w, mm(R, STACK[d]), name=nm)
+        else:
+            Rl = mm(R, SHANK[d] if std in SCREWS else STACK[d])
+            i = place_std(std, size, w, Rl, length=L, name=nm)
+        out.append((i, mvec(R, p)))
+    return out
+
 place(S_PLATE, plate_body, [0, 0, 0], name="Top plate")
 for k in range(4):
     a = 90 * k
     R = Rz(a)
     corner = ["FL", "FR", "BR", "BL"][k]
-    place(S_BLOCK, block_body, [0, 0, 0], R, name=f"Corner block {corner}")
-    place(S_MTOWER, mtower_body, [0, 0, 0], R, name=f"Motor tower {corner}")
+    place(S_BLKL, blkl_body, [0, 0, BLK_BOT[0]], R, name=f"Corner block lower {corner}")
+    place(S_BLKU, blku_body, [0, 0, BLK_TOP[0]], R, name=f"Corner block upper {corner}")
+    place(S_TAB, tab_body, [0, 0, 0], R, name=f"Tension tab {corner}")
+    place(S_MTOWER, mtower_body, [0, 0, 0], R, name=f"Motor plate {corner}")
+    jplace("corner", R, tag=corner)
     d, i_ = rot_z(a, D_FL), rot_z(a, I_FL)
     place(*buy["pulley"], [d[0], d[1], PUL_Z0], name=f"Drive pulley {corner}")
-    place(*buy["idler"], [i_[0], i_[1], PUL_Z0], name=f"Idler {corner}")
+    im = rot_z(a, I_MID)
+    place(*buy["idler"], [im[0], im[1], PUL_Z0], name=f"Idler {corner}")
     shaft_top = MOTOR_FACE - 27
     place_std("Shaft", "Ø8", [d[0], d[1], BLK_BOT[0]], length=round(shaft_top - BLK_BOT[0], 1), name=f"Drive shaft {corner}")
     for zb in (BLK_TOP[0], BLK_BOT[1] - 7):
@@ -705,6 +630,7 @@ for k in range(4):
 # perimeter rails on the plate: X rails along X at y = +-RO, Y rails along Y at x = +-RO
 for k, (pos, R) in enumerate([([0, -RO, PT], I3), ([0, RO, PT], I3), ([-RO, 0, PT], Rz(90)), ([RO, 0, PT], Rz(90))]):
     place(*buy["mgn12_rail"], pos, R, name=["X rail front", "X rail back", "Y rail left", "Y rail right"][k])
+    jplace("rail12", R, pos, tag=["X front", "X back", "Y left", "Y right"][k])
 
 # belts: X belts along X at y = +-B, Y belts along Y at x = +-B
 for nm, pos, R in [("X belt front", [0, -B, BZ - BW / 2], I3), ("X belt back", [0, B, BZ - BW / 2], I3),
@@ -782,32 +708,50 @@ place(S_DUCT, duct_ret, [0, 0, 0], name="Filter duct return")
 
 # moving gantry at (tx, ty): (key, studio/body, position fn, rotation, name)
 def gantry_parts():
-    g = []
+    g, jg = [], []
     for sgn, nm in ((1, "back"), (-1, "front")):
         R = I3 if sgn > 0 else Rz(180)
+        f = lambda tx, ty: [tx, 0, 0]
         g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
-        g.append((f"xend_{nm}", (S_XEND, xend_body), lambda tx, ty: [tx, 0, 0], R, f"X-end tower {nm}"))
+        g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end tower {nm}"))
+        g.append((f"xcl_{nm}", (S_XCL, xcl_body), f, R, f"X-end strand clamp {nm}"))
+        jg.append(("xend", R, f, f"X-end {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
+        f = lambda tx, ty: [0, ty, 0]
         g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
-        g.append((f"yend_{nm}", (S_YEND, yend_body), lambda tx, ty: [0, ty, 0], R, f"Y-end tower {nm}"))
-    g += [("xbeam", (S_BEAM, beam_body), lambda tx, ty: [tx, 0, XB_BOT], Rz(90), "X beam"),
-          ("xrail", buy["mgn9_rail"], lambda tx, ty: [tx, 0, XB_BOT], mm(Rz(90), RX180), "MGN9 rail X beam"),
-          ("ybeam", (S_BEAM, beam_body), lambda tx, ty: [0, ty, YB_BOT], I3, "Y beam"),
-          ("yrail", buy["mgn9_rail"], lambda tx, ty: [0, ty, YB_BOT], RX180, "MGN9 rail Y beam"),
+        g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end tower {nm}"))
+        g.append((f"ycl_{nm}", (S_YCL, ycl_body), f, R, f"Y-end strand clamp {nm}"))
+        jg.append(("yend", R, f, f"Y-end {nm}"))
+    fx_ = lambda tx, ty: [tx, 0, XB_BOT]
+    fy_ = lambda tx, ty: [0, ty, YB_BOT]
+    fh = lambda tx, ty: [tx, ty, 0]
+    g += [("xbeam", (S_BEAM, beam_body), fx_, Rz(90), "X beam"),
+          ("xrail", buy["mgn9_rail"], fx_, mm(Rz(90), RX180), "MGN9 rail X beam"),
+          ("ybeam", (S_BEAM, beam_body), fy_, I3, "Y beam"),
+          ("yrail", buy["mgn9_rail"], fy_, RX180, "MGN9 rail Y beam"),
           ("xcar9", buy["mgn9h"], lambda tx, ty: [tx, ty, XB_BOT], mm(Rz(90), RX180), "MGN9H on X beam"),
           ("ycar9", buy["mgn9h"], lambda tx, ty: [tx, ty, YB_BOT], RX180, "MGN9H on Y beam"),
-          ("yoke", (S_YOKE, yoke_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead yoke"),
-          ("neck", (S_NECK, neck_body), lambda tx, ty: [tx, ty, 0], I3, "Toolhead neck"),
+          ("yoke", (S_YOKE, yoke_body), fh, I3, "Yoke U"),
+          ("ytop", (S_YTOP, ytop_body), fh, I3, "Yoke top plate"),
+          ("neck", (S_NECK, neck_body), fh, I3, "Toolhead neck"),
+          ("tpl", (S_TPL, tpl_body), fh, I3, "Toolhead plate"),
+          ("adapt", (S_ADAPT, adapt_body), fh, I3, "Neck air adapter"),
           ("strip", (S_STRIP, strip_body), lambda tx, ty: [0, ty, 0], I3, "Shutter strip"),
-          ("nplate", (S_NPLATE, nplate_body), lambda tx, ty: [tx, ty, 0], I3, "Shutter neck plate"),
-          ("tube", (S_TUBE, tube_body), lambda tx, ty: [tx, ty, 0], I3, "Filament tube")]
-    g += [(f"tdet{k}", (S_TDET, b_), lambda tx, ty: [tx, ty, 0], I3, nm_) for k, (b_, nm_) in enumerate(tdet)]
-    return g
+          ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter neck plate"),
+          ("tube", (S_TUBE, tube_body), fh, I3, "Filament tube")]
+    g += [(f"tdet{k}", (S_TDET, b_), fh, I3, nm_) for k, (b_, nm_) in enumerate(tdet)]
+    jg += [("beam", Rz(90), fx_, "X beam"), ("beam", I3, fy_, "Y beam"),
+           ("yoke", I3, fh, "yoke"), ("neck", I3, fh, "neck")]
+    return g, jg
 
-GP = gantry_parts()
+GP, GJ = gantry_parts()
 TX0, TY0 = 40, -30
 moving = {k: place(st, bd, f(TX0, TY0), R, name=nm) for k, (st, bd), f, R, nm in GP}
+moving_fx = []          # (instance, offset, position fn)
+for key, R, f, tag in GJ:
+    for i, off in jplace(key, R, f(TX0, TY0), tag):
+        moving_fx.append((i, off, f))
 
 # moving bed at bed-top height zt: bed, heater, arms and Z carriages
 BEDP = [("bed", (S_MIC6, bed_body), lambda zt: [0, 0, zt], I3, "Bed"),
@@ -826,17 +770,27 @@ def pose_bed(zt):
 def pose(tx, ty):
     for k, _, f, _, _ in GP:
         r("assembly_move", assembly=A, instance=moving[k], position=[round(v, 4) for v in f(tx, ty)])
+    for i, off, f in moving_fx:
+        r("assembly_move", assembly=A, instance=i, position=[round(a + b, 4) for a, b in zip(f(tx, ty), off)])
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
 EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z motor mount", "Z jackshaft", "Z 608", "Z reduction")
 PASS = [("Filter duct", "Shear plate back"), ("Filter duct", "insulation"), ("Filter duct", "Outer skin"),
         ("Filter duct", "Back module housing"), ("Heater shaft", "Floor plate"), ("Heater shaft", "Chamber heater"),
         ("Heater shaft", "Heater fan motor")]
+# fasteners that thread into a stand-in without modelled holes, or into a tapped hole modelled at nominal size
+FX_PASS = [("post bolt", "Post"), ("NEMA23 motor screw", "NEMA23"), ("NEMA17 screw", "NEMA17"),
+           ("extruder screw", "Extruder"), ("duct screw", "Part-cooling duct"), ("Beacon bracket screw", "Beacon"),
+           ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate")]
 def unexpected(info):
     names = {i["id"]: i["name"] for i in info["instances"]}
     bad = []
     for x in info["interference"]:
         na, nb = names[x["a"]], names[x["b"]]
+        if na.startswith("fx ") and nb.startswith("fx "):
+            continue          # screw in its own nut / washer / spacer stack
+        if any(a_ in na and b_ in nb or a_ in nb and b_ in na for a_, b_ in FX_PASS):
+            continue
         if any(e in na for e in EXPECTED) and any(e in nb for e in EXPECTED):
             continue
         # each Z belt's inner strand passes through its own arm's clamp
