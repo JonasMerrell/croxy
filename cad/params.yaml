@@ -58,7 +58,7 @@ z:
   belt_offset: -25      # belt loop beside the rail, in the column's own frame
   belt_x: 14            # belt centre plane, inward from the shear plate face
   idler_z: -85          # top idler, kept below the toolhead
-  motor_z: -368         # Z drive jackshaft axis, in the bay under the floor (bay ends at -400)
+  motor_z: -400         # Z drive jackshaft axis, in the cool bay under the floor insulation
   reduction: {small_t: 20, big_t: 60, centre: 52.45, loop: "188 mm GT2 6 mm"}   # 1:3 so the bed holds when the motors are off
   carriage_drop: 20     # Z carriage centre below the bed top
 
@@ -68,3 +68,30 @@ bed:
   heater_t: 2
   arm: 20               # square steel arms from each Z carriage to the bed
   arm_inset: 20         # arm reaches this far in under the bed edge
+
+enclosure:
+  hot_layer: 15         # hot-face layer (aerogel blanket or mineral wool board, rated >= 250 C) so the PIR stays below its limit
+  pir: 30               # polyisocyanurate board
+  skin: 2               # aluminium sheet, outside
+  bay_h: 60             # cool Z bay under the floor insulation (Z drives, heater fan motor)
+  base_t: 6             # aluminium base plate
+  feet_h: 15
+  support: 30           # G10 blocks under the floor plate corners (thermal break), on 3030 legs in the bay
+  lid_z: 210            # top bay lid (over the NEMA23s)
+  window: {w: 260, h: 230, cz: -176}   # door window, centred on the build centre in X
+  glass_t: 4
+
+shutter:                # cross shutter over the plate cutout. A strip moves in Y with the neck; 0.05 mm stainless
+  strip_t: 2            # spring-tape covers close the cutout front/back of the strip (rollers in pockets in the plate
+  roller_r: 4           # top, just outside the cutout) and left/right of the neck (rollers on the strip ends)
+  y_roller_r: 4.5
+
+heater:                 # PTC heater + blower on the chamber floor, left side; blower motor in the cool bay
+  x: [-150, -92]
+  y: [5, 135]
+  top: -200
+  power_w: 300
+
+back_module:
+  depth: 110
+  split_z: -170         # filter loop above, electronics below

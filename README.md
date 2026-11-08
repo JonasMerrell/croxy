@@ -5,7 +5,7 @@ everything that moves in XY mounted on top of one machined steel top plate, out 
 toolhead reaches down into the chamber through a cutout in the plate. It is designed in
 [rCAD](https://github.com/JonasMerrell/cad-rust-app).
 
-<img alt="CroXY gantry on the top plate" src="out/render-gantry.png" width="100%">
+<img alt="CroXY, closed" src="out/render-closed-iso_front_left.png" width="49%"> <img alt="CroXY with the enclosure hidden" src="out/render-iso_front_left.png" width="49%">
 
 ## Status
 
@@ -13,11 +13,13 @@ toolhead reaches down into the chamber through a cutout in the plate. It is desi
 |---|---|
 | Layout sketches (rev B) | approved, [docs/layout-sketches.html](docs/layout-sketches.html) |
 | Top plate, corner pulley blocks, motor towers, XY drive, gantry, toolhead yoke | modelled on top of the plate, clearance-checked over full travel |
-| Sliding shutter over the plate cutout | space reserved (15 mm), not modelled |
+| Shutter over the plate cutout | modelled: strip moving in Y plus stainless spring-tape covers |
 | Frame | 3030 posts, steel side and back shear plates, steel floor plate |
 | Z system and bed | modelled: 3 belted columns (NEMA17 below the floor), MIC6 bed on 3 arms, clearance-checked over full Z travel. 1:3 belt reduction at each motor |
-| Enclosure, insulation, door, back module (filter + electronics) | not started |
-| Toolhead | envelope stand-in only (Chube Conduction + Sherpa Heavy) |
+| Enclosure, insulation, door | modelled: hot-face layer + PIR + skin, double-glazed door, cool Z bay, G10 thermal breaks |
+| Chamber heater | modelled: PTC 300 W + blower on the chamber floor, blower motor in the Z bay |
+| Back module | modelled: filter loop (cooler, HEPA, carbon, blower) above, electronics below |
+| Toolhead | detailed stand-ins: Sherpa-style extruder, LDO motor, Chube Conduction, Beacon, ring duct |
 
 ## Build the model
 
@@ -53,6 +55,16 @@ All key sizes are in [`cad/params.yaml`](cad/params.yaml). Change a number and r
 - **1:3 reduction.** Each NEMA17 drives a 60T pulley on the jackshaft through a 20T and a 188 mm GT2 6 mm loop. The jackshaft runs in two 608s in the steel motor mount, and the motor holes are slotted to tension the loop.
 - **Bed.** MIC6 200 × 200 × 8 with a silicone heater, centred at (18, 25) under the nozzle, carried on three steel arms.
 - **Open item.** With about 2 kg moving, each motor sees roughly its own detent torque at power-off through the 1:3. If the bed still creeps, go 1:4 or add a brake.
+
+## How the enclosure works
+
+- **Walls.** Outside the frame: 15 mm hot-face layer (aerogel blanket or mineral wool board) so the 30 mm PIR board stays below its temperature limit, then a 2 mm aluminium skin. The front door has the same build-up and a double-glazed window.
+- **Floor.** The floor plate stands on four G10 blocks (thermal breaks) through the floor insulation, on 3030 legs in the cool Z bay. The Z drives hang from the floor plate on G10 hangers, so the steel floor doesn't heat the motors.
+- **Shutter.** A strip moves in Y with the toolhead neck. Thin stainless spring-tape covers close the rest of the cutout: front and back from rollers sunk into pockets in the plate top, left and right of the neck from rollers on the strip ends.
+- **Heater.** A 300 W PTC heater and blower wheel sit on the chamber floor to the left of the bed. The blower motor is below the floor in the cool bay.
+- **Gantry bay.** Ventilated with two 80 mm fans in the back wall. The part-cooling blower sits here and feeds the toolhead through the hollow neck.
+- **Back module.** The filter loop (air-to-air cooler, HEPA, carbon, blower) sits above the electronics bay (Kraken, 48 V and 24 V PSUs, host, fans). Each has its own rear cover.
+- **Outside size.** 474 W × 586 D × 668 H mm (plus the door handle).
 
 ## Decisions made so far
 
