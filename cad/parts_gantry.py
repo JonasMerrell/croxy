@@ -77,9 +77,13 @@ for k in range(4):
     a = 90 * k
     for p in S_PTS:
         holes.append(circ(rot_z(a, p), TAP["M5"]))                      # M5 tapped through, corner stack rods
-    holes.append(circ(rot_z(a, [-PC, -PC]), CLR["M8"]))                 # M8 into the post end
+    holes.append(circ(rot_z(a, [-PC, -PC]), CLR["M8"]))                 # M8 tie rod through the post
     for n in range(-4, 5):
         holes.append(circ(rot_z(a, [n * 25, -RO]), TAP["M3"]))           # MGN12 rail screws, M3 tapped
+ANG_PTS = []                                  # M5 tapped from below for the shear plate angles (outside the shear plates)
+for s_ in (-125, -40, 40, 125):
+    ANG_PTS += [[-PC, s_], [PC, s_], [s_, PC]]
+holes += [circ(p, TAP["M5"]) for p in ANG_PTS]
 cut_through(holes, T, "Cutout and holes")
 for sy in (-1, 1):   # pockets for the shutter's Y-cover spring rollers, just outside the cutout edges
     box(-(CUT - 2), CUT - 2, min(sy * (CUT + 1), sy * (CUT + 11)), max(sy * (CUT + 1), sy * (CUT + 11)), 2, T, "remove", "Roller pocket")
@@ -154,7 +158,6 @@ for p in ([-148, -116], [-138, -116]):
 J("corner", "ISO 4026", "M4", [I_FL[0], -112.5, BLK_TOP[1] + 4.5], "-y", L=10, label="tension set screw")
 for p in NEMA23_H:
     J("corner", "ISO 4762", "M5", [p[0], p[1], MOTOR_FACE + 6], "-z", L=12, label="NEMA23 motor screw")
-J("corner", "ISO 4762", "M8", [-PC, -PC, PT], "-z", L=25, label="post bolt")
 
 # ================================================================ 2. X-end tower (7075, milled from the top) + strand clamp
 inner = B - XY["pitch_r"]                     # inner strand centre

@@ -254,26 +254,6 @@ ARM_REACH = {k: round(SPF - v, 3) for k, v in {"Z1": abs(BX - hb) - BD["arm_inse
                                                "Z2": (BX + hb) - BD["arm_inset"],
                                                "Z3": (BY + hb) - BD["arm_inset"]}.items()}
 
-S_SIDE = studio("Side shear plate")
-res = box(-SPI, -SPF, -SPI, SPI, -CH, 0, "new", "Plate")
-side_body = new_body(res)
-name_part(side_body, "Side shear plate", "Steel", "#58626b", "metal")
-
-S_BACK = studio("Back shear plate")
-res = box(-SPF, SPF, SPF, SPI, -CH, 0, "new", "Plate")
-back_body = new_body(res)
-name_part(back_body, "Back shear plate", "Steel", "#58626b", "metal")
-
-S_FLOOR = studio("Floor plate")
-res = box(-W / 2, W / 2, -W / 2, W / 2, FLOOR[0], FLOOR[1], "new", "Plate")
-floor_body = new_body(res)
-slots = []
-for col in COLS:
-    a = col_world(col, [Z["belt_x"] - 10, Z["belt_offset"] - 15, 0]); b = col_world(col, [Z["belt_x"] + 10, Z["belt_offset"] + 15, 0])
-    slots.append({"type": "rect", "corner1": a[:2], "corner2": b[:2]})
-cut_through(slots, FLOOR[1], "Z belt slots")
-name_part(floor_body, "Floor plate", "Steel", "#58626b", "metal")
-
 zc_span = Z["idler_z"] - Z["motor_z"]
 S_ZBELT = studio("Z belt")
 def stadium_z(rad, h):
@@ -294,12 +274,6 @@ RD = Z["reduction"]
 R60, R20 = RD["big_t"] * 2 / (2 * math.pi), RD["small_t"] * 2 / (2 * math.pi)
 JY, MY = Z["belt_offset"], Z["belt_offset"] + RD["centre"]
 RX0 = -6 - 10 - 8                     # outboard face of the reduction pulleys (plate 6, bearing boss 10, pulley 8)
-S_ZMOUNT = studio("Z motor mount")
-res = box(-6, 0, JY - 21, MY + 21, mz - 21, FI[0], "new", "Plate")
-zmount_body = new_body(res)
-box(-16, -6, JY - 14, JY + 14, mz - 14, mz + 14, "add", "Bearing boss")   # two 608s for the jackshaft
-name_part(zmount_body, "Z motor mount (motor holes slotted for reduction belt tension)", "Steel", "#7a8691", "metal")
-
 S_P60 = studio("GT2 pulley 60T 6 mm")
 res = cyl(0, 0, R60 + 1.4, 0, 0.75, "new", "Flange"); cyl(0, 0, R60 - 0.4, 0.75, 7.25, "add"); cyl(0, 0, R60 + 1.4, 7.25, 8, "add")
 p60_body = new_body(res); name_part(p60_body, f"GT2 {RD['big_t']}T pulley, 6 mm belt, 8 mm bore", "Aluminium 6061", "#b8bec4", "satin")
@@ -323,28 +297,21 @@ rbelt_body = new_body(res); name_part(rbelt_body, f"GT2 6 mm closed loop {RD['lo
 S_MIC6 = studio("Bed")
 res = box(BX - hb, BX + hb, BY - hb, BY + hb, -BD["t"], 0, "new", "MIC6")
 bed_body = new_body(res)
-name_part(bed_body, "Bed, MIC6 200 x 200 x 8", "Aluminium 6061", "#b9c0c6", "metal")
+BED_SCR = [col_world(c_, [ARM_REACH[c_[0]], 0, 0]) for c_ in COLS]
+cut_through([circ(p, CLR["M4"]) for p in BED_SCR], 0, "Arm screw holes")
+pocket_z([circ(p, 9.0) for p in BED_SCR], 0, 2.6, "Countersinks")
+name_part(bed_body, "Bed, MIC6 200 x 200 x 8", "Aluminium 6061", "#b9c0c6", "metal", method="mill", notes="bought MIC6 cast plate cut to size; 3 countersunk M4 holes drilled on the mill (1 setup)")
 S_HEATER = studio("Bed heater")
 res = box(BX - hb + 5, BX + hb - 5, BY - hb + 5, BY + hb - 5, -BD["t"] - BD["heater_t"], -BD["t"], "new", "Heater")
 heater_body = new_body(res)
+cut_through([circ(p, 14.0) for p in BED_SCR], 0, "Arm screw clearances")
 name_part(heater_body, "Silicone bed heater", None, "#b5482b", "matte")
 
-# bed arms, one Part Studio each, in their column's frame with the bed top at z = 0
-arm_s = {}
 aw = BD["arm"]
 zd = Z["carriage_drop"]
 under = -BD["t"] - BD["heater_t"]
-for nm, _, _ in COLS:
-    st = studio(f"Bed arm {nm}")
-    L = ARM_REACH[nm]
-    res = box(13, 19, -13.5, 13.5, -zd - 22.7, -zd + 22.7, "new", "Carriage plate")
-    b = new_body(res)
-    box(19, L + aw / 2, -aw / 2, aw / 2, under - aw, under, "add", "Arm")
-    # belt clamp tab reaching the inner strand
-    yb = Z["belt_offset"] + XY["pitch_r"]
-    res2 = box(Z["belt_x"] - 8, 19, yb - 4.5, -13.5, -zd - 10, -zd + 10, "add", "Belt clamp")
-    name_part(b, f"Bed arm {nm}", "Steel", "#8a96a1", "metal")
-    arm_s[nm] = (st, b)
+rail_mid = (Z_TOP - zd + Z_BOT - zd) / 2
+exec(open(os.path.join(HERE, "parts_frame.py")).read())
 
 # ================================================================ Enclosure, shutter, heater, back module, toolhead detail
 def cyl_y(cx, cz, rad, y0, y1, op="new", name=None):
@@ -361,11 +328,11 @@ def rect_world(col, a, b):
 
 # holes through the floor insulation: G10 supports, Z hangers, Z belt slots, heater shaft
 SUP = EN["support"]
-SUP_C = W / 2 - SUP / 2 - 3
+SUP_C = PC                                # G10 blocks and bay legs under the posts (the tie rods run through)
 HSX, HSY = (HT["x"][0] + HT["x"][1]) / 2, (HT["y"][0] + HT["y"][1]) / 2
 floor_holes = [{"type": "rect", "corner1": [sx * SUP_C - SUP / 2, sy * SUP_C - SUP / 2],
                 "corner2": [sx * SUP_C + SUP / 2, sy * SUP_C + SUP / 2]} for sx in (-1, 1) for sy in (-1, 1)]
-floor_holes += [rect_world(col, [-6, JY - 21, 0], [0, MY + 21, 0]) for col in COLS]
+floor_holes += [circ(p, 11.0) for p in zso_w]
 floor_holes += slots
 floor_holes.append({"type": "circle", "center": [HSX, HSY], "radius": 6})
 
@@ -406,20 +373,23 @@ name_part(skin_body, "Outer skin (aluminium sheet, powder coated)", "Aluminium 6
 S_BASE = studio("Base plate")
 res = box(-OW, OW, -OW, OW, BASE[0], BASE[1], "new", "Base")
 base_body = new_body(res)
-for sx in (-1, 1):
-    for sy in (-1, 1):
-        cyl(sx * (OW - 30), sy * (OW - 30), 15, BASE[0] - EN["feet_h"], BASE[0], "add", "Foot")
-name_part(base_body, "Base plate with feet", "Aluminium 6061", "#3a434c", "satin")
+FEET = [[sx * (OW - 30), sy * (OW - 30)] for sx in (-1, 1) for sy in (-1, 1)]
+cut_through([circ([sx * PC, sy * PC], CLR["M8"]) for sx in (-1, 1) for sy in (-1, 1)] + [circ(p, CLR["M6"]) for p in FEET], BASE[1], "Holes")
+name_part(base_body, "Base plate", "Aluminium 6061", "#3a434c", "satin", method="SCS",
+          notes="6 mm 6061, SCS laser cut with holes")
+S_FOOT = studio("Rubber foot")
+res = cyl(0, 0, 15, 0, EN["feet_h"], "new", "Foot")
+foot_body = new_body(res)
+name_part(foot_body, "Rubber foot 30 x 15, M6 insert", None, "#1d1d1d", "satin", method="buy")
+for p in FEET:
+    J("feet", "ISO 4762", "M6", [p[0], p[1], BASE[1]], "-z", L=16, label="foot screw")
 
 S_SUP = studio("Floor support block")
 res = box(-SUP / 2, SUP / 2, -SUP / 2, SUP / 2, FI[0], FLOOR[0], "new", "Block")
 sup_body = new_body(res)
-name_part(sup_body, "Floor support block (G10, thermal break)", None, "#c9c27a", "satin")
-
-S_ZHANG = studio("Z mount hanger")
-res = box(-6, 0, JY - 21, MY + 21, FI[0], FLOOR[0], "new", "Hanger")
-zhang_body = new_body(res)
-name_part(zhang_body, "Z mount hanger (G10, thermal break)", None, "#c9c27a", "satin")
+cut_through([circ([0, 0], CLR["M8"])], FLOOR[0], "Tie rod bore")
+name_part(sup_body, "Floor support block (G10, thermal break)", None, "#c9c27a", "satin", method="buy + mill",
+          notes="G10/FR4 30 mm square bar, cut to 50 mm, faced and drilled Ø9 on the mill (2 setups)")
 
 # ---- door: built flat (local x across, local y = world z, local z = thickness outwards)
 DW = OW - SK
@@ -516,7 +486,6 @@ for x0_, x1_, y0_, y1_, nm_, col_ in ((-175, -65, BY0 + 6, BY1 - 6, "Air-to-air 
                                       (80, 180, BY0 + 8, BY0 + 42, "Filter loop blower (radial 97 mm)", "#2b2b2b")):
     res = box(x0_, x1_, y0_, y1_, FZ[0], FZ[1], "new", nm_)
     b_ = new_body(res); name_part(b_, nm_, None, col_, "satin"); fparts.append((b_, nm_))
-DUCT_Z = -45
 S_DUCT = studio("Filter ducts")
 res = cyl_y(-120, DUCT_Z, 20, SPF, BY0 + 6, "new", "Outlet")
 duct_out = new_body(res)
@@ -625,7 +594,8 @@ for k in range(4):
     place(*buy["coupling"], [d[0], d[1], MOTOR_PLATE[0] - 25], name=f"Coupling {corner}")
     place_std("NEMA", "NEMA 23", [d[0], d[1], MOTOR_FACE], RX180, length=XY["motor_len"], name=f"NEMA23 {corner}")
     pc = rot_z(a, [-PC, -PC])
-    place_std("Extrusion", "3030", [pc[0], pc[1], -F["chamber_h"]], length=F["chamber_h"], name=f"Post {corner}")
+    place(S_POST, post_body, [pc[0], pc[1], -CH], name=f"Post {corner}")
+    jplace("post", R, tag=corner)
 
 # perimeter rails on the plate: X rails along X at y = +-RO, Y rails along Y at x = +-RO
 for k, (pos, R) in enumerate([([0, -RO, PT], I3), ([0, RO, PT], I3), ([-RO, 0, PT], Rz(90)), ([RO, 0, PT], Rz(90))]):
@@ -639,10 +609,14 @@ for nm, pos, R in [("X belt front", [0, -B, BZ - BW / 2], I3), ("X belt back", [
 
 
 # frame shell
-place(S_SIDE, side_body, [0, 0, 0], I3, name="Shear plate left")
-place(S_SIDE, side_body, [0, 0, 0], Rz(180), name="Shear plate right")
+place(S_SIDEL, sidel_body, [0, 0, 0], I3, name="Shear plate left")
+place(S_SIDER, sider_body, [0, 0, 0], I3, name="Shear plate right")
 place(S_BACK, back_body, [0, 0, 0], I3, name="Shear plate back")
 place(S_FLOOR, floor_body, [0, 0, 0], I3, name="Floor plate")
+for nm_, key, R_, pos_ in ANGLES:
+    place(S_ANGLE, angle_body, pos_, R_, name=f"Shear angle {nm_}")
+    jplace(key, R_, pos_, tag=nm_)
+jplace("shear")
 
 # Z columns: rail, top idler, belt, drive pulley, NEMA17 and its mount
 def place_col(col, studio_body, p, Rl, name, std=None, **kw):
@@ -660,10 +634,14 @@ for col in COLS:
     place_col(col, buy["idler"], [Z["belt_x"] - 8, Z["belt_offset"], Z["idler_z"]], RY90, f"{nm} Z idler")
     place_col(col, buy["pulley"], [Z["belt_x"] - 8, Z["belt_offset"], Z["motor_z"]], RY90, f"{nm} Z drive pulley")
     place_col(col, (S_ZBELT, zbelt_body), [Z["belt_x"] - BW / 2, Z["belt_offset"], (Z["idler_z"] + Z["motor_z"]) / 2], RAILV, f"{nm} Z belt")
-    place_col(col, (S_ZMOUNT, zmount_body), [0, 0, 0], I3, f"{nm} Z motor mount")
-    # 1:3 reduction: jackshaft in two 608s, 60T outboard, NEMA17 inboard of the mount driving a 20T
+    jplace("rail12", mm(col[2], RAILV), col_world(col, [0, 0, rail_mid]), tag=f"{nm} rail")
+    place_col(col, (S_ZMOUNT, zmount_body), [0, 0, 0], I3, f"{nm} Z drive bracket")
+    place_col(col, (S_ZBI, zbi_body), [0, JY, mz], R_ZBI, f"{nm} Z bearing block in")
+    place_col(col, (S_ZBO, zbo_body), [-ZB_T, JY, mz], R_ZBO, f"{nm} Z bearing block out")
+    jplace("zcol", col[2], col_world(col, [0, 0, 0]), tag=nm)
+    # 1:3 reduction: jackshaft in two 608s, 60T outboard, NEMA17 inboard of the bracket driving a 20T
     place_col(col, None, [RX0 - 2, JY, mz], RY90, f"{nm} Z jackshaft", std=("Shaft", "Ø8"), length=round(Z["belt_x"] + 10 - (RX0 - 2), 1))
-    for xb in (-16, -9):
+    for xb in (-12, 0):
         place_col(col, None, [xb, JY, mz], RY90, f"{nm} Z 608 {xb}", std=("Bearing", "608"))
     place_col(col, (S_P60, p60_body), [RX0, JY, mz], RY90, f"{nm} Z reduction 60T")
     place_col(col, (S_P20, p20_body), [RX0, MY, mz], RY90, f"{nm} Z reduction 20T")
@@ -687,13 +665,14 @@ penc(S_HW, hinge_hi, [0, 0, 0], name="Door hinge upper")
 penc(S_HW, handle_body, [0, 0, 0], name="Door handle")
 penc(S_BCOV, bcov_up, [0, 0, 0], name="Filter bay cover")
 penc(S_BCOV, bcov_lo, [0, 0, 0], name="Electronics bay cover")
-place(S_BASE, base_body, [0, 0, 0], name="Base plate")
+penc(S_BASE, base_body, [0, 0, 0], name="Base plate")
 for sx in (-1, 1):
     for sy in (-1, 1):
         place(S_SUP, sup_body, [sx * SUP_C, sy * SUP_C, 0], name="Floor support G10")
         place_std("Extrusion", "3030", [sx * SUP_C, sy * SUP_C, BAY[0]], length=EN["bay_h"], name="Bay leg 3030")
-for col in COLS:
-    place_col(col, (S_ZHANG, zhang_body), [0, 0, 0], I3, f"{col[0]} Z mount hanger")
+for p in FEET:
+    penc(S_FOOT, foot_body, [p[0], p[1], BASE[0] - EN["feet_h"]], name="Rubber foot")
+ENC += [i for i, _ in jplace("feet")]
 for (yy, nm_) in ((YROLL_Y, "back"), (-YROLL_Y, "front")):
     place(S_YROLL, yroll_body, [0, yy, 0], name=f"Shutter Y roller {nm_}")
 place(S_HEAT, cheat_body, [0, 0, 0], name="Chamber heater")
@@ -759,12 +738,21 @@ BEDP = [("bed", (S_MIC6, bed_body), lambda zt: [0, 0, zt], I3, "Bed"),
 for col in COLS:
     nm, o, Rc = col
     BEDP.append((f"arm_{nm}", arm_s[nm], lambda zt, c=col: col_world(c, [0, 0, zt]), Rc, f"Bed arm {nm}"))
+    BEDP.append((f"zcl_{nm}", (S_ZCL, zcl_body), lambda zt, c=col: col_world(c, [0, 0, zt]), Rc, f"{nm} Z belt clamp plate"))
     BEDP.append((f"zcar_{nm}", buy["mgn12h"], lambda zt, c=col: col_world(c, [0, 0, zt - zd]), mm(col[2], RAILV), f"{nm} MGN12H"))
 ZT0 = (Z_TOP + Z_BOT) / 2
 moving_bed = {k: place(st, bd, f(ZT0), R, name=nm) for k, (st, bd), f, R, nm in BEDP}
+moving_bed_fx = []
+for col in COLS:
+    fz = lambda zt, c=col: col_world(c, [0, 0, zt])
+    for key in ("arm", f"bed_{col[0]}"):
+        for i, off in jplace(key, col[2], fz(ZT0), tag=col[0]):
+            moving_bed_fx.append((i, off, fz))
 def pose_bed(zt):
     for k, _, f, _, _ in BEDP:
         r("assembly_move", assembly=A, instance=moving_bed[k], position=[round(v, 4) for v in f(zt)])
+    for i, off, f in moving_bed_fx:
+        r("assembly_move", assembly=A, instance=i, position=[round(a + b, 4) for a, b in zip(f(zt), off)])
 
 
 def pose(tx, ty):
@@ -774,14 +762,14 @@ def pose(tx, ty):
         r("assembly_move", assembly=A, instance=i, position=[round(a + b, 4) for a, b in zip(f(tx, ty), off)])
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
-EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z motor mount", "Z jackshaft", "Z 608", "Z reduction")
-PASS = [("Filter duct", "Shear plate back"), ("Filter duct", "insulation"), ("Filter duct", "Outer skin"),
+EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z jackshaft", "Z 608", "Z reduction")
+PASS = [("Filter duct", "insulation"), ("Filter duct", "Outer skin"),
         ("Filter duct", "Back module housing"), ("Heater shaft", "Floor plate"), ("Heater shaft", "Chamber heater"),
         ("Heater shaft", "Heater fan motor")]
 # fasteners that thread into a stand-in without modelled holes, or into a tapped hole modelled at nominal size
 FX_PASS = [("post bolt", "Post"), ("NEMA23 motor screw", "NEMA23"), ("NEMA17 screw", "NEMA17"),
            ("extruder screw", "Extruder"), ("duct screw", "Part-cooling duct"), ("Beacon bracket screw", "Beacon"),
-           ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate")]
+           ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate"), ("M8 tie rod", "Bay leg")]
 def unexpected(info):
     names = {i["id"]: i["name"] for i in info["instances"]}
     bad = []
@@ -792,9 +780,6 @@ def unexpected(info):
         if any(a_ in na and b_ in nb or a_ in nb and b_ in na for a_, b_ in FX_PASS):
             continue
         if any(e in na for e in EXPECTED) and any(e in nb for e in EXPECTED):
-            continue
-        # each Z belt's inner strand passes through its own arm's clamp
-        if {na, nb} in ({f"{c} Z belt", f"Bed arm {c}"} for c in ("Z1", "Z2", "Z3")):
             continue
         # pass-throughs that are not cut in the stand-ins
         if any(a_ in na and b_ in nb or a_ in nb and b_ in na for a_, b_ in PASS):
@@ -842,6 +827,13 @@ r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height
 # one Z drive (Z1) close up: 1:3 reduction under the floor
 r("render_assembly", assembly=A, view="iso_front_left_below", width=1400, height=1050,
   fit_box=[[-SPF - 30, Z["z12_y"] - 40, mz - 30], [-SPF + 45, Z["z12_y"] + MY + 25, FLOOR[1]]], path="render-zdrive.png")
+# one bed arm (Z2, seen through the open front) and its carriage, clamp and screws
+c1 = col_world(COLS[1], [0, 0, ZT0])
+r("render_assembly", assembly=A, view="iso_front_left", width=1400, height=1050,
+  fit_box=[[c1[0] - 110, c1[1] - 25, c1[2] - 75], [c1[0] + 10, c1[1] + 45, c1[2] + 10]], path="render-bedarm.png")
+# one corner (FL) of the gantry
+r("render_assembly", assembly=A, view="iso_front_left", width=1400, height=1050,
+  fit_box=[[-W / 2, -W / 2, 0], [-95, -95, MOTOR_FACE + 80]], path="render-corner.png")
 for i in ENC:
     r("assembly_move", assembly=A, instance=i, hidden=False)
 r("export", format="step", assembly=A, path="CroXY.step")
