@@ -12,15 +12,15 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Bed arm Z2 | 1 | Aluminium 7075 | 61 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed arm Z3 | 1 | Aluminium 7075 | 55 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed, MIC6 200 x 200 x 8 | 1 | Aluminium 6061 | 862 g | bought MIC6 cast plate cut to size; 3 countersunk M4 holes drilled on the mill (1 setup) |
-| Belt clamp plate | 8 | Aluminium 7075 | 3 g | 9.7 x 27 x 5 7075 bar, 2 drilled and countersunk holes from the outer face (1 setup). 8 per printer |
+| Belt clamp plate | 8 | Aluminium 7075 | 7 g | 21.7 x 27 x 5 7075 bar, 4 drilled and countersunk holes from the outer face (1 setup). 8 per printer |
 | Corner block plate, lower | 4 | Steel | 63 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the top face (1 setup) |
 | Corner block plate, upper | 4 | Steel | 0 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the bottom face, M4 tapped tab holes on the tongue (flip once) |
 | Tension slider | 4 | Steel | 7 g | 14 x 12 x 8 steel block, Ø9 drilled from the top (1 setup) |
 | Tension tab | 4 | Steel | 5 g | 20 x 6 x 10 steel bar. 2 drilled holes from the top, 2 M5 tapped holes from the side (2 setups) |
 | Toolhead neck | 1 | Aluminium 7075 | 79 g | 7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups) |
 | Toolhead plate | 1 | Aluminium 7075 | 81 g | 6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups) |
-| X-end block | 2 | Aluminium 7075 | 128 g | One part from 7075 bar 45.4 x 40.1 x 85. Setup 1, bottom face down: profile, step down to the base, strand channels and post noses (Ø5 end mill, 14.5 deep), carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 6 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 4 clamp plate taps M4 (3 setups) |
-| Y-end block | 2 | Aluminium 7075 | 72 g | One part from 7075 bar 40.1 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, strand channels and post noses (Ø5 end mill, 14.5 deep), carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 6 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 4 clamp plate taps M4 (3 setups) |
+| X-end block | 2 | Aluminium 7075 | 99 g | One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
+| Y-end block | 2 | Aluminium 7075 | 44 g | One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
 | Yoke U | 1 | Aluminium 7075 | 85 g | 7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups) |
 | Yoke top plate | 1 | Aluminium 7075 | 30 g | 6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups) |
 | Z bearing block, inboard | 3 | Steel | 34 g | 10 mm steel plate: contour, Ø22 x 7 seat and holes from one side, M4 tapped (1 setup) |
@@ -151,7 +151,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 |---|---:|---|
 | Bearing 608 | 14 | - |
 | ISO 10642 M3x10 | 8 | extruder screw x4, Beacon bracket screw x2, duct screw x2 |
-| ISO 10642 M4x12 | 16 | belt clamp screw x16 |
+| ISO 10642 M4x12 | 32 | belt clamp screw x32 |
 | ISO 10642 M4x20 | 3 | bed screw x3 |
 | ISO 4026 M5x10 | 8 | tension jack screw x8 |
 | ISO 4032 M3 | 26 | nut x26 |
@@ -187,7 +187,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Shaft Ø8x74 | 4 | - |
 | Shaft Ø8x88 | 1 | - |
 
-589 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
+605 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
 M5 / M8 threaded rod. Tapped holes are modelled at the nominal diameter.
 
 ## Other bought parts and stand-ins
