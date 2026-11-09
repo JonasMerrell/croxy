@@ -18,7 +18,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Tension slider | 4 | Steel | 7 g | 14 x 12 x 8 steel block, Ø9 drilled from the top (1 setup) |
 | Tension tab | 4 | Steel | 5 g | 20 x 6 x 10 steel bar. 2 drilled holes from the top, 2 M5 tapped holes from the side (2 setups) |
 | Toolhead neck | 1 | Aluminium 7075 | 79 g | 7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups) |
-| Toolhead plate | 1 | Aluminium 7075 | 81 g | 6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups) |
+| Toolhead plate | 1 | Aluminium 7075 | 104 g | 7075 block 82 x 61 x 57, machined in its own (diagonal) frame. From the bottom: motor flange and cheeks, cbores; from the top: contour, air outlet, filament hole, holes and countersinks; from the flange face: motor pilot and M3 holes (3 setups) |
 | X-end block | 2 | Aluminium 7075 | 99 g | One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
 | Y-end block | 2 | Aluminium 7075 | 44 g | One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
 | Yoke U | 1 | Aluminium 7075 | 85 g | 7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups) |
@@ -63,13 +63,13 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 
 | Part | Qty | Material | Mass each | How |
 |---|---:|---|---:|---|
-| Beacon bracket | 1 | PPS-CF | 8 g | PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts |
+| Beacon bracket | 1 | PPS-CF | 5 g | PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts |
 | Cradle for Activated carbon filter | 1 | PET-CF | 58 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for Air-to-air cooler | 1 | PET-CF | 80 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for Filter loop blower | 1 | PET-CF | 34 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for HEPA H13 filter | 1 | PET-CF | 34 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Neck air adapter | 1 | PPS-CF | 4 g | PPS-CF, printed standing on the mounting face; internal channel teardrop-shaped, no supports |
-| Part-cooling duct (fed through the hollow neck) | 1 | PPS-CF | 50 g | PPS-CF, printed mount face down; channel roofs are <= 11 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts |
+| Part-cooling duct (fed through the hollow neck) | 1 | PPS-CF | 13 g | PPS-CF, printed plenum face down; channel roofs are <= 13 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts |
 | Shutter strip with X-cover spring reels (moves in Y) | 1 | PPS-CF | 9 g | PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it |
 
 ## Bought, then cut / drilled / faced
@@ -107,8 +107,10 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Door hinge, lift-off, stainless | 1 | Stainless steel | 79 g |  |
 | Electronics fan 80 mm, exhaust | 1 | - |  |  |
 | Electronics fan 80 mm, intake | 1 | - |  |  |
-| Extruder (Sherpa Heavy style) | 1 | - |  |  |
-| Extruder motor (LDO high-temp) | 1 | - |  |  |
+| Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft) | 1 | - |  |  |
+| Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox) | 1 | Steel | 4 g |  |
+| Extruder motor (LDO high-temp, 36 mm) | 1 | - |  |  |
+| Extruder shaft coupling (5-5 beam coupling D14) | 1 | Aluminium 6061 | 7 g |  |
 | Filter duct, chamber outlet (stainless tube 40 x 1.5) | 1 | Stainless steel | 136 g | bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone |
 | Filter duct, chamber return (stainless tube 40 x 1.5) | 1 | Stainless steel | 139 g | bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone |
 | Filter loop blower (radial 97 mm) | 1 | - |  |  |
@@ -150,7 +152,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Part | Qty | Used for |
 |---|---:|---|
 | Bearing 608 | 14 | - |
-| ISO 10642 M3x10 | 8 | extruder screw x4, Beacon bracket screw x2, duct screw x2 |
+| ISO 10642 M3x10 | 9 | extruder screw x4, duct screw x3, Beacon bracket screw x2 |
 | ISO 10642 M4x12 | 32 | belt clamp screw x32 |
 | ISO 10642 M4x20 | 3 | bed screw x3 |
 | ISO 4026 M5x10 | 8 | tension jack screw x8 |
@@ -163,7 +165,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | ISO 4762 M3x14 | 2 | adapter screw x2 |
 | ISO 4762 M3x16 | 2 | Beacon screw x2 |
 | ISO 4762 M3x6 | 4 | X carriage screw x4 |
-| ISO 4762 M3x8 | 133 | MGN12 rail screw x63, MGN9 rail screw x26, carriage screw x16, NEMA17 screw x12, Z carriage screw x12, neck screw x4 |
+| ISO 4762 M3x8 | 137 | MGN12 rail screw x63, MGN9 rail screw x26, carriage screw x16, NEMA17 screw x12, Z carriage screw x12, neck screw x4, extruder motor screw x4 |
 | ISO 4762 M4x10 | 8 | cradle screw x8 |
 | ISO 4762 M4x12 | 36 | fan screw x16, beam screw x8, heater screw x4, heater motor screw x4, blower screw x4 |
 | ISO 4762 M4x16 | 8 | tab screw x8 |
@@ -187,7 +189,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Shaft Ø8x74 | 4 | - |
 | Shaft Ø8x88 | 1 | - |
 
-605 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
+610 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
 M5 / M8 threaded rod. Tapped holes are modelled at the nominal diameter.
 
 ## Other bought parts and stand-ins
