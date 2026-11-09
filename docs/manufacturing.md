@@ -18,9 +18,9 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Toolhead neck | 1 | Aluminium 7075 | 79 g | 7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups) |
 | Toolhead plate | 1 | Aluminium 7075 | 81 g | 6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups) |
 | X-end strand clamp | 2 | Aluminium 7075 | 17 g | 7075, profile milled from the side, GT2 tooth grooves on the belt face with a 1 mm end mill (2 setups) |
-| X-end tower | 2 | Aluminium 7075 | 87 g | 7075 block 45.4 x 27 x 65. From the top: contour, step to the base, cbores; then M4 tapped from the top and the side (3 setups) |
-| Y-end strand clamp | 2 | Aluminium 7075 | 17 g | 7075, U profile milled from the side, GT2 tooth grooves on the belt face (2 setups) |
-| Y-end tower | 2 | Aluminium 7075 | 45 g | 7075 block. From the top: contour, base step, beam seat slot, cbores; M4 tapped from the top and the side (3 setups) |
+| X-end tower | 2 | Aluminium 7075 | 97 g | 7075 block 45.4 x 27 x 65. From the top: contour, step to the base, cbores; then M4 tapped from the top and the side (3 setups) |
+| Y-end strand clamp | 2 | Aluminium 7075 | 18 g | 7075, U profile milled from the side, GT2 tooth grooves on the belt face (2 setups) |
+| Y-end tower | 2 | Aluminium 7075 | 47 g | 7075 block. From the top: contour, base step, beam seat slot, cbores; M4 tapped from the top and the side (3 setups) |
 | Yoke U | 1 | Aluminium 7075 | 85 g | 7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups) |
 | Yoke top plate | 1 | Aluminium 7075 | 30 g | 6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups) |
 | Z bearing block, inboard | 3 | Steel | 34 g | 10 mm steel plate: contour, Ø22 x 7 seat and holes from one side, M4 tapped (1 setup) |
@@ -35,7 +35,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Back cover, filter bay (vented) | 1 | Aluminium 6061 | 884 g | 2 mm 5052, SCS cut with vent slots |
 | Back shear plate | 1 | Steel | 4500 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes |
 | Base plate | 1 | Aluminium 6061 | 4663 g | 6 mm 6061, SCS laser cut with holes; hand-tap the M4 skin holes |
-| Beam backer (U channel) | 2 | Steel | 467 g | 3 mm mild steel or 4130, SCS laser cut with holes and bent to a 25 x 25 U. Mill the rail face flat (1 setup, long vise or fixture) |
+| Beam backer (U channel) | 2 | Steel | 465 g | 3 mm mild steel or 4130, SCS laser cut with holes and bent to a 25 x 25 U. Mill the rail face flat (1 setup, long vise or fixture) |
 | Door inner sheet (hot face) | 1 | Stainless steel | 1089 g | 1 mm 304 stainless, SCS laser cut and bent, riveted to the pan walls |
 | Door outer pan | 1 | Aluminium 6061 | 1069 g | 2 mm 5052, SCS laser cut and bent into a tray (4 bends, corner reliefs), window cut out |
 | Electronics backplate | 1 | Aluminium 6061 | 633 g | 2 mm 5052, SCS cut with all holes and bent |
@@ -166,6 +166,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | ISO 4762 M4x10 | 8 | cradle screw x8 |
 | ISO 4762 M4x12 | 44 | fan screw x16, beam screw x8, clamp screw x8, heater screw x4, heater motor screw x4, blower screw x4 |
 | ISO 4762 M4x20 | 12 | bearing block screw x12 |
+| ISO 4762 M4x8 | 8 | beam cross screw x8 |
 | ISO 4762 M5x12 | 30 | NEMA23 motor screw x16, angle screw x12, handle screw x2 |
 | ISO 4762 M5x16 | 24 | shear plate screw x24 |
 | ISO 4762 M5x60 | 9 | bracket screw x9 |
@@ -183,7 +184,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Shaft Ø8x74 | 4 | - |
 | Shaft Ø8x88 | 1 | - |
 
-569 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
+577 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
 M5 / M8 threaded rod. Tapped holes are modelled at the nominal diameter.
 
 ## Other bought parts and stand-ins

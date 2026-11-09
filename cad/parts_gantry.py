@@ -163,10 +163,17 @@ for p in NEMA23_H:
 inner = B - XY["pitch_r"]                     # inner strand centre
 SF0, SF1 = inner - XY["belt_t"] / 2, inner + XY["belt_t"] / 2     # strand faces
 UP0, UP1 = SF1, B + 3.5                        # upright between the strands
+UPM = (UP0 + UP1) / 2                          # beam cross screws: through the flanges into the tower cheeks
+CHK_Z = 14.0                                   # cross screw height above the beam bottom
 S_XEND = studio("X-end tower")
 res = box(-22.7, 22.7, RO - 13.5, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
 xend_body = new_body(res)
 box(-22.7, 22.7, UP0, UP1, CARR_FACE + BASE_T, XB_BOT, "add", "Upright")
+for sx in (-1, 1):
+    x0_, x1_ = sorted((sx * (BWD / 2), sx * 22.7))
+    box(x0_, x1_, UP0, UP1, XB_BOT, XB_BOT + 20, "add", "Cheek")
+holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], BWD / 2, 8, +1, "Cheek tap")
+holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, 8, -1, "Cheek tap")
 CAR12 = [[sx * 10, sy * 10] for sx in (-1, 1) for sy in (-1, 1)]
 xc_h = [[c[0], RO + c[1]] for c in CAR12]
 pocket_z([circ(p, CB["M3"][0]) for p in xc_h], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
@@ -193,9 +200,11 @@ for sx in (-1, 1):
 S_YEND = studio("Y-end tower")
 res = box(RO - 13.5, RO + 13.5, -22.7, 22.7, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
 yend_body = new_body(res)
-EAR_Z = 64
+EAR_Z = YB_BOT + 21
 box(UP0, UP1, -22.7, 22.7, CARR_FACE + BASE_T, EAR_Z, "add", "Upright")
-box(UP0, UP1, -13.5, 13.5, YB_BOT, EAR_Z, "remove", "Beam seat")
+box(UP0, UP1, -BWD / 2, BWD / 2, YB_BOT, EAR_Z, "remove", "Beam seat")
+holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], BWD / 2, 8, +1, "Cheek tap")
+holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, 8, -1, "Cheek tap")
 yc_h = [[RO + c[0], c[1]] for c in CAR12]
 pocket_z([circ(p, CB["M3"][0]) for p in yc_h], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
 cut_through([circ(p, CLR["M3"]) for p in yc_h], CARR_FACE + BASE_T, "Carriage screws")
@@ -228,8 +237,12 @@ beam_body = new_body(res)
 RAIL9_X = [x * 20 for x in range(-6, 7)]
 cut_through([circ([x, 0], CLR["M3"]) for x in RAIL9_X] + [circ([sx * (B - 1.5), sy * 6], CLR["M4"]) for sx in (-1, 1) for sy in (-1, 1)],
             BT, "Rail and tower holes")
+holes_y([circ([sx * UPM, CHK_Z], CLR["M4"]) for sx in (-1, 1)], -BWD / 2, BWD, +1, "Flange cross holes")
 name_part(beam_body, "Beam backer (U channel)", "Steel", "#6d7a86", "metal", method="SCS + mill",
           notes="3 mm mild steel or 4130, SCS laser cut with holes and bent to a 25 x 25 U. Mill the rail face flat (1 setup, long vise or fixture)")
+for sx in (-1, 1):
+    for sy in (-1, 1):
+        J("beam", "ISO 4762", "M4", [sx * UPM, sy * (BWD / 2 - BT), CHK_Z], "+y" if sy > 0 else "-y", L=8, label="beam cross screw")
 for x in RAIL9_X:
     J("beam", "ISO 4762", "M3", [x, 0, -3.0], "+z", L=8, label="MGN9 rail screw")
     J("beam", "ISO 4032", "M3", [x, 0, BT], "+z", label="nut")

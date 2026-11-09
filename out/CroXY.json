@@ -5650,6 +5650,516 @@
      },
      {
       "id": 7,
+      "name": "Plane z=90",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "90",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 8,
+      "name": "Cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 7
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -22.7,
+          "y": 137.32999999999998
+         },
+         {
+          "id": 2,
+          "x": -12.5,
+          "y": 137.32999999999998
+         },
+         {
+          "id": 3,
+          "x": -12.5,
+          "y": 146.5
+         },
+         {
+          "id": 4,
+          "x": -22.7,
+          "y": 146.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         90.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 9,
+      "name": "Cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 8,
+         "point": [
+          -15.9,
+          140.38666666666666
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 10,
+      "name": "Plane z=90",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "90",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 11,
+      "name": "Cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 10
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 12.5,
+          "y": 137.32999999999998
+         },
+         {
+          "id": 2,
+          "x": 22.7,
+          "y": 137.32999999999998
+         },
+         {
+          "id": 3,
+          "x": 22.7,
+          "y": 146.5
+         },
+         {
+          "id": 4,
+          "x": 12.5,
+          "y": 146.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         90.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 12,
+      "name": "Cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 11,
+         "point": [
+          19.3,
+          140.38666666666666
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "20",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 13,
+      "name": "Plane x=12.5",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Right"
+       },
+       "offset": "12.5",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 14,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 13
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 141.915,
+          "y": 104.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         12.5,
+         0.0,
+         0.0
+        ],
+        "x": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 15,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 14,
+         "point": [
+          142.14278548117105,
+          103.78864596039314
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "8",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 16,
+      "name": "Plane x=-20.5",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Right"
+       },
+       "offset": "-20.5",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 17,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 16
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 141.915,
+          "y": 104.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         -20.5,
+         0.0,
+         0.0
+        ],
+        "x": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 18,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 17,
+         "point": [
+          142.14278548117105,
+          103.78864596039314
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "8",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 19,
       "name": "Plane z=27.7",
       "suppressed": false,
       "hidden": false,
@@ -5667,7 +6177,7 @@
       }
      },
      {
-      "id": 8,
+      "id": 20,
       "name": "Cbores",
       "suppressed": false,
       "hidden": false,
@@ -5675,7 +6185,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 7
+        "feature": 19
        },
        "sketch": {
         "points": [
@@ -5759,7 +6269,7 @@
       }
      },
      {
-      "id": 9,
+      "id": 21,
       "name": "Cbores",
       "suppressed": false,
       "hidden": false,
@@ -5768,7 +6278,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
           -10.0,
           133.0
@@ -5776,7 +6286,7 @@
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
           -10.0,
           153.0
@@ -5784,7 +6294,7 @@
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
           10.0,
           133.0
@@ -5792,7 +6302,7 @@
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
           10.0,
           153.0
@@ -5810,7 +6320,7 @@
       }
      },
      {
-      "id": 10,
+      "id": 22,
       "name": "Plane z=31",
       "suppressed": false,
       "hidden": false,
@@ -5828,7 +6338,7 @@
       }
      },
      {
-      "id": 11,
+      "id": 23,
       "name": "Carriage screws",
       "suppressed": false,
       "hidden": false,
@@ -5836,7 +6346,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 10
+        "feature": 22
        },
        "sketch": {
         "points": [
@@ -5920,7 +6430,7 @@
       }
      },
      {
-      "id": 12,
+      "id": 24,
       "name": "Carriage screws",
       "suppressed": false,
       "hidden": false,
@@ -5929,7 +6439,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
           -10.0,
           132.6123771708976
@@ -5937,7 +6447,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
           -10.0,
           152.6123771708976
@@ -5945,7 +6455,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
           10.0,
           132.6123771708976
@@ -5953,7 +6463,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
           10.0,
           152.6123771708976
@@ -5971,7 +6481,7 @@
       }
      },
      {
-      "id": 13,
+      "id": 25,
       "name": "Plane z=80",
       "suppressed": false,
       "hidden": false,
@@ -5989,7 +6499,7 @@
       }
      },
      {
-      "id": 14,
+      "id": 26,
       "name": "Beam screws M4",
       "suppressed": false,
       "hidden": false,
@@ -5997,7 +6507,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 13
+        "feature": 25
        },
        "sketch": {
         "points": [
@@ -6057,7 +6567,7 @@
       }
      },
      {
-      "id": 15,
+      "id": 27,
       "name": "Beam screws M4",
       "suppressed": false,
       "hidden": false,
@@ -6066,7 +6576,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 26,
          "point": [
           -5.772214518828935,
           141.28864596039315
@@ -6074,7 +6584,7 @@
         },
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 26,
          "point": [
           6.227785481171065,
           141.28864596039315
@@ -6092,7 +6602,7 @@
       }
      },
      {
-      "id": 16,
+      "id": 28,
       "name": "Plane y=145.33",
       "suppressed": false,
       "hidden": false,
@@ -6110,7 +6620,7 @@
       }
      },
      {
-      "id": 17,
+      "id": 29,
       "name": "Clamp screws M4",
       "suppressed": false,
       "hidden": false,
@@ -6118,7 +6628,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 16
+        "feature": 28
        },
        "sketch": {
         "points": [
@@ -6178,7 +6688,7 @@
       }
      },
      {
-      "id": 18,
+      "id": 30,
       "name": "Clamp screws M4",
       "suppressed": false,
       "hidden": false,
@@ -6187,7 +6697,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 17,
+         "sketch": 29,
          "point": [
           -9.772214518828934,
           53.78864596039316
@@ -6195,7 +6705,7 @@
         },
         {
          "kind": "region",
-         "sketch": 17,
+         "sketch": 29,
          "point": [
           10.227785481171066,
           53.78864596039316
@@ -6214,7 +6724,7 @@
      }
     ],
     "rollback": null,
-    "next_id": 18,
+    "next_id": 30,
     "parts": {
      "3:0": {
       "name": "X-end tower",
@@ -6992,7 +7502,7 @@
         }
        ],
        "end": "blind",
-       "depth": "33",
+       "depth": "37",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -7035,22 +7545,22 @@
          {
           "id": 1,
           "x": 137.32999999999998,
-          "y": -13.5
+          "y": -12.5
          },
          {
           "id": 2,
           "x": 146.5,
-          "y": -13.5
+          "y": -12.5
          },
          {
           "id": 3,
           "x": 146.5,
-          "y": 13.5
+          "y": 12.5
          },
          {
           "id": 4,
           "x": 137.32999999999998,
-          "y": 13.5
+          "y": 12.5
          }
         ],
         "curves": [
@@ -7141,12 +7651,12 @@
          "sketch": 8,
          "point": [
           143.44333333333333,
-          -4.5
+          -4.166666666666667
          ]
         }
        ],
        "end": "blind",
-       "depth": "17",
+       "depth": "21",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -7157,6 +7667,208 @@
      },
      {
       "id": 10,
+      "name": "Plane y=20.5",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Front"
+       },
+       "offset": "-20.5",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 11,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 10
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 141.915,
+          "y": 61.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         20.5,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         0.0,
+         -1.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 12,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 11,
+         "point": [
+          142.14278548117105,
+          60.78864596039316
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "8",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 13,
+      "name": "Plane y=-12.5",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Front"
+       },
+       "offset": "12.5",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 14,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 13
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 141.915,
+          "y": 61.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         -12.5,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         0.0,
+         -1.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 15,
+      "name": "Cheek tap",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 14,
+         "point": [
+          142.14278548117105,
+          60.78864596039316
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "8",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 16,
       "name": "Plane z=27.7",
       "suppressed": false,
       "hidden": false,
@@ -7174,7 +7886,7 @@
       }
      },
      {
-      "id": 11,
+      "id": 17,
       "name": "Cbores",
       "suppressed": false,
       "hidden": false,
@@ -7182,7 +7894,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 10
+        "feature": 16
        },
        "sketch": {
         "points": [
@@ -7266,7 +7978,7 @@
       }
      },
      {
-      "id": 12,
+      "id": 18,
       "name": "Cbores",
       "suppressed": false,
       "hidden": false,
@@ -7275,7 +7987,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 17,
          "point": [
           133.0,
           -10.0
@@ -7283,7 +7995,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 17,
          "point": [
           133.0,
           10.0
@@ -7291,7 +8003,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 17,
          "point": [
           153.0,
           -10.0
@@ -7299,7 +8011,7 @@
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 17,
          "point": [
           153.0,
           10.0
@@ -7317,7 +8029,7 @@
       }
      },
      {
-      "id": 13,
+      "id": 19,
       "name": "Plane z=31",
       "suppressed": false,
       "hidden": false,
@@ -7335,7 +8047,7 @@
       }
      },
      {
-      "id": 14,
+      "id": 20,
       "name": "Carriage screws",
       "suppressed": false,
       "hidden": false,
@@ -7343,7 +8055,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 13
+        "feature": 19
        },
        "sketch": {
         "points": [
@@ -7427,7 +8139,7 @@
       }
      },
      {
-      "id": 15,
+      "id": 21,
       "name": "Carriage screws",
       "suppressed": false,
       "hidden": false,
@@ -7436,7 +8148,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 20,
          "point": [
           133.0,
           -10.387622829102424
@@ -7444,7 +8156,7 @@
         },
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 20,
          "point": [
           133.0,
           9.612377170897576
@@ -7452,7 +8164,7 @@
         },
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 20,
          "point": [
           153.0,
           -10.387622829102424
@@ -7460,7 +8172,7 @@
         },
         {
          "kind": "region",
-         "sketch": 14,
+         "sketch": 20,
          "point": [
           153.0,
           9.612377170897576
@@ -7478,7 +8190,7 @@
       }
      },
      {
-      "id": 16,
+      "id": 22,
       "name": "Plane z=37",
       "suppressed": false,
       "hidden": false,
@@ -7496,7 +8208,7 @@
       }
      },
      {
-      "id": 17,
+      "id": 23,
       "name": "Beam screws M4",
       "suppressed": false,
       "hidden": false,
@@ -7504,7 +8216,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 16
+        "feature": 22
        },
        "sketch": {
         "points": [
@@ -7564,7 +8276,7 @@
       }
      },
      {
-      "id": 18,
+      "id": 24,
       "name": "Beam screws M4",
       "suppressed": false,
       "hidden": false,
@@ -7573,7 +8285,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 17,
+         "sketch": 23,
          "point": [
           141.72778548117105,
           -6.211354039606841
@@ -7581,7 +8293,7 @@
         },
         {
          "kind": "region",
-         "sketch": 17,
+         "sketch": 23,
          "point": [
           141.72778548117105,
           5.788645960393159
@@ -7599,7 +8311,7 @@
       }
      },
      {
-      "id": 19,
+      "id": 25,
       "name": "Plane x=137.33",
       "suppressed": false,
       "hidden": false,
@@ -7617,7 +8329,7 @@
       }
      },
      {
-      "id": 20,
+      "id": 26,
       "name": "Clamp screws M4",
       "suppressed": false,
       "hidden": false,
@@ -7625,7 +8337,7 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 19
+        "feature": 25
        },
        "sketch": {
         "points": [
@@ -7685,7 +8397,7 @@
       }
      },
      {
-      "id": 21,
+      "id": 27,
       "name": "Clamp screws M4",
       "suppressed": false,
       "hidden": false,
@@ -7694,7 +8406,7 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 20,
+         "sketch": 26,
          "point": [
           -17.772214518828935,
           55.78864596039316
@@ -7702,7 +8414,7 @@
         },
         {
          "kind": "region",
-         "sketch": 20,
+         "sketch": 26,
          "point": [
           18.227785481171065,
           55.78864596039316
@@ -7721,7 +8433,7 @@
      }
     ],
     "rollback": null,
-    "next_id": 21,
+    "next_id": 27,
     "parts": {
      "3:0": {
       "name": "Y-end tower",
@@ -7890,7 +8602,7 @@
         }
        ],
        "end": "blind",
-       "depth": "33",
+       "depth": "37",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -8044,7 +8756,7 @@
         }
        ],
        "end": "blind",
-       "depth": "18.0",
+       "depth": "22.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -8198,7 +8910,7 @@
         }
        ],
        "end": "blind",
-       "depth": "17.5",
+       "depth": "21.5",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -8946,10 +9658,131 @@
        "op": "remove",
        "draft": "0"
       }
+     },
+     {
+      "id": 6,
+      "name": "Plane y=12.5",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Front"
+       },
+       "offset": "-12.5",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 7,
+      "name": "Flange cross holes",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 6
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -141.915,
+          "y": 14.0
+         },
+         {
+          "id": 3,
+          "x": 141.915,
+          "y": 14.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.25,
+          "construction": false
+         },
+         {
+          "id": 4,
+          "type": "circle",
+          "c": 3,
+          "r": 2.25,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 4,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         12.5,
+         0.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         0.0,
+         -1.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 8,
+      "name": "Flange cross holes",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 7,
+         "point": [
+          -141.65874133368254,
+          13.762226705442304
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 7,
+         "point": [
+          142.1712586663174,
+          13.762226705442304
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "25",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
      }
     ],
     "rollback": null,
-    "next_id": 5,
+    "next_id": 8,
     "parts": {
      "2:0": {
       "name": "Beam backer (U channel)",
@@ -79327,6 +80160,23 @@
      },
      {
       "id": 32,
+      "name": "ISO 4762 M4x8",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "custom",
+       "name": "ISO 4762 socket head cap screw",
+       "values": {
+        "length": "8",
+        "size": "4"
+       },
+       "refs": [],
+       "select": "",
+       "op": "new"
+      }
+     },
+     {
+      "id": 33,
       "name": "ISO 4032 M3",
       "suppressed": false,
       "hidden": false,
@@ -79342,7 +80192,7 @@
       }
      },
      {
-      "id": 33,
+      "id": 34,
       "name": "ISO 4762 M3x6",
       "suppressed": false,
       "hidden": false,
@@ -79359,7 +80209,7 @@
       }
      },
      {
-      "id": 34,
+      "id": 35,
       "name": "ISO 10642 M3x10",
       "suppressed": false,
       "hidden": false,
@@ -79376,7 +80226,7 @@
       }
      },
      {
-      "id": 35,
+      "id": 36,
       "name": "ISO 4762 M3x14",
       "suppressed": false,
       "hidden": false,
@@ -79393,7 +80243,7 @@
       }
      },
      {
-      "id": 36,
+      "id": 37,
       "name": "ISO 10642 M4x20",
       "suppressed": false,
       "hidden": false,
@@ -79411,7 +80261,7 @@
      }
     ],
     "rollback": null,
-    "next_id": 36,
+    "next_id": 37,
     "parts": {
      "10:0": {
       "name": "Bearing 608",
@@ -79654,6 +80504,16 @@
       "hidden": true
      },
      "32:0": {
+      "name": "ISO 4762 M4x8",
+      "color": [
+       40,
+       42,
+       46
+      ],
+      "material": "Steel",
+      "hidden": true
+     },
+     "33:0": {
       "name": "ISO 4032 M3",
       "color": [
        188,
@@ -79663,7 +80523,7 @@
       "material": "Steel",
       "hidden": true
      },
-     "33:0": {
+     "34:0": {
       "name": "ISO 4762 M3x6",
       "color": [
        40,
@@ -79673,7 +80533,7 @@
       "material": "Steel",
       "hidden": true
      },
-     "34:0": {
+     "35:0": {
       "name": "ISO 10642 M3x10",
       "color": [
        40,
@@ -79683,7 +80543,7 @@
       "material": "Steel",
       "hidden": true
      },
-     "35:0": {
+     "36:0": {
       "name": "ISO 4762 M3x14",
       "color": [
        40,
@@ -79693,7 +80553,7 @@
       "material": "Steel",
       "hidden": true
      },
-     "36:0": {
+     "37:0": {
       "name": "ISO 10642 M4x20",
       "color": [
        40,
@@ -101616,28 +102476,28 @@
     },
     {
      "id": 748,
-     "name": "fx MGN9 rail screw M3 X beam",
+     "name": "fx beam cross screw M4 X beam",
      "studio": 81,
      "body": [
-      15,
+      32,
       0
      ],
      "pose": {
       "r": [
-       2.220446049250313e-16,
+       3.3306690738754696e-16,
        1.0000000000000002,
-       -8.659560562354934e-17,
-       1.0000000000000002,
-       2.220446049250313e-16,
-       8.659560562354934e-17,
-       8.659560562354934e-17,
-       -8.659560562354934e-17,
-       -1.0
+       0.0,
+       0.0,
+       3.3306690738754696e-16,
+       -1.0000000000000002,
+       -1.0000000000000002,
+       0.0,
+       3.3306690738754696e-16
       ],
       "t": [
-       40.0,
-       -120.0,
-       87.0
+       49.5,
+       -141.915,
+       104.0
       ]
      },
      "fixed": true,
@@ -101645,7 +102505,7 @@
     },
     {
      "id": 749,
-     "name": "fx nut M3 X beam",
+     "name": "fx beam cross screw M4 X beam",
      "studio": 81,
      "body": [
       32,
@@ -101653,20 +102513,20 @@
      ],
      "pose": {
       "r": [
-       6.123233995736766e-17,
-       1.0,
-       0.0,
-       -1.0,
-       6.123233995736766e-17,
+       3.3306690738754696e-16,
+       1.0000000000000002,
        0.0,
        0.0,
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       1.0000000000000002,
        0.0,
-       1.0
+       3.3306690738754696e-16
       ],
       "t": [
-       40.0,
-       -120.0,
-       93.0
+       30.5,
+       -141.915,
+       104.0
       ]
      },
      "fixed": true,
@@ -101674,36 +102534,7 @@
     },
     {
      "id": 750,
-     "name": "fx MGN9 rail screw M3 X beam",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       2.220446049250313e-16,
-       1.0000000000000002,
-       -8.659560562354934e-17,
-       1.0000000000000002,
-       2.220446049250313e-16,
-       8.659560562354934e-17,
-       8.659560562354934e-17,
-       -8.659560562354934e-17,
-       -1.0
-      ],
-      "t": [
-       40.0,
-       -100.0,
-       87.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 751,
-     "name": "fx nut M3 X beam",
+     "name": "fx beam cross screw M4 X beam",
      "studio": 81,
      "body": [
       32,
@@ -101711,20 +102542,49 @@
      ],
      "pose": {
       "r": [
-       6.123233995736766e-17,
-       1.0,
-       0.0,
-       -1.0,
-       6.123233995736766e-17,
+       3.3306690738754696e-16,
+       1.0000000000000002,
        0.0,
        0.0,
+       3.3306690738754696e-16,
+       -1.0000000000000002,
+       -1.0000000000000002,
        0.0,
-       1.0
+       3.3306690738754696e-16
       ],
       "t": [
-       40.0,
-       -100.0,
-       93.0
+       49.5,
+       141.915,
+       104.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 751,
+     "name": "fx beam cross screw M4 X beam",
+     "studio": 81,
+     "body": [
+      32,
+      0
+     ],
+     "pose": {
+      "r": [
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       0.0,
+       0.0,
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       1.0000000000000002,
+       0.0,
+       3.3306690738754696e-16
+      ],
+      "t": [
+       30.5,
+       141.915,
+       104.0
       ]
      },
      "fixed": true,
@@ -101752,7 +102612,7 @@
       ],
       "t": [
        40.0,
-       -80.0,
+       -120.0,
        87.0
       ]
      },
@@ -101764,7 +102624,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -101781,7 +102641,7 @@
       ],
       "t": [
        40.0,
-       -80.0,
+       -120.0,
        93.0
       ]
      },
@@ -101810,7 +102670,7 @@
       ],
       "t": [
        40.0,
-       -60.0,
+       -100.0,
        87.0
       ]
      },
@@ -101822,7 +102682,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -101839,7 +102699,7 @@
       ],
       "t": [
        40.0,
-       -60.0,
+       -100.0,
        93.0
       ]
      },
@@ -101868,7 +102728,7 @@
       ],
       "t": [
        40.0,
-       -40.0,
+       -80.0,
        87.0
       ]
      },
@@ -101880,7 +102740,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -101897,7 +102757,7 @@
       ],
       "t": [
        40.0,
-       -40.0,
+       -80.0,
        93.0
       ]
      },
@@ -101926,7 +102786,7 @@
       ],
       "t": [
        40.0,
-       -20.0,
+       -60.0,
        87.0
       ]
      },
@@ -101938,7 +102798,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -101955,7 +102815,7 @@
       ],
       "t": [
        40.0,
-       -20.0,
+       -60.0,
        93.0
       ]
      },
@@ -101984,7 +102844,7 @@
       ],
       "t": [
        40.0,
-       0.0,
+       -40.0,
        87.0
       ]
      },
@@ -101996,7 +102856,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102013,7 +102873,7 @@
       ],
       "t": [
        40.0,
-       0.0,
+       -40.0,
        93.0
       ]
      },
@@ -102042,7 +102902,7 @@
       ],
       "t": [
        40.0,
-       20.0,
+       -20.0,
        87.0
       ]
      },
@@ -102054,7 +102914,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102071,7 +102931,7 @@
       ],
       "t": [
        40.0,
-       20.0,
+       -20.0,
        93.0
       ]
      },
@@ -102100,7 +102960,7 @@
       ],
       "t": [
        40.0,
-       40.0,
+       0.0,
        87.0
       ]
      },
@@ -102112,7 +102972,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102129,7 +102989,7 @@
       ],
       "t": [
        40.0,
-       40.0,
+       0.0,
        93.0
       ]
      },
@@ -102158,7 +103018,7 @@
       ],
       "t": [
        40.0,
-       60.0,
+       20.0,
        87.0
       ]
      },
@@ -102170,7 +103030,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102187,7 +103047,7 @@
       ],
       "t": [
        40.0,
-       60.0,
+       20.0,
        93.0
       ]
      },
@@ -102216,7 +103076,7 @@
       ],
       "t": [
        40.0,
-       80.0,
+       40.0,
        87.0
       ]
      },
@@ -102228,7 +103088,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102245,7 +103105,7 @@
       ],
       "t": [
        40.0,
-       80.0,
+       40.0,
        93.0
       ]
      },
@@ -102274,7 +103134,7 @@
       ],
       "t": [
        40.0,
-       100.0,
+       60.0,
        87.0
       ]
      },
@@ -102286,7 +103146,7 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102303,7 +103163,7 @@
       ],
       "t": [
        40.0,
-       100.0,
+       60.0,
        93.0
       ]
      },
@@ -102332,7 +103192,7 @@
       ],
       "t": [
        40.0,
-       120.0,
+       80.0,
        87.0
       ]
      },
@@ -102344,7 +103204,123 @@
      "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      32,
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       1.0,
+       0.0,
+       -1.0,
+       6.123233995736766e-17,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       40.0,
+       80.0,
+       93.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 774,
+     "name": "fx MGN9 rail screw M3 X beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       1.0000000000000002,
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       8.659560562354934e-17,
+       -8.659560562354934e-17,
+       -1.0
+      ],
+      "t": [
+       40.0,
+       100.0,
+       87.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 775,
+     "name": "fx nut M3 X beam",
+     "studio": 81,
+     "body": [
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       6.123233995736766e-17,
+       1.0,
+       0.0,
+       -1.0,
+       6.123233995736766e-17,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       40.0,
+       100.0,
+       93.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 776,
+     "name": "fx MGN9 rail screw M3 X beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       2.220446049250313e-16,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       1.0000000000000002,
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       8.659560562354934e-17,
+       -8.659560562354934e-17,
+       -1.0
+      ],
+      "t": [
+       40.0,
+       120.0,
+       87.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 777,
+     "name": "fx nut M3 X beam",
+     "studio": 81,
+     "body": [
+      33,
       0
      ],
      "pose": {
@@ -102369,127 +103345,11 @@
      "hidden": false
     },
     {
-     "id": 774,
-     "name": "fx MGN9 rail screw M3 Y beam",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       -120.0,
-       -30.0,
-       44.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 775,
-     "name": "fx nut M3 Y beam",
-     "studio": 81,
-     "body": [
-      32,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       -120.0,
-       -30.0,
-       50.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 776,
-     "name": "fx MGN9 rail screw M3 Y beam",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       -100.0,
-       -30.0,
-       44.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 777,
-     "name": "fx nut M3 Y beam",
-     "studio": 81,
-     "body": [
-      32,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       -100.0,
-       -30.0,
-       50.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 778,
-     "name": "fx MGN9 rail screw M3 Y beam",
+     "name": "fx beam cross screw M4 Y beam",
      "studio": 81,
      "body": [
-      15,
+      32,
       0
      ],
      "pose": {
@@ -102498,16 +103358,16 @@
        0.0,
        0.0,
        0.0,
+       6.123233995736766e-17,
        -1.0,
-       1.2246467991473532e-16,
        0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       1.0,
+       6.123233995736766e-17
       ],
       "t": [
-       -80.0,
-       -30.0,
-       44.0
+       -141.915,
+       -39.5,
+       61.0
       ]
      },
      "fixed": true,
@@ -102515,7 +103375,7 @@
     },
     {
      "id": 779,
-     "name": "fx nut M3 Y beam",
+     "name": "fx beam cross screw M4 Y beam",
      "studio": 81,
      "body": [
       32,
@@ -102527,16 +103387,16 @@
        0.0,
        0.0,
        0.0,
+       6.123233995736766e-17,
        1.0,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.0,
+       6.123233995736766e-17
       ],
       "t": [
-       -80.0,
-       -30.0,
-       50.0
+       -141.915,
+       -20.5,
+       61.0
       ]
      },
      "fixed": true,
@@ -102544,36 +103404,7 @@
     },
     {
      "id": 780,
-     "name": "fx MGN9 rail screw M3 Y beam",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       -60.0,
-       -30.0,
-       44.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 781,
-     "name": "fx nut M3 Y beam",
+     "name": "fx beam cross screw M4 Y beam",
      "studio": 81,
      "body": [
       32,
@@ -102585,16 +103416,45 @@
        0.0,
        0.0,
        0.0,
+       6.123233995736766e-17,
+       -1.0,
+       0.0,
+       1.0,
+       6.123233995736766e-17
+      ],
+      "t": [
+       141.915,
+       -39.5,
+       61.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 781,
+     "name": "fx beam cross screw M4 Y beam",
+     "studio": 81,
+     "body": [
+      32,
+      0
+     ],
+     "pose": {
+      "r": [
        1.0,
        0.0,
        0.0,
        0.0,
-       1.0
+       6.123233995736766e-17,
+       1.0,
+       0.0,
+       -1.0,
+       6.123233995736766e-17
       ],
       "t": [
-       -60.0,
-       -30.0,
-       50.0
+       141.915,
+       -20.5,
+       61.0
       ]
      },
      "fixed": true,
@@ -102621,7 +103481,7 @@
        -1.0
       ],
       "t": [
-       -40.0,
+       -120.0,
        -30.0,
        44.0
       ]
@@ -102634,7 +103494,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102650,7 +103510,7 @@
        1.0
       ],
       "t": [
-       -40.0,
+       -120.0,
        -30.0,
        50.0
       ]
@@ -102679,7 +103539,7 @@
        -1.0
       ],
       "t": [
-       -20.0,
+       -100.0,
        -30.0,
        44.0
       ]
@@ -102692,7 +103552,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102708,7 +103568,7 @@
        1.0
       ],
       "t": [
-       -20.0,
+       -100.0,
        -30.0,
        50.0
       ]
@@ -102737,7 +103597,7 @@
        -1.0
       ],
       "t": [
-       0.0,
+       -80.0,
        -30.0,
        44.0
       ]
@@ -102750,7 +103610,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102766,7 +103626,7 @@
        1.0
       ],
       "t": [
-       0.0,
+       -80.0,
        -30.0,
        50.0
       ]
@@ -102795,7 +103655,7 @@
        -1.0
       ],
       "t": [
-       20.0,
+       -60.0,
        -30.0,
        44.0
       ]
@@ -102808,7 +103668,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102824,7 +103684,7 @@
        1.0
       ],
       "t": [
-       20.0,
+       -60.0,
        -30.0,
        50.0
       ]
@@ -102853,7 +103713,7 @@
        -1.0
       ],
       "t": [
-       40.0,
+       -40.0,
        -30.0,
        44.0
       ]
@@ -102866,7 +103726,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102882,7 +103742,7 @@
        1.0
       ],
       "t": [
-       40.0,
+       -40.0,
        -30.0,
        50.0
       ]
@@ -102911,7 +103771,7 @@
        -1.0
       ],
       "t": [
-       60.0,
+       -20.0,
        -30.0,
        44.0
       ]
@@ -102924,7 +103784,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102940,7 +103800,7 @@
        1.0
       ],
       "t": [
-       60.0,
+       -20.0,
        -30.0,
        50.0
       ]
@@ -102969,7 +103829,7 @@
        -1.0
       ],
       "t": [
-       80.0,
+       0.0,
        -30.0,
        44.0
       ]
@@ -102982,7 +103842,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -102998,7 +103858,7 @@
        1.0
       ],
       "t": [
-       80.0,
+       0.0,
        -30.0,
        50.0
       ]
@@ -103027,7 +103887,7 @@
        -1.0
       ],
       "t": [
-       100.0,
+       20.0,
        -30.0,
        44.0
       ]
@@ -103040,7 +103900,7 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
       0
      ],
      "pose": {
@@ -103056,7 +103916,7 @@
        1.0
       ],
       "t": [
-       100.0,
+       20.0,
        -30.0,
        50.0
       ]
@@ -103085,7 +103945,7 @@
        -1.0
       ],
       "t": [
-       120.0,
+       40.0,
        -30.0,
        44.0
       ]
@@ -103098,7 +103958,239 @@
      "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      32,
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       40.0,
+       -30.0,
+       50.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 800,
+     "name": "fx MGN9 rail screw M3 Y beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       60.0,
+       -30.0,
+       44.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 801,
+     "name": "fx nut M3 Y beam",
+     "studio": 81,
+     "body": [
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       60.0,
+       -30.0,
+       50.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 802,
+     "name": "fx MGN9 rail screw M3 Y beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       80.0,
+       -30.0,
+       44.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 803,
+     "name": "fx nut M3 Y beam",
+     "studio": 81,
+     "body": [
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       80.0,
+       -30.0,
+       50.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 804,
+     "name": "fx MGN9 rail screw M3 Y beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       100.0,
+       -30.0,
+       44.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 805,
+     "name": "fx nut M3 Y beam",
+     "studio": 81,
+     "body": [
+      33,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       100.0,
+       -30.0,
+       50.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 806,
+     "name": "fx MGN9 rail screw M3 Y beam",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       120.0,
+       -30.0,
+       44.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 807,
+     "name": "fx nut M3 Y beam",
+     "studio": 81,
+     "body": [
+      33,
       0
      ],
      "pose": {
@@ -103123,243 +104215,11 @@
      "hidden": false
     },
     {
-     "id": 800,
-     "name": "fx X carriage screw M3 yoke",
-     "studio": 81,
-     "body": [
-      33,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       32.5,
-       -38.0,
-       77.3
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 801,
-     "name": "fx X carriage screw M3 yoke",
-     "studio": 81,
-     "body": [
-      33,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       32.5,
-       -22.0,
-       77.3
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 802,
-     "name": "fx X carriage screw M3 yoke",
-     "studio": 81,
-     "body": [
-      33,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       47.5,
-       -38.0,
-       77.3
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 803,
-     "name": "fx X carriage screw M3 yoke",
-     "studio": 81,
-     "body": [
-      33,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
-      ],
-      "t": [
-       47.5,
-       -22.0,
-       77.3
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 804,
-     "name": "fx leg screw M3 yoke",
-     "studio": 81,
-     "body": [
-      31,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       23.0,
-       -48.5,
-       80.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 805,
-     "name": "fx leg screw M3 yoke",
-     "studio": 81,
-     "body": [
-      31,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       23.0,
-       -11.5,
-       80.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 806,
-     "name": "fx leg screw M3 yoke",
-     "studio": 81,
-     "body": [
-      31,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       57.0,
-       -48.5,
-       80.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 807,
-     "name": "fx leg screw M3 yoke",
-     "studio": 81,
-     "body": [
-      31,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       57.0,
-       -11.5,
-       80.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 808,
-     "name": "fx Y carriage screw M3 yoke",
+     "name": "fx X carriage screw M3 yoke",
      "studio": 81,
      "body": [
-      31,
+      34,
       0
      ],
      "pose": {
@@ -103375,9 +104235,9 @@
        -1.0
       ],
       "t": [
-       32.0,
-       -37.5,
-       31.0
+       32.5,
+       -38.0,
+       77.3
       ]
      },
      "fixed": true,
@@ -103385,6 +104245,238 @@
     },
     {
      "id": 809,
+     "name": "fx X carriage screw M3 yoke",
+     "studio": 81,
+     "body": [
+      34,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       32.5,
+       -22.0,
+       77.3
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 810,
+     "name": "fx X carriage screw M3 yoke",
+     "studio": 81,
+     "body": [
+      34,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       47.5,
+       -38.0,
+       77.3
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 811,
+     "name": "fx X carriage screw M3 yoke",
+     "studio": 81,
+     "body": [
+      34,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       47.5,
+       -22.0,
+       77.3
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 812,
+     "name": "fx leg screw M3 yoke",
+     "studio": 81,
+     "body": [
+      31,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       23.0,
+       -48.5,
+       80.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 813,
+     "name": "fx leg screw M3 yoke",
+     "studio": 81,
+     "body": [
+      31,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       23.0,
+       -11.5,
+       80.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 814,
+     "name": "fx leg screw M3 yoke",
+     "studio": 81,
+     "body": [
+      31,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       57.0,
+       -48.5,
+       80.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 815,
+     "name": "fx leg screw M3 yoke",
+     "studio": 81,
+     "body": [
+      31,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       57.0,
+       -11.5,
+       80.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 816,
+     "name": "fx Y carriage screw M3 yoke",
+     "studio": 81,
+     "body": [
+      31,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0
+      ],
+      "t": [
+       32.0,
+       -37.5,
+       31.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 817,
      "name": "fx Y carriage screw M3 yoke",
      "studio": 81,
      "body": [
@@ -103413,7 +104505,7 @@
      "hidden": false
     },
     {
-     "id": 810,
+     "id": 818,
      "name": "fx Y carriage screw M3 yoke",
      "studio": 81,
      "body": [
@@ -103442,7 +104534,7 @@
      "hidden": false
     },
     {
-     "id": 811,
+     "id": 819,
      "name": "fx Y carriage screw M3 yoke",
      "studio": 81,
      "body": [
@@ -103471,7 +104563,7 @@
      "hidden": false
     },
     {
-     "id": 812,
+     "id": 820,
      "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
@@ -103500,7 +104592,7 @@
      "hidden": false
     },
     {
-     "id": 813,
+     "id": 821,
      "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
@@ -103529,7 +104621,7 @@
      "hidden": false
     },
     {
-     "id": 814,
+     "id": 822,
      "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
@@ -103558,7 +104650,7 @@
      "hidden": false
     },
     {
-     "id": 815,
+     "id": 823,
      "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
@@ -103587,7 +104679,7 @@
      "hidden": false
     },
     {
-     "id": 816,
+     "id": 824,
      "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
@@ -103616,7 +104708,7 @@
      "hidden": false
     },
     {
-     "id": 817,
+     "id": 825,
      "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
@@ -103645,7 +104737,7 @@
      "hidden": false
     },
     {
-     "id": 818,
+     "id": 826,
      "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
@@ -103674,7 +104766,7 @@
      "hidden": false
     },
     {
-     "id": 819,
+     "id": 827,
      "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
@@ -103703,11 +104795,11 @@
      "hidden": false
     },
     {
-     "id": 820,
+     "id": 828,
      "name": "fx extruder screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103732,11 +104824,11 @@
      "hidden": false
     },
     {
-     "id": 821,
+     "id": 829,
      "name": "fx extruder screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103761,11 +104853,11 @@
      "hidden": false
     },
     {
-     "id": 822,
+     "id": 830,
      "name": "fx extruder screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103790,11 +104882,11 @@
      "hidden": false
     },
     {
-     "id": 823,
+     "id": 831,
      "name": "fx extruder screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103819,11 +104911,11 @@
      "hidden": false
     },
     {
-     "id": 824,
+     "id": 832,
      "name": "fx Beacon bracket screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103848,11 +104940,11 @@
      "hidden": false
     },
     {
-     "id": 825,
+     "id": 833,
      "name": "fx Beacon bracket screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103877,11 +104969,11 @@
      "hidden": false
     },
     {
-     "id": 826,
+     "id": 834,
      "name": "fx duct screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103906,11 +104998,11 @@
      "hidden": false
     },
     {
-     "id": 827,
+     "id": 835,
      "name": "fx duct screw M3 neck",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
@@ -103935,11 +105027,11 @@
      "hidden": false
     },
     {
-     "id": 828,
+     "id": 836,
      "name": "fx adapter screw M3 neck",
      "studio": 81,
      "body": [
-      35,
+      36,
       0
      ],
      "pose": {
@@ -103964,11 +105056,11 @@
      "hidden": false
     },
     {
-     "id": 829,
+     "id": 837,
      "name": "fx adapter screw M3 neck",
      "studio": 81,
      "body": [
-      35,
+      36,
       0
      ],
      "pose": {
@@ -103993,7 +105085,7 @@
      "hidden": false
     },
     {
-     "id": 830,
+     "id": 838,
      "name": "fx Beacon screw M3 neck",
      "studio": 81,
      "body": [
@@ -104022,7 +105114,7 @@
      "hidden": false
     },
     {
-     "id": 831,
+     "id": 839,
      "name": "fx Beacon screw M3 neck",
      "studio": 81,
      "body": [
@@ -104051,7 +105143,7 @@
      "hidden": false
     },
     {
-     "id": 832,
+     "id": 840,
      "name": "Bed",
      "studio": 32,
      "body": [
@@ -104080,7 +105172,7 @@
      "hidden": false
     },
     {
-     "id": 833,
+     "id": 841,
      "name": "Bed heater",
      "studio": 33,
      "body": [
@@ -104109,7 +105201,7 @@
      "hidden": false
     },
     {
-     "id": 834,
+     "id": 842,
      "name": "Bed arm Z1",
      "studio": 45,
      "body": [
@@ -104138,7 +105230,7 @@
      "hidden": false
     },
     {
-     "id": 835,
+     "id": 843,
      "name": "Z1 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -104167,7 +105259,7 @@
      "hidden": false
     },
     {
-     "id": 836,
+     "id": 844,
      "name": "Z1 MGN12H",
      "studio": 21,
      "body": [
@@ -104196,7 +105288,7 @@
      "hidden": false
     },
     {
-     "id": 837,
+     "id": 845,
      "name": "Bed arm Z2",
      "studio": 46,
      "body": [
@@ -104225,7 +105317,7 @@
      "hidden": false
     },
     {
-     "id": 838,
+     "id": 846,
      "name": "Z2 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -104254,7 +105346,7 @@
      "hidden": false
     },
     {
-     "id": 839,
+     "id": 847,
      "name": "Z2 MGN12H",
      "studio": 21,
      "body": [
@@ -104283,7 +105375,7 @@
      "hidden": false
     },
     {
-     "id": 840,
+     "id": 848,
      "name": "Bed arm Z3",
      "studio": 47,
      "body": [
@@ -104312,7 +105404,7 @@
      "hidden": false
     },
     {
-     "id": 841,
+     "id": 849,
      "name": "Z3 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -104341,7 +105433,7 @@
      "hidden": false
     },
     {
-     "id": 842,
+     "id": 850,
      "name": "Z3 MGN12H",
      "studio": 21,
      "body": [
@@ -104370,7 +105462,7 @@
      "hidden": false
     },
     {
-     "id": 843,
+     "id": 851,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104399,7 +105491,7 @@
      "hidden": false
     },
     {
-     "id": 844,
+     "id": 852,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104428,7 +105520,7 @@
      "hidden": false
     },
     {
-     "id": 845,
+     "id": 853,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104457,7 +105549,7 @@
      "hidden": false
     },
     {
-     "id": 846,
+     "id": 854,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104486,7 +105578,7 @@
      "hidden": false
     },
     {
-     "id": 847,
+     "id": 855,
      "name": "fx Z clamp screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104515,7 +105607,7 @@
      "hidden": false
     },
     {
-     "id": 848,
+     "id": 856,
      "name": "fx Z clamp screw M3 Z1",
      "studio": 81,
      "body": [
@@ -104544,11 +105636,11 @@
      "hidden": false
     },
     {
-     "id": 849,
+     "id": 857,
      "name": "fx bed screw M4 Z1",
      "studio": 81,
      "body": [
-      36,
+      37,
       0
      ],
      "pose": {
@@ -104573,7 +105665,7 @@
      "hidden": false
     },
     {
-     "id": 850,
+     "id": 858,
      "name": "fx G10 washer Z1",
      "studio": 49,
      "body": [
@@ -104602,7 +105694,7 @@
      "hidden": false
     },
     {
-     "id": 851,
+     "id": 859,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104631,7 +105723,7 @@
      "hidden": false
     },
     {
-     "id": 852,
+     "id": 860,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104660,7 +105752,7 @@
      "hidden": false
     },
     {
-     "id": 853,
+     "id": 861,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104689,7 +105781,7 @@
      "hidden": false
     },
     {
-     "id": 854,
+     "id": 862,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104718,7 +105810,7 @@
      "hidden": false
     },
     {
-     "id": 855,
+     "id": 863,
      "name": "fx Z clamp screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104747,7 +105839,7 @@
      "hidden": false
     },
     {
-     "id": 856,
+     "id": 864,
      "name": "fx Z clamp screw M3 Z2",
      "studio": 81,
      "body": [
@@ -104776,11 +105868,11 @@
      "hidden": false
     },
     {
-     "id": 857,
+     "id": 865,
      "name": "fx bed screw M4 Z2",
      "studio": 81,
      "body": [
-      36,
+      37,
       0
      ],
      "pose": {
@@ -104805,7 +105897,7 @@
      "hidden": false
     },
     {
-     "id": 858,
+     "id": 866,
      "name": "fx G10 washer Z2",
      "studio": 49,
      "body": [
@@ -104834,7 +105926,7 @@
      "hidden": false
     },
     {
-     "id": 859,
+     "id": 867,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -104863,7 +105955,7 @@
      "hidden": false
     },
     {
-     "id": 860,
+     "id": 868,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -104892,7 +105984,7 @@
      "hidden": false
     },
     {
-     "id": 861,
+     "id": 869,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -104921,7 +106013,7 @@
      "hidden": false
     },
     {
-     "id": 862,
+     "id": 870,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -104950,7 +106042,7 @@
      "hidden": false
     },
     {
-     "id": 863,
+     "id": 871,
      "name": "fx Z clamp screw M3 Z3",
      "studio": 81,
      "body": [
@@ -104979,7 +106071,7 @@
      "hidden": false
     },
     {
-     "id": 864,
+     "id": 872,
      "name": "fx Z clamp screw M3 Z3",
      "studio": 81,
      "body": [
@@ -105008,11 +106100,11 @@
      "hidden": false
     },
     {
-     "id": 865,
+     "id": 873,
      "name": "fx bed screw M4 Z3",
      "studio": 81,
      "body": [
-      36,
+      37,
       0
      ],
      "pose": {
@@ -105037,7 +106129,7 @@
      "hidden": false
     },
     {
-     "id": 866,
+     "id": 874,
      "name": "fx G10 washer Z3",
      "studio": 49,
      "body": [
@@ -105067,7 +106159,7 @@
     }
    ],
    "mates": [],
-   "next_id": 866,
+   "next_id": 874,
    "relations": []
   }
  ],
