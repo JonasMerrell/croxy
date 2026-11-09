@@ -21,7 +21,7 @@ xy:
   belt_w: 12
   belt_t: 1.4
   belt_z: 39            # belt centre height (plate top is 12)
-  tension_travel: 6     # idler slot travel (moves away from its drive)
+  tension_travel: 8     # idler slot travel, away from its drive (max before the idler meets the drive pulley)
   rail_off: 143         # MGN12 perimeter rails at +-143, on the plate top
   rail_len: 230
   motor_len: 76

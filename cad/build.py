@@ -384,6 +384,7 @@ for k in range(4):
     place(S_BLKL, blkl_body, [0, 0, BLK_BOT[0]], R, name=f"Corner block lower {corner}")
     place(S_BLKU, blku_body, [0, 0, BLK_TOP[0]], R, name=f"Corner block upper {corner}")
     place(S_TAB, tab_body, [0, 0, 0], R, name=f"Tension tab {corner}")
+    place(S_SLIDE, slide_body, [0, 0, 0], R, name=f"Tension slider {corner}")
     place(S_MTOWER, mtower_body, [0, 0, 0], R, name=f"Motor plate {corner}")
     jplace("corner", R, tag=corner)
     d, i_ = rot_z(a, D_FL), rot_z(a, I_FL)
@@ -508,12 +509,18 @@ def gantry_parts():
         f = lambda tx, ty: [tx, 0, 0]
         g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
         g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end block {nm}"))
+        for su in (-1, 1):
+            o = mvec(R, [su * CP_UC, 0, 0])
+            g.append((f"xclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [tx + o[0], o[1], 0], R, f"Belt clamp plate X {nm}"))
         jg.append(("xend", R, f, f"X-end {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
         f = lambda tx, ty: [0, ty, 0]
         g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
         g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end block {nm}"))
+        for su in (-1, 1):
+            o = mvec(R, [0, su * CP_UC, 0])
+            g.append((f"yclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [o[0], ty + o[1], 0], mm(R, Rz(-90)), f"Belt clamp plate Y {nm}"))
         jg.append(("yend", R, f, f"Y-end {nm}"))
     fx_ = lambda tx, ty: [tx, 0, XB_BOT]
     fy_ = lambda tx, ty: [0, ty, YB_BOT]
