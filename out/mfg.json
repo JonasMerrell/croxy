@@ -39,7 +39,7 @@
   "material": "Steel",
   "notes": "steel round spacer"
  },
- "G10 tube 10 x 5.3 x 54.3": {
+ "G10 tube 10 x 5.3 x 93.3": {
   "method": "buy",
   "material": "",
   "notes": "G10/FR4 tube, thermal break under the motor"
@@ -72,27 +72,17 @@
  "Yoke U": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups)"
+  "notes": "7075 block 44 x 49 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups)"
  },
  "Yoke top plate": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups)"
+  "notes": "6 mm 7075 plate: contour, holes and the filament tube hole from the top, cbores from the bottom (2 setups)"
  },
- "Toolhead neck": {
+ "Extruder carrier": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups)"
- },
- "Toolhead plate": {
-  "method": "mill",
-  "material": "Aluminium 7075",
-  "notes": "6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups)"
- },
- "Neck air adapter": {
-  "method": "print",
-  "material": "PPS-CF",
-  "notes": "PPS-CF, printed standing on the mounting face; internal channel teardrop-shaped, no supports"
+  "notes": "7075 block 80 x 75 x 42, machined in its own (rotated) frame. From the bottom: motor flange and cheeks, cbores, gearbox taps M3; from the top: contour, filament hole, clearance holes over the carriage screw heads; from the flange face: motor pilot and M3 holes (3 setups)"
  },
  "PTFE filament tube 4 mm": {
   "method": "buy",
@@ -189,7 +179,7 @@
   "material": "Steel",
   "notes": "bought mild steel angle, cut to length, 8 holes drilled on the mill with a stop (1 setup per leg)"
  },
- "Post, steel square tube 30 x 30 x 3 x 320": {
+ "Post, steel square tube 30 x 30 x 3 x 254": {
   "method": "buy + mill",
   "material": "Steel",
   "notes": "bought mild steel tube, cut and both ends faced square to length on the mill (1 setup per end)"
@@ -379,10 +369,10 @@
   "material": "PPS-CF",
   "notes": "PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it"
  },
- "Shutter neck plate (X covers attach here)": {
+ "Shutter column plate (X covers attach here)": {
   "method": "SCS",
   "material": "Aluminium 6061",
-  "notes": "1.5 mm aluminium, SCS cut; rides on the strip, pushed by the neck, X tapes bonded to it"
+  "notes": "1.5 mm aluminium, SCS cut; rides on the strip, pushed by the hotend column, X tapes bonded to it"
  },
  "Y-cover spring reel, stainless tape (in a plate pocket)": {
   "method": "buy",
@@ -489,24 +479,34 @@
   "material": "",
   "notes": ""
  },
- "Part-cooling blower (server type, hose to the neck)": {
+ "Part-cooling blower (server type, hose to the toolhead duct)": {
   "method": "buy",
   "material": "",
   "notes": ""
  },
- "Part-cooling duct (fed through the hollow neck)": {
+ "Part-cooling duct with Beacon pad (riser through the shutter)": {
   "method": "print",
   "material": "PPS-CF",
-  "notes": "PPS-CF, printed mount face down; channel roofs are <= 11 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts"
+  "notes": "PPS-CF, printed standing on the riser top; feed and ring channel roofs are <= 6 mm bridges, Beacon pad prints flat off the riser, no supports; 2 M3 heat-set inserts for the Beacon; hose from the gantry-bay blower on the barb"
  },
- "Extruder (Sherpa Heavy style)": {
+ "Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)": {
   "method": "buy",
   "material": "",
   "notes": ""
  },
- "Extruder motor (LDO high-temp)": {
+ "Extruder motor (36 mm, in the gantry bay)": {
   "method": "buy",
   "material": "",
+  "notes": ""
+ },
+ "Extruder shaft coupling (5-5 flexible coupling D12)": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)": {
+  "method": "buy",
+  "material": "Steel",
   "notes": ""
  },
  "Chube Conduction hotend": {
@@ -523,10 +523,5 @@
   "method": "buy",
   "material": "",
   "notes": ""
- },
- "Beacon bracket": {
-  "method": "print",
-  "material": "PPS-CF",
-  "notes": "PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts"
  }
 }

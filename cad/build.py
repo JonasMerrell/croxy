@@ -160,18 +160,26 @@ YB_TOP, XB_TOP = YB_BOT + BH, XB_BOT + BH
 X_CAR_FACE = XB_BOT - 10                  # MGN9H face under the X beam
 Y_CAR_FACE = YB_BOT - 10                  # MGN9H face under the Y beam
 YOKE_T = 6
-TH_TOP = TH["body_top"]                   # toolhead body hangs below the plate
-NECK_TOP = Y_CAR_FACE - YOKE_T            # underside of the yoke
 FX, FY = TH["offset"]                     # nozzle / filament axis relative to the beam cross
-NOZ = TH_TOP - TH["height"]
+NOZ = TH["nozzle_z"]
 MOTOR_PLATE = (XB_TOP + 1, XB_TOP + 7)    # motor plate clears the X beam
 MOTOR_FACE = MOTOR_PLATE[1]
-assert BLK_BOT[0] > CARR_FACE - 10 and NECK_TOP > PT + F["shutter_h"] and TH_TOP < 0, "stack does not fit"
+assert BLK_BOT[0] > CARR_FACE - 10, "stack does not fit"
+assert MOTOR_FACE + XY["motor_len"] < P["enclosure"]["lid_z"] - 5, "NEMA23s do not fit under the lid"
+
+# toolhead layout, centre of mass and fit (cad/toolhead.py): the extruder rides above the plate under the yoke,
+# drawn in its own frame (rotated THL["rot"] about z)
+import toolhead as THM
+THL = THM.layout(P)
+TH_ROT = Rz(THL["rot"])
+TH_REPORT, TH_COM, TH_MASS = THM.report(P)
+assert math.hypot(TH_COM[0], TH_COM[1]) < 1.0, "toolhead centre of mass is off the rail lines (re-solve with cad/toolhead.py):\n" + TH_REPORT
+assert not THM.fit_problems(P, THL), THM.fit_problems(P, THL)
 
 layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "belt_z": BZ,
           "x_beam": [XB_BOT, XB_TOP], "y_beam": [YB_BOT, YB_TOP], "motor_face": MOTOR_FACE,
-          "toolhead_top": TH_TOP, "nozzle_z": NOZ, "nozzle_offset": [FX, FY],
-          "build_centre": [FX, FY]}
+          "nozzle_z": NOZ, "nozzle_offset": [FX, FY],
+          "build_centre": [FX, FY], "toolhead_com": [round(v, 2) for v in TH_COM], "toolhead_mass_g": round(TH_MASS)}
 
 # ================================================================ Part Studios
 exec(open(os.path.join(HERE, "parts_gantry.py")).read())
@@ -533,16 +541,13 @@ def gantry_parts():
           ("ycar9", buy["mgn9h"], lambda tx, ty: [tx, ty, YB_BOT], RX180, "MGN9H on Y beam"),
           ("yoke", (S_YOKE, yoke_body), fh, I3, "Yoke U"),
           ("ytop", (S_YTOP, ytop_body), fh, I3, "Yoke top plate"),
-          ("neck", (S_NECK, neck_body), fh, I3, "Toolhead neck"),
-          ("tpl", (S_TPL, tpl_body), fh, I3, "Toolhead plate"),
-          ("adapt", (S_ADAPT, adapt_body), fh, I3, "Neck air adapter"),
+          ("carrier", (S_CAR, car_body), fh, TH_ROT, "Extruder carrier"),
           ("strip", (S_STRIP, strip_body), lambda tx, ty: [0, ty, 0], I3, "Shutter strip"),
-          ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter neck plate"),
+          ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter column plate"),
           ("tube", (S_TUBE, tube_body), fh, I3, "Filament tube")]
-    g += [(f"tdet{k}", (S_TDET, b_), fh, I3, nm_) for k, (b_, nm_) in enumerate(tdet)]
-    g.append(("bcnb", (S_BCNB, bcnb_body), fh, I3, "Beacon bracket"))
+    g += [(f"tdet{k}", (S_TDET, b_), fh, TH_ROT, nm_) for k, (b_, nm_) in enumerate(tdet)]
     jg += [("beam", Rz(90), fx_, "X beam"), ("beam", I3, fy_, "Y beam"),
-           ("yoke", I3, fh, "yoke"), ("neck", I3, fh, "neck")]
+           ("yoke", I3, fh, "yoke"), ("th", TH_ROT, fh, "toolhead")]
     return g, jg
 
 GP, GJ = gantry_parts()
@@ -584,10 +589,11 @@ def pose(tx, ty):
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
 EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z jackshaft", "Z 608", "Z reduction")
-PASS = [("Heater shaft", "Chamber heater"), ("Heater shaft", "Heater fan motor")]
+PASS = [("Heater shaft", "Chamber heater"), ("Heater shaft", "Heater fan motor"),
+        ("Extruder jackshaft", "Extruder gearbox"), ("Extruder jackshaft", "Extruder shaft coupling")]
 # fasteners that thread into a stand-in without modelled holes, or into a tapped hole modelled at nominal size
 FX_PASS = [("post bolt", "Post"), ("NEMA23 motor screw", "NEMA23"), ("NEMA17 screw", "NEMA17"),
-           ("extruder screw", "Extruder"), ("duct screw", "Part-cooling duct"), ("Beacon bracket screw", "Beacon"),
+           ("extruder screw", "Extruder"), ("extruder motor screw", "Extruder motor"), ("duct screw", "Part-cooling duct"), ("carrier screw", "Yoke U"),
            ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate"), ("M8 tie rod", "Bay leg"),
            ("heater screw", "Chamber heater"), ("heater motor screw", "Heater fan motor"), ("fan screw", "fan"),
            ("blower screw", "blower"), ("electronics screw", "Kraken"), ("electronics screw", "PSU"), ("electronics screw", "Raspberry"),

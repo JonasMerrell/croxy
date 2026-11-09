@@ -64,6 +64,25 @@ The towers don't carry rails, so they don't need to match steel's expansion. Wit
 axis at about 0.8 N·m each at speed, and the motor rotors included (≈ 1.2 kg equivalent each on a
 20T pulley), the limit is about 60 m/s².
 
+## Toolhead centre of mass
+
+Everything the two MGN9H carriages carry (yoke, carrier, extruder, hotend, duct, carriages), from
+`python3 cad/toolhead.py` with the estimated bought-part masses in `params.yaml`:
+
+| Layout | Mass | CoM offset from the cross (x, y) | CoM below the Y / X carriage faces | Nozzle below the plate |
+|---|---|---|---|---|
+| Original: everything round the nozzle, under the plate | ≈ 625 g | (9.6, 16.9) mm | 40 / 83 mm | 86 mm |
+| Diagonal, motor as counterweight, under the plate (PR #1, first commit) | ≈ 660 g | (0.3, -0.2) mm | 40 / 83 mm | 86 mm |
+| **Now: extruder above the plate under the yoke, beams +39 mm** | **≈ 547 g** | **(0.0, 0.0) mm** | **16 / 59 mm** | **20 mm** |
+
+![Toolhead: extruder and motor on the carrier under the yoke, hotend column through the shutter](../out/render-toolhead.png)
+
+At 60 m/s² the original offset put about 0.7 N·m of yaw and roll on the carriages on every move. The
+vertical lever now gives about 0.5 to 1.9 N·m of pitch/roll shared by the yoke and both carriages, down
+from 1.6 to 3.3 N·m. The neck and the toolhead plate are gone, so the carried mass dropped by about 110 g.
+The extruder motor and gearbox now run in the gantry bay instead of the 150 °C chamber, so filament is not
+softened at the drive gears and the motor needs no high-temperature rating.
+
 ## Beam backer (input for the dynamic simulation)
 
 25 × 25 × 3 steel U channel with the MGN9 rail: I ≈ 20,400 mm⁴ both ways. Over the 286 mm span the

@@ -8,7 +8,7 @@
   "Motor plate",
   "Spacer 8 x 5.3 x 9",
   "Spacer 8 x 5.3 x 20",
-  "G10 tube 10 x 5.3 x 54.3",
+  "G10 tube 10 x 5.3 x 93.3",
   "Shim 8 x 14 x 2",
   "Belt clamp plate",
   "X-end block",
@@ -16,9 +16,7 @@
   "Beam backer",
   "Yoke U",
   "Yoke top plate",
-  "Toolhead neck",
-  "Toolhead plate",
-  "Neck air adapter",
+  "Extruder carrier",
   "Filament tube",
   "MGN12 rail",
   "MGN12H carriage",
@@ -70,7 +68,7 @@
   "Door glass",
   "Door hardware",
   "Shutter strip",
-  "Shutter neck plate",
+  "Shutter column plate",
   "Shutter Y roller",
   "Chamber heater",
   "Heater fan motor",
@@ -79,8 +77,7 @@
   "Filter ducts",
   "Electronics",
   "Top bay",
-  "Toolhead",
-  "Beacon bracket"
+  "Toolhead"
  ],
  "layout": {
   "drive_FL": [
@@ -97,24 +94,29 @@
   ],
   "belt_z": 39,
   "x_beam": [
-   90,
-   115
+   129,
+   154
   ],
   "y_beam": [
-   47,
-   72
+   86,
+   111
   ],
-  "motor_face": 122,
-  "toolhead_top": -2,
-  "nozzle_z": -86,
+  "motor_face": 161,
+  "nozzle_z": -20,
   "nozzle_offset": [
    18,
-   25
+   15.5
   ],
   "build_centre": [
    18,
-   25
-  ]
+   15.5
+  ],
+  "toolhead_com": [
+   -0.0,
+   0.0,
+   59.68
+  ],
+  "toolhead_mass_g": 547
  },
  "moving": {
   "xcar_back": 691,
@@ -141,19 +143,18 @@
   "ycar9": 712,
   "yoke": 713,
   "ytop": 714,
-  "neck": 715,
-  "tpl": 716,
-  "adapt": 717,
-  "strip": 718,
-  "nplate": 719,
-  "tube": 720,
-  "tdet0": 721,
-  "tdet1": 722,
-  "tdet2": 723,
-  "tdet3": 724,
-  "tdet4": 725,
-  "tdet5": 726,
-  "bcnb": 727
+  "carrier": 715,
+  "strip": 716,
+  "nplate": 717,
+  "tube": 718,
+  "tdet0": 719,
+  "tdet1": 720,
+  "tdet2": 721,
+  "tdet3": 722,
+  "tdet4": 723,
+  "tdet5": 724,
+  "tdet6": 725,
+  "tdet7": 726
  },
  "start": [
   40,
@@ -228,7 +229,7 @@
     0,
     0
    ],
-   "bed_top": -86.5,
+   "bed_top": -20.5,
    "clashes": []
   },
   {
@@ -236,7 +237,7 @@
     -90,
     -90
    ],
-   "bed_top": -86.5,
+   "bed_top": -20.5,
    "clashes": []
   },
   {
@@ -244,7 +245,7 @@
     90,
     -90
    ],
-   "bed_top": -86.5,
+   "bed_top": -20.5,
    "clashes": []
   },
   {
@@ -252,7 +253,7 @@
     90,
     90
    ],
-   "bed_top": -86.5,
+   "bed_top": -20.5,
    "clashes": []
   },
   {
@@ -260,7 +261,7 @@
     -90,
     90
    ],
-   "bed_top": -86.5,
+   "bed_top": -20.5,
    "clashes": []
   },
   {
@@ -268,7 +269,7 @@
     0,
     0
    ],
-   "bed_top": -266,
+   "bed_top": -200,
    "clashes": []
   },
   {
@@ -276,7 +277,7 @@
     -90,
     -90
    ],
-   "bed_top": -266,
+   "bed_top": -200,
    "clashes": []
   },
   {
@@ -284,7 +285,7 @@
     90,
     -90
    ],
-   "bed_top": -266,
+   "bed_top": -200,
    "clashes": []
   },
   {
@@ -292,7 +293,7 @@
     90,
     90
    ],
-   "bed_top": -266,
+   "bed_top": -200,
    "clashes": []
   },
   {
@@ -300,7 +301,7 @@
     -90,
     90
    ],
-   "bed_top": -266,
+   "bed_top": -200,
    "clashes": []
   }
  ]
