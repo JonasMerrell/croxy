@@ -399,41 +399,53 @@ tparts.append((b_, "Part-cooling blower (server type, hose to the neck)"))
 for p in ((-30, 130), (47, 130), (-30, 195), (47, 195)):
     J("module", "ISO 4762", "M4", [p[0], OW, p[1]], "-y", L=12, label="blower screw")
 
-# ---------------------------------------------------------------- toolhead detail (relative to the neck centre)
+# ---------------------------------------------------------------- toolhead detail, in the toolhead frame
+# (cad/toolhead.py: u from the beam cross towards the nozzle, v across; placed rotated by THL["rot"]).
+# The hotend and gearbox sit on the nozzle side, the motor past the cross drives the gearbox's pinion
+# through a coupling and a jackshaft, so the centre of mass sits on both MGN9 rail lines.
 S_TDET = studio("Toolhead")
 tdet = []
 def tpart(nm_, res, color, material=None, method="buy", notes=""):
     b_ = new_body(res); name_part(b_, nm_, material, color, "satin", method=method, notes=notes); tdet.append((b_, nm_))
-# part-cooling duct: riser under the plate's air outlet, ring round the nozzle; hollow, printed mount face down
-DR = (-18.0, -3.0, -18.0, 35.0)                # riser x0, x1, y0, y1
-res = box(DR[0], DR[1], DR[2], DR[3], NOZ + 4, TP_BOT, "new", "Duct riser")
-cyl(FX, FY, 14, NOZ + 2, NOZ + 8, "add", "Duct ring")
-box(FX - 21, FX - 8, FY - 5, FY + 5, NOZ + 2, NOZ + 8, "add", "Duct feed")
-cyl(FX, FY, 7, NOZ + 2, NOZ + 8, "remove", "Ring bore")
-box(DR[0] + 2, DR[1] - 2, DR[2] + 2, 10, NOZ + 6, TP_BOT, "remove", "Riser channel")
-box(DR[0] + 2, DR[1] - 2, 10, 28, NOZ + 6, NOZ + 16, "remove", "Plenum to the feed")
-pocket_up([circ(p, 4.0) for p in DUCT_H], TP_BOT - 6, 6, "Heat-set inserts")
+def tbox(b, op="new", name=None):
+    return box(b[0], b[1], b[2], b[3], b[4], b[5], op, name)
+# part-cooling duct: plenum under the plate's air outlet, riser beside the jackshaft, feed and ring round the nozzle
+PL, RS, FD, RG = THL["PLEN"], THL["RISER"], THL["FEED"], THL["RING"]
+res = tbox(PL, "new", "Duct plenum")
+tbox(RS, "add", "Duct riser")
+tbox(FD, "add", "Duct feed")
+cyl(FU, 0, RG[0], RG[2], RG[3], "add", "Duct ring")
+cyl(FU, 0, RG[1], RG[2], RG[3], "remove", "Ring bore")
+box(PL[0] + 3, PL[1] - 3, PL[2] + 3, PL[3] - 3, PL[4] + 2, PL[5], "remove", "Plenum cavity")
+box(RS[0] + 2, RS[1] - 2, RS[2] + 2, RS[3] - 2, FD[4] + 2, PL[4] + 2, "remove", "Riser channel")
+box(FD[0], FD[1], FD[2] + 2, FD[3] - 2, FD[4] + 2, FD[5] - 2, "remove", "Feed channel")
+pocket_z([circ(p, 4.0) for p in THL["DUCT_H"]], PL[5], 5, "Heat-set inserts")
 tpart("Part-cooling duct (fed through the hollow neck)", res, "#3c3f44", "PPS-CF", "print",
-      "PPS-CF, printed mount face down; channel roofs are <= 11 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts")
-tpart("Extruder (Sherpa Heavy style)", box(FX - 20, FX + 20, FY - 14, FY + 10, -42, TP_BOT, "new", "Extruder"), "#c4572a")
-tpart("Extruder motor (LDO high-temp)", box(FX - 18, FX + 18, FY + 10, FY + 30, -40, TP_BOT, "new", "Extruder motor"), "#2b2b2b")
-res = cyl(FX, FY, 11, NOZ + 12, -42, "new", "Chube")
-tpart("Chube Conduction hotend", res, "#b8bec4")
-tpart("Nozzle", cyl(FX, FY, 3.5, NOZ, NOZ + 12, "new", "Nozzle"), "#c9a227", "Brass")
-tpart("Beacon3D probe", box(FX + 16, FX + 30, FY - 27, FY - 1, NOZ + 3, NOZ + 15, "new", "Beacon"), "#1d1d1d")
+      "PPS-CF, printed plenum face down; channel roofs are <= 13 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts")
+GB = THL["GB"]
+tpart("Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)", tbox(GB, "new", "Extruder gearbox"), "#c4572a")
+tpart("Extruder motor (LDO high-temp, 36 mm)", tbox(THL["MOT"], "new", "Extruder motor"), "#2b2b2b")
+CP, JSH = THL["CPL"], THL["JSH"]
+tpart("Extruder shaft coupling (5-5 beam coupling D14)", cyl_x(0, JS_Z, 7, CP[0], CP[1], "new", "Coupling"), "#b8bec4", "Aluminium 6061")
+tpart("Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)", cyl_x(0, JS_Z, 2.5, JSH[0], JSH[1], "new", "Jackshaft"),
+      "#9aa3ab", "Steel")
+CH_ = THL["CHUBE"]
+tpart("Chube Conduction hotend", cyl(FU, 0, CH_[0], CH_[1], CH_[2], "new", "Chube"), "#b8bec4")
+NZ_ = THL["NOZZLE"]
+tpart("Nozzle", cyl(FU, 0, NZ_[0], NZ_[1], NZ_[2], "new", "Nozzle"), "#c9a227", "Brass")
+tpart("Beacon3D probe", tbox(THL["BEACON"], "new", "Beacon"), "#1d1d1d")
 # Beacon bracket: C section (top pad on the plate, web, bottom pad on the Beacon), printed lying on the web
-BB = (39.0, 48.0, -2.0, 24.0)
 S_BCNB = studio("Beacon bracket")
-res = box(BB[0], BB[1], BB[2], BB[3], TP_BOT - 5, TP_BOT, "new", "Top pad")
+res = tbox(THL["BB_TOP"], "new", "Top pad")
 bcnb_body = new_body(res)
-box(BB[0], BB[0] + 3, BB[2], BB[3], NOZ + 15, TP_BOT - 5, "add", "Web")
-box(BB[0], BB[1], BB[2], BB[3], NOZ + 15, NOZ + 19, "add", "Bottom pad")
-pocket_up([circ(p, 4.0) for p in BCN_H], TP_BOT - 5, 5, "Heat-set inserts")
-BCN_B = [[44.5, 3.0], [44.5, 19.0]]
-cut_through([circ(p, CLR["M3"]) for p in BCN_B], NOZ + 19, "Beacon screw holes")
+tbox(THL["BB_WEB"], "add", "Web")
+tbox(THL["BB_BOT"], "add", "Bottom pad")
+pocket_up([circ(p, 4.0) for p in THL["BB_H"]], THL["BB_TOP"][4], 5, "Heat-set inserts")
+BCN_B = THL["BCN_H"]
+cut_through([circ(p, CLR["M3"]) for p in BCN_B], THL["BB_BOT"][5], "Beacon screw holes")
 name_part(bcnb_body, "Beacon bracket", "PPS-CF", "#3c3f44", "satin", method="print", notes="PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts")
 for p in BCN_B:
-    J("neck", "ISO 4762", "M3", [p[0], p[1], NOZ + 3], "+z", L=16, label="Beacon screw")
+    J("th", "ISO 4762", "M3", [p[0], p[1], NOZ + 3], "+z", L=16, label="Beacon screw")
 
 # ---------------------------------------------------------------- holes for every sheet-metal fastener (drilled after
 # all joint lists exist; SCS cuts them with the blanks)
