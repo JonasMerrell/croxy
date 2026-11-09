@@ -291,118 +291,78 @@ for x in RAIL9_X:
     J("beam", "ISO 4032", "M3", [x, 0, BT], "+z", label="nut")
 
 # ================================================================ 5. Toolhead yoke: U (bottom plate + legs) and a top plate, both 7075
+# The legs stand 6 mm outboard of the Y beam's sides so the PTFE filament tube can rise between beam and leg.
 CAR9 = [[sx * 8, sy * 7.5] for sx in (-1, 1) for sy in (-1, 1)]        # MGN9H holes (along x 16, across 15)
 yw = 22.0
-YK_Y = BWD / 2 + 9
-LEG_IN = BWD / 2 + 3
-LEG_H = [[sx * 17, sy * 18.5] for sx in (-1, 1) for sy in (-1, 1)]
-NECK_SCR = [[sx * 14, sy * 13] for sx in (-1, 1) for sy in (-1, 1)]
+YK_Y = BWD / 2 + 12
+LEG_IN = YK_Y - 6
+LEG_H = [[sx * 17, sy * (YK_Y - 3)] for sx in (-1, 1) for sy in (-1, 1)]
+YK_SCR = THL["YK_SCR"]                         # carrier plate screws, tapped through the bottom plate
 S_YOKE = studio("Yoke U")
 res = box(-yw, yw, -YK_Y, YK_Y, Y_CAR_FACE - YOKE_T, Y_CAR_FACE, "new", "Bottom plate")
 yoke_body = new_body(res)
 box(-yw, yw, LEG_IN, YK_Y, Y_CAR_FACE, X_CAR_FACE - YOKE_T, "add", "Back leg")
 box(-yw, yw, -YK_Y, -LEG_IN, Y_CAR_FACE, X_CAR_FACE - YOKE_T, "add", "Front leg")
-cut_through([circ(p, CLR["M3"]) for p in CAR9] + [circ(p, TAP["M3"]) for p in NECK_SCR], Y_CAR_FACE, "Carriage and neck holes")
+cut_through([circ(p, CLR["M3"]) for p in CAR9] + [circ(p, TAP["M3"]) for p in YK_SCR] + [circ([FX, FY], 4.5)],
+            Y_CAR_FACE, "Carriage, carrier and filament holes")
 pocket_z([circ(p, TAP["M3"]) for p in LEG_H], X_CAR_FACE - YOKE_T, 10, "Leg screws M3")
 name_part(yoke_body, "Yoke U", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups)")
+          notes=f"7075 block 44 x {2 * YK_Y:.0f} x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups)")
 S_YTOP = studio("Yoke top plate")
 res = box(-yw, yw, -YK_Y, YK_Y, X_CAR_FACE - YOKE_T, X_CAR_FACE, "new", "Top plate")
 ytop_body = new_body(res)
 CARX9 = [[sx * 7.5, sy * 8] for sx in (-1, 1) for sy in (-1, 1)]      # X beam carriage, rotated
 pocket_up([circ(p, CB["M3"][0]) for p in CARX9], X_CAR_FACE - YOKE_T, CB["M3"][1], "Cbores from below")
-cut_through([circ(p, CLR["M3"]) for p in CARX9 + LEG_H], X_CAR_FACE, "Holes")
+cut_through([circ(p, CLR["M3"]) for p in CARX9 + LEG_H] + [circ([FX, FY], 4.5)], X_CAR_FACE, "Holes")
 name_part(ytop_body, "Yoke top plate", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups)")
+          notes="6 mm 7075 plate: contour, holes and the filament tube hole from the top, cbores from the bottom (2 setups)")
 for p in CARX9:
     J("yoke", "ISO 4762", "M3", [p[0], p[1], X_CAR_FACE - YOKE_T + CB["M3"][1]], "+z", L=6, label="X carriage screw")
 for p in LEG_H:
     J("yoke", "ISO 4762", "M3", [p[0], p[1], X_CAR_FACE], "-z", L=10, label="leg screw")
-for p in CAR9:
-    J("yoke", "ISO 4762", "M3", [p[0], p[1], Y_CAR_FACE - YOKE_T], "+z", L=10, label="Y carriage screw")
 
-# ---- 6. Toolhead neck: 7075 tube pocketed from the bottom (closed top web), air window on +y
-nx, ny = TH["neck"]
-NW = 5.0                                     # wall
-WEB = 4.0
-TP_T = 6.0                                    # toolhead plate under the neck
-TP_TOP = TH_TOP                               # plate top (the neck bottom)
-TP_BOT = TH_TOP - TP_T
-S_NECK = studio("Toolhead neck")
-res = box(-nx / 2, nx / 2, -ny / 2, ny / 2, TP_TOP, NECK_TOP, "new", "Neck")
-neck_body = new_body(res)
-pocket_up([{"type": "rect", "corner1": [-nx / 2 + NW, -ny / 2 + NW], "corner2": [nx / 2 - NW, ny / 2 - NW]}], TP_TOP, NECK_TOP - WEB - TP_TOP, "Air channel")
-cut_through([circ(p, CLR["M3"]) for p in NECK_SCR] + [circ(p, 7.0) for p in CAR9], NECK_TOP, "Web holes")
-AD_T = 10.0                                   # air adapter thickness
-WIN = (-12, 4, 20, 27)                        # x0, x1, z0, z1 of the air window in the +y wall
-sid = sketch(plane_y(ny / 2), [{"type": "rect", "corner1": [WIN[0], WIN[2]], "corner2": [WIN[1], WIN[3]]}], "Air window")
-r("add_feature", kind="extrude", name="Air window", params={"profiles": [{"sketch": sid}], "depth": str(NW), "op": "remove"})
-AD_SCR = [[-19.5, 23.5], [9, 23.5]]
-holes_y([circ(p, TAP["M3"]) for p in AD_SCR], ny / 2 - NW, NW, +1, "Adapter screws M3")
-TPN = THL["TPN_W"]                            # toolhead plate screws into the wall ends (clear of the gearbox, flange, duct and Beacon bracket)
-pocket_up([circ(p, TAP["M3"]) for p in TPN], TP_TOP, 8, "Plate screws M3")
-name_part(neck_body, "Toolhead neck", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; "
-                "from the top: web holes; from +y: air window and M3 (3 setups)")
-
-# ---- Toolhead plate, drawn in the toolhead frame (cad/toolhead.py: u from the beam cross towards the nozzle,
-# v across) and placed rotated by THL["rot"] about z. Everything heavy sits on that diagonal so the centre of mass
-# lands on the cross: hotend and gearbox on the nozzle side, the extruder motor on a flange past the cross.
+# ---- 6. Extruder carrier: a 7075 plate under the yoke, drawn in the toolhead frame (cad/toolhead.py: u along the
+# gearbox drive shafts, v across; placed rotated by THL["rot"]). The Sherpa-style gearbox hangs under it round the
+# filament, the motor on a milled flange across the beam cross (the counterweight) turns the gearbox pinion through
+# a coupling and a jackshaft. Only the hotend and the duct riser go down through the shutter.
 def loc(p):
     return THM.to_local(THL, p[0], p[1])
-FU, MF, FL_T, JS_Z = THL["FU"], THL["MF"], THL["FL_T"], THL["JS_Z"]
-S_TPL = studio("Toolhead plate")
+Fu, Fv, MF, FL_T, AX, VM = THL["Fu"], THL["Fv"], THL["MF"], THL["FL_T"], THL["AX"], THL["VM"]
+CP_TOP, CP_BOT, CP_T = THL["CP_TOP"], THL["CP_BOT"], THL["CP_T"]
+S_CAR = studio("Extruder carrier")
 BAND = THL["BAND"]
-res = box(BAND[0], BAND[1], BAND[2], BAND[3], TP_BOT, TP_TOP, "new", "Diagonal band")
-tpl_body = new_body(res)
-nsq = [loc(c) for c in ((-nx / 2, -ny / 2), (nx / 2, -ny / 2), (nx / 2, ny / 2), (-nx / 2, ny / 2))]
-sid = sketch(plane(TP_BOT), [{"type": "polyline", "closed": True, "points": [[round(a, 4), round(b, 4)] for a, b in nsq]}], "Neck footprint")
-extrude(sid, TP_T, "add", "Neck footprint")
+res = box(BAND[0], BAND[1], BAND[2], BAND[3], CP_BOT, CP_TOP, "new", "Band")
+car_body = new_body(res)
+ysq = [loc(c) for c in ((-yw, -YK_Y), (yw, -YK_Y), (yw, YK_Y), (-yw, YK_Y))]
+sid = sketch(plane(CP_BOT), [{"type": "polyline", "closed": True, "points": [[round(a, 4), round(b, 4)] for a, b in ysq]}], "Yoke footprint")
+extrude(sid, CP_T, "add", "Yoke footprint")
 box(*THL["FLANGE"], "add", "Motor flange")
 for c in THL["CHEEKS"]:
     box(*c, "add", "Motor cheek")
-TPN_L = [loc(p) for p in TPN]
-EXT_H, BB_H, DUCT_H, MOT_H = THL["EXT_H"], THL["BB_H"], THL["DUCT_H"], THL["MOT_H"]
-AIR = THL["AIR"]
-cut_through([{"type": "rect", "corner1": [AIR[0], AIR[2]], "corner2": [AIR[1], AIR[3]]}, circ([FU, 0], 4.5)]
-            + [circ(p, CLR["M3"]) for p in TPN_L + EXT_H + BB_H + DUCT_H], TP_TOP, "Holes")
-pocket_up([circ(p, CB["M3"][0]) for p in TPN_L], TP_BOT, CB["M3"][1], "Cbores from below")
-pocket_z([circ(p, 6.6) for p in EXT_H + BB_H + DUCT_H], TP_TOP, 1.7, "Countersinks")
-holes_x([circ([0, JS_Z], 23.0)] + [circ(p, CLR["M3"]) for p in MOT_H], MF, FL_T, +1, "Motor pilot and screws")
-name_part(tpl_body, "Toolhead plate", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075 block 82 x 61 x 57, machined in its own (diagonal) frame. From the bottom: motor flange and cheeks, "
-                "cbores; from the top: contour, air outlet, filament hole, holes and countersinks; from the flange face: "
-                "motor pilot and M3 holes (3 setups)")
-for p in NECK_SCR:
-    J("neck", "ISO 4762", "M3", [p[0], p[1], NECK_TOP - WEB], "+z", L=8, label="neck screw")
-for p in TPN:
-    J("neck", "ISO 4762", "M3", [p[0], p[1], TP_BOT + CB["M3"][1]], "+z", L=10, label="plate screw")
+YK_SCR_L = [loc(p) for p in YK_SCR]
+CAR9_L = [loc(p) for p in CAR9]
+EXT_H, MOT_H = THL["EXT_H"], THL["MOT_H"]
+cut_through([circ([Fu, Fv], 4.5)] + [circ(p, CLR["M3"]) for p in YK_SCR_L] + [circ(p, 7.0) for p in CAR9_L], CP_TOP, "Holes")
+pocket_up([circ(p, CB["M3"][0]) for p in YK_SCR_L], CP_BOT, CB["M3"][1], "Cbores from below")
+pocket_up([circ(p, TAP["M3"]) for p in EXT_H], CP_BOT, CP_T, "Gearbox screws M3")
+holes_x([circ([VM, AX], 23.0)] + [circ(p, CLR["M3"]) for p in MOT_H], MF, FL_T, +1, "Motor pilot and screws")
+name_part(car_body, "Extruder carrier", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
+          notes="7075 block 80 x 75 x 42, machined in its own (rotated) frame. From the bottom: motor flange and cheeks, "
+                "cbores, gearbox taps M3; from the top: contour, filament hole, clearance holes over the carriage screw heads; "
+                "from the flange face: motor pilot and M3 holes (3 setups)")
+for p in YK_SCR:
+    J("yoke", "ISO 4762", "M3", [p[0], p[1], CP_BOT + CB["M3"][1]], "+z", L=8, label="carrier screw")
+for p in CAR9:
+    J("yoke", "ISO 4762", "M3", [p[0], p[1], Y_CAR_FACE - YOKE_T], "+z", L=10, label="Y carriage screw")
 # toolhead-frame fasteners: joint list "th", placed rotated with the toolhead
 for p in EXT_H:
-    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="extruder screw")
-for p in BB_H:
-    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="Beacon bracket screw")
-for p in DUCT_H:
-    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="duct screw")
+    J("th", "ISO 4762", "M3", [p[0], p[1], THL["Z0"] + 3.3], "+z", L=40, label="extruder screw")
 for p in MOT_H:
     J("th", "ISO 4762", "M3", [MF + FL_T, p[0], p[1]], "-x", L=8, label="extruder motor screw")
-for p in AD_SCR:
-    J("neck", "ISO 4762", "M3", [p[0], ny / 2 + AD_T, p[1]], "-y", L=14, label="adapter screw")
 
-# air adapter on the neck's +y face (PPS-CF, printed standing on its mounting face; teardrop channel)
-S_ADAPT = studio("Neck air adapter")
-res = box(-nx / 2, 12, ny / 2, ny / 2 + AD_T, WIN[2] - 1, WIN[3] + 3, "new", "Adapter")
-adapt_body = new_body(res)
-cyl(-4, ny / 2 + 5.5, 4.5, WIN[3] + 3, WIN[3] + 13, "add", "Hose barb")
-pocket_z([circ([-4, ny / 2 + 5.5], 6)], WIN[3] + 13, 11, "Barb bore")
-box(WIN[0], WIN[1], ny / 2, ny / 2 + 7, WIN[2], WIN[3] + 2, "remove", "Air cavity")
-holes_y([circ(p, CLR["M3"]) for p in AD_SCR], ny / 2, AD_T, +1, "Screw holes")
-name_part(adapt_body, "Neck air adapter", "PPS-CF", "#3c3f44", "satin", method="print",
-          notes="PPS-CF, printed standing on the mounting face; internal channel teardrop-shaped, no supports")
-
-# PTFE filament tube (bought)
+# PTFE filament tube (bought): from the gearbox inlet up through the carrier and the yoke, beside the X beam
 S_TUBE = studio("Filament tube")
-res = cyl(FX, FY, 2, TH_TOP, TH["filament_top"], "new", "PTFE tube")
+res = cyl(FX, FY, 2, CP_BOT, TH["filament_top"], "new", "PTFE tube")
 tube_body = new_body(res)
 name_part(tube_body, "PTFE filament tube 4 mm", None, "#e8e4d8", "satin", method="buy")
 

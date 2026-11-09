@@ -151,7 +151,7 @@ res = box(-JX, JX, BY1, SKY1, SPL, LID, "new", "Upper cover")
 bcov_up = new_body(res)
 res = box(-JX, JX, BY1, SKY1, BAY[0], SPL - 0.5, "new", "Lower cover")
 bcov_lo = new_body(res)
-EL_FANS = [[-160, -380], [-70, -380]]
+EL_FANS = [[-160, BAY[0] + 56], [-70, BAY[0] + 56]]   # bay floor up, so they follow the chamber height
 holes_y([circ(p, 76.0) for p in EL_FANS], BY1, SK, +1, "Fan openings")
 holes_y([{"type": "rect", "corner1": [x_ - 3, z_ - 30], "corner2": [x_ + 3, z_ + 30]} for x_ in range(-200, 201, 16) for z_ in (-90, 120)],
         BY1, SK, +1, "Vent slots")
@@ -282,26 +282,26 @@ for zz in (-225, -115):
 # ---------------------------------------------------------------- shutter over the cutout
 ST = SHU["strip_t"]
 SZ0 = PT + 0.5
-SXE = CUT + 4                          # strip ends overlap the plate by 4 mm and slide on PTFE pads
+SXE = CUT + 6                          # strip ends overlap the plate by 6 mm and slide on PTFE pads
+COL = THM.column_world(THL)            # the hotend column (hotend + duct riser) that drops through the shutter
 S_STRIP = studio("Shutter strip")
-SB0, SB1 = -(ny / 2 + 6.5), FY + 7.5          # band around the neck and the filament tube
+SB0, SB1 = COL[2] - 8, COL[3] + 6      # band around the column
 res = box(-SXE, SXE, SB0, SB1, SZ0, SZ0 + ST, "new", "Strip")
 strip_body = new_body(res)
-cut_through([{"type": "rect", "corner1": [-(G["travel"] + nx / 2 + 2), -(ny / 2 + 1.5)],
-              "corner2": [G["travel"] + nx / 2 + 2, FY + 3.5]}], SZ0 + ST, "Neck and tube slot")
+cut_through([{"type": "rect", "corner1": [-G["travel"] + COL[0] - 2, COL[2] - 1.5],
+              "corner2": [G["travel"] + COL[1] + 2, COL[3] + 1.5]}], SZ0 + ST, "Column slot")
 rr = SHU["roller_r"]
-for sx in (-1, 1):
-    sid = sketch(plane_y(SB1 - 2), [{"type": "circle", "center": [sx * (CUT - rr), SZ0 + ST + rr], "radius": rr}], "X cover roller")
+for sx in (-1, 1):   # reels just outside the cutout edge, clear of the column at full travel
+    sid = sketch(plane_y(SB1 - 2), [{"type": "circle", "center": [sx * (CUT + 2), SZ0 + ST + rr], "radius": rr}], "X cover roller")
     extrude(sid, SB1 - SB0 - 4, "add", "X cover roller")
 name_part(strip_body, "Shutter strip with X-cover spring reels (moves in Y)", "PPS-CF", "#8c6f4e", "satin", method="print",
           notes="PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it")
-S_NPLATE = studio("Shutter neck plate")
-res = box(-nx / 2 - 2, nx / 2 + 2, -ny / 2 - 6, FY + 6, SZ0 + ST + 0.5, SZ0 + ST + 2, "new", "Plate")
+S_NPLATE = studio("Shutter column plate")
+res = box(COL[0] - 1.5, COL[1] + 1.5, COL[2] - 6, COL[3] + 6, SZ0 + ST + 0.5, SZ0 + ST + 2, "new", "Plate")
 nplate_body = new_body(res)
-box(-nx / 2, nx / 2, -ny / 2, ny / 2, SZ0 + ST + 0.5, SZ0 + ST + 2, "remove", "Neck hole")
-cyl(FX, FY, 3, SZ0 + ST + 0.5, SZ0 + ST + 2, "remove", "Filament tube hole")
-name_part(nplate_body, "Shutter neck plate (X covers attach here)", AL, "#c0c6cc", "metal", method="SCS",
-          notes="1.5 mm aluminium, SCS cut; rides on the strip, pushed by the neck, X tapes bonded to it")
+box(COL[0] - 0.5, COL[1] + 0.5, COL[2] - 0.5, COL[3] + 0.5, SZ0 + ST + 0.5, SZ0 + ST + 2, "remove", "Column hole")
+name_part(nplate_body, "Shutter column plate (X covers attach here)", AL, "#c0c6cc", "metal", method="SCS",
+          notes="1.5 mm aluminium, SCS cut; rides on the strip, pushed by the hotend column, X tapes bonded to it")
 S_YROLL = studio("Shutter Y roller")
 yr = SHU["y_roller_r"]
 res = cyl_x(0, 7, yr, -(CUT - 3), CUT - 3, "new", "Roller")
@@ -325,7 +325,7 @@ for p in HM_H:
     J("heat", "ISO 4762", "M4", [p[0], p[1], BASE[0]], "+z", L=12, label="heater motor screw")
 
 # ---------------------------------------------------------------- back module contents
-FZ = (SPL + 5, PT - 20)                # filter parts stand on printed cradles on the divider
+FZ = (SPL + 5, PT + 40)                # filter parts stand on printed cradles on the divider
 S_FILT = studio("Filter loop")
 fparts, cradles = [], []
 FILT = ((-175, -65, BY0 + 6, BY1 - 6, "Air-to-air cooler (finned, ambient side vented)", "#9aa3ab"),
@@ -364,12 +364,12 @@ for b_, n_ in ((duct_out, "outlet"), (duct_ret, "return")):
 EZ = (BAY[0] + 10, SPL - 10)
 S_ELEC = studio("Electronics")
 eparts = []
-ELEC = ((-200, -40, BY0 + 6, BY0 + 26, -330, -230, "BTT Kraken (on standoffs)", "#1d5c3a"),
-        (-20, 195, BY0 + 6, BY0 + 36, -300, -185, "PSU 48 V (LRS-350-48 class)", "#a7adb3"),
-        (-20, 195, BY0 + 6, BY0 + 36, -420, -320, "PSU 24 V (LRS-350-24 class)", "#a7adb3"),
-        (-200, -120, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, intake", "#2b2b2b"),
-        (-110, -30, BY1 - 27, BY1 - 2, -420, -340, "Electronics fan 80 mm, exhaust", "#2b2b2b"),
-        (-200, -130, BY0 + 6, BY0 + 46, -222, -180, "Raspberry Pi / host + relays", "#1d5c3a"))
+ELEC = ((-200, -40, BY0 + 6, BY0 + 26, BAY[0] + 106, BAY[0] + 206, "BTT Kraken (on standoffs)", "#1d5c3a"),
+        (-20, 195, BY0 + 6, BY0 + 36, BAY[0] + 136, BAY[0] + 251, "PSU 48 V (LRS-350-48 class)", "#a7adb3"),
+        (-20, 195, BY0 + 6, BY0 + 36, BAY[0] + 16, BAY[0] + 116, "PSU 24 V (LRS-350-24 class)", "#a7adb3"),
+        (-200, -120, BY1 - 27, BY1 - 2, BAY[0] + 16, BAY[0] + 96, "Electronics fan 80 mm, intake", "#2b2b2b"),
+        (-110, -30, BY1 - 27, BY1 - 2, BAY[0] + 16, BAY[0] + 96, "Electronics fan 80 mm, exhaust", "#2b2b2b"),
+        (-200, -130, BY0 + 6, BY0 + 46, BAY[0] + 214, BAY[0] + 256, "Raspberry Pi / host + relays", "#1d5c3a"))
 for x0_, x1_, y0_, y1_, z0_, z1_, nm_, col_ in ELEC:
     res = box(x0_, x1_, y0_, y1_, z0_, z1_, "new", nm_)
     b_ = new_body(res); name_part(b_, nm_, None, col_, "satin", method="buy"); eparts.append((b_, nm_))
@@ -394,58 +394,54 @@ for (cx_, cz_), nm_ in zip(TB_FANS, ("Top bay fan 80 mm, intake", "Top bay fan 8
         for sz in (-1, 1):
             J("module", "ISO 4762", "M4", [cx_ + sx * 36, OW, cz_ + sz * 36], "-y", L=12, label="fan screw")
 res = box(-40, 57, OW - SK - 33, OW - SK, 120, 205, "new", "Part-cooling blower")
-b_ = new_body(res); name_part(b_, "Part-cooling blower (server type, hose to the neck)", None, "#2b2b2b", "satin", method="buy")
-tparts.append((b_, "Part-cooling blower (server type, hose to the neck)"))
+b_ = new_body(res); name_part(b_, "Part-cooling blower (server type, hose to the toolhead duct)", None, "#2b2b2b", "satin", method="buy")
+tparts.append((b_, "Part-cooling blower (server type, hose to the toolhead duct)"))
 for p in ((-30, 130), (47, 130), (-30, 195), (47, 195)):
     J("module", "ISO 4762", "M4", [p[0], OW, p[1]], "-y", L=12, label="blower screw")
 
 # ---------------------------------------------------------------- toolhead detail, in the toolhead frame
-# (cad/toolhead.py: u from the beam cross towards the nozzle, v across; placed rotated by THL["rot"]).
-# The hotend and gearbox sit on the nozzle side, the motor past the cross drives the gearbox's pinion
-# through a coupling and a jackshaft, so the centre of mass sits on both MGN9 rail lines.
+# (cad/toolhead.py: u along the gearbox drive shafts, v across; placed rotated by THL["rot"]). Above the shutter,
+# under the extruder carrier: the gearbox round the filament and the motor across the beam cross, joined by a
+# coupling and a jackshaft. Through the shutter: the hotend and the duct riser. Under the plate: the nozzle,
+# the duct ring and the Beacon on a pad of the duct.
+NOZ_ = THL["NOZ"]
 S_TDET = studio("Toolhead")
 tdet = []
 def tpart(nm_, res, color, material=None, method="buy", notes=""):
     b_ = new_body(res); name_part(b_, nm_, material, color, "satin", method=method, notes=notes); tdet.append((b_, nm_))
 def tbox(b, op="new", name=None):
     return box(b[0], b[1], b[2], b[3], b[4], b[5], op, name)
-# part-cooling duct: plenum under the plate's air outlet, riser beside the jackshaft, feed and ring round the nozzle
-PL, RS, FD, RG = THL["PLEN"], THL["RISER"], THL["FEED"], THL["RING"]
-res = tbox(PL, "new", "Duct plenum")
-tbox(RS, "add", "Duct riser")
+RS, FD, RG, BP = THL["RISER"], THL["FEED"], THL["RING"], THL["BPAD"]
+res = tbox(RS, "new", "Duct riser")
 tbox(FD, "add", "Duct feed")
-cyl(FU, 0, RG[0], RG[2], RG[3], "add", "Duct ring")
-cyl(FU, 0, RG[1], RG[2], RG[3], "remove", "Ring bore")
-box(PL[0] + 3, PL[1] - 3, PL[2] + 3, PL[3] - 3, PL[4] + 2, PL[5], "remove", "Plenum cavity")
-box(RS[0] + 2, RS[1] - 2, RS[2] + 2, RS[3] - 2, FD[4] + 2, PL[4] + 2, "remove", "Riser channel")
+tbox(BP, "add", "Beacon pad")
+cyl(Fu, Fv, RG[0], RG[2], RG[3], "add", "Duct ring")
+cyl(Fu, Fv, RG[1], RG[2], RG[3], "remove", "Ring bore")
+BB_ = THL["BARB"]
+sid = sketch(plane_y(BB_[1]), [{"type": "circle", "center": [BB_[0], BB_[2]], "radius": 4.5}], "Hose barb")
+extrude(sid, 10, "add", "Hose barb")
+sid = sketch(plane_y(BB_[1] + 2), [{"type": "circle", "center": [BB_[0], BB_[2]], "radius": 3.0}], "Barb bore")
+extrude(sid, 12, "remove", "Barb bore")
+box(RS[0] + 2, RS[1] - 2, RS[2] + 2, RS[3] - 2, FD[4] + 2, RS[5] - 2, "remove", "Riser channel")
 box(FD[0], FD[1], FD[2] + 2, FD[3] - 2, FD[4] + 2, FD[5] - 2, "remove", "Feed channel")
-pocket_z([circ(p, 4.0) for p in THL["DUCT_H"]], PL[5], 5, "Heat-set inserts")
-tpart("Part-cooling duct (fed through the hollow neck)", res, "#3c3f44", "PPS-CF", "print",
-      "PPS-CF, printed plenum face down; channel roofs are <= 13 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts")
+pocket_up([circ(p, 4.0) for p in THL["BCN_H"]], BP[4], 3.5, "Beacon heat-set inserts")
+tpart("Part-cooling duct with Beacon pad (riser through the shutter)", res, "#3c3f44", "PPS-CF", "print",
+      "PPS-CF, printed standing on the riser top; feed and ring channel roofs are <= 6 mm bridges, Beacon pad prints flat off the riser, "
+      "no supports; 2 M3 heat-set inserts for the Beacon; hose from the gantry-bay blower on the barb")
 GB = THL["GB"]
 tpart("Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)", tbox(GB, "new", "Extruder gearbox"), "#c4572a")
-tpart("Extruder motor (LDO high-temp, 36 mm)", tbox(THL["MOT"], "new", "Extruder motor"), "#2b2b2b")
-CP, JSH = THL["CPL"], THL["JSH"]
-tpart("Extruder shaft coupling (5-5 beam coupling D14)", cyl_x(0, JS_Z, 7, CP[0], CP[1], "new", "Coupling"), "#b8bec4", "Aluminium 6061")
-tpart("Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)", cyl_x(0, JS_Z, 2.5, JSH[0], JSH[1], "new", "Jackshaft"),
+tpart("Extruder motor (36 mm, in the gantry bay)", tbox(THL["MOT"], "new", "Extruder motor"), "#2b2b2b")
+CP_, JSH = THL["CPL"], THL["JSH"]
+tpart("Extruder shaft coupling (5-5 flexible coupling D12)", cyl_x(VM, AX, 6, CP_[0], CP_[1], "new", "Coupling"), "#b8bec4", "Aluminium 6061")
+tpart("Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)", cyl_x(VM, AX, 2.5, JSH[0], JSH[1], "new", "Jackshaft"),
       "#9aa3ab", "Steel")
 CH_ = THL["CHUBE"]
-tpart("Chube Conduction hotend", cyl(FU, 0, CH_[0], CH_[1], CH_[2], "new", "Chube"), "#b8bec4")
+tpart("Chube Conduction hotend", cyl(Fu, Fv, CH_[0], CH_[1], CH_[2], "new", "Chube"), "#b8bec4")
 NZ_ = THL["NOZZLE"]
-tpart("Nozzle", cyl(FU, 0, NZ_[0], NZ_[1], NZ_[2], "new", "Nozzle"), "#c9a227", "Brass")
+tpart("Nozzle", cyl(Fu, Fv, NZ_[0], NZ_[1], NZ_[2], "new", "Nozzle"), "#c9a227", "Brass")
 tpart("Beacon3D probe", tbox(THL["BEACON"], "new", "Beacon"), "#1d1d1d")
-# Beacon bracket: C section (top pad on the plate, web, bottom pad on the Beacon), printed lying on the web
-S_BCNB = studio("Beacon bracket")
-res = tbox(THL["BB_TOP"], "new", "Top pad")
-bcnb_body = new_body(res)
-tbox(THL["BB_WEB"], "add", "Web")
-tbox(THL["BB_BOT"], "add", "Bottom pad")
-pocket_up([circ(p, 4.0) for p in THL["BB_H"]], THL["BB_TOP"][4], 5, "Heat-set inserts")
-BCN_B = THL["BCN_H"]
-cut_through([circ(p, CLR["M3"]) for p in BCN_B], THL["BB_BOT"][5], "Beacon screw holes")
-name_part(bcnb_body, "Beacon bracket", "PPS-CF", "#3c3f44", "satin", method="print", notes="PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts")
-for p in BCN_B:
-    J("th", "ISO 4762", "M3", [p[0], p[1], NOZ + 3], "+z", L=16, label="Beacon screw")
+for p in THL["BCN_H"]:
+    J("th", "ISO 4762", "M3", [p[0], p[1], NOZ_ + 2], "+z", L=16, label="Beacon screw")
 
 # ---------------------------------------------------------------- holes for every sheet-metal fastener (drilled after
 # all joint lists exist; SCS cuts them with the blanks)

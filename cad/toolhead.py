@@ -1,100 +1,140 @@
-"""Toolhead layout and centre of mass. Plain Python (no rCAD), so it runs on its own:
+"""Toolhead layout, centre of mass and fit checks. Plain Python (no rCAD), so it runs on its own:
 
-    python3 cad/toolhead.py          # prints the mass table and where the centre of mass is
+    python3 cad/toolhead.py          # mass table, centre of mass, solved frame and motor position, fit checks
 
-build.py uses layout() for the geometry, so the model and this check always agree.
+build.py uses layout() for the geometry, so the model and these checks always agree.
 
-The toolhead is laid out in its own frame:
-  origin  the beam cross: the yoke centre, where the two MGN9 rail lines cross
-  u       along the diagonal from the cross to the filament axis
-  v       across it (u, v, z right-handed)
-  z       world z (0 = top plate underside)
-The Part Studios for the toolhead plate, Beacon bracket and toolhead detail are drawn in this
-frame and placed rotated by `rot` degrees about z.
+Layout (Jonas, 2026-11-09): the extruder rides ABOVE the plate, in the cool gantry bay, under the yoke.
+Only a slim column (the hotend and the part-cooling duct riser) drops through the shutter and the plate
+cutout to the nozzle. The gearbox sits round the filament; the extruder motor sits across the beam
+cross as the counterweight and turns the gearbox pinion through a coupling and a jackshaft that runs
+under the yoke. The motor position and the frame angle are solved so the centre of mass of everything
+the two MGN9H carriages carry lands on the beam cross (both rail lines).
 
-Why: the filament has to drop past both beams, so the nozzle sits in an open quadrant, (18, 25)
-from the cross. If the extruder, motor, hotend and Beacon all sit around the nozzle, the centre of
-mass is off both rail lines and every acceleration twists the MGN9 carriages. So everything heavy
-is arranged along that diagonal: the hotend and the Sherpa-style gearbox on the nozzle side, and
-the extruder motor across the cross as the counterweight, driving the gearbox's pinion through a
-coupling and a short jackshaft. The motor position is set so the centre of mass lands on the cross.
+Frame: origin at the beam cross; u along the gearbox drive shafts (rotated `rot` degrees from world x),
+v across, z world (0 = top plate underside). The filament axis is at (Fu, Fv) in this frame.
 """
+import copy
 import math
 
 RHO = {"7075": 2.81e-3, "steel": 7.85e-3, "print": 1.45e-3}    # g/mm3 (PPS-CF about 1.45)
 
 
-def layout(P):
-    TH, G = P["toolhead"], P["gantry"]
-    FX, FY = TH["offset"]
-    FU = math.hypot(FX, FY)                       # nozzle distance from the cross, along u
-    rot = math.degrees(math.atan2(FY, FX))
-    PT = P["frame"]["plate_t"]
-    Y_CAR_FACE, X_CAR_FACE = G["y_beam_bot"] - 10, G["x_beam_bot"] - 10
-    YOKE_T = 6
-    TP_TOP = TH["body_top"]
-    TP_T = 6.0
-    TP_BOT = TP_TOP - TP_T
-    NOZ = TP_TOP - TH["height"]
-    NECK_TOP = Y_CAR_FACE - YOKE_T
-    MF = TH["motor_face_u"]                       # extruder motor mounting face, u
-    L = {"FU": FU, "rot": rot, "TP_TOP": TP_TOP, "TP_BOT": TP_BOT, "TP_T": TP_T, "NOZ": NOZ, "MF": MF}
-
-    # Sherpa-style gearbox around the filament: drive shafts along u, drive gears either side of
-    # the filament, the big gear on the cross side. Its 10T pinion sits on the jackshaft axis.
-    GB = (FU - 14, FU + 10, -19.5, 16.0, TP_BOT - 38, TP_BOT)          # u0 u1 v0 v1 z0 z1
-    JS_Z = TP_BOT - 30                                                 # jackshaft / motor axis z
-    L.update(GB=GB, JS_Z=JS_Z)
-    # motor (36 mm square, 20 mm body) on the cross side; its face on the plate's flange
-    FL_T = 5.0                                                         # motor flange thickness
-    MOT = (MF - 20, MF, -18, 18, JS_Z - 18, JS_Z + 18)
-    CPL = (MF + FL_T + 2, MF + FL_T + 20)                              # flexible coupling, u range, D14
-    JSH = (CPL[0] + 9, GB[0] + 10)                                     # 5 mm jackshaft, u range (into the gearbox bearings)
-    L.update(FL_T=FL_T, MOT=MOT, CPL=CPL, JSH=JSH)
-
-    # toolhead plate (7075, 6 mm): a band along the diagonal, the neck footprint, and the motor
-    # flange with two side cheeks hanging under it (milled from the bottom)
-    BAND = (MF - 22, FU + 12, -28.0, 23.0)
-    FLANGE = (MF, MF + FL_T, -22.5, 22.5, JS_Z - 21, TP_BOT)
-    CHEEKS = [(MF - 20, MF, s0, s1, JS_Z, TP_BOT) for s0, s1 in ((-22.5, -18.5), (18.5, 22.5))]
-    L.update(BAND=BAND, FLANGE=FLANGE, CHEEKS=CHEEKS)
-    # neck screws (world frame, in the neck wall ends): chosen clear of the gearbox, flange, duct and Beacon bracket
-    L["TPN_W"] = [[-19.5, 19.0], [19.5, -19.0], [19.5, 0.0], [-19.5, -19.0]]
-    # air outlet from the hollow neck into the duct plenum (inside the neck's pocket)
-    L["AIR"] = (-2.0, 11.0, -5.0, 9.0)
-
-    # part-cooling duct: plenum under the plate, riser beside the jackshaft, feed into a ring at the nozzle
-    L["PLEN"] = (-5.0, 14.0, -8.0, 21.0, TP_BOT - 6, TP_BOT)
-    L["RISER"] = (2.0, 14.0, 8.0, 20.0, NOZ + 4, TP_BOT - 6)
-    L["FEED"] = (8.0, FU - 6, 6.0, 16.0, NOZ + 2, NOZ + 8)
-    L["RING"] = (14.0, 7.0, NOZ + 2, NOZ + 8)                          # outer r, bore r, z0, z1 (at the nozzle)
-    L["DUCT_H"] = [[-3.5, -6.5], [12.5, -6.5], [4.0, 19.5]]          # countersunk from the plate top, inside the neck pocket
-
-    # Beacon on the cross side of the nozzle, on a printed C bracket
-    L["BEACON"] = (-9.0, 17.0, -22.0, -8.0, NOZ + 3, NOZ + 15)
-    L["BB_TOP"] = (8.0, 20.0, -27.0, -20.0, TP_BOT - 5, TP_BOT)
-    L["BB_WEB"] = (8.0, 20.0, -27.0, -24.0, NOZ + 15, TP_BOT - 5)
-    L["BB_BOT"] = (-9.0, 20.0, -27.0, -12.0, NOZ + 15, NOZ + 19)
-    L["BB_H"] = [[11.0, -24.0], [17.0, -24.0]]                       # bracket to plate, countersunk from the top
-    L["BCN_H"] = [[-4.0, -15.0], [12.0, -15.0]]                      # Beacon to bracket
-    L["EXT_H"] = [[GB[0] + 5, 13.0], [GB[1] - 3, 13.0], [GB[0] + 5, -16.0], [GB[1] - 3, -16.0]]
-    L["MOT_H"] = [[sv * 13, JS_Z + sz * 13] for sv in (-1, 1) for sz in (-1, 1)]   # NEMA14 36 mm, 26 mm square
-    L["CHUBE"] = (11.0, NOZ + 12, GB[4])
-    L["NOZZLE"] = (3.5, NOZ, NOZ + 12)
-
-    # world-frame things that move with the yoke (symmetric about the cross unless noted)
-    L["Y_CAR_FACE"], L["X_CAR_FACE"], L["NECK_TOP"], L["YOKE_T"] = Y_CAR_FACE, X_CAR_FACE, NECK_TOP, YOKE_T
-    return L
+def _rot(deg):
+    return math.cos(math.radians(deg)), math.sin(math.radians(deg))
 
 
 def to_world(L, u, v):
-    c, s = math.cos(math.radians(L["rot"])), math.sin(math.radians(L["rot"]))
+    c, s = _rot(L["rot"])
     return [c * u - s * v, s * u + c * v]
 
 
 def to_local(L, x, y):
-    c, s = math.cos(math.radians(L["rot"])), math.sin(math.radians(L["rot"]))
+    c, s = _rot(L["rot"])
     return [c * x + s * y, -s * x + c * y]
+
+
+def gantry_z(P):
+    """World z of the gantry stack the toolhead hangs in."""
+    G, F = P["gantry"], P["frame"]
+    PT = F["plate_t"]
+    Y_CAR_FACE, X_CAR_FACE = G["y_beam_bot"] - 10, G["x_beam_bot"] - 10
+    YOKE_T = 6
+    return {"PT": PT, "SHUTTER_TOP": PT + F["shutter_h"], "Y_CAR_FACE": Y_CAR_FACE, "X_CAR_FACE": X_CAR_FACE,
+            "YOKE_T": YOKE_T, "YOKE_BOT": Y_CAR_FACE - YOKE_T}
+
+
+def layout(P, rot=None, mf=None):
+    TH = P["toolhead"]
+    gz = gantry_z(P)
+    FX, FY = TH["offset"]
+    L = dict(gz)
+    L["rot"] = TH["frame_rot"] if rot is None else rot
+    MF = TH["motor_face_u"] if mf is None else mf
+    Fu, Fv = to_local(L, FX, FY)
+    NOZ = TH["nozzle_z"]
+    CP_TOP = gz["YOKE_BOT"]                     # carrier plate bolts under the yoke
+    CP_T = 6.0
+    CP_BOT = CP_TOP - CP_T
+    Z0 = gz["SHUTTER_TOP"] + 1.0                # lowest point of anything above the shutter
+    AX = Z0 + 18.0                              # motor, jackshaft and gearbox drive shaft axis height
+    assert CP_BOT >= Z0 + 36, "no room for the 36 mm motor between the shutter and the yoke: raise the beams"
+    L.update(Fu=Fu, Fv=Fv, MF=MF, NOZ=NOZ, CP_TOP=CP_TOP, CP_BOT=CP_BOT, CP_T=CP_T, Z0=Z0, AX=AX)
+    # Sherpa-style gearbox: drive shafts along u, the main drive gear at v = Fv - 5.5, its 50T gear meshing the
+    # 10T pinion on the jackshaft 15 mm across at v = Fv + 9.5 (same height)
+    VM = Fv + 9.5
+    GB = (Fu - 14, Fu + 7, Fv - 20, Fv + 14, Z0, CP_BOT)        # u kept short of the end-block bases at full travel
+    L.update(VM=VM, GB=GB)
+    FL_T = 5.0
+    MOT = (MF - 20, MF, VM - 18, VM + 18, AX - 18, AX + 18)
+    CPL = (MF + FL_T + 0.5, GB[0] - 0.5)                               # flexible coupling, D12, fills the gap
+    assert CPL[1] - CPL[0] >= 10, "no room for the coupling between the motor flange and the gearbox"
+    JSH = ((CPL[0] + CPL[1]) / 2, GB[0] + 10)                          # 5 mm jackshaft into the gearbox bearings
+    FLANGE = (MF, MF + FL_T, VM - 22.5, VM + 22.5, Z0 + 0.5, CP_BOT)
+    CHEEKS = [(MF - 20, MF, VM + s0, VM + s1, AX, CP_BOT) for s0, s1 in ((-22.5, -18.5), (18.5, 22.5))]
+    L.update(FL_T=FL_T, MOT=MOT, CPL=CPL, JSH=JSH, FLANGE=FLANGE, CHEEKS=CHEEKS)
+    # carrier plate: the yoke footprint plus a band over the gearbox and the motor flange
+    L["BAND"] = (MF - 22, GB[1] + 2, min(GB[2], VM - 22.5) - 2, max(GB[3], VM + 22.5) + 2)
+    # hotend column through the shutter and the plate
+    L["CHUBE"] = (11.0, NOZ + 12, Z0)
+    L["NOZZLE"] = (3.5, NOZ, NOZ + 12)
+    L["RISER"] = (max(Fu - 27, MF + FL_T + 1), GB[0] - 1, Fv - 6, Fv + 6, NOZ + 4, Z0 + 10)    # duct riser, cross side of the hotend
+    L["BARB"] = (L["RISER"][0] + 6.5, Fv - 6, Z0 + 5)                    # hose barb on the riser's -v face, (u, v face, z)
+    L["FEED"] = (Fu - 22, Fu - 6, Fv - 5, Fv + 5, NOZ + 2, NOZ + 8)
+    L["RING"] = (14.0, 7.0, NOZ + 2, NOZ + 8)
+    # Beacon on a printed pad from the riser, on the cross side, fully under the plate
+    L["BEACON"] = (Fu - 54, Fu - 28, Fv - 7, Fv + 7, NOZ + 2, NOZ + 14)
+    L["BPAD"] = (Fu - 54, Fu - 14, Fv - 9, Fv + 9, NOZ + 14, -2.0)
+    L["BCN_H"] = [[Fu - 49, Fv], [Fu - 33, Fv]]
+    # gearbox through-bolts (from its underside into the carrier) and motor screws
+    L["EXT_H"] = [[GB[0] + 3, GB[2] + 3], [GB[1] - 3, GB[2] + 3], [GB[1] - 3, GB[3] - 3]]
+    L["YK_SCR"] = carrier_screws(L, P)
+    L["MOT_H"] = [[VM + sv * 13, AX + sz * 13] for sv in (-1, 1) for sz in (-1, 1)]
+    return L
+
+
+def _inside(L, b, x, y, pad):
+    u, v = to_local(L, x, y)
+    return b[0] - pad <= u <= b[1] + pad and b[2] - pad <= v <= b[3] + pad
+
+
+def carrier_screws(L, P):
+    """Four carrier-to-yoke screws (world xy): inside the yoke footprint, clear of the MGN9H carriage screw heads,
+    the filament and everything hanging under the carrier (so they can be reached from below)."""
+    yx, yy = _yoke_xy(P)
+    car9 = [[sx * 8, sy * 7.5] for sx in (-1, 1) for sy in (-1, 1)]
+    FX, FY = P["toolhead"]["offset"]
+    under = [L["GB"], L["MOT"], L["FLANGE"], (L["CPL"][0], L["CPL"][1], L["VM"] - 6, L["VM"] + 6, 0, 0)] + L["CHEEKS"]
+    ok = []
+    for i in range(-40, 41):
+        for j in range(-48, 49):
+            x, y = i * 0.5, j * 0.5
+            if abs(x) > yx - 4 or abs(y) > yy - 4:
+                continue
+            if any(math.hypot(x - a, y - b) < 7 for a, b in car9) or math.hypot(x - FX, y - FY) < 7:
+                continue
+            if any(_inside(L, b, x, y, 4.0) for b in under):
+                continue
+            ok.append((x, y))
+    picks = []
+    for cx, cy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        best = max(ok, key=lambda p: cx * p[0] + cy * p[1])
+        picks.append([best[0], best[1]])
+    return picks
+
+
+def column_world(L, pad=0.0):
+    """World xy bounds (relative to the cross) of what passes through the shutter and the plate."""
+    pts = []
+    r = L["CHUBE"][0]
+    for a in range(0, 360, 10):
+        pts.append(to_world(L, L["Fu"] + r * math.cos(math.radians(a)), L["Fv"] + r * math.sin(math.radians(a))))
+    R = L["RISER"]
+    for u in R[:2]:
+        for v in R[2:4]:
+            pts.append(to_world(L, u, v))
+    xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+    return (min(xs) - pad, max(xs) + pad, min(ys) - pad, max(ys) + pad)
 
 
 def _box(b):
@@ -102,85 +142,40 @@ def _box(b):
     return (u1 - u0) * (v1 - v0) * (z1 - z0), [(u0 + u1) / 2, (v0 + v1) / 2, (z0 + z1) / 2]
 
 
-def _plate(L, P):
-    """Toolhead plate volume and centroid: band + neck footprint (sampled on a 0.5 mm grid), less the holes, plus flange and cheeks."""
-    nx, ny = P["toolhead"]["neck"]
-    BAND, h = L["BAND"], 0.5
-    a = m_u = m_v = 0.0
-    lo, hi = -60.0, 60.0
+def _yoke_xy(P):
+    G = P["gantry"]
+    return 22.0, G["beam_w"] / 2 + 12          # yoke half widths in x and y
+
+
+def _carrier(L, P, h=0.5):
+    """Carrier plate volume and centroid: band + yoke footprint on a grid, plus flange and cheeks, less the pilot hole."""
+    yx, yy = _yoke_xy(P)
+    B = L["BAND"]
+    a = mu = mv = 0.0
+    lo, hi = -80.0, 80.0
     n = int((hi - lo) / h)
     for i in range(n):
         u = lo + (i + 0.5) * h
         for j in range(n):
             v = lo + (j + 0.5) * h
             x, y = to_world(L, u, v)
-            inside = (BAND[0] <= u <= BAND[1] and BAND[2] <= v <= BAND[3]) or (abs(x) <= nx / 2 and abs(y) <= ny / 2)
-            if not inside:
-                continue
-            ax = L["AIR"]
-            if ax[0] <= u <= ax[1] and ax[2] <= v <= ax[3]:
-                continue
-            a += h * h; m_u += u * h * h; m_v += v * h * h
-    vol = a * L["TP_T"]
-    parts = [(vol, [m_u / a, m_v / a, (L["TP_TOP"] + L["TP_BOT"]) / 2])]
+            if (B[0] <= u <= B[1] and B[2] <= v <= B[3]) or (abs(x) <= yx and abs(y) <= yy):
+                a += h * h; mu += u * h * h; mv += v * h * h
+    parts = [(a * L["CP_T"], [mu / a, mv / a, (L["CP_TOP"] + L["CP_BOT"]) / 2])]
     for b in [L["FLANGE"]] + L["CHEEKS"]:
         parts.append(_box(b))
-    # motor pilot hole in the flange
     fl = L["FLANGE"]
-    parts.append((-math.pi * 11.5 ** 2 * L["FL_T"], [(fl[0] + fl[1]) / 2, 0, L["JS_Z"]]))
+    parts.append((-math.pi * 11.5 ** 2 * L["FL_T"], [(fl[0] + fl[1]) / 2, L["VM"], L["AX"]]))
     V = sum(p[0] for p in parts)
-    c = [sum(p[0] * p[1][k] for p in parts) / V for k in range(3)]
-    return V, c
-
-
-def masses(P):
-    """[(name, grams, [u, v, z])] for everything the two MGN9H carriages carry."""
-    L = layout(P)
-    TH = P["toolhead"]
-    MG = TH["mass_g"]
-    nx, ny = TH["neck"]
-    out = []
-    # yoke, neck and carriages: centred on the cross
-    yw, YK_Y, LEG_IN = 22.0, 12.5 + 9, 12.5 + 3
-    yc, xc, YT = L["Y_CAR_FACE"], L["X_CAR_FACE"], L["YOKE_T"]
-    vU = 2 * yw * 2 * YK_Y * YT + 2 * (2 * yw * (YK_Y - LEG_IN) * (xc - YT - yc))
-    out.append(("Yoke U (7075)", vU * RHO["7075"], [0, 0, (yc - YT + xc - YT) / 2]))
-    out.append(("Yoke top plate (7075)", 2 * yw * 2 * YK_Y * YT * RHO["7075"], [0, 0, xc - YT / 2]))
-    hN = L["NECK_TOP"] - L["TP_TOP"]
-    vN = nx * ny * hN - (nx - 10) * (ny - 10) * (hN - 4)
-    out.append(("Toolhead neck (7075)", vN * RHO["7075"], [0, 0, (L["NECK_TOP"] + L["TP_TOP"]) / 2]))
-    out.append(("MGN9H carriage, Y beam", MG["mgn9h"], [0, 0, yc + 5]))
-    out.append(("MGN9H carriage, X beam", MG["mgn9h"], [0, 0, xc + 5]))
-    ad = to_local(L, -5.0, ny / 2 + 5)
-    out.append(("Neck air adapter (PPS-CF)", MG["air_adapter"], [ad[0], ad[1], 20.0]))
-    # toolhead
-    V, c = _plate(L, P)
-    out.append(("Toolhead plate with motor flange (7075)", V * RHO["7075"], c))
-    out.append(("Extruder motor (LDO high-temp, 36 mm)", MG["motor"], _box(L["MOT"])[1]))
-    out.append(("Shaft coupling", MG["coupling"], [(L["CPL"][0] + L["CPL"][1]) / 2, 0, L["JS_Z"]]))
-    js = L["JSH"]
-    out.append(("Jackshaft 5 mm", math.pi * 2.5 ** 2 * (js[1] - js[0]) * RHO["steel"], [(js[0] + js[1]) / 2, 0, L["JS_Z"]]))
-    out.append(("Extruder gearbox (Sherpa-style, with gears and bearings)", MG["gearbox"], _box(L["GB"])[1]))
-    out.append(("Chube Conduction hotend with nozzle", MG["hotend"], [L["FU"], 0, (L["NOZZLE"][1] + L["CHUBE"][2]) / 2]))
-    out.append(("Beacon3D", MG["beacon"], _box(L["BEACON"])[1]))
-    vb = [_box(L[k]) for k in ("BB_TOP", "BB_WEB", "BB_BOT")]
-    Vb = sum(x[0] for x in vb)
-    out.append(("Beacon bracket (PPS-CF)", Vb * RHO["print"],
-                [sum(x[0] * x[1][k] for x in vb) / Vb for k in range(3)]))
-    Vd, cd = _duct(L)
-    out.append(("Part-cooling duct (PPS-CF)", Vd * RHO["print"], cd))
-    out.append(("Wiring and sleeving to the toolhead", MG["wiring"], [L["FU"] / 2, 0, L["TP_BOT"] - 10]))
-    return L, out
+    return V, [sum(p[0] * p[1][k] for p in parts) / V for k in range(3)]
 
 
 def _duct(L):
-    """Duct volume (outer shapes less the plenum, riser and feed channels) and centroid."""
-    PL, RS, FD = L["PLEN"], L["RISER"], L["FEED"]
-    parts = [_box(PL), _box(RS), _box(FD)]
+    R, FD = L["RISER"], L["FEED"]
     ro, ri, z0, z1 = L["RING"]
-    parts.append((math.pi * (ro ** 2 - ri ** 2) * (z1 - z0), [L["FU"], 0, (z0 + z1) / 2]))
-    for b in [(PL[0] + 3, PL[1] - 3, PL[2] + 3, PL[3] - 3, PL[4] + 2, PL[5]),
-              (RS[0] + 2, RS[1] - 2, RS[2] + 2, RS[3] - 2, FD[4] + 2, PL[4] + 2),
+    parts = [_box(R), _box(FD), _box(L["BPAD"]),
+             (math.pi * (ro ** 2 - ri ** 2) * (z1 - z0), [L["Fu"], L["Fv"], (z0 + z1) / 2])]
+    for b in [(R[0] + 2, R[1] - 2, R[2] + 2, R[3] - 2, FD[4] + 2, R[5] - 2),
               (FD[0], FD[1], FD[2] + 2, FD[3] - 2, FD[4] + 2, FD[5] - 2)]:
         v, c = _box(b)
         parts.append((-v, c))
@@ -188,11 +183,84 @@ def _duct(L):
     return V, [sum(p[0] * p[1][k] for p in parts) / V for k in range(3)]
 
 
-def com(P):
-    L, ms = masses(P)
+def masses(P, rot=None, mf=None):
+    """[(name, grams, [u, v, z])] for everything the two MGN9H carriages carry."""
+    L = layout(P, rot, mf)
+    MG = P["toolhead"]["mass_g"]
+    yx, yy = _yoke_xy(P)
+    LEG_IN = yy - 6
+    yc, xc, YT = L["Y_CAR_FACE"], L["X_CAR_FACE"], L["YOKE_T"]
+    out = []
+    vU = 2 * yx * 2 * yy * YT + 2 * (2 * yx * (yy - LEG_IN) * (xc - YT - yc))
+    out.append(("Yoke U (7075)", vU * RHO["7075"], [0, 0, (yc - YT + xc - YT) / 2]))
+    out.append(("Yoke top plate (7075)", 2 * yx * 2 * yy * YT * RHO["7075"], [0, 0, xc - YT / 2]))
+    out.append(("MGN9H carriage, Y beam", MG["mgn9h"], [0, 0, yc + 5]))
+    out.append(("MGN9H carriage, X beam", MG["mgn9h"], [0, 0, xc + 5]))
+    V, c = _carrier(L, P)
+    out.append(("Carrier plate with motor flange (7075)", V * RHO["7075"], c))
+    out.append(("Extruder motor (36 mm)", MG["motor"], _box(L["MOT"])[1]))
+    out.append(("Shaft coupling", MG["coupling"], [(L["CPL"][0] + L["CPL"][1]) / 2, L["VM"], L["AX"]]))
+    js = L["JSH"]
+    out.append(("Jackshaft 5 mm", math.pi * 2.5 ** 2 * (js[1] - js[0]) * RHO["steel"], [(js[0] + js[1]) / 2, L["VM"], L["AX"]]))
+    out.append(("Extruder gearbox (Sherpa-style, with gears and bearings)", MG["gearbox"], _box(L["GB"])[1]))
+    out.append(("Chube Conduction hotend with nozzle", MG["hotend"], [L["Fu"], L["Fv"], (L["NOZZLE"][1] + L["CHUBE"][2]) / 2]))
+    out.append(("Beacon3D", MG["beacon"], _box(L["BEACON"])[1]))
+    Vd, cd = _duct(L)
+    out.append(("Part-cooling duct with Beacon pad (PPS-CF)", Vd * RHO["print"], cd))
+    out.append(("Wiring and sleeving to the toolhead", MG["wiring"], [L["Fu"] / 2, L["Fv"], L["AX"]]))
+    return L, out
+
+
+def com(P, rot=None, mf=None):
+    L, ms = masses(P, rot, mf)
     M = sum(m for _, m, _ in ms)
-    cu = [sum(m * p[k] for _, m, p in ms) / M for k in range(3)]
-    return L, ms, M, cu
+    c = [sum(m * p[k] for _, m, p in ms) / M for k in range(3)]
+    return L, ms, M, c
+
+
+def solve(P):
+    """frame_rot and motor_face_u that put the centre of mass on the cross (Newton on the two unknowns)."""
+    rot, mf = P["toolhead"]["frame_rot"], P["toolhead"]["motor_face_u"]
+    for _ in range(30):
+        def f(r_, m_):
+            L, _, _, c = com(P, r_, m_)
+            return to_world(L, c[0], c[1])
+        f0 = f(rot, mf)
+        if math.hypot(*f0) < 1e-3:
+            break
+        fr, fm = f(rot + 0.5, mf), f(rot, mf + 0.5)
+        J = [[(fr[0] - f0[0]) / 0.5, (fm[0] - f0[0]) / 0.5], [(fr[1] - f0[1]) / 0.5, (fm[1] - f0[1]) / 0.5]]
+        det = J[0][0] * J[1][1] - J[0][1] * J[1][0]
+        d_rot = (J[1][1] * f0[0] - J[0][1] * f0[1]) / det
+        d_mf = (-J[1][0] * f0[0] + J[0][0] * f0[1]) / det
+        rot, mf = rot - d_rot, mf - d_mf
+    return rot, mf
+
+
+def fit_problems(P, L):
+    """Rough envelope checks against what closes in at full travel (the rCAD sweep is the real check)."""
+    T, G, XY = P["gantry"]["travel"], P["gantry"], P["xy"]
+    cut = P["frame"]["cutout"] / 2
+    belt_in = XY["belt_line"] - XY["pitch_r"] - XY["belt_t"] / 2          # inner belt strands
+    bad = []
+    col = column_world(L)
+    if max(abs(col[0]), abs(col[1]), abs(col[2]), abs(col[3])) + T > cut - 1:
+        bad.append(f"column {col} reaches the cutout edge at full travel")
+    above = [L["GB"], L["MOT"], L["FLANGE"]] + L["CHEEKS"]
+    for b in above:
+        for u in b[:2]:
+            for v in b[2:4]:
+                x, y = to_world(L, u, v)
+                if max(abs(x), abs(y)) + T > belt_in - 1 and b[4] < 46:
+                    bad.append(f"{b} corner ({x:.1f}, {y:.1f}) reaches the inner belt strands")
+                if min(abs(x), abs(y)) + T > 123 - 1 and b[4] < 57:
+                    bad.append(f"{b} corner ({x:.1f}, {y:.1f}) reaches a corner block")
+                for a, o in ((x, y), (y, x)):                                    # beam end blocks ride with the toolhead
+                    if abs(o) < 22.7 and b[4] < 31 and abs(a) + T > 129.5 - 1:
+                        bad.append(f"{b} corner ({x:.1f}, {y:.1f}) reaches an end-block base")
+                    if abs(o) < 22.7 and abs(a) + T > 138.3 - 1:
+                        bad.append(f"{b} corner ({x:.1f}, {y:.1f}) reaches an end-block upright")
+    return bad
 
 
 def report(P):
@@ -202,28 +270,17 @@ def report(P):
     for n, m, p in ms:
         lines.append(f"{n:58s} {m:6.1f} {p[0]:7.1f} {p[1]:7.1f} {p[2]:7.1f}")
     lines.append(f"{'total carried by the two MGN9H carriages':58s} {M:6.1f}")
-    lines.append(f"centre of mass: u {c[0]:.2f}  v {c[1]:.2f}  ->  x {w[0]:.2f}  y {w[1]:.2f} from the beam cross; z {c[2]:.1f}")
-    lines.append(f"rail planes: Y-beam MGN9H face z {L['Y_CAR_FACE']:.0f}, X-beam MGN9H face z {L['X_CAR_FACE']:.0f}")
+    lines.append(f"centre of mass: x {w[0]:.2f}  y {w[1]:.2f} from the beam cross; z {c[2]:.1f}")
+    lines.append(f"rail planes: Y-beam MGN9H face z {L['Y_CAR_FACE']:.0f}, X-beam MGN9H face z {L['X_CAR_FACE']:.0f}; nozzle z {L['NOZ']:.0f}")
+    lines.append(f"column through the plate (x0, x1, y0, y1): {tuple(round(v, 1) for v in column_world(L))}")
     return "\n".join(lines), (w[0], w[1], c[2]), M
-
-
-def solve_motor_face(P):
-    """motor_face_u that puts the centre of mass on the cross (bisection on u)."""
-    import copy
-    Q = copy.deepcopy(P)
-    lo, hi = -40.0, 0.0
-    for _ in range(40):
-        mid = (lo + hi) / 2
-        Q["toolhead"]["motor_face_u"] = mid
-        if com(Q)[3][0] > 0:
-            hi = mid
-        else:
-            lo = mid
-    return (lo + hi) / 2
 
 
 if __name__ == "__main__":
     import os, yaml
     P = yaml.safe_load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "params.yaml")))
     print(report(P)[0])
-    print(f"motor_face_u for zero offset along the diagonal: {solve_motor_face(P):.1f}")
+    r_, m_ = solve(P)
+    print(f"solved: frame_rot {r_:.2f}, motor_face_u {m_:.2f}")
+    for b in fit_problems(P, layout(P)):
+        print("FIT:", b)

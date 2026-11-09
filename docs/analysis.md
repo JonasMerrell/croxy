@@ -66,23 +66,22 @@ axis at about 0.8 N·m each at speed, and the motor rotors included (≈ 1.2 kg 
 
 ## Toolhead centre of mass
 
-Everything the two MGN9H carriages carry (yoke, neck, toolhead, carriages), from `python3 cad/toolhead.py`
-with the estimated bought-part masses in `params.yaml`:
+Everything the two MGN9H carriages carry (yoke, carrier, extruder, hotend, duct, carriages), from
+`python3 cad/toolhead.py` with the estimated bought-part masses in `params.yaml`:
 
-| Layout | Mass | CoM offset from the beam cross (x, y) | Off the rail lines |
-|---|---|---|---|
-| Before: extruder, motor, hotend and Beacon around the nozzle at (18, 25) | ≈ 625 g | (9.6, 16.9) mm | 19 mm |
-| **Now: on the diagonal, motor past the cross as counterweight** | **≈ 660 g** | **(0.3, -0.2) mm** | **0.4 mm** |
+| Layout | Mass | CoM offset from the cross (x, y) | CoM below the Y / X carriage faces | Nozzle below the plate |
+|---|---|---|---|---|
+| Original: everything round the nozzle, under the plate | ≈ 625 g | (9.6, 16.9) mm | 40 / 83 mm | 86 mm |
+| Diagonal, motor as counterweight, under the plate (PR #1, first commit) | ≈ 660 g | (0.3, -0.2) mm | 40 / 83 mm | 86 mm |
+| **Now: extruder above the plate under the yoke, beams +39 mm** | **≈ 547 g** | **(0.0, 0.0) mm** | **16 / 59 mm** | **20 mm** |
 
-At 60 m/s² the old offset put about 0.7 N·m of yaw and roll on the carriages on every move, on top
-of the vertical lever below. That is now gone. The 35 g added is the motor flange, coupling and jackshaft.
+![Toolhead: extruder and motor on the carrier under the yoke, hotend column through the shutter](../out/render-toolhead.png)
 
-The vertical lever remains: the carried CoM is at z ≈ -3, about 40 mm below the Y-beam carriage face
-(z 37) and 83 mm below the X-beam one (z 80), because the toolhead hangs through the plate. At
-60 m/s² that is roughly 1.6 to 3.3 N·m of pitch/roll moment shared by the yoke and both carriages.
-MGN9H moment ratings are an order of magnitude above that, so the question is stiffness (nozzle
-deflection), which belongs in the dynamic simulation. Keeping heavy parts high under the plate is
-the lever that is left.
+At 60 m/s² the original offset put about 0.7 N·m of yaw and roll on the carriages on every move. The
+vertical lever now gives about 0.5 to 1.9 N·m of pitch/roll shared by the yoke and both carriages, down
+from 1.6 to 3.3 N·m. The neck and the toolhead plate are gone, so the carried mass dropped by about 110 g.
+The extruder motor and gearbox now run in the gantry bay instead of the 150 °C chamber, so filament is not
+softened at the drive gears and the motor needs no high-temperature rating.
 
 ## Beam backer (input for the dynamic simulation)
 

@@ -10,19 +10,18 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 |---|---:|---|---:|---|
 | Bed arm Z1 | 1 | Aluminium 7075 | 90 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed arm Z2 | 1 | Aluminium 7075 | 61 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
-| Bed arm Z3 | 1 | Aluminium 7075 | 55 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
+| Bed arm Z3 | 1 | Aluminium 7075 | 63 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed, MIC6 200 x 200 x 8 | 1 | Aluminium 6061 | 862 g | bought MIC6 cast plate cut to size; 3 countersunk M4 holes drilled on the mill (1 setup) |
 | Belt clamp plate | 8 | Aluminium 7075 | 7 g | 21.7 x 27 x 5 7075 bar, 4 drilled and countersunk holes from the outer face (1 setup). 8 per printer |
 | Corner block plate, lower | 4 | Steel | 63 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the top face (1 setup) |
 | Corner block plate, upper | 4 | Steel | 0 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the bottom face, M4 tapped tab holes on the tongue (flip once) |
+| Extruder carrier | 1 | Aluminium 7075 | 79 g | 7075 block 80 x 75 x 42, machined in its own (rotated) frame. From the bottom: motor flange and cheeks, cbores, gearbox taps M3; from the top: contour, filament hole, clearance holes over the carriage screw heads; from the flange face: motor pilot and M3 holes (3 setups) |
 | Tension slider | 4 | Steel | 7 g | 14 x 12 x 8 steel block, Ø9 drilled from the top (1 setup) |
 | Tension tab | 4 | Steel | 5 g | 20 x 6 x 10 steel bar. 2 drilled holes from the top, 2 M5 tapped holes from the side (2 setups) |
-| Toolhead neck | 1 | Aluminium 7075 | 79 g | 7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; from the top: web holes; from +y: air window and M3 (3 setups) |
-| Toolhead plate | 1 | Aluminium 7075 | 104 g | 7075 block 82 x 61 x 57, machined in its own (diagonal) frame. From the bottom: motor flange and cheeks, cbores; from the top: contour, air outlet, filament hole, holes and countersinks; from the flange face: motor pilot and M3 holes (3 setups) |
-| X-end block | 2 | Aluminium 7075 | 99 g | One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
-| Y-end block | 2 | Aluminium 7075 | 44 g | One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
-| Yoke U | 1 | Aluminium 7075 | 85 g | 7075 block 44 x 43 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups) |
-| Yoke top plate | 1 | Aluminium 7075 | 30 g | 6 mm 7075 plate: contour and holes from the top, cbores from the bottom (2 setups) |
+| X-end block | 2 | Aluminium 7075 | 151 g | One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
+| Y-end block | 2 | Aluminium 7075 | 95 g | One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups) |
+| Yoke U | 1 | Aluminium 7075 | 86 g | 7075 block 44 x 49 x 43. U profile contoured standing on end; holes from the bottom and the top (3 setups) |
+| Yoke top plate | 1 | Aluminium 7075 | 34 g | 6 mm 7075 plate: contour, holes and the filament tube hole from the top, cbores from the bottom (2 setups) |
 | Z bearing block, inboard | 3 | Steel | 34 g | 10 mm steel plate: contour, Ø22 x 7 seat and holes from one side, M4 tapped (1 setup) |
 | Z bearing block, outboard | 3 | Steel | 33 g | 10 mm steel plate: contour, Ø22 x 7 seat and holes from one side (1 setup) |
 | Z belt clamp plate | 3 | Aluminium 7075 | 5 g | 5 mm 7075: contour, 2 holes, GT2 tooth grooves on the belt face (1 setup) |
@@ -31,26 +30,26 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 
 | Part | Qty | Material | Mass each | How |
 |---|---:|---|---:|---|
-| Back cover, electronics bay | 1 | Aluminium 6061 | 638 g | 2 mm 5052, SCS cut with fan openings |
-| Back cover, filter bay (vented) | 1 | Aluminium 6061 | 884 g | 2 mm 5052, SCS cut with vent slots |
-| Back shear plate | 1 | Steel | 4500 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes |
+| Back cover, electronics bay | 1 | Aluminium 6061 | 625 g | 2 mm 5052, SCS cut with fan openings |
+| Back cover, filter bay (vented) | 1 | Aluminium 6061 | 827 g | 2 mm 5052, SCS cut with vent slots |
+| Back shear plate | 1 | Steel | 3543 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes |
 | Base plate | 1 | Aluminium 6061 | 4663 g | 6 mm 6061, SCS laser cut with holes; hand-tap the M4 skin holes |
 | Beam backer (U channel) | 2 | Steel | 466 g | 3 mm mild steel or 4130, SCS laser cut with holes and bent to a 25 x 25 U. Mill the rail face flat (1 setup, long vise or fixture) |
-| Door inner sheet (hot face) | 1 | Stainless steel | 1089 g | 1 mm 304 stainless, SCS laser cut and bent, riveted to the pan walls |
-| Door outer pan | 1 | Aluminium 6061 | 1069 g | 2 mm 5052, SCS laser cut and bent into a tray (4 bends, corner reliefs), window cut out |
+| Door inner sheet (hot face) | 1 | Stainless steel | 900 g | 1 mm 304 stainless, SCS laser cut and bent, riveted to the pan walls |
+| Door outer pan | 1 | Aluminium 6061 | 915 g | 2 mm 5052, SCS laser cut and bent into a tray (4 bends, corner reliefs), window cut out |
 | Electronics backplate | 1 | Aluminium 6061 | 633 g | 2 mm 5052, SCS cut with all holes and bent |
 | Floor plate | 1 | Steel | 6676 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M5 angle holes |
 | Lid (removable) | 1 | Aluminium 6061 | 1557 g | 2 mm 5052 flat, SCS cut; M4 screws into rivnuts |
 | Module divider (filter bay over electronics) | 1 | Aluminium 6061 | 277 g | 2 mm 5052, SCS cut and bent, riveted to the side skins |
 | Motor plate | 4 | Steel | 107 g | 6 mm mild steel, SCS laser blank, bore the Ø38.6 pilot and tap M5 on the mill (1 setup) |
-| Shutter neck plate (X covers attach here) | 1 | Aluminium 6061 | 4 g | 1.5 mm aluminium, SCS cut; rides on the strip, pushed by the neck, X tapes bonded to it |
-| Side shear plate left | 1 | Steel | 4806 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension |
-| Side shear plate right | 1 | Steel | 4806 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension |
-| Skin back wall (between the chamber and the back module) | 1 | Aluminium 6061 | 1786 g | 2 mm 5052, SCS cut and bent: flanges point back into the module so all fixings sit outside the insulation |
+| Shutter column plate (X covers attach here) | 1 | Aluminium 6061 | 2 g | 1.5 mm aluminium, SCS cut; rides on the strip, pushed by the hotend column, X tapes bonded to it |
+| Side shear plate left | 1 | Steel | 3811 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension |
+| Side shear plate right | 1 | Steel | 3811 g | 6 mm mild steel, SCS laser cut with all holes; hand-tap the M3 rail holes. Idler slot 8.2 x 14 for Z belt tension |
+| Skin back wall (between the chamber and the back module) | 1 | Aluminium 6061 | 1712 g | 2 mm 5052, SCS cut and bent: flanges point back into the module so all fixings sit outside the insulation |
 | Skin front strip, Z bay | 1 | Aluminium 6061 | 155 g | 2 mm 5052, SCS cut (and bent), riveted to the side jambs |
-| Skin front strip, top bay | 1 | Aluminium 6061 | 549 g | 2 mm 5052, SCS cut (and bent), riveted to the side jambs |
-| Skin side left | 1 | Aluminium 6061 | 2274 g | 2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat |
-| Skin side right | 1 | Aluminium 6061 | 2274 g | 2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat |
+| Skin front strip, top bay | 1 | Aluminium 6061 | 650 g | 2 mm 5052, SCS cut (and bent), riveted to the side jambs |
+| Skin side left | 1 | Aluminium 6061 | 2183 g | 2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat |
+| Skin side right | 1 | Aluminium 6061 | 2183 g | 2 mm 5052-H32, SCS laser cut with all holes, 4 flanges bent in (corner reliefs), powder coat |
 | Z drive bracket | 3 | Steel | 299 g | 5 mm mild steel, SCS laser cut and bent 90 deg; motor holes slotted for the reduction belt tension; hand-tap the 3 M5 flange holes |
 
 ## Waterjet, then milled
@@ -63,21 +62,19 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 
 | Part | Qty | Material | Mass each | How |
 |---|---:|---|---:|---|
-| Beacon bracket | 1 | PPS-CF | 5 g | PPS-CF, printed lying on the web (C profile), no supports; 2 M3 heat-set inserts |
 | Cradle for Activated carbon filter | 1 | PET-CF | 58 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for Air-to-air cooler | 1 | PET-CF | 80 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for Filter loop blower | 1 | PET-CF | 34 g | PET-CF, printed as it sits (open tray, no overhangs) |
 | Cradle for HEPA H13 filter | 1 | PET-CF | 34 g | PET-CF, printed as it sits (open tray, no overhangs) |
-| Neck air adapter | 1 | PPS-CF | 4 g | PPS-CF, printed standing on the mounting face; internal channel teardrop-shaped, no supports |
-| Part-cooling duct (fed through the hollow neck) | 1 | PPS-CF | 13 g | PPS-CF, printed plenum face down; channel roofs are <= 13 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts |
-| Shutter strip with X-cover spring reels (moves in Y) | 1 | PPS-CF | 9 g | PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it |
+| Part-cooling duct with Beacon pad (riser through the shutter) | 1 | PPS-CF | 12 g | PPS-CF, printed standing on the riser top; feed and ring channel roofs are <= 6 mm bridges, Beacon pad prints flat off the riser, no supports; 2 M3 heat-set inserts for the Beacon; hose from the gantry-bay blower on the barb |
+| Shutter strip with X-cover spring reels (moves in Y) | 1 | PPS-CF | 11 g | PPS-CF printed flat (2 mm plate, supportless); the two bought spring-tape reels clip into it |
 
 ## Bought, then cut / drilled / faced
 
 | Part | Qty | Material | Mass each | How |
 |---|---:|---|---:|---|
 | Floor support block (G10, thermal break) | 4 | - |  | G10/FR4 30 mm square bar, cut to 50 mm, faced and drilled Ø9 on the mill (2 setups) |
-| Post, steel square tube 30 x 30 x 3 x 320 | 4 | Steel | 814 g | bought mild steel tube, cut and both ends faced square to length on the mill (1 setup per end) |
+| Post, steel square tube 30 x 30 x 3 x 254 | 4 | Steel | 646 g | bought mild steel tube, cut and both ends faced square to length on the mill (1 setup per end) |
 | Steel angle 30 x 30 x 3 x 319 | 6 | Steel | 424 g | bought mild steel angle, cut to length, 8 holes drilled on the mill with a stop (1 setup per leg) |
 
 ## Cut from board
@@ -108,14 +105,14 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Electronics fan 80 mm, exhaust | 1 | - |  |  |
 | Electronics fan 80 mm, intake | 1 | - |  |  |
 | Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft) | 1 | - |  |  |
-| Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox) | 1 | Steel | 4 g |  |
-| Extruder motor (LDO high-temp, 36 mm) | 1 | - |  |  |
-| Extruder shaft coupling (5-5 beam coupling D14) | 1 | Aluminium 6061 | 7 g |  |
+| Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox) | 1 | Steel | 3 g |  |
+| Extruder motor (36 mm, in the gantry bay) | 1 | - |  |  |
+| Extruder shaft coupling (5-5 flexible coupling D12) | 1 | Aluminium 6061 | 4 g |  |
 | Filter duct, chamber outlet (stainless tube 40 x 1.5) | 1 | Stainless steel | 136 g | bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone |
 | Filter duct, chamber return (stainless tube 40 x 1.5) | 1 | Stainless steel | 139 g | bought tube cut to length; slip-fit through the back wall, sealed with high-temp silicone |
 | Filter loop blower (radial 97 mm) | 1 | - |  |  |
 | G10 tube 10 x 5.3 x 50 | 9 | - |  | G10/FR4 tube, thermal break |
-| G10 tube 10 x 5.3 x 54.3 | 16 | - |  | G10/FR4 tube, thermal break under the motor |
+| G10 tube 10 x 5.3 x 93.3 | 16 | - |  | G10/FR4 tube, thermal break under the motor |
 | G10 washer 12 x 4.5 x 2 | 3 | - |  | G10 washer, keeps the arm off the heater layer |
 | GT2 20T pulley, 12 mm belt | 7 | Aluminium 6061 | 4 g |  |
 | GT2 20T pulley, 6 mm belt, 5 mm bore | 3 | Aluminium 6061 | 3 g |  |
@@ -134,7 +131,7 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | PSU 24 V (LRS-350-24 class) | 1 | - |  |  |
 | PSU 48 V (LRS-350-48 class) | 1 | - |  |  |
 | PTFE filament tube 4 mm | 1 | - |  |  |
-| Part-cooling blower (server type, hose to the neck) | 1 | - |  |  |
+| Part-cooling blower (server type, hose to the toolhead duct) | 1 | - |  |  |
 | Raspberry Pi / host + relays | 1 | - |  |  |
 | Rigid shaft coupling D20 L25, 6.35-8 | 4 | Aluminium 6061 | 21 g |  |
 | Rubber foot 30 x 15, M6 insert | 4 | - |  |  |
@@ -152,7 +149,6 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Part | Qty | Used for |
 |---|---:|---|
 | Bearing 608 | 14 | - |
-| ISO 10642 M3x10 | 9 | extruder screw x4, duct screw x3, Beacon bracket screw x2 |
 | ISO 10642 M4x12 | 32 | belt clamp screw x32 |
 | ISO 10642 M4x20 | 3 | bed screw x3 |
 | ISO 4026 M5x10 | 8 | tension jack screw x8 |
@@ -161,11 +157,11 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | ISO 4032 M5 | 40 | nut x40 |
 | ISO 4032 M8 | 7 | nut x7 |
 | ISO 4035 M8 | 4 | thin nut x4 |
-| ISO 4762 M3x10 | 34 | electronics screw x16, Z clamp screw x6, leg screw x4, Y carriage screw x4, plate screw x4 |
-| ISO 4762 M3x14 | 2 | adapter screw x2 |
+| ISO 4762 M3x10 | 30 | electronics screw x16, Z clamp screw x6, leg screw x4, Y carriage screw x4 |
 | ISO 4762 M3x16 | 2 | Beacon screw x2 |
+| ISO 4762 M3x40 | 3 | extruder screw x3 |
 | ISO 4762 M3x6 | 4 | X carriage screw x4 |
-| ISO 4762 M3x8 | 137 | MGN12 rail screw x63, MGN9 rail screw x26, carriage screw x16, NEMA17 screw x12, Z carriage screw x12, neck screw x4, extruder motor screw x4 |
+| ISO 4762 M3x8 | 137 | MGN12 rail screw x63, MGN9 rail screw x26, carriage screw x16, NEMA17 screw x12, Z carriage screw x12, carrier screw x4, extruder motor screw x4 |
 | ISO 4762 M4x10 | 8 | cradle screw x8 |
 | ISO 4762 M4x12 | 36 | fan screw x16, beam screw x8, heater screw x4, heater motor screw x4, blower screw x4 |
 | ISO 4762 M4x16 | 8 | tab screw x8 |
@@ -183,13 +179,13 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | ISO 7380 M4x10 | 24 | lid screw x14, cover screw x8, base screw x2 |
 | ISO 7380 M4x16 | 4 | jamb screw x4 |
 | ISO 7380 M4x8 | 17 | base screw x13, hinge screw x4 |
-| Shaft Ø5x120 | 16 | M5 threaded rod x16 |
-| Shaft Ø8x417.9 | 4 | M8 tie rod x4 |
+| Shaft Ø5x159 | 16 | M5 threaded rod x16 |
+| Shaft Ø8x113 | 4 | - |
+| Shaft Ø8x351.9 | 4 | M8 tie rod x4 |
 | Shaft Ø8x54 | 3 | - |
-| Shaft Ø8x74 | 4 | - |
 | Shaft Ø8x88 | 1 | - |
 
-610 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
+598 standard parts in all. Shafts named `Shaft Ø5` / `Shaft Ø8` that are used as threaded rod are cut from
 M5 / M8 threaded rod. Tapped holes are modelled at the nominal diameter.
 
 ## Other bought parts and stand-ins

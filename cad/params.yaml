@@ -12,7 +12,7 @@ frame:
   shutter_h: 15         # height kept clear above the plate for a sliding insulated shutter over the cutout
   post: 3030
   post_center: 175      # posts at (+-175, +-175)
-  chamber_h: 320        # top plate underside to floor plate top
+  chamber_h: 254        # top plate underside to floor plate top (66 shorter since the extruder moved above the plate)
 
 xy:
   belt_line: 143        # each belt runs directly above its MGN12 rail
@@ -32,29 +32,26 @@ gantry:
   beam_h: 25
   beam_t: 3             # bent U channel, mild steel or 4130 (Send Cut Send)
   beam_rail_len: 250    # MGN9 (ends clear the towers)
-  y_beam_bot: 47        # Y beam (spans X, moves in Y): lower beam, sits on the Y-end towers
-  x_beam_bot: 90        # X beam (spans Y, moves in X): upper beam, sits on the X-end towers
+  y_beam_bot: 86        # Y beam (spans X, moves in Y): lower beam, sits on the Y-end towers
+  x_beam_bot: 129        # X beam (spans Y, moves in X): upper beam, sits on the X-end towers
   travel: 90            # toolhead centre travels +-90 in X and Y
 
 toolhead:
-  envelope: [60, 60]    # Chube Conduction + Sherpa Heavy stand-in footprint
-  height: 84            # top of the extruder to nozzle tip
-  offset: [18, 25]      # nozzle / filament axis from the beam cross, so the filament drops through an open quadrant
-  body_top: -2          # the toolhead body hangs fully below the plate on a neck from the yoke
-  neck: [44, 43]        # neck footprint through the cutout (x, y)
-  filament_top: 110     # PTFE tube modelled straight up to here (below the motor plates); it bends to the lid port above
-  # Centre of mass on the beam cross (both MGN9 rail lines). Everything heavy sits on the diagonal
-  # from the cross to the nozzle; the extruder motor sits across the cross as the counterweight and
-  # drives the gearbox through a coupling and jackshaft. motor_face_u is where its face sits along
-  # that diagonal (negative = past the cross). Check with: python3 cad/toolhead.py
-  motor_face_u: -17
-  mass_g:               # bought parts, estimates: weigh the real ones and update, then rerun cad/toolhead.py
-    motor: 125          # LDO high-temp 36 mm round pancake class
+  # The extruder rides above the plate in the gantry bay, under the yoke; only the hotend and the duct riser
+  # drop through the shutter and the cutout. The beams were raised 39 mm to make room for it (2026-11-09).
+  offset: [18, 15.5]    # nozzle / filament axis from the beam cross; the PTFE tube rises between the Y beam and the yoke leg
+  nozzle_z: -20         # nozzle tip (Beacon and duct ring just clear the plate underside)
+  filament_top: 160     # PTFE tube modelled straight up to here (above the X beam); it bends to the lid port above
+  # Centre of mass on the beam cross (both MGN9 rail lines): the motor sits across the cross as the counterweight.
+  # frame_rot and motor_face_u are solved by: python3 cad/toolhead.py (paste the solved values here)
+  frame_rot: 51.93
+  motor_face_u: -8.62
+  mass_g:               # bought parts, estimates: weigh the real ones and update, then re-solve
+    motor: 125          # 36 mm round pancake class (runs in the gantry bay now, not the chamber)
     gearbox: 55         # Sherpa-style housing, gears, drive shafts, bearings, idler arm
     hotend: 55          # Chube Conduction with nozzle, heater and thermistor
     beacon: 8
     coupling: 6
-    air_adapter: 6
     wiring: 15
     mgn9h: 26
 
@@ -71,8 +68,8 @@ z:
   rail_len: 230
   belt_offset: -25      # belt loop beside the rail, in the column's own frame
   belt_x: 18            # belt centre plane, inward from the shear plate face
-  idler_z: -85          # top idler, kept below the toolhead
-  motor_z: -403         # Z drive jackshaft axis, in the cool bay under the floor insulation
+  idler_z: -19          # top idler, level with the bed top at the top of its travel
+  motor_z: -337         # Z drive jackshaft axis, in the cool bay under the floor insulation
   reduction: {small_t: 20, big_t: 60, centre: 52.45, loop: "188 mm GT2 6 mm"}   # 1:3 so the bed holds when the motors are off
   carriage_drop: 20     # Z carriage centre below the bed top
 
@@ -91,8 +88,8 @@ enclosure:
   base_t: 6             # aluminium base plate
   feet_h: 15
   support: 30           # G10 blocks under the floor plate corners (thermal break), on 3030 legs in the bay
-  lid_z: 210            # top bay lid (over the NEMA23s)
-  window: {w: 260, h: 230, cz: -176}   # door window, centred on the build centre in X
+  lid_z: 249            # top bay lid (over the NEMA23s)
+  window: {w: 260, h: 200, cz: -143}   # door window, centred on the build centre in X
   glass_t: 4
 
 shutter:                # cross shutter over the plate cutout. A strip moves in Y with the neck; 0.05 mm stainless
@@ -103,9 +100,9 @@ shutter:                # cross shutter over the plate cutout. A strip moves in 
 heater:                 # PTC heater + blower on the chamber floor, left side; blower motor in the cool bay
   x: [-150, -92]
   y: [5, 135]
-  top: -200
+  top: -134
   power_w: 800         # 2 x 400 W PTC; heat-up about 50 min (300 W would take about 3 h)
 
 back_module:
   depth: 110
-  split_z: -170         # filter loop above, electronics below
+  split_z: -104         # filter loop above, electronics below
