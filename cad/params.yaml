@@ -43,6 +43,20 @@ toolhead:
   body_top: -2          # the toolhead body hangs fully below the plate on a neck from the yoke
   neck: [44, 43]        # neck footprint through the cutout (x, y)
   filament_top: 110     # PTFE tube modelled straight up to here (below the motor plates); it bends to the lid port above
+  # Centre of mass on the beam cross (both MGN9 rail lines). Everything heavy sits on the diagonal
+  # from the cross to the nozzle; the extruder motor sits across the cross as the counterweight and
+  # drives the gearbox through a coupling and jackshaft. motor_face_u is where its face sits along
+  # that diagonal (negative = past the cross). Check with: python3 cad/toolhead.py
+  motor_face_u: -17
+  mass_g:               # bought parts, estimates: weigh the real ones and update, then rerun cad/toolhead.py
+    motor: 125          # LDO high-temp 36 mm round pancake class
+    gearbox: 55         # Sherpa-style housing, gears, drive shafts, bearings, idler arm
+    hotend: 55          # Chube Conduction with nozzle, heater and thermistor
+    beacon: 8
+    coupling: 6
+    air_adapter: 6
+    wiring: 15
+    mgn9h: 26
 
 shell:
   shear_t: 6            # steel shear plates on the inner faces of the posts: left, right, back (front is the door)

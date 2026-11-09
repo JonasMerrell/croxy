@@ -64,6 +64,26 @@ The towers don't carry rails, so they don't need to match steel's expansion. Wit
 axis at about 0.8 N·m each at speed, and the motor rotors included (≈ 1.2 kg equivalent each on a
 20T pulley), the limit is about 60 m/s².
 
+## Toolhead centre of mass
+
+Everything the two MGN9H carriages carry (yoke, neck, toolhead, carriages), from `python3 cad/toolhead.py`
+with the estimated bought-part masses in `params.yaml`:
+
+| Layout | Mass | CoM offset from the beam cross (x, y) | Off the rail lines |
+|---|---|---|---|
+| Before: extruder, motor, hotend and Beacon around the nozzle at (18, 25) | ≈ 625 g | (9.6, 16.9) mm | 19 mm |
+| **Now: on the diagonal, motor past the cross as counterweight** | **≈ 660 g** | **(0.3, -0.2) mm** | **0.4 mm** |
+
+At 60 m/s² the old offset put about 0.7 N·m of yaw and roll on the carriages on every move, on top
+of the vertical lever below. That is now gone. The 35 g added is the motor flange, coupling and jackshaft.
+
+The vertical lever remains: the carried CoM is at z ≈ -3, about 40 mm below the Y-beam carriage face
+(z 37) and 83 mm below the X-beam one (z 80), because the toolhead hangs through the plate. At
+60 m/s² that is roughly 1.6 to 3.3 N·m of pitch/roll moment shared by the yoke and both carriages.
+MGN9H moment ratings are an order of magnitude above that, so the question is stiffness (nozzle
+deflection), which belongs in the dynamic simulation. Keeping heavy parts high under the plate is
+the lever that is left.
+
 ## Beam backer (input for the dynamic simulation)
 
 25 × 25 × 3 steel U channel with the MGN9 rail: I ≈ 20,400 mm⁴ both ways. Over the 286 mm span the

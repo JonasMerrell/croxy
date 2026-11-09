@@ -354,34 +354,53 @@ sid = sketch(plane_y(ny / 2), [{"type": "rect", "corner1": [WIN[0], WIN[2]], "co
 r("add_feature", kind="extrude", name="Air window", params={"profiles": [{"sketch": sid}], "depth": str(NW), "op": "remove"})
 AD_SCR = [[-19.5, 23.5], [9, 23.5]]
 holes_y([circ(p, TAP["M3"]) for p in AD_SCR], ny / 2 - NW, NW, +1, "Adapter screws M3")
-TPN = [[-19.5, -10], [-19.5, 10], [19.5, -10], [19.5, 5]]   # toolhead plate screws into the wall ends
+TPN = THL["TPN_W"]                            # toolhead plate screws into the wall ends (clear of the gearbox, flange, duct and Beacon bracket)
 pocket_up([circ(p, TAP["M3"]) for p in TPN], TP_TOP, 8, "Plate screws M3")
 name_part(neck_body, "Toolhead neck", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
           notes="7075 block 44 x 43 x 33. From the bottom: pocket the air channel leaving a 4 mm top web, tap M3 in the wall ends; "
                 "from the top: web holes; from +y: air window and M3 (3 setups)")
+
+# ---- Toolhead plate, drawn in the toolhead frame (cad/toolhead.py: u from the beam cross towards the nozzle,
+# v across) and placed rotated by THL["rot"] about z. Everything heavy sits on that diagonal so the centre of mass
+# lands on the cross: hotend and gearbox on the nozzle side, the extruder motor on a flange past the cross.
+def loc(p):
+    return THM.to_local(THL, p[0], p[1])
+FU, MF, FL_T, JS_Z = THL["FU"], THL["MF"], THL["FL_T"], THL["JS_Z"]
 S_TPL = studio("Toolhead plate")
-res = box(-nx / 2, FX + 30, -ny / 2, FY + 30, TP_BOT, TP_TOP, "new", "Plate")
+BAND = THL["BAND"]
+res = box(BAND[0], BAND[1], BAND[2], BAND[3], TP_BOT, TP_TOP, "new", "Diagonal band")
 tpl_body = new_body(res)
-EXT_H = [[FX - 15, FY - 8], [FX + 15, FY - 8], [FX - 15, FY + 5], [FX + 15, FY + 5]]
-BCN_H = [[43.5, 3.0], [43.5, 19.0]]
-DUCT_H = [[-10.5, 16], [-10.5, 31]]
-AIR = (-nx / 2 + NW, -4, -ny / 2 + NW, 10)
-cut_through([{"type": "rect", "corner1": [AIR[0], AIR[2]], "corner2": [AIR[1], AIR[3]]}, circ([FX, FY], 4.5)]
-            + [circ(p, CLR["M3"]) for p in TPN + EXT_H + BCN_H + DUCT_H], TP_TOP, "Holes")
-pocket_up([circ(p, CB["M3"][0]) for p in TPN], TP_BOT, CB["M3"][1], "Cbores from below")
-pocket_z([circ(p, 6.6) for p in EXT_H + BCN_H + DUCT_H], TP_TOP, 1.7, "Countersinks")
+nsq = [loc(c) for c in ((-nx / 2, -ny / 2), (nx / 2, -ny / 2), (nx / 2, ny / 2), (-nx / 2, ny / 2))]
+sid = sketch(plane(TP_BOT), [{"type": "polyline", "closed": True, "points": [[round(a, 4), round(b, 4)] for a, b in nsq]}], "Neck footprint")
+extrude(sid, TP_T, "add", "Neck footprint")
+box(*THL["FLANGE"], "add", "Motor flange")
+for c in THL["CHEEKS"]:
+    box(*c, "add", "Motor cheek")
+TPN_L = [loc(p) for p in TPN]
+EXT_H, BB_H, DUCT_H, MOT_H = THL["EXT_H"], THL["BB_H"], THL["DUCT_H"], THL["MOT_H"]
+AIR = THL["AIR"]
+cut_through([{"type": "rect", "corner1": [AIR[0], AIR[2]], "corner2": [AIR[1], AIR[3]]}, circ([FU, 0], 4.5)]
+            + [circ(p, CLR["M3"]) for p in TPN_L + EXT_H + BB_H + DUCT_H], TP_TOP, "Holes")
+pocket_up([circ(p, CB["M3"][0]) for p in TPN_L], TP_BOT, CB["M3"][1], "Cbores from below")
+pocket_z([circ(p, 6.6) for p in EXT_H + BB_H + DUCT_H], TP_TOP, 1.7, "Countersinks")
+holes_x([circ([0, JS_Z], 23.0)] + [circ(p, CLR["M3"]) for p in MOT_H], MF, FL_T, +1, "Motor pilot and screws")
 name_part(tpl_body, "Toolhead plate", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups)")
+          notes="7075 block 82 x 61 x 57, machined in its own (diagonal) frame. From the bottom: motor flange and cheeks, "
+                "cbores; from the top: contour, air outlet, filament hole, holes and countersinks; from the flange face: "
+                "motor pilot and M3 holes (3 setups)")
 for p in NECK_SCR:
     J("neck", "ISO 4762", "M3", [p[0], p[1], NECK_TOP - WEB], "+z", L=8, label="neck screw")
 for p in TPN:
     J("neck", "ISO 4762", "M3", [p[0], p[1], TP_BOT + CB["M3"][1]], "+z", L=10, label="plate screw")
+# toolhead-frame fasteners: joint list "th", placed rotated with the toolhead
 for p in EXT_H:
-    J("neck", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="extruder screw")
-for p in BCN_H:
-    J("neck", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="Beacon bracket screw")
+    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="extruder screw")
+for p in BB_H:
+    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="Beacon bracket screw")
 for p in DUCT_H:
-    J("neck", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="duct screw")
+    J("th", "ISO 10642", "M3", [p[0], p[1], TP_TOP], "-z", L=10, label="duct screw")
+for p in MOT_H:
+    J("th", "ISO 4762", "M3", [MF + FL_T, p[0], p[1]], "-x", L=8, label="extruder motor screw")
 for p in AD_SCR:
     J("neck", "ISO 4762", "M3", [p[0], ny / 2 + AD_T, p[1]], "-y", L=14, label="adapter screw")
 
