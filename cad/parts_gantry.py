@@ -159,72 +159,95 @@ J("corner", "ISO 4026", "M4", [I_FL[0], -112.5, BLK_TOP[1] + 4.5], "-y", L=10, l
 for p in NEMA23_H:
     J("corner", "ISO 4762", "M5", [p[0], p[1], MOTOR_FACE + 6], "-z", L=12, label="NEMA23 motor screw")
 
-# ================================================================ 2. X-end tower (7075, milled from the top) + strand clamp
+# ================================================================ 2. End blocks: one 7075 part each, 3-axis milled
+# Each block bolts to its MGN12H carriage, carries a beam end between two cheeks and anchors both belt ends.
+# Belt anchor (milled from the top, Ø3 end mill, 14.5 deep): each belt end runs in along the upright face, wraps
+# 180° round a milled post (R2.5 nose) and comes back in an outer channel, where an M4 set screw from the outer
+# face pinches the tail against the post. Local frame below: X-end block, rail along x, beam along y.
 inner = B - XY["pitch_r"]                     # inner strand centre
 SF0, SF1 = inner - XY["belt_t"] / 2, inner + XY["belt_t"] / 2     # strand faces
 UP0, UP1 = SF1, B + 3.5                        # upright between the strands
 UPM = (UP0 + UP1) / 2                          # beam cross screws: through the flanges into the tower cheeks
 CHK_Z = 14.0                                   # cross screw height above the beam bottom
-S_XEND = studio("X-end tower")
-res = box(-22.7, 22.7, RO - 13.5, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
-xend_body = new_body(res)
-box(-22.7, 22.7, UP0, UP1, CARR_FACE + BASE_T, XB_BOT, "add", "Upright")
-for sx in (-1, 1):
-    x0_, x1_ = sorted((sx * (BWD / 2), sx * 22.7))
-    box(x0_, x1_, UP0, UP1, XB_BOT, XB_BOT + 20, "add", "Cheek")
-holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], BWD / 2, 8, +1, "Cheek tap")
-holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, 8, -1, "Cheek tap")
+JAW_T = 46.5                                   # top of the belt anchor (belt top + 1.5, below the Y beam)
+CH = 3.0                                       # anchor channel width (Ø3 end mill)
+A_FLOOR = CARR_FACE + 7                        # anchor pocket floor
+A_IN0 = UP0 - CH                               # strand channel  A_IN0 .. UP0
+A_POST0 = A_IN0 - 5.0                          # post            A_POST0 .. A_IN0
+A_RET0 = A_POST0 - CH                          # return channel  A_RET0 .. A_POST0
+A_OUT = A_RET0 - 4.0                           # outer wall      A_OUT .. A_RET0 (set screws)
+A_NOSE = 8.5                                   # post nose centre |x|, nose radius 2.5
+SS_X, SS_Z = 15.0, BZ                          # set screws
+HW = 22.7                                      # block half width along the rail
 CAR12 = [[sx * 10, sy * 10] for sx in (-1, 1) for sy in (-1, 1)]
-xc_h = [[c[0], RO + c[1]] for c in CAR12]
-pocket_z([circ(p, CB["M3"][0]) for p in xc_h], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
-cut_through([circ(p, CLR["M3"]) for p in xc_h], CARR_FACE + BASE_T, "Carriage screws")
-pocket_z([circ([sx * 6, B - 1.5], TAP["M4"]) for sx in (-1, 1)], XB_BOT, 10, "Beam screws M4")
-holes_y([circ([sx * 10, 54], TAP["M4"]) for sx in (-1, 1)], UP0, 8, +1, "Clamp screws M4")
-name_part(xend_body, "X-end tower", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075 block 45.4 x 27 x 65. From the top: contour, step to the base, cbores; then M4 tapped from the top and the side (3 setups)")
-S_XCL = studio("X-end strand clamp")
-CL0 = SF0 - 5.6
-res = box(-17.5, 17.5, CL0, SF0, CARR_FACE + BASE_T, 60, "new", "Clamp")
-xcl_body = new_body(res)
-box(-17.5, 17.5, SF0, UP0, BZ + BW / 2 + 1, 60, "add", "Step over the belt")
-holes_y([circ([sx * 10, 54], CLR["M4"]) for sx in (-1, 1)], CL0, UP0 - CL0, +1, "Clamp screws")
-name_part(xcl_body, "X-end strand clamp", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075, profile milled from the side, GT2 tooth grooves on the belt face with a 1 mm end mill (2 setups)")
+
+def end_block(swap, top_z, seat, nm):
+    """swap=False: X-end frame (u = x along the rail, v = y towards the outside). swap=True: Y-end (u = y, v = x)."""
+    def bx(u0, u1, v0, v1, z0, z1, op, name):
+        return box(v0, v1, u0, u1, z0, z1, op, name) if swap else box(u0, u1, v0, v1, z0, z1, op, name)
+    def pt(u, v):
+        return [v, u] if swap else [u, v]
+    res = bx(-HW, HW, A_OUT, RO + 13.5, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
+    body = new_body(res)
+    bx(-HW, HW, A_OUT, UP0, CARR_FACE + BASE_T, JAW_T, "add", "Belt anchor")
+    bx(-HW, HW, UP0, UP1, CARR_FACE + BASE_T, top_z, "add", "Upright")
+    seat()
+    # belt anchor pockets from the top, then the post noses put back
+    for (u0, u1, v0, v1), pn in (((-HW - 1, HW + 1, A_IN0, UP0), "Strand channel"),
+                                 ((-HW - 1, HW + 1, A_RET0, A_POST0), "Return channel"),
+                                 ((-A_NOSE, A_NOSE, A_RET0, UP0), "Turn pocket")):
+        bx(u0, u1, v0, v1, A_FLOOR, JAW_T + 1, "remove", pn)
+    for su in (-1, 1):
+        cyl(*pt(su * A_NOSE, (A_POST0 + A_IN0) / 2), 2.5, A_FLOOR, JAW_T, "add", "Post nose")
+    ss = [circ([su * SS_X, SS_Z], TAP["M4"]) for su in (-1, 1)]
+    if swap:
+        holes_x(ss, A_OUT, A_RET0 - A_OUT, +1, "Set screws M4")
+    else:
+        holes_y(ss, A_OUT, A_RET0 - A_OUT, +1, "Set screws M4")
+    ch = [pt(c[0], RO + c[1]) for c in CAR12]
+    pocket_z([circ(p, CB["M3"][0]) for p in ch], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
+    cut_through([circ(p, CLR["M3"]) for p in ch], CARR_FACE + BASE_T, "Carriage screws")
+    return body, ch
+
+# ---- X-end block: the upright rises to the X beam, which drops into a slot between two cheeks
+S_XEND = studio("X-end block")
+def _xseat():
+    for sx in (-1, 1):
+        x0_, x1_ = sorted((sx * (BWD / 2), sx * HW))
+        box(x0_, x1_, UP0, UP1, XB_BOT, XB_BOT + 20, "add", "Cheek")
+    holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], BWD / 2, HW - BWD / 2, +1, "Cheek tap")
+    holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, HW - BWD / 2, -1, "Cheek tap")
+    pocket_z([circ([sx * 6, B - 1.5], TAP["M4"]) for sx in (-1, 1)], XB_BOT, 10, "Beam screws M4")
+xend_body, xc_h = end_block(False, XB_BOT, _xseat, "X")
+name_part(xend_body, "X-end block", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
+          notes="One part from 7075 bar 45.4 x 34.2 x 85. Setup 1, bottom face down: profile, step down to the base, "
+                "belt anchor pockets and posts (Ø3 end mill, 14.5 deep), carriage cbores, beam screw taps M4. "
+                "Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: set screw taps M4 (3 setups)")
 for c in xc_h:
     J("xend", "ISO 4762", "M3", [c[0], c[1], CARR_FACE + BASE_T - CB["M3"][1]], "-z", L=8, label="carriage screw")
 for sx in (-1, 1):
     J("xend", "ISO 4762", "M4", [sx * 6, B - 1.5, XB_BOT + BT], "-z", L=12, label="beam screw")
-    J("xend", "ISO 4762", "M4", [sx * 10, CL0, 54], "+y", L=12, label="clamp screw")
+    J("xend", "ISO 4026", "M4", [sx * SS_X, A_OUT, SS_Z], "+y", L=5, label="belt set screw")
 
-# ---- Y-end tower (local: right tower, Y beam at y = 0). U-shaped upright: ears beside the beam carry the clamp screws
-S_YEND = studio("Y-end tower")
-res = box(RO - 13.5, RO + 13.5, -22.7, 22.7, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
-yend_body = new_body(res)
+# ---- Y-end block (local: right block, Y beam at y = 0): the beam sits in a seat between the two ears
+S_YEND = studio("Y-end block")
 EAR_Z = YB_BOT + 21
-box(UP0, UP1, -22.7, 22.7, CARR_FACE + BASE_T, EAR_Z, "add", "Upright")
-box(UP0, UP1, -BWD / 2, BWD / 2, YB_BOT, EAR_Z, "remove", "Beam seat")
-holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], BWD / 2, 8, +1, "Cheek tap")
-holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, 8, -1, "Cheek tap")
-yc_h = [[RO + c[0], c[1]] for c in CAR12]
-pocket_z([circ(p, CB["M3"][0]) for p in yc_h], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
-cut_through([circ(p, CLR["M3"]) for p in yc_h], CARR_FACE + BASE_T, "Carriage screws")
-pocket_z([circ([B - 1.5, sy * 6], TAP["M4"]) for sy in (-1, 1)], YB_BOT, 10, "Beam screws M4")
-holes_x([circ([sy * 18, 56], TAP["M4"]) for sy in (-1, 1)], UP0, 8, +1, "Clamp screws M4")
-name_part(yend_body, "Y-end tower", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075 block. From the top: contour, base step, beam seat slot, cbores; M4 tapped from the top and the side (3 setups)")
-S_YCL = studio("Y-end strand clamp")
-res = box(CL0, SF0, -22.7, 22.7, CARR_FACE + BASE_T, EAR_Z, "new", "Clamp")
-ycl_body = new_body(res)
-box(SF0, UP0, -22.7, 22.7, BZ + BW / 2 + 1, EAR_Z, "add", "Step over the belt")
-box(CL0, UP0, -13.5, 13.5, YB_BOT - 0.5, EAR_Z, "remove", "Beam clearance")
-holes_x([circ([sy * 18, 56], CLR["M4"]) for sy in (-1, 1)], CL0, UP0 - CL0, +1, "Clamp screws")
-name_part(ycl_body, "Y-end strand clamp", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="7075, U profile milled from the side, GT2 tooth grooves on the belt face (2 setups)")
+def _yseat():
+    box(UP0, UP1, -BWD / 2, BWD / 2, YB_BOT, EAR_Z, "remove", "Beam seat")
+    box(A_OUT - 1, A_RET0, -5.5, 5.5, YB_BOT - 7, JAW_T + 1, "remove", "Notch for the MGN9 rail end")
+    holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], BWD / 2, HW - BWD / 2, +1, "Cheek tap")
+    holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, HW - BWD / 2, -1, "Cheek tap")
+    pocket_z([circ([B - 1.5, sy * 6], TAP["M4"]) for sy in (-1, 1)], YB_BOT, 10, "Beam screws M4")
+yend_body, yc_h = end_block(True, EAR_Z, _yseat, "Y")
+name_part(yend_body, "Y-end block", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
+          notes="One part from 7075 bar 34.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, "
+                "beam seat slot, belt anchor pockets and posts (Ø3 end mill, 14.5 deep), carriage cbores, beam screw taps M4. "
+                "Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: set screw taps M4 (3 setups)")
 for c in yc_h:
     J("yend", "ISO 4762", "M3", [c[0], c[1], CARR_FACE + BASE_T - CB["M3"][1]], "-z", L=8, label="carriage screw")
 for sy in (-1, 1):
     J("yend", "ISO 4762", "M4", [B - 1.5, sy * 6, YB_BOT + BT], "-z", L=12, label="beam screw")
-    J("yend", "ISO 4762", "M4", [CL0, sy * 18, 56], "+x", L=12, label="clamp screw")
+    J("yend", "ISO 4026", "M4", [A_OUT, sy * SS_X, SS_Z], "+x", L=5, label="belt set screw")
 
 # ================================================================ 4. Beam backer: SCS bent U channel, web at the bottom
 S_BEAM = studio("Beam backer")

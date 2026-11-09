@@ -44,25 +44,15 @@
   "material": "Steel",
   "notes": "DIN 988 shim washer"
  },
- "X-end tower": {
+ "X-end block": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "7075 block 45.4 x 27 x 65. From the top: contour, step to the base, cbores; then M4 tapped from the top and the side (3 setups)"
+  "notes": "One part from 7075 bar 45.4 x 34.2 x 85. Setup 1, bottom face down: profile, step down to the base, belt anchor pockets and posts (\u00d83 end mill, 14.5 deep), carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: set screw taps M4 (3 setups)"
  },
- "X-end strand clamp": {
+ "Y-end block": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "7075, profile milled from the side, GT2 tooth grooves on the belt face with a 1 mm end mill (2 setups)"
- },
- "Y-end tower": {
-  "method": "mill",
-  "material": "Aluminium 7075",
-  "notes": "7075 block. From the top: contour, base step, beam seat slot, cbores; M4 tapped from the top and the side (3 setups)"
- },
- "Y-end strand clamp": {
-  "method": "mill",
-  "material": "Aluminium 7075",
-  "notes": "7075, U profile milled from the side, GT2 tooth grooves on the belt face (2 setups)"
+  "notes": "One part from 7075 bar 34.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, belt anchor pockets and posts (\u00d83 end mill, 14.5 deep), carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: set screw taps M4 (3 setups)"
  },
  "Beam backer (U channel)": {
   "method": "SCS + mill",

@@ -507,15 +507,13 @@ def gantry_parts():
         R = I3 if sgn > 0 else Rz(180)
         f = lambda tx, ty: [tx, 0, 0]
         g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
-        g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end tower {nm}"))
-        g.append((f"xcl_{nm}", (S_XCL, xcl_body), f, R, f"X-end strand clamp {nm}"))
+        g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end block {nm}"))
         jg.append(("xend", R, f, f"X-end {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
         f = lambda tx, ty: [0, ty, 0]
         g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
-        g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end tower {nm}"))
-        g.append((f"ycl_{nm}", (S_YCL, ycl_body), f, R, f"Y-end strand clamp {nm}"))
+        g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end block {nm}"))
         jg.append(("yend", R, f, f"Y-end {nm}"))
     fx_ = lambda tx, ty: [tx, 0, XB_BOT]
     fy_ = lambda tx, ty: [0, ty, YB_BOT]
