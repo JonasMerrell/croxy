@@ -17651,22 +17651,22 @@
          {
           "id": 1,
           "x": -19.5,
-          "y": -10.0
+          "y": 19.0
          },
          {
           "id": 3,
-          "x": -19.5,
-          "y": 10.0
+          "x": 19.5,
+          "y": -19.0
          },
          {
           "id": 5,
           "x": 19.5,
-          "y": -10.0
+          "y": 0.0
          },
          {
           "id": 7,
-          "x": 19.5,
-          "y": 5.0
+          "x": -19.5,
+          "y": -19.0
          }
         ],
         "curves": [
@@ -17740,7 +17740,23 @@
          "sketch": 17,
          "point": [
           -19.5,
-          -10.342020143325668
+          18.65797985667433
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 17,
+         "point": [
+          19.5,
+          -19.34202014332567
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 17,
+         "point": [
+          19.5,
+          -0.3420201433256685
          ]
         },
         {
@@ -17748,23 +17764,7 @@
          "sketch": 17,
          "point": [
           -19.5,
-          9.657979856674332
-         ]
-        },
-        {
-         "kind": "region",
-         "sketch": 17,
-         "point": [
-          19.5,
-          -10.342020143325668
-         ]
-        },
-        {
-         "kind": "region",
-         "sketch": 17,
-         "point": [
-          19.5,
-          4.657979856674332
+          -19.34202014332567
          ]
         }
        ],
@@ -17824,7 +17824,7 @@
      },
      {
       "id": 2,
-      "name": "Plate",
+      "name": "Diagonal band",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -17837,23 +17837,23 @@
         "points": [
          {
           "id": 1,
-          "x": -22.0,
-          "y": -21.5
+          "x": -39.0,
+          "y": -28.0
          },
          {
           "id": 2,
-          "x": 48.0,
-          "y": -21.5
+          "x": 42.80584360149872,
+          "y": -28.0
          },
          {
           "id": 3,
-          "x": 48.0,
-          "y": 55.0
+          "x": 42.80584360149872,
+          "y": 23.0
          },
          {
           "id": 4,
-          "x": -22.0,
-          "y": 55.0
+          "x": -39.0,
+          "y": 23.0
          }
         ],
         "curves": [
@@ -17933,7 +17933,7 @@
      },
      {
       "id": 3,
-      "name": "Plate",
+      "name": "Diagonal band",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -17943,8 +17943,8 @@
          "kind": "region",
          "sketch": 2,
          "point": [
-          24.666666666666668,
-          4.0
+          15.537229067665814,
+          -11.0
          ]
         }
        ],
@@ -17960,6 +17960,605 @@
      },
      {
       "id": 4,
+      "name": "Plane z=-8",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-8.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 5,
+      "name": "Neck footprint",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 4
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -30.3027,
+          "y": 5.2912
+         },
+         {
+          "id": 2,
+          "x": -4.5933,
+          "y": -30.4163
+         },
+         {
+          "id": 3,
+          "x": 30.3027,
+          "y": -5.2912
+         },
+         {
+          "id": 4,
+          "x": 4.5933,
+          "y": 30.4163
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -8.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 6,
+      "name": "Neck footprint",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 5,
+         "point": [
+          -1.5310999999999997,
+          -10.138766666666667
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 7,
+      "name": "Plane z=-59",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-59.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 8,
+      "name": "Motor flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 7
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -17.0,
+          "y": -22.5
+         },
+         {
+          "id": 2,
+          "x": -12.0,
+          "y": -22.5
+         },
+         {
+          "id": 3,
+          "x": -12.0,
+          "y": 22.5
+         },
+         {
+          "id": 4,
+          "x": -17.0,
+          "y": 22.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -59.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 9,
+      "name": "Motor flange",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 8,
+         "point": [
+          -13.666666666666666,
+          -7.5
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "51.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 10,
+      "name": "Plane z=-38",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-38.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 11,
+      "name": "Motor cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 10
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -37.0,
+          "y": -22.5
+         },
+         {
+          "id": 2,
+          "x": -17.0,
+          "y": -22.5
+         },
+         {
+          "id": 3,
+          "x": -17.0,
+          "y": -18.5
+         },
+         {
+          "id": 4,
+          "x": -37.0,
+          "y": -18.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -38.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 12,
+      "name": "Motor cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 11,
+         "point": [
+          -23.666666666666668,
+          -21.166666666666668
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "30.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 13,
+      "name": "Plane z=-38",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-38.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 14,
+      "name": "Motor cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 13
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -37.0,
+          "y": 18.5
+         },
+         {
+          "id": 2,
+          "x": -17.0,
+          "y": 18.5
+         },
+         {
+          "id": 3,
+          "x": -17.0,
+          "y": 22.5
+         },
+         {
+          "id": 4,
+          "x": -37.0,
+          "y": 22.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -38.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 15,
+      "name": "Motor cheek",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 14,
+         "point": [
+          -23.666666666666668,
+          19.833333333333332
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "30.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 16,
       "name": "Plane z=-2",
       "suppressed": false,
       "hidden": false,
@@ -17977,7 +18576,7 @@
       }
      },
      {
-      "id": 5,
+      "id": 17,
       "name": "Holes",
       "suppressed": false,
       "hidden": false,
@@ -17985,94 +18584,99 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 4
+        "feature": 16
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": -17.0,
-          "y": -16.5
+          "x": -2.0,
+          "y": -5.0
          },
          {
           "id": 2,
-          "x": -4.0,
-          "y": -16.5
+          "x": 11.0,
+          "y": -5.0
          },
          {
           "id": 3,
-          "x": -4.0,
-          "y": 10.0
+          "x": 11.0,
+          "y": 9.0
          },
          {
           "id": 4,
-          "x": -17.0,
-          "y": 10.0
+          "x": -2.0,
+          "y": 9.0
          },
          {
           "id": 9,
-          "x": 18.0,
-          "y": 25.0
+          "x": 30.80584360149873,
+          "y": 0.0
          },
          {
           "id": 11,
-          "x": -19.5,
-          "y": -10.0
+          "x": 4.025210333599414,
+          "y": 26.926709449360583
          },
          {
           "id": 13,
-          "x": -19.5,
-          "y": 10.0
+          "x": -4.025210333599414,
+          "y": -26.926709449360583
          },
          {
           "id": 15,
-          "x": 19.5,
-          "y": -10.0
+          "x": 11.39394215397898,
+          "y": -15.82491965830414
          },
          {
           "id": 17,
-          "x": 19.5,
-          "y": 5.0
+          "x": -26.813094641557377,
+          "y": 4.7231298672477
          },
          {
           "id": 19,
-          "x": 3.0,
-          "y": 17.0
+          "x": 21.80584360149873,
+          "y": 13.0
          },
          {
           "id": 21,
-          "x": 33.0,
-          "y": 17.0
+          "x": 37.80584360149872,
+          "y": 13.0
          },
          {
           "id": 23,
-          "x": 3.0,
-          "y": 30.0
+          "x": 21.80584360149873,
+          "y": -16.0
          },
          {
           "id": 25,
-          "x": 33.0,
-          "y": 30.0
+          "x": 37.80584360149872,
+          "y": -16.0
          },
          {
           "id": 27,
-          "x": 43.5,
-          "y": 3.0
+          "x": 11.0,
+          "y": -24.0
          },
          {
           "id": 29,
-          "x": 43.5,
-          "y": 19.0
+          "x": 17.0,
+          "y": -24.0
          },
          {
           "id": 31,
-          "x": -10.5,
-          "y": 16.0
+          "x": -3.5,
+          "y": -6.5
          },
          {
           "id": 33,
-          "x": -10.5,
-          "y": 31.0
+          "x": 12.5,
+          "y": -6.5
+         },
+         {
+          "id": 35,
+          "x": 4.0,
+          "y": 19.5
          }
         ],
         "curves": [
@@ -18194,6 +18798,13 @@
           "c": 33,
           "r": 1.7,
           "construction": false
+         },
+         {
+          "id": 36,
+          "type": "circle",
+          "c": 35,
+          "r": 1.7,
+          "construction": false
          }
         ],
         "constraints": [
@@ -18214,7 +18825,7 @@
           "l": 8
          }
         ],
-        "next_id": 34,
+        "next_id": 36,
         "texts": []
        },
        "frame": {
@@ -18242,7 +18853,7 @@
       }
      },
      {
-      "id": 6,
+      "id": 18,
       "name": "Holes",
       "suppressed": false,
       "hidden": false,
@@ -18251,114 +18862,122 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          -8.333333333333334,
-          -7.666666666666667
+          6.666666666666667,
+          -0.3333333333333333
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          18.25625866631745,
-          24.762226705442306
+          31.062102267816176,
+          -0.23777329455769544
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          -19.5,
-          -10.387622829102424
+          4.025210333599413,
+          26.53908662025816
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          -19.5,
-          9.612377170897576
+          -4.025210333599414,
+          -27.314332278463002
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          19.5,
-          -10.387622829102424
+          11.393942153978978,
+          -16.212542487406566
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          19.5,
-          4.6123771708975765
+          -26.81309464155738,
+          4.335507038145276
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          3.0,
-          16.612377170897577
+          21.805843601498726,
+          12.612377170897576
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          33.0,
-          16.612377170897577
+          37.80584360149872,
+          12.612377170897576
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          3.0,
-          29.612377170897574
+          21.805843601498726,
+          -16.387622829102426
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          33.0,
-          29.612377170897574
+          37.80584360149872,
+          -16.387622829102426
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          43.5,
-          2.612377170897576
+          11.0,
+          -24.387622829102426
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          43.5,
-          18.612377170897574
+          17.0,
+          -24.387622829102426
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          -10.5,
-          15.612377170897576
+          -3.5,
+          -6.8876228291024235
          ]
         },
         {
          "kind": "region",
-         "sketch": 5,
+         "sketch": 17,
          "point": [
-          -10.5,
-          30.612377170897574
+          12.5,
+          -6.8876228291024235
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 17,
+         "point": [
+          3.9999999999999996,
+          19.112377170897574
          ]
         }
        ],
@@ -18373,7 +18992,7 @@
       }
      },
      {
-      "id": 7,
+      "id": 19,
       "name": "Plane z=-8",
       "suppressed": false,
       "hidden": false,
@@ -18391,7 +19010,7 @@
       }
      },
      {
-      "id": 8,
+      "id": 20,
       "name": "Cbores from below",
       "suppressed": false,
       "hidden": false,
@@ -18399,29 +19018,29 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 7
+        "feature": 19
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": -19.5,
-          "y": -10.0
+          "x": 4.025210333599414,
+          "y": 26.926709449360583
          },
          {
           "id": 3,
-          "x": -19.5,
-          "y": 10.0
+          "x": -4.025210333599414,
+          "y": -26.926709449360583
          },
          {
           "id": 5,
-          "x": 19.5,
-          "y": -10.0
+          "x": 11.39394215397898,
+          "y": -15.82491965830414
          },
          {
           "id": 7,
-          "x": 19.5,
-          "y": 5.0
+          "x": -26.813094641557377,
+          "y": 4.7231298672477
          }
         ],
         "curves": [
@@ -18483,7 +19102,7 @@
       }
      },
      {
-      "id": 9,
+      "id": 21,
       "name": "Cbores from below",
       "suppressed": false,
       "hidden": false,
@@ -18492,34 +19111,34 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
-          -19.500000000000004,
-          -10.0
+          4.025210333599413,
+          26.926709449360583
          ]
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
-          -19.500000000000004,
-          10.0
+          -4.025210333599415,
+          -26.926709449360583
          ]
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
-          19.499999999999996,
-          -10.0
+          11.393942153978978,
+          -15.82491965830414
          ]
         },
         {
          "kind": "region",
-         "sketch": 8,
+         "sketch": 20,
          "point": [
-          19.499999999999996,
-          5.0
+          -26.81309464155738,
+          4.7231298672477
          ]
         }
        ],
@@ -18534,7 +19153,7 @@
       }
      },
      {
-      "id": 10,
+      "id": 22,
       "name": "Plane z=-3.7",
       "suppressed": false,
       "hidden": false,
@@ -18552,7 +19171,7 @@
       }
      },
      {
-      "id": 11,
+      "id": 23,
       "name": "Countersinks",
       "suppressed": false,
       "hidden": false,
@@ -18560,49 +19179,54 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 10
+        "feature": 22
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": 3.0,
-          "y": 17.0
+          "x": 21.80584360149873,
+          "y": 13.0
          },
          {
           "id": 3,
-          "x": 33.0,
-          "y": 17.0
+          "x": 37.80584360149872,
+          "y": 13.0
          },
          {
           "id": 5,
-          "x": 3.0,
-          "y": 30.0
+          "x": 21.80584360149873,
+          "y": -16.0
          },
          {
           "id": 7,
-          "x": 33.0,
-          "y": 30.0
+          "x": 37.80584360149872,
+          "y": -16.0
          },
          {
           "id": 9,
-          "x": 43.5,
-          "y": 3.0
+          "x": 11.0,
+          "y": -24.0
          },
          {
           "id": 11,
-          "x": 43.5,
-          "y": 19.0
+          "x": 17.0,
+          "y": -24.0
          },
          {
           "id": 13,
-          "x": -10.5,
-          "y": 16.0
+          "x": -3.5,
+          "y": -6.5
          },
          {
           "id": 15,
-          "x": -10.5,
-          "y": 31.0
+          "x": 12.5,
+          "y": -6.5
+         },
+         {
+          "id": 17,
+          "x": 4.0,
+          "y": 19.5
          }
         ],
         "curves": [
@@ -18661,10 +19285,17 @@
           "c": 15,
           "r": 3.3,
           "construction": false
+         },
+         {
+          "id": 18,
+          "type": "circle",
+          "c": 17,
+          "r": 3.3,
+          "construction": false
          }
         ],
         "constraints": [],
-        "next_id": 16,
+        "next_id": 18,
         "texts": []
        },
        "frame": {
@@ -18692,7 +19323,7 @@
       }
      },
      {
-      "id": 12,
+      "id": 24,
       "name": "Countersinks",
       "suppressed": false,
       "hidden": false,
@@ -18701,66 +19332,82 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          2.9999999999999996,
-          17.0
+          21.805843601498726,
+          13.0
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          33.0,
-          17.0
+          37.80584360149873,
+          13.0
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          2.9999999999999996,
-          30.0
+          21.805843601498726,
+          -16.0
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          33.0,
-          30.0
+          37.80584360149873,
+          -16.0
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          43.5,
-          3.0
+          13.985973650864528,
+          -24.066718416827822
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          43.5,
-          19.0
+          17.099999999999998,
+          -23.541742430504417
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          -10.5,
-          16.0
+          10.825675988293533,
+          -24.57870486684524
          ]
         },
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 23,
          "point": [
-          -10.5,
-          31.0
+          -3.5000000000000004,
+          -6.5
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 23,
+         "point": [
+          12.5,
+          -6.5
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 23,
+         "point": [
+          3.9999999999999996,
+          19.5
          ]
         }
        ],
@@ -18773,10 +19420,191 @@
        "op": "remove",
        "draft": "0"
       }
+     },
+     {
+      "id": 25,
+      "name": "Plane x=-17",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Right"
+       },
+       "offset": "-17",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 26,
+      "name": "Motor pilot and screws",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 25
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": -38.0
+         },
+         {
+          "id": 3,
+          "x": -13.0,
+          "y": -51.0
+         },
+         {
+          "id": 5,
+          "x": -13.0,
+          "y": -25.0
+         },
+         {
+          "id": 7,
+          "x": 13.0,
+          "y": -51.0
+         },
+         {
+          "id": 9,
+          "x": 13.0,
+          "y": -25.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 11.5,
+          "construction": false
+         },
+         {
+          "id": 4,
+          "type": "circle",
+          "c": 3,
+          "r": 1.7,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "circle",
+          "c": 5,
+          "r": 1.7,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "circle",
+          "c": 7,
+          "r": 1.7,
+          "construction": false
+         },
+         {
+          "id": 10,
+          "type": "circle",
+          "c": 9,
+          "r": 1.7,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 10,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         -17.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 27,
+      "name": "Motor pilot and screws",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          0.8673606251679574,
+          -37.81563680778634
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          -13.0,
+          -51.38762282910242
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          -13.0,
+          -25.387622829102426
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          13.0,
+          -51.38762282910242
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          13.0,
+          -25.387622829102426
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "5.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
      }
     ],
     "rollback": null,
-    "next_id": 12,
+    "next_id": 27,
     "parts": {
      "3:0": {
       "name": "Toolhead plate",
@@ -82745,6 +83573,160 @@
     "features": [
      {
       "id": 1,
+      "name": "Plane z=-14",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-14.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 2,
+      "name": "Duct plenum",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 1
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -5.0,
+          "y": -8.0
+         },
+         {
+          "id": 2,
+          "x": 14.0,
+          "y": -8.0
+         },
+         {
+          "id": 3,
+          "x": 14.0,
+          "y": 21.0
+         },
+         {
+          "id": 4,
+          "x": -5.0,
+          "y": 21.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -14.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 3,
+      "name": "Duct plenum",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 2,
+         "point": [
+          7.666666666666667,
+          1.6666666666666667
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 4,
       "name": "Plane z=-82",
       "suppressed": false,
       "hidden": false,
@@ -82762,7 +83744,7 @@
       }
      },
      {
-      "id": 2,
+      "id": 5,
       "name": "Duct riser",
       "suppressed": false,
       "hidden": false,
@@ -82770,29 +83752,29 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 1
+        "feature": 4
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": -18.0,
-          "y": -18.0
+          "x": 2.0,
+          "y": 8.0
          },
          {
           "id": 2,
-          "x": -3.0,
-          "y": -18.0
+          "x": 14.0,
+          "y": 8.0
          },
          {
           "id": 3,
-          "x": -3.0,
-          "y": 35.0
+          "x": 14.0,
+          "y": 20.0
          },
          {
           "id": 4,
-          "x": -18.0,
-          "y": 35.0
+          "x": 2.0,
+          "y": 20.0
          }
         ],
         "curves": [
@@ -82871,109 +83853,8 @@
       }
      },
      {
-      "id": 3,
-      "name": "Duct riser",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 2,
-         "point": [
-          -8.0,
-          -0.3333333333333333
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "74.0",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "new",
-       "draft": "0"
-      }
-     },
-     {
-      "id": 4,
-      "name": "Plane z=-84",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Top"
-       },
-       "offset": "-84",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 5,
-      "name": "Duct ring",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 4
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": 18.0,
-          "y": 25.0
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 14.0,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 2,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         0.0,
-         -84.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         1.0,
-         0.0
-        ],
-        "normal": [
-         0.0,
-         0.0,
-         1.0
-        ]
-       }
-      }
-     },
-     {
       "id": 6,
-      "name": "Duct ring",
+      "name": "Duct riser",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -82983,13 +83864,13 @@
          "kind": "region",
          "sketch": 5,
          "point": [
-          17.19858693854415,
-          25.644894691267393
+          10.0,
+          12.0
          ]
         }
        ],
        "end": "blind",
-       "depth": "6",
+       "depth": "68.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -83031,23 +83912,23 @@
         "points": [
          {
           "id": 1,
-          "x": -3.0,
-          "y": 20.0
+          "x": 8.0,
+          "y": 6.0
          },
          {
           "id": 2,
-          "x": 10.0,
-          "y": 20.0
+          "x": 24.80584360149873,
+          "y": 6.0
          },
          {
           "id": 3,
-          "x": 10.0,
-          "y": 30.0
+          "x": 24.80584360149873,
+          "y": 16.0
          },
          {
           "id": 4,
-          "x": -3.0,
-          "y": 30.0
+          "x": 8.0,
+          "y": 16.0
          }
         ],
         "curves": [
@@ -83137,8 +84018,8 @@
          "kind": "region",
          "sketch": 8,
          "point": [
-          5.666666666666667,
-          23.333333333333332
+          19.203895734332487,
+          9.333333333333334
          ]
         }
        ],
@@ -83172,7 +84053,7 @@
      },
      {
       "id": 11,
-      "name": "Ring bore",
+      "name": "Duct ring",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83185,8 +84066,109 @@
         "points": [
          {
           "id": 1,
-          "x": 18.0,
-          "y": 25.0
+          "x": 30.80584360149873,
+          "y": 0.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 14.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -84.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 12,
+      "name": "Duct ring",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 11,
+         "point": [
+          30.004430540042875,
+          0.6448946912673895
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "6",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "add",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 13,
+      "name": "Plane z=-84",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-84",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 14,
+      "name": "Ring bore",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 13
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 30.80584360149873,
+          "y": 0.0
          }
         ],
         "curves": [
@@ -83227,7 +84209,7 @@
       }
      },
      {
-      "id": 12,
+      "id": 15,
       "name": "Ring bore",
       "suppressed": false,
       "hidden": false,
@@ -83236,10 +84218,10 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 11,
+         "sketch": 14,
          "point": [
-          18.54589629938905,
-          23.50016224406474
+          31.35173990088778,
+          -1.499837755935259
          ]
         }
        ],
@@ -83254,162 +84236,8 @@
       }
      },
      {
-      "id": 13,
-      "name": "Plane z=-80",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Top"
-       },
-       "offset": "-80",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 14,
-      "name": "Riser channel",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 13
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": -16.0,
-          "y": -16.0
-         },
-         {
-          "id": 2,
-          "x": -5.0,
-          "y": -16.0
-         },
-         {
-          "id": 3,
-          "x": -5.0,
-          "y": 10.0
-         },
-         {
-          "id": 4,
-          "x": -16.0,
-          "y": 10.0
-         }
-        ],
-        "curves": [
-         {
-          "id": 5,
-          "type": "line",
-          "a": 1,
-          "b": 2,
-          "construction": false
-         },
-         {
-          "id": 6,
-          "type": "line",
-          "a": 2,
-          "b": 3,
-          "construction": false
-         },
-         {
-          "id": 7,
-          "type": "line",
-          "a": 3,
-          "b": 4,
-          "construction": false
-         },
-         {
-          "id": 8,
-          "type": "line",
-          "a": 4,
-          "b": 1,
-          "construction": false
-         }
-        ],
-        "constraints": [
-         {
-          "type": "horizontal",
-          "l": 5
-         },
-         {
-          "type": "horizontal",
-          "l": 7
-         },
-         {
-          "type": "vertical",
-          "l": 6
-         },
-         {
-          "type": "vertical",
-          "l": 8
-         }
-        ],
-        "next_id": 8,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         0.0,
-         -80.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         1.0,
-         0.0
-        ],
-        "normal": [
-         0.0,
-         0.0,
-         1.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 15,
-      "name": "Riser channel",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 14,
-         "point": [
-          -8.666666666666666,
-          -7.333333333333333
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "72.0",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
-     },
-     {
       "id": 16,
-      "name": "Plane z=-80",
+      "name": "Plane z=-12",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83418,7 +84246,7 @@
         "kind": "origin_plane",
         "plane": "Top"
        },
-       "offset": "-80",
+       "offset": "-12.0",
        "mode": "offset",
        "refs": [],
        "angle": "45",
@@ -83427,7 +84255,7 @@
      },
      {
       "id": 17,
-      "name": "Plenum to the feed",
+      "name": "Plenum cavity",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83440,23 +84268,23 @@
         "points": [
          {
           "id": 1,
-          "x": -16.0,
-          "y": 10.0
+          "x": -2.0,
+          "y": -5.0
          },
          {
           "id": 2,
-          "x": -5.0,
-          "y": 10.0
+          "x": 11.0,
+          "y": -5.0
          },
          {
           "id": 3,
-          "x": -5.0,
-          "y": 28.0
+          "x": 11.0,
+          "y": 18.0
          },
          {
           "id": 4,
-          "x": -16.0,
-          "y": 28.0
+          "x": -2.0,
+          "y": 18.0
          }
         ],
         "curves": [
@@ -83514,7 +84342,7 @@
         "origin": [
          0.0,
          0.0,
-         -80.0
+         -12.0
         ],
         "x": [
          1.0,
@@ -83536,7 +84364,7 @@
      },
      {
       "id": 18,
-      "name": "Plenum to the feed",
+      "name": "Plenum cavity",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83546,13 +84374,13 @@
          "kind": "region",
          "sketch": 17,
          "point": [
-          -8.666666666666666,
-          16.0
+          6.666666666666667,
+          2.6666666666666665
          ]
         }
        ],
        "end": "blind",
-       "depth": "10",
+       "depth": "4.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -83563,7 +84391,7 @@
      },
      {
       "id": 19,
-      "name": "Plane z=-14",
+      "name": "Plane z=-82",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83572,7 +84400,7 @@
         "kind": "origin_plane",
         "plane": "Top"
        },
-       "offset": "-14.0",
+       "offset": "-82",
        "mode": "offset",
        "refs": [],
        "angle": "45",
@@ -83581,7 +84409,7 @@
      },
      {
       "id": 20,
-      "name": "Heat-set inserts",
+      "name": "Riser channel",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83594,40 +84422,81 @@
         "points": [
          {
           "id": 1,
-          "x": -10.5,
-          "y": 16.0
+          "x": 4.0,
+          "y": 10.0
+         },
+         {
+          "id": 2,
+          "x": 12.0,
+          "y": 10.0
          },
          {
           "id": 3,
-          "x": -10.5,
-          "y": 31.0
+          "x": 12.0,
+          "y": 18.0
+         },
+         {
+          "id": 4,
+          "x": 4.0,
+          "y": 18.0
          }
         ],
         "curves": [
          {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 2.0,
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
           "construction": false
          },
          {
-          "id": 4,
-          "type": "circle",
-          "c": 3,
-          "r": 2.0,
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
           "construction": false
          }
         ],
-        "constraints": [],
-        "next_id": 4,
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
         "texts": []
        },
        "frame": {
         "origin": [
          0.0,
          0.0,
-         -14.0
+         -82.0
         ],
         "x": [
          1.0,
@@ -83649,7 +84518,7 @@
      },
      {
       "id": 21,
-      "name": "Heat-set inserts",
+      "name": "Riser channel",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83659,21 +84528,13 @@
          "kind": "region",
          "sketch": 20,
          "point": [
-          -10.272214518828934,
-          15.78864596039316
-         ]
-        },
-        {
-         "kind": "region",
-         "sketch": 20,
-         "point": [
-          -10.272214518828934,
-          30.788645960393165
+          9.333333333333334,
+          12.666666666666666
          ]
         }
        ],
        "end": "blind",
-       "depth": "6",
+       "depth": "70.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -83684,7 +84545,7 @@
      },
      {
       "id": 22,
-      "name": "Plane z=-42",
+      "name": "Plane z=-82",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83693,7 +84554,7 @@
         "kind": "origin_plane",
         "plane": "Top"
        },
-       "offset": "-42",
+       "offset": "-82",
        "mode": "offset",
        "refs": [],
        "angle": "45",
@@ -83702,7 +84563,7 @@
      },
      {
       "id": 23,
-      "name": "Extruder",
+      "name": "Feed channel",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83715,23 +84576,23 @@
         "points": [
          {
           "id": 1,
-          "x": -2.0,
-          "y": 11.0
+          "x": 8.0,
+          "y": 8.0
          },
          {
           "id": 2,
-          "x": 38.0,
-          "y": 11.0
+          "x": 24.80584360149873,
+          "y": 8.0
          },
          {
           "id": 3,
-          "x": 38.0,
-          "y": 35.0
+          "x": 24.80584360149873,
+          "y": 14.0
          },
          {
           "id": 4,
-          "x": -2.0,
-          "y": 35.0
+          "x": 8.0,
+          "y": 14.0
          }
         ],
         "curves": [
@@ -83789,7 +84650,7 @@
         "origin": [
          0.0,
          0.0,
-         -42.0
+         -82.0
         ],
         "x": [
          1.0,
@@ -83811,7 +84672,7 @@
      },
      {
       "id": 24,
-      "name": "Extruder",
+      "name": "Feed channel",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83821,24 +84682,24 @@
          "kind": "region",
          "sketch": 23,
          "point": [
-          24.666666666666668,
-          19.0
+          19.203895734332487,
+          10.0
          ]
         }
        ],
        "end": "blind",
-       "depth": "34.0",
+       "depth": "2",
        "opposite": false,
        "second": false,
        "depth2": "10",
        "up_to": null,
-       "op": "new",
+       "op": "remove",
        "draft": "0"
       }
      },
      {
       "id": 25,
-      "name": "Plane z=-40",
+      "name": "Plane z=-13",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83847,7 +84708,7 @@
         "kind": "origin_plane",
         "plane": "Top"
        },
-       "offset": "-40",
+       "offset": "-13.0",
        "mode": "offset",
        "refs": [],
        "angle": "45",
@@ -83856,7 +84717,7 @@
      },
      {
       "id": 26,
-      "name": "Extruder motor",
+      "name": "Heat-set inserts",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83869,23 +84730,164 @@
         "points": [
          {
           "id": 1,
-          "x": 0.0,
-          "y": 35.0
-         },
-         {
-          "id": 2,
-          "x": 36.0,
-          "y": 35.0
+          "x": -3.5,
+          "y": -6.5
          },
          {
           "id": 3,
-          "x": 36.0,
-          "y": 55.0
+          "x": 12.5,
+          "y": -6.5
+         },
+         {
+          "id": 5,
+          "x": 4.0,
+          "y": 19.5
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.0,
+          "construction": false
          },
          {
           "id": 4,
-          "x": 0.0,
-          "y": 55.0
+          "type": "circle",
+          "c": 3,
+          "r": 2.0,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "circle",
+          "c": 5,
+          "r": 2.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 6,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -13.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 27,
+      "name": "Heat-set inserts",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          -3.2722145188289353,
+          -6.711354039606841
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          12.727785481171066,
+          -6.711354039606841
+         ]
+        },
+        {
+         "kind": "region",
+         "sketch": 26,
+         "point": [
+          4.227785481171065,
+          19.28864596039316
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "5",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "remove",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 28,
+      "name": "Plane z=-46",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-46.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 29,
+      "name": "Extruder gearbox",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 28
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 16.805843601498726,
+          "y": -19.5
+         },
+         {
+          "id": 2,
+          "x": 40.80584360149872,
+          "y": -19.5
+         },
+         {
+          "id": 3,
+          "x": 40.80584360149872,
+          "y": 16.0
+         },
+         {
+          "id": 4,
+          "x": 16.805843601498726,
+          "y": 16.0
          }
         ],
         "curves": [
@@ -83943,7 +84945,7 @@
         "origin": [
          0.0,
          0.0,
-         -40.0
+         -46.0
         ],
         "x": [
          1.0,
@@ -83964,8 +84966,8 @@
       }
      },
      {
-      "id": 27,
-      "name": "Extruder motor",
+      "id": 30,
+      "name": "Extruder gearbox",
       "suppressed": false,
       "hidden": false,
       "op": {
@@ -83973,15 +84975,15 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 26,
+         "sketch": 29,
          "point": [
-          24.0,
-          41.666666666666664
+          32.80584360149872,
+          -7.666666666666667
          ]
         }
        ],
        "end": "blind",
-       "depth": "32.0",
+       "depth": "38.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -83991,7 +84993,363 @@
       }
      },
      {
-      "id": 28,
+      "id": 31,
+      "name": "Plane z=-56",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Top"
+       },
+       "offset": "-56.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 32,
+      "name": "Extruder motor",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 31
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": -37.0,
+          "y": -18.0
+         },
+         {
+          "id": 2,
+          "x": -17.0,
+          "y": -18.0
+         },
+         {
+          "id": 3,
+          "x": -17.0,
+          "y": 18.0
+         },
+         {
+          "id": 4,
+          "x": -37.0,
+          "y": 18.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 5,
+          "type": "line",
+          "a": 1,
+          "b": 2,
+          "construction": false
+         },
+         {
+          "id": 6,
+          "type": "line",
+          "a": 2,
+          "b": 3,
+          "construction": false
+         },
+         {
+          "id": 7,
+          "type": "line",
+          "a": 3,
+          "b": 4,
+          "construction": false
+         },
+         {
+          "id": 8,
+          "type": "line",
+          "a": 4,
+          "b": 1,
+          "construction": false
+         }
+        ],
+        "constraints": [
+         {
+          "type": "horizontal",
+          "l": 5
+         },
+         {
+          "type": "horizontal",
+          "l": 7
+         },
+         {
+          "type": "vertical",
+          "l": 6
+         },
+         {
+          "type": "vertical",
+          "l": 8
+         }
+        ],
+        "next_id": 8,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         0.0,
+         0.0,
+         -56.0
+        ],
+        "x": [
+         1.0,
+         0.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "normal": [
+         0.0,
+         0.0,
+         1.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 33,
+      "name": "Extruder motor",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 32,
+         "point": [
+          -23.666666666666668,
+          -6.0
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "36.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 34,
+      "name": "Plane x=-10",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Right"
+       },
+       "offset": "-10.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 35,
+      "name": "Coupling",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 34
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": -38.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 7.0,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         -10.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 36,
+      "name": "Coupling",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 35,
+         "point": [
+          0.54589629938905,
+          -39.49983775593526
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "18.0",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 37,
+      "name": "Plane x=-1",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "plane",
+       "base": {
+        "kind": "origin_plane",
+        "plane": "Right"
+       },
+       "offset": "-1.0",
+       "mode": "offset",
+       "refs": [],
+       "angle": "45",
+       "flip": false
+      }
+     },
+     {
+      "id": 38,
+      "name": "Jackshaft",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "sketch",
+       "plane": {
+        "kind": "feature_plane",
+        "feature": 37
+       },
+       "sketch": {
+        "points": [
+         {
+          "id": 1,
+          "x": 0.0,
+          "y": -38.0
+         }
+        ],
+        "curves": [
+         {
+          "id": 2,
+          "type": "circle",
+          "c": 1,
+          "r": 2.5,
+          "construction": false
+         }
+        ],
+        "constraints": [],
+        "next_id": 2,
+        "texts": []
+       },
+       "frame": {
+        "origin": [
+         -1.0,
+         0.0,
+         0.0
+        ],
+        "x": [
+         0.0,
+         1.0,
+         0.0
+        ],
+        "y": [
+         0.0,
+         0.0,
+         1.0
+        ],
+        "normal": [
+         1.0,
+         0.0,
+         0.0
+        ]
+       }
+      }
+     },
+     {
+      "id": 39,
+      "name": "Jackshaft",
+      "suppressed": false,
+      "hidden": false,
+      "op": {
+       "type": "extrude",
+       "profiles": [
+        {
+         "kind": "region",
+         "sketch": 38,
+         "point": [
+          0.2847318514638311,
+          -38.26419254950855
+         ]
+        }
+       ],
+       "end": "blind",
+       "depth": "27.805843601498726",
+       "opposite": false,
+       "second": false,
+       "depth2": "10",
+       "up_to": null,
+       "op": "new",
+       "draft": "0"
+      }
+     },
+     {
+      "id": 40,
       "name": "Plane z=-74",
       "suppressed": false,
       "hidden": false,
@@ -84009,7 +85367,7 @@
       }
      },
      {
-      "id": 29,
+      "id": 41,
       "name": "Chube",
       "suppressed": false,
       "hidden": false,
@@ -84017,14 +85375,14 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 28
+        "feature": 40
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": 18.0,
-          "y": 25.0
+          "x": 30.80584360149873,
+          "y": 0.0
          }
         ],
         "curves": [
@@ -84065,7 +85423,7 @@
       }
      },
      {
-      "id": 30,
+      "id": 42,
       "name": "Chube",
       "suppressed": false,
       "hidden": false,
@@ -84074,15 +85432,15 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 29,
+         "sketch": 41,
          "point": [
-          18.829649293638916,
-          25.17634740124785
+          31.635492895137645,
+          0.17634740124785178
          ]
         }
        ],
        "end": "blind",
-       "depth": "32",
+       "depth": "28.0",
        "opposite": false,
        "second": false,
        "depth2": "10",
@@ -84092,7 +85450,7 @@
       }
      },
      {
-      "id": 31,
+      "id": 43,
       "name": "Plane z=-86",
       "suppressed": false,
       "hidden": false,
@@ -84110,7 +85468,7 @@
       }
      },
      {
-      "id": 32,
+      "id": 44,
       "name": "Nozzle",
       "suppressed": false,
       "hidden": false,
@@ -84118,14 +85476,14 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 31
+        "feature": 43
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": 18.0,
-          "y": 25.0
+          "x": 30.80584360149873,
+          "y": 0.0
          }
         ],
         "curves": [
@@ -84166,7 +85524,7 @@
       }
      },
      {
-      "id": 33,
+      "id": 45,
       "name": "Nozzle",
       "suppressed": false,
       "hidden": false,
@@ -84175,10 +85533,10 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 32,
+         "sketch": 44,
          "point": [
-          17.532541332340802,
-          25.170141040777683
+          30.33838493383953,
+          0.17014104077768577
          ]
         }
        ],
@@ -84193,7 +85551,7 @@
       }
      },
      {
-      "id": 34,
+      "id": 46,
       "name": "Plane z=-83",
       "suppressed": false,
       "hidden": false,
@@ -84211,7 +85569,7 @@
       }
      },
      {
-      "id": 35,
+      "id": 47,
       "name": "Beacon",
       "suppressed": false,
       "hidden": false,
@@ -84219,29 +85577,29 @@
        "type": "sketch",
        "plane": {
         "kind": "feature_plane",
-        "feature": 34
+        "feature": 46
        },
        "sketch": {
         "points": [
          {
           "id": 1,
-          "x": 34.0,
-          "y": -2.0
+          "x": -9.0,
+          "y": -22.0
          },
          {
           "id": 2,
-          "x": 48.0,
-          "y": -2.0
+          "x": 17.0,
+          "y": -22.0
          },
          {
           "id": 3,
-          "x": 48.0,
-          "y": 24.0
+          "x": 17.0,
+          "y": -8.0
          },
          {
           "id": 4,
-          "x": 34.0,
-          "y": 24.0
+          "x": -9.0,
+          "y": -8.0
          }
         ],
         "curves": [
@@ -84320,7 +85678,7 @@
       }
      },
      {
-      "id": 36,
+      "id": 48,
       "name": "Beacon",
       "suppressed": false,
       "hidden": false,
@@ -84329,10 +85687,10 @@
        "profiles": [
         {
          "kind": "region",
-         "sketch": 35,
+         "sketch": 47,
          "point": [
-          43.333333333333336,
-          6.666666666666667
+          8.333333333333334,
+          -17.333333333333332
          ]
         }
        ],
@@ -84348,10 +85706,10 @@
      }
     ],
     "rollback": null,
-    "next_id": 36,
+    "next_id": 48,
     "parts": {
-     "24:0": {
-      "name": "Extruder (Sherpa Heavy style)",
+     "30:0": {
+      "name": "Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)",
       "color": [
        196,
        87,
@@ -84360,8 +85718,8 @@
       "material": null,
       "finish": "satin"
      },
-     "27:0": {
-      "name": "Extruder motor (LDO high-temp)",
+     "33:0": {
+      "name": "Extruder motor (LDO high-temp, 36 mm)",
       "color": [
        43,
        43,
@@ -84370,34 +85728,24 @@
       "material": null,
       "finish": "satin"
      },
-     "30:0": {
-      "name": "Chube Conduction hotend",
+     "36:0": {
+      "name": "Extruder shaft coupling (5-5 beam coupling D14)",
       "color": [
        184,
        190,
        196
       ],
-      "material": null,
+      "material": "Aluminium 6061",
       "finish": "satin"
      },
-     "33:0": {
-      "name": "Nozzle",
+     "39:0": {
+      "name": "Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)",
       "color": [
-       201,
-       162,
-       39
+       154,
+       163,
+       171
       ],
-      "material": "Brass",
-      "finish": "satin"
-     },
-     "36:0": {
-      "name": "Beacon3D probe",
-      "color": [
-       29,
-       29,
-       29
-      ],
-      "material": null,
+      "material": "Steel",
       "finish": "satin"
      },
      "3:0": {
@@ -84408,6 +85756,36 @@
        68
       ],
       "material": "PPS-CF",
+      "finish": "satin"
+     },
+     "42:0": {
+      "name": "Chube Conduction hotend",
+      "color": [
+       184,
+       190,
+       196
+      ],
+      "material": null,
+      "finish": "satin"
+     },
+     "45:0": {
+      "name": "Nozzle",
+      "color": [
+       201,
+       162,
+       39
+      ],
+      "material": "Brass",
+      "finish": "satin"
+     },
+     "48:0": {
+      "name": "Beacon3D probe",
+      "color": [
+       29,
+       29,
+       29
+      ],
+      "material": null,
       "finish": "satin"
      }
     },
@@ -84455,23 +85833,23 @@
         "points": [
          {
           "id": 1,
-          "x": 39.0,
-          "y": -2.0
+          "x": 8.0,
+          "y": -27.0
          },
          {
           "id": 2,
-          "x": 48.0,
-          "y": -2.0
+          "x": 20.0,
+          "y": -27.0
          },
          {
           "id": 3,
-          "x": 48.0,
-          "y": 24.0
+          "x": 20.0,
+          "y": -20.0
          },
          {
           "id": 4,
-          "x": 39.0,
-          "y": 24.0
+          "x": 8.0,
+          "y": -20.0
          }
         ],
         "curves": [
@@ -84561,8 +85939,8 @@
          "kind": "region",
          "sketch": 2,
          "point": [
-          45.0,
-          6.666666666666667
+          16.0,
+          -24.666666666666668
          ]
         }
        ],
@@ -84609,23 +85987,23 @@
         "points": [
          {
           "id": 1,
-          "x": 39.0,
-          "y": -2.0
+          "x": 8.0,
+          "y": -27.0
          },
          {
           "id": 2,
-          "x": 42.0,
-          "y": -2.0
+          "x": 20.0,
+          "y": -27.0
          },
          {
           "id": 3,
-          "x": 42.0,
-          "y": 24.0
+          "x": 20.0,
+          "y": -24.0
          },
          {
           "id": 4,
-          "x": 39.0,
-          "y": 24.0
+          "x": 8.0,
+          "y": -24.0
          }
         ],
         "curves": [
@@ -84715,8 +86093,8 @@
          "kind": "region",
          "sketch": 5,
          "point": [
-          41.0,
-          6.666666666666667
+          16.0,
+          -26.0
          ]
         }
        ],
@@ -84763,23 +86141,23 @@
         "points": [
          {
           "id": 1,
-          "x": 39.0,
-          "y": -2.0
+          "x": -9.0,
+          "y": -27.0
          },
          {
           "id": 2,
-          "x": 48.0,
-          "y": -2.0
+          "x": 20.0,
+          "y": -27.0
          },
          {
           "id": 3,
-          "x": 48.0,
-          "y": 24.0
+          "x": 20.0,
+          "y": -12.0
          },
          {
           "id": 4,
-          "x": 39.0,
-          "y": 24.0
+          "x": -9.0,
+          "y": -12.0
          }
         ],
         "curves": [
@@ -84869,8 +86247,8 @@
          "kind": "region",
          "sketch": 8,
          "point": [
-          45.0,
-          6.666666666666667
+          10.333333333333334,
+          -22.0
          ]
         }
        ],
@@ -84917,13 +86295,13 @@
         "points": [
          {
           "id": 1,
-          "x": 43.5,
-          "y": 3.0
+          "x": 11.0,
+          "y": -24.0
          },
          {
           "id": 3,
-          "x": 43.5,
-          "y": 19.0
+          "x": 17.0,
+          "y": -24.0
          }
         ],
         "curves": [
@@ -84982,16 +86360,16 @@
          "kind": "region",
          "sketch": 11,
          "point": [
-          43.72778548117106,
-          2.7886459603931595
+          11.227785481171066,
+          -24.211354039606835
          ]
         },
         {
          "kind": "region",
          "sketch": 11,
          "point": [
-          43.72778548117106,
-          18.78864596039316
+          17.227785481171065,
+          -24.211354039606835
          ]
         }
        ],
@@ -85038,13 +86416,13 @@
         "points": [
          {
           "id": 1,
-          "x": 44.5,
-          "y": 3.0
+          "x": -4.0,
+          "y": -15.0
          },
          {
           "id": 3,
-          "x": 44.5,
-          "y": 19.0
+          "x": 12.0,
+          "y": -15.0
          }
         ],
         "curves": [
@@ -85103,16 +86481,16 @@
          "kind": "region",
          "sketch": 14,
          "point": [
-          44.5,
-          2.612377170897576
+          -4.0,
+          -15.387622829102426
          ]
         },
         {
          "kind": "region",
          "sketch": 14,
          "point": [
-          44.5,
-          18.612377170897574
+          12.0,
+          -15.387622829102426
          ]
         }
        ],
@@ -85759,14 +87137,14 @@
      },
      {
       "id": 37,
-      "name": "ISO 10642 M3x10",
+      "name": "ISO 4762 M3x14",
       "suppressed": false,
       "hidden": false,
       "op": {
        "type": "custom",
-       "name": "ISO 10642 countersunk socket screw",
+       "name": "ISO 4762 socket head cap screw",
        "values": {
-        "length": "10",
+        "length": "14",
         "size": "3"
        },
        "refs": [],
@@ -85776,14 +87154,14 @@
      },
      {
       "id": 38,
-      "name": "ISO 4762 M3x14",
+      "name": "ISO 10642 M3x10",
       "suppressed": false,
       "hidden": false,
       "op": {
        "type": "custom",
-       "name": "ISO 4762 socket head cap screw",
+       "name": "ISO 10642 countersunk socket screw",
        "values": {
-        "length": "14",
+        "length": "10",
         "size": "3"
        },
        "refs": [],
@@ -86120,7 +87498,7 @@
       "hidden": true
      },
      "37:0": {
-      "name": "ISO 10642 M3x10",
+      "name": "ISO 4762 M3x14",
       "color": [
        40,
        42,
@@ -86130,7 +87508,7 @@
       "hidden": true
      },
      "38:0": {
-      "name": "ISO 4762 M3x14",
+      "name": "ISO 10642 M3x10",
       "color": [
        40,
        42,
@@ -107152,11 +108530,11 @@
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107297,11 +108675,11 @@
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107318,19 +108696,19 @@
     },
     {
      "id": 722,
-     "name": "Extruder (Sherpa Heavy style)",
+     "name": "Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)",
      "studio": 79,
      "body": [
-      24,
+      30,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107347,19 +108725,19 @@
     },
     {
      "id": 723,
-     "name": "Extruder motor (LDO high-temp)",
+     "name": "Extruder motor (LDO high-temp, 36 mm)",
      "studio": 79,
      "body": [
-      27,
+      33,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107376,19 +108754,19 @@
     },
     {
      "id": 724,
-     "name": "Chube Conduction hotend",
+     "name": "Extruder shaft coupling (5-5 beam coupling D14)",
      "studio": 79,
      "body": [
-      30,
+      36,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107405,19 +108783,19 @@
     },
     {
      "id": 725,
-     "name": "Nozzle",
+     "name": "Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)",
      "studio": 79,
      "body": [
-      33,
+      39,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107434,19 +108812,19 @@
     },
     {
      "id": 726,
-     "name": "Beacon3D probe",
+     "name": "Chube Conduction hotend",
      "studio": 79,
      "body": [
-      36,
+      42,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107463,19 +108841,19 @@
     },
     {
      "id": 727,
-     "name": "Beacon bracket",
-     "studio": 80,
+     "name": "Nozzle",
+     "studio": 79,
      "body": [
-      3,
+      45,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
@@ -107492,28 +108870,28 @@
     },
     {
      "id": 728,
-     "name": "fx carriage screw M3 X-end back",
-     "studio": 81,
+     "name": "Beacon3D probe",
+     "studio": 79,
      "body": [
-      15,
+      48,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
        1.0
       ],
       "t": [
-       30.0,
-       133.0,
-       27.7
+       40.0,
+       -30.0,
+       0.0
       ]
      },
      "fixed": true,
@@ -107521,28 +108899,28 @@
     },
     {
      "id": 729,
-     "name": "fx carriage screw M3 X-end back",
-     "studio": 81,
+     "name": "Beacon bracket",
+     "studio": 80,
      "body": [
-      15,
+      3,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
        0.0,
-       0.0,
-       0.0,
-       1.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
        1.0
       ],
       "t": [
-       30.0,
-       153.0,
-       27.7
+       40.0,
+       -30.0,
+       0.0
       ]
      },
      "fixed": true,
@@ -107569,7 +108947,7 @@
        1.0
       ],
       "t": [
-       50.0,
+       30.0,
        133.0,
        27.7
       ]
@@ -107598,7 +108976,7 @@
        1.0
       ],
       "t": [
-       50.0,
+       30.0,
        153.0,
        27.7
       ]
@@ -107608,6 +108986,64 @@
     },
     {
      "id": 732,
+     "name": "fx carriage screw M3 X-end back",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       50.0,
+       133.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 733,
+     "name": "fx carriage screw M3 X-end back",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       50.0,
+       153.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 734,
      "name": "fx beam screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107636,7 +109072,7 @@
      "hidden": false
     },
     {
-     "id": 733,
+     "id": 735,
      "name": "fx belt clamp screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107665,7 +109101,7 @@
      "hidden": false
     },
     {
-     "id": 734,
+     "id": 736,
      "name": "fx belt clamp screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107694,7 +109130,7 @@
      "hidden": false
     },
     {
-     "id": 735,
+     "id": 737,
      "name": "fx beam screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107723,7 +109159,7 @@
      "hidden": false
     },
     {
-     "id": 736,
+     "id": 738,
      "name": "fx belt clamp screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107752,7 +109188,7 @@
      "hidden": false
     },
     {
-     "id": 737,
+     "id": 739,
      "name": "fx belt clamp screw M4 X-end back",
      "studio": 81,
      "body": [
@@ -107781,64 +109217,6 @@
      "hidden": false
     },
     {
-     "id": 738,
-     "name": "fx carriage screw M3 X-end front",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       50.0,
-       -133.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 739,
-     "name": "fx carriage screw M3 X-end front",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       50.0,
-       -153.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 740,
      "name": "fx carriage screw M3 X-end front",
      "studio": 81,
@@ -107859,7 +109237,7 @@
        1.0
       ],
       "t": [
-       30.0,
+       50.0,
        -133.0,
        27.7
       ]
@@ -107888,7 +109266,7 @@
        1.0
       ],
       "t": [
-       30.0,
+       50.0,
        -153.0,
        27.7
       ]
@@ -107898,6 +109276,64 @@
     },
     {
      "id": 742,
+     "name": "fx carriage screw M3 X-end front",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       30.0,
+       -133.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 743,
+     "name": "fx carriage screw M3 X-end front",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       30.0,
+       -153.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 744,
      "name": "fx beam screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -107926,7 +109362,7 @@
      "hidden": false
     },
     {
-     "id": 743,
+     "id": 745,
      "name": "fx belt clamp screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -107955,7 +109391,7 @@
      "hidden": false
     },
     {
-     "id": 744,
+     "id": 746,
      "name": "fx belt clamp screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -107984,7 +109420,7 @@
      "hidden": false
     },
     {
-     "id": 745,
+     "id": 747,
      "name": "fx beam screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -108013,7 +109449,7 @@
      "hidden": false
     },
     {
-     "id": 746,
+     "id": 748,
      "name": "fx belt clamp screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -108042,7 +109478,7 @@
      "hidden": false
     },
     {
-     "id": 747,
+     "id": 749,
      "name": "fx belt clamp screw M4 X-end front",
      "studio": 81,
      "body": [
@@ -108071,64 +109507,6 @@
      "hidden": false
     },
     {
-     "id": 748,
-     "name": "fx carriage screw M3 Y-end right",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       133.0,
-       -40.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 749,
-     "name": "fx carriage screw M3 Y-end right",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       153.0,
-       -40.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 750,
      "name": "fx carriage screw M3 Y-end right",
      "studio": 81,
@@ -108150,7 +109528,7 @@
       ],
       "t": [
        133.0,
-       -20.0,
+       -40.0,
        27.7
       ]
      },
@@ -108179,7 +109557,7 @@
       ],
       "t": [
        153.0,
-       -20.0,
+       -40.0,
        27.7
       ]
      },
@@ -108188,6 +109566,64 @@
     },
     {
      "id": 752,
+     "name": "fx carriage screw M3 Y-end right",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       133.0,
+       -20.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 753,
+     "name": "fx carriage screw M3 Y-end right",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       153.0,
+       -20.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 754,
      "name": "fx beam screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108216,7 +109652,7 @@
      "hidden": false
     },
     {
-     "id": 753,
+     "id": 755,
      "name": "fx belt clamp screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108245,7 +109681,7 @@
      "hidden": false
     },
     {
-     "id": 754,
+     "id": 756,
      "name": "fx belt clamp screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108274,7 +109710,7 @@
      "hidden": false
     },
     {
-     "id": 755,
+     "id": 757,
      "name": "fx beam screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108303,7 +109739,7 @@
      "hidden": false
     },
     {
-     "id": 756,
+     "id": 758,
      "name": "fx belt clamp screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108332,7 +109768,7 @@
      "hidden": false
     },
     {
-     "id": 757,
+     "id": 759,
      "name": "fx belt clamp screw M4 Y-end right",
      "studio": 81,
      "body": [
@@ -108361,64 +109797,6 @@
      "hidden": false
     },
     {
-     "id": 758,
-     "name": "fx carriage screw M3 Y-end left",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       -133.0,
-       -20.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 759,
-     "name": "fx carriage screw M3 Y-end left",
-     "studio": 81,
-     "body": [
-      15,
-      0
-     ],
-     "pose": {
-      "r": [
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       -153.0,
-       -20.0,
-       27.7
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 760,
      "name": "fx carriage screw M3 Y-end left",
      "studio": 81,
@@ -108440,7 +109818,7 @@
       ],
       "t": [
        -133.0,
-       -40.0,
+       -20.0,
        27.7
       ]
      },
@@ -108469,7 +109847,7 @@
       ],
       "t": [
        -153.0,
-       -40.0,
+       -20.0,
        27.7
       ]
      },
@@ -108478,6 +109856,64 @@
     },
     {
      "id": 762,
+     "name": "fx carriage screw M3 Y-end left",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       -133.0,
+       -40.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 763,
+     "name": "fx carriage screw M3 Y-end left",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.0,
+       1.2246467991473532e-16,
+       0.0,
+       -1.2246467991473532e-16,
+       -1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       -153.0,
+       -40.0,
+       27.7
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 764,
      "name": "fx beam screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108506,7 +109942,7 @@
      "hidden": false
     },
     {
-     "id": 763,
+     "id": 765,
      "name": "fx belt clamp screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108535,7 +109971,7 @@
      "hidden": false
     },
     {
-     "id": 764,
+     "id": 766,
      "name": "fx belt clamp screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108564,7 +110000,7 @@
      "hidden": false
     },
     {
-     "id": 765,
+     "id": 767,
      "name": "fx beam screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108593,7 +110029,7 @@
      "hidden": false
     },
     {
-     "id": 766,
+     "id": 768,
      "name": "fx belt clamp screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108622,7 +110058,7 @@
      "hidden": false
     },
     {
-     "id": 767,
+     "id": 769,
      "name": "fx belt clamp screw M4 Y-end left",
      "studio": 81,
      "body": [
@@ -108651,64 +110087,6 @@
      "hidden": false
     },
     {
-     "id": 768,
-     "name": "fx beam cross screw M4 X beam",
-     "studio": 81,
-     "body": [
-      34,
-      0
-     ],
-     "pose": {
-      "r": [
-       3.3306690738754696e-16,
-       1.0000000000000002,
-       0.0,
-       0.0,
-       3.3306690738754696e-16,
-       -1.0000000000000002,
-       -1.0000000000000002,
-       0.0,
-       3.3306690738754696e-16
-      ],
-      "t": [
-       49.5,
-       -143.5,
-       104.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 769,
-     "name": "fx beam cross screw M4 X beam",
-     "studio": 81,
-     "body": [
-      34,
-      0
-     ],
-     "pose": {
-      "r": [
-       3.3306690738754696e-16,
-       1.0000000000000002,
-       0.0,
-       0.0,
-       3.3306690738754696e-16,
-       1.0000000000000002,
-       1.0000000000000002,
-       0.0,
-       3.3306690738754696e-16
-      ],
-      "t": [
-       30.5,
-       -143.5,
-       104.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
      "id": 770,
      "name": "fx beam cross screw M4 X beam",
      "studio": 81,
@@ -108730,7 +110108,7 @@
       ],
       "t": [
        49.5,
-       143.5,
+       -143.5,
        104.0
       ]
      },
@@ -108759,7 +110137,7 @@
       ],
       "t": [
        30.5,
-       143.5,
+       -143.5,
        104.0
       ]
      },
@@ -108768,28 +110146,28 @@
     },
     {
      "id": 772,
-     "name": "fx MGN9 rail screw M3 X beam",
+     "name": "fx beam cross screw M4 X beam",
      "studio": 81,
      "body": [
-      15,
+      34,
       0
      ],
      "pose": {
       "r": [
-       2.220446049250313e-16,
+       3.3306690738754696e-16,
        1.0000000000000002,
-       -8.659560562354934e-17,
-       1.0000000000000002,
-       2.220446049250313e-16,
-       8.659560562354934e-17,
-       8.659560562354934e-17,
-       -8.659560562354934e-17,
-       -1.0
+       0.0,
+       0.0,
+       3.3306690738754696e-16,
+       -1.0000000000000002,
+       -1.0000000000000002,
+       0.0,
+       3.3306690738754696e-16
       ],
       "t": [
-       40.0,
-       -120.0,
-       87.0
+       49.5,
+       143.5,
+       104.0
       ]
      },
      "fixed": true,
@@ -108797,28 +110175,28 @@
     },
     {
      "id": 773,
-     "name": "fx nut M3 X beam",
+     "name": "fx beam cross screw M4 X beam",
      "studio": 81,
      "body": [
-      35,
+      34,
       0
      ],
      "pose": {
       "r": [
-       6.123233995736766e-17,
-       1.0,
-       0.0,
-       -1.0,
-       6.123233995736766e-17,
+       3.3306690738754696e-16,
+       1.0000000000000002,
        0.0,
        0.0,
+       3.3306690738754696e-16,
+       1.0000000000000002,
+       1.0000000000000002,
        0.0,
-       1.0
+       3.3306690738754696e-16
       ],
       "t": [
-       40.0,
-       -120.0,
-       93.0
+       30.5,
+       143.5,
+       104.0
       ]
      },
      "fixed": true,
@@ -108846,7 +110224,7 @@
       ],
       "t": [
        40.0,
-       -100.0,
+       -120.0,
        87.0
       ]
      },
@@ -108875,7 +110253,7 @@
       ],
       "t": [
        40.0,
-       -100.0,
+       -120.0,
        93.0
       ]
      },
@@ -108904,7 +110282,7 @@
       ],
       "t": [
        40.0,
-       -80.0,
+       -100.0,
        87.0
       ]
      },
@@ -108933,7 +110311,7 @@
       ],
       "t": [
        40.0,
-       -80.0,
+       -100.0,
        93.0
       ]
      },
@@ -108962,7 +110340,7 @@
       ],
       "t": [
        40.0,
-       -60.0,
+       -80.0,
        87.0
       ]
      },
@@ -108991,7 +110369,7 @@
       ],
       "t": [
        40.0,
-       -60.0,
+       -80.0,
        93.0
       ]
      },
@@ -109020,7 +110398,7 @@
       ],
       "t": [
        40.0,
-       -40.0,
+       -60.0,
        87.0
       ]
      },
@@ -109049,7 +110427,7 @@
       ],
       "t": [
        40.0,
-       -40.0,
+       -60.0,
        93.0
       ]
      },
@@ -109078,7 +110456,7 @@
       ],
       "t": [
        40.0,
-       -20.0,
+       -40.0,
        87.0
       ]
      },
@@ -109107,7 +110485,7 @@
       ],
       "t": [
        40.0,
-       -20.0,
+       -40.0,
        93.0
       ]
      },
@@ -109136,7 +110514,7 @@
       ],
       "t": [
        40.0,
-       0.0,
+       -20.0,
        87.0
       ]
      },
@@ -109165,7 +110543,7 @@
       ],
       "t": [
        40.0,
-       0.0,
+       -20.0,
        93.0
       ]
      },
@@ -109194,7 +110572,7 @@
       ],
       "t": [
        40.0,
-       20.0,
+       0.0,
        87.0
       ]
      },
@@ -109223,7 +110601,7 @@
       ],
       "t": [
        40.0,
-       20.0,
+       0.0,
        93.0
       ]
      },
@@ -109252,7 +110630,7 @@
       ],
       "t": [
        40.0,
-       40.0,
+       20.0,
        87.0
       ]
      },
@@ -109281,7 +110659,7 @@
       ],
       "t": [
        40.0,
-       40.0,
+       20.0,
        93.0
       ]
      },
@@ -109310,7 +110688,7 @@
       ],
       "t": [
        40.0,
-       60.0,
+       40.0,
        87.0
       ]
      },
@@ -109339,7 +110717,7 @@
       ],
       "t": [
        40.0,
-       60.0,
+       40.0,
        93.0
       ]
      },
@@ -109368,7 +110746,7 @@
       ],
       "t": [
        40.0,
-       80.0,
+       60.0,
        87.0
       ]
      },
@@ -109397,7 +110775,7 @@
       ],
       "t": [
        40.0,
-       80.0,
+       60.0,
        93.0
       ]
      },
@@ -109426,7 +110804,7 @@
       ],
       "t": [
        40.0,
-       100.0,
+       80.0,
        87.0
       ]
      },
@@ -109455,7 +110833,7 @@
       ],
       "t": [
        40.0,
-       100.0,
+       80.0,
        93.0
       ]
      },
@@ -109484,7 +110862,7 @@
       ],
       "t": [
        40.0,
-       120.0,
+       100.0,
        87.0
       ]
      },
@@ -109513,7 +110891,7 @@
       ],
       "t": [
        40.0,
-       120.0,
+       100.0,
        93.0
       ]
      },
@@ -109522,28 +110900,28 @@
     },
     {
      "id": 798,
-     "name": "fx beam cross screw M4 Y beam",
+     "name": "fx MGN9 rail screw M3 X beam",
      "studio": 81,
      "body": [
-      34,
+      15,
       0
      ],
      "pose": {
       "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       6.123233995736766e-17,
-       -1.0,
-       0.0,
-       1.0,
-       6.123233995736766e-17
+       2.220446049250313e-16,
+       1.0000000000000002,
+       -8.659560562354934e-17,
+       1.0000000000000002,
+       2.220446049250313e-16,
+       8.659560562354934e-17,
+       8.659560562354934e-17,
+       -8.659560562354934e-17,
+       -1.0
       ],
       "t": [
-       -143.5,
-       -39.5,
-       61.0
+       40.0,
+       120.0,
+       87.0
       ]
      },
      "fixed": true,
@@ -109551,28 +110929,28 @@
     },
     {
      "id": 799,
-     "name": "fx beam cross screw M4 Y beam",
+     "name": "fx nut M3 X beam",
      "studio": 81,
      "body": [
-      34,
+      35,
       0
      ],
      "pose": {
       "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
        6.123233995736766e-17,
        1.0,
        0.0,
        -1.0,
-       6.123233995736766e-17
+       6.123233995736766e-17,
+       0.0,
+       0.0,
+       0.0,
+       1.0
       ],
       "t": [
-       -143.5,
-       -20.5,
-       61.0
+       40.0,
+       120.0,
+       93.0
       ]
      },
      "fixed": true,
@@ -109599,7 +110977,7 @@
        6.123233995736766e-17
       ],
       "t": [
-       143.5,
+       -143.5,
        -39.5,
        61.0
       ]
@@ -109628,7 +111006,7 @@
        6.123233995736766e-17
       ],
       "t": [
-       143.5,
+       -143.5,
        -20.5,
        61.0
       ]
@@ -109638,10 +111016,10 @@
     },
     {
      "id": 802,
-     "name": "fx MGN9 rail screw M3 Y beam",
+     "name": "fx beam cross screw M4 Y beam",
      "studio": 81,
      "body": [
-      15,
+      34,
       0
      ],
      "pose": {
@@ -109650,16 +111028,16 @@
        0.0,
        0.0,
        0.0,
+       6.123233995736766e-17,
        -1.0,
-       1.2246467991473532e-16,
        0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       1.0,
+       6.123233995736766e-17
       ],
       "t": [
-       -120.0,
-       -30.0,
-       44.0
+       143.5,
+       -39.5,
+       61.0
       ]
      },
      "fixed": true,
@@ -109667,10 +111045,10 @@
     },
     {
      "id": 803,
-     "name": "fx nut M3 Y beam",
+     "name": "fx beam cross screw M4 Y beam",
      "studio": 81,
      "body": [
-      35,
+      34,
       0
      ],
      "pose": {
@@ -109679,16 +111057,16 @@
        0.0,
        0.0,
        0.0,
+       6.123233995736766e-17,
        1.0,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.0,
+       6.123233995736766e-17
       ],
       "t": [
-       -120.0,
-       -30.0,
-       50.0
+       143.5,
+       -20.5,
+       61.0
       ]
      },
      "fixed": true,
@@ -109715,7 +111093,7 @@
        -1.0
       ],
       "t": [
-       -100.0,
+       -120.0,
        -30.0,
        44.0
       ]
@@ -109744,7 +111122,7 @@
        1.0
       ],
       "t": [
-       -100.0,
+       -120.0,
        -30.0,
        50.0
       ]
@@ -109773,7 +111151,7 @@
        -1.0
       ],
       "t": [
-       -80.0,
+       -100.0,
        -30.0,
        44.0
       ]
@@ -109802,7 +111180,7 @@
        1.0
       ],
       "t": [
-       -80.0,
+       -100.0,
        -30.0,
        50.0
       ]
@@ -109831,7 +111209,7 @@
        -1.0
       ],
       "t": [
-       -60.0,
+       -80.0,
        -30.0,
        44.0
       ]
@@ -109860,7 +111238,7 @@
        1.0
       ],
       "t": [
-       -60.0,
+       -80.0,
        -30.0,
        50.0
       ]
@@ -109889,7 +111267,7 @@
        -1.0
       ],
       "t": [
-       -40.0,
+       -60.0,
        -30.0,
        44.0
       ]
@@ -109918,7 +111296,7 @@
        1.0
       ],
       "t": [
-       -40.0,
+       -60.0,
        -30.0,
        50.0
       ]
@@ -109947,7 +111325,7 @@
        -1.0
       ],
       "t": [
-       -20.0,
+       -40.0,
        -30.0,
        44.0
       ]
@@ -109976,7 +111354,7 @@
        1.0
       ],
       "t": [
-       -20.0,
+       -40.0,
        -30.0,
        50.0
       ]
@@ -110005,7 +111383,7 @@
        -1.0
       ],
       "t": [
-       0.0,
+       -20.0,
        -30.0,
        44.0
       ]
@@ -110034,7 +111412,7 @@
        1.0
       ],
       "t": [
-       0.0,
+       -20.0,
        -30.0,
        50.0
       ]
@@ -110063,7 +111441,7 @@
        -1.0
       ],
       "t": [
-       20.0,
+       0.0,
        -30.0,
        44.0
       ]
@@ -110092,7 +111470,7 @@
        1.0
       ],
       "t": [
-       20.0,
+       0.0,
        -30.0,
        50.0
       ]
@@ -110121,7 +111499,7 @@
        -1.0
       ],
       "t": [
-       40.0,
+       20.0,
        -30.0,
        44.0
       ]
@@ -110150,7 +111528,7 @@
        1.0
       ],
       "t": [
-       40.0,
+       20.0,
        -30.0,
        50.0
       ]
@@ -110179,7 +111557,7 @@
        -1.0
       ],
       "t": [
-       60.0,
+       40.0,
        -30.0,
        44.0
       ]
@@ -110208,7 +111586,7 @@
        1.0
       ],
       "t": [
-       60.0,
+       40.0,
        -30.0,
        50.0
       ]
@@ -110237,7 +111615,7 @@
        -1.0
       ],
       "t": [
-       80.0,
+       60.0,
        -30.0,
        44.0
       ]
@@ -110266,7 +111644,7 @@
        1.0
       ],
       "t": [
-       80.0,
+       60.0,
        -30.0,
        50.0
       ]
@@ -110295,7 +111673,7 @@
        -1.0
       ],
       "t": [
-       100.0,
+       80.0,
        -30.0,
        44.0
       ]
@@ -110324,7 +111702,7 @@
        1.0
       ],
       "t": [
-       100.0,
+       80.0,
        -30.0,
        50.0
       ]
@@ -110353,7 +111731,7 @@
        -1.0
       ],
       "t": [
-       120.0,
+       100.0,
        -30.0,
        44.0
       ]
@@ -110382,7 +111760,7 @@
        1.0
       ],
       "t": [
-       120.0,
+       100.0,
        -30.0,
        50.0
       ]
@@ -110392,10 +111770,10 @@
     },
     {
      "id": 828,
-     "name": "fx X carriage screw M3 yoke",
+     "name": "fx MGN9 rail screw M3 Y beam",
      "studio": 81,
      "body": [
-      36,
+      15,
       0
      ],
      "pose": {
@@ -110411,9 +111789,9 @@
        -1.0
       ],
       "t": [
-       32.5,
-       -38.0,
-       77.3
+       120.0,
+       -30.0,
+       44.0
       ]
      },
      "fixed": true,
@@ -110421,10 +111799,10 @@
     },
     {
      "id": 829,
-     "name": "fx X carriage screw M3 yoke",
+     "name": "fx nut M3 Y beam",
      "studio": 81,
      "body": [
-      36,
+      35,
       0
      ],
      "pose": {
@@ -110433,16 +111811,16 @@
        0.0,
        0.0,
        0.0,
-       -1.0,
-       1.2246467991473532e-16,
+       1.0,
        0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       0.0,
+       0.0,
+       1.0
       ],
       "t": [
-       32.5,
-       -22.0,
-       77.3
+       120.0,
+       -30.0,
+       50.0
       ]
      },
      "fixed": true,
@@ -110469,7 +111847,7 @@
        -1.0
       ],
       "t": [
-       47.5,
+       32.5,
        -38.0,
        77.3
       ]
@@ -110498,7 +111876,7 @@
        -1.0
       ],
       "t": [
-       47.5,
+       32.5,
        -22.0,
        77.3
       ]
@@ -110508,10 +111886,10 @@
     },
     {
      "id": 832,
-     "name": "fx leg screw M3 yoke",
+     "name": "fx X carriage screw M3 yoke",
      "studio": 81,
      "body": [
-      32,
+      36,
       0
      ],
      "pose": {
@@ -110520,16 +111898,16 @@
        0.0,
        0.0,
        0.0,
-       1.0,
+       -1.0,
+       1.2246467991473532e-16,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.2246467991473532e-16,
+       -1.0
       ],
       "t": [
-       23.0,
-       -48.5,
-       80.0
+       47.5,
+       -38.0,
+       77.3
       ]
      },
      "fixed": true,
@@ -110537,10 +111915,10 @@
     },
     {
      "id": 833,
-     "name": "fx leg screw M3 yoke",
+     "name": "fx X carriage screw M3 yoke",
      "studio": 81,
      "body": [
-      32,
+      36,
       0
      ],
      "pose": {
@@ -110549,16 +111927,16 @@
        0.0,
        0.0,
        0.0,
-       1.0,
+       -1.0,
+       1.2246467991473532e-16,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.2246467991473532e-16,
+       -1.0
       ],
       "t": [
-       23.0,
-       -11.5,
-       80.0
+       47.5,
+       -22.0,
+       77.3
       ]
      },
      "fixed": true,
@@ -110585,7 +111963,7 @@
        1.0
       ],
       "t": [
-       57.0,
+       23.0,
        -48.5,
        80.0
       ]
@@ -110614,7 +111992,7 @@
        1.0
       ],
       "t": [
-       57.0,
+       23.0,
        -11.5,
        80.0
       ]
@@ -110624,7 +112002,7 @@
     },
     {
      "id": 836,
-     "name": "fx Y carriage screw M3 yoke",
+     "name": "fx leg screw M3 yoke",
      "studio": 81,
      "body": [
       32,
@@ -110636,16 +112014,16 @@
        0.0,
        0.0,
        0.0,
-       -1.0,
-       1.2246467991473532e-16,
+       1.0,
        0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       0.0,
+       0.0,
+       1.0
       ],
       "t": [
-       32.0,
-       -37.5,
-       31.0
+       57.0,
+       -48.5,
+       80.0
       ]
      },
      "fixed": true,
@@ -110653,7 +112031,7 @@
     },
     {
      "id": 837,
-     "name": "fx Y carriage screw M3 yoke",
+     "name": "fx leg screw M3 yoke",
      "studio": 81,
      "body": [
       32,
@@ -110665,16 +112043,16 @@
        0.0,
        0.0,
        0.0,
-       -1.0,
-       1.2246467991473532e-16,
+       1.0,
        0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       0.0,
+       0.0,
+       1.0
       ],
       "t": [
-       32.0,
-       -22.5,
-       31.0
+       57.0,
+       -11.5,
+       80.0
       ]
      },
      "fixed": true,
@@ -110701,7 +112079,7 @@
        -1.0
       ],
       "t": [
-       48.0,
+       32.0,
        -37.5,
        31.0
       ]
@@ -110730,7 +112108,7 @@
        -1.0
       ],
       "t": [
-       48.0,
+       32.0,
        -22.5,
        31.0
       ]
@@ -110740,10 +112118,10 @@
     },
     {
      "id": 840,
-     "name": "fx neck screw M3 neck",
+     "name": "fx Y carriage screw M3 yoke",
      "studio": 81,
      "body": [
-      15,
+      32,
       0
      ],
      "pose": {
@@ -110759,9 +112137,9 @@
        -1.0
       ],
       "t": [
-       26.0,
-       -43.0,
-       27.0
+       48.0,
+       -37.5,
+       31.0
       ]
      },
      "fixed": true,
@@ -110769,10 +112147,10 @@
     },
     {
      "id": 841,
-     "name": "fx neck screw M3 neck",
+     "name": "fx Y carriage screw M3 yoke",
      "studio": 81,
      "body": [
-      15,
+      32,
       0
      ],
      "pose": {
@@ -110788,9 +112166,9 @@
        -1.0
       ],
       "t": [
-       26.0,
-       -17.0,
-       27.0
+       48.0,
+       -22.5,
+       31.0
       ]
      },
      "fixed": true,
@@ -110817,7 +112195,7 @@
        -1.0
       ],
       "t": [
-       54.0,
+       26.0,
        -43.0,
        27.0
       ]
@@ -110846,7 +112224,7 @@
        -1.0
       ],
       "t": [
-       54.0,
+       26.0,
        -17.0,
        27.0
       ]
@@ -110856,10 +112234,10 @@
     },
     {
      "id": 844,
-     "name": "fx plate screw M3 neck",
+     "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
-      32,
+      15,
       0
      ],
      "pose": {
@@ -110875,9 +112253,9 @@
        -1.0
       ],
       "t": [
-       20.5,
-       -40.0,
-       -4.7
+       54.0,
+       -43.0,
+       27.0
       ]
      },
      "fixed": true,
@@ -110885,10 +112263,10 @@
     },
     {
      "id": 845,
-     "name": "fx plate screw M3 neck",
+     "name": "fx neck screw M3 neck",
      "studio": 81,
      "body": [
-      32,
+      15,
       0
      ],
      "pose": {
@@ -110904,9 +112282,9 @@
        -1.0
       ],
       "t": [
-       20.5,
-       -20.0,
-       -4.7
+       54.0,
+       -17.0,
+       27.0
       ]
      },
      "fixed": true,
@@ -110933,8 +112311,8 @@
        -1.0
       ],
       "t": [
-       59.5,
-       -40.0,
+       20.5,
+       -11.0,
        -4.7
       ]
      },
@@ -110963,7 +112341,7 @@
       ],
       "t": [
        59.5,
-       -25.0,
+       -49.0,
        -4.7
       ]
      },
@@ -110972,10 +112350,10 @@
     },
     {
      "id": 848,
-     "name": "fx extruder screw M3 neck",
+     "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
-      37,
+      32,
       0
      ],
      "pose": {
@@ -110984,16 +112362,16 @@
        0.0,
        0.0,
        0.0,
-       1.0,
+       -1.0,
+       1.2246467991473532e-16,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.2246467991473532e-16,
+       -1.0
       ],
       "t": [
-       43.0,
-       -13.0,
-       -2.0
+       59.5,
+       -30.0,
+       -4.7
       ]
      },
      "fixed": true,
@@ -111001,10 +112379,10 @@
     },
     {
      "id": 849,
-     "name": "fx extruder screw M3 neck",
+     "name": "fx plate screw M3 neck",
      "studio": 81,
      "body": [
-      37,
+      32,
       0
      ],
      "pose": {
@@ -111013,16 +112391,16 @@
        0.0,
        0.0,
        0.0,
-       1.0,
+       -1.0,
+       1.2246467991473532e-16,
        0.0,
-       0.0,
-       0.0,
-       1.0
+       -1.2246467991473532e-16,
+       -1.0
       ],
       "t": [
-       73.0,
-       -13.0,
-       -2.0
+       20.5,
+       -49.0,
+       -4.7
       ]
      },
      "fixed": true,
@@ -111030,184 +112408,10 @@
     },
     {
      "id": 850,
-     "name": "fx extruder screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       43.0,
-       0.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 851,
-     "name": "fx extruder screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       73.0,
-       0.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 852,
-     "name": "fx Beacon bracket screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       83.5,
-       -27.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 853,
-     "name": "fx Beacon bracket screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       83.5,
-       -11.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 854,
-     "name": "fx duct screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       29.5,
-       -14.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 855,
-     "name": "fx duct screw M3 neck",
-     "studio": 81,
-     "body": [
-      37,
-      0
-     ],
-     "pose": {
-      "r": [
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0,
-       0.0,
-       0.0,
-       0.0,
-       1.0
-      ],
-      "t": [
-       29.5,
-       1.0,
-       -2.0
-      ]
-     },
-     "fixed": true,
-     "hidden": false
-    },
-    {
-     "id": 856,
      "name": "fx adapter screw M3 neck",
      "studio": 81,
      "body": [
-      38,
+      37,
       0
      ],
      "pose": {
@@ -111232,11 +112436,11 @@
      "hidden": false
     },
     {
-     "id": 857,
+     "id": 851,
      "name": "fx adapter screw M3 neck",
      "studio": 81,
      "body": [
-      38,
+      37,
       0
      ],
      "pose": {
@@ -111261,29 +112465,203 @@
      "hidden": false
     },
     {
-     "id": 858,
-     "name": "fx Beacon screw M3 neck",
+     "id": 852,
+     "name": "fx extruder screw M3 toolhead",
      "studio": 81,
      "body": [
-      39,
+      38,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       1.0
       ],
       "t": [
-       84.5,
-       -27.0,
-       -83.0
+       42.1913,
+       -4.7078,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 853,
+     "name": "fx extruder screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       51.5402,
+       8.2767,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 854,
+     "name": "fx extruder screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       65.7258,
+       -21.6527,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 855,
+     "name": "fx extruder screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       75.0747,
+       -8.6681,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 856,
+     "name": "fx Beacon bracket screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       65.9042,
+       -35.0964,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 857,
+     "name": "fx Beacon bracket screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       69.41,
+       -30.2272,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 858,
+     "name": "fx duct screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       43.2299,
+       -36.6384,
+       -2.0
       ]
      },
      "fixed": true,
@@ -111291,28 +112669,28 @@
     },
     {
      "id": 859,
-     "name": "fx Beacon screw M3 neck",
+     "name": "fx duct screw M3 toolhead",
      "studio": 81,
      "body": [
-      39,
+      38,
       0
      ],
      "pose": {
       "r": [
-       1.0,
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
        0.0,
        0.0,
        0.0,
-       -1.0,
-       1.2246467991473532e-16,
-       0.0,
-       -1.2246467991473532e-16,
-       -1.0
+       1.0
       ],
       "t": [
-       84.5,
-       -11.0,
-       -83.0
+       52.5788,
+       -23.6538,
+       -2.0
       ]
      },
      "fixed": true,
@@ -111320,6 +112698,209 @@
     },
     {
      "id": 860,
+     "name": "fx duct screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      38,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       0.0,
+       -0.811534341451549,
+       0.584304725845,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "t": [
+       26.5123,
+       -15.3599,
+       -2.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 861,
+     "name": "fx extruder motor screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.844080443902385e-13,
+       -9.453549054683208e-14,
+       -1.0,
+       -0.8115343414512834,
+       0.5843047258453691,
+       9.453549054683208e-14,
+       0.584304725845369,
+       0.8115343414512834,
+       -1.844080443902385e-13
+      ],
+      "t": [
+       43.5383,
+       -47.3344,
+       -51.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 862,
+     "name": "fx extruder motor screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.844080443902385e-13,
+       -9.453549054683208e-14,
+       -1.0,
+       -0.8115343414512834,
+       0.5843047258453691,
+       9.453549054683208e-14,
+       0.584304725845369,
+       0.8115343414512834,
+       -1.844080443902385e-13
+      ],
+      "t": [
+       43.5383,
+       -47.3344,
+       -25.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 863,
+     "name": "fx extruder motor screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.844080443902385e-13,
+       -9.453549054683208e-14,
+       -1.0,
+       -0.8115343414512834,
+       0.5843047258453691,
+       9.453549054683208e-14,
+       0.584304725845369,
+       0.8115343414512834,
+       -1.844080443902385e-13
+      ],
+      "t": [
+       22.4384,
+       -32.1425,
+       -51.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 864,
+     "name": "fx extruder motor screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      15,
+      0
+     ],
+     "pose": {
+      "r": [
+       -1.844080443902385e-13,
+       -9.453549054683208e-14,
+       -1.0,
+       -0.8115343414512834,
+       0.5843047258453691,
+       9.453549054683208e-14,
+       0.584304725845369,
+       0.8115343414512834,
+       -1.844080443902385e-13
+      ],
+      "t": [
+       22.4384,
+       -32.1425,
+       -25.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 865,
+     "name": "fx Beacon screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      39,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       -5.583202727916406e-17,
+       0.811534341451549,
+       -0.584304725845,
+       1.089971676536471e-16,
+       5.583202727916406e-17,
+       -1.089971676536471e-16,
+       -1.0
+      ],
+      "t": [
+       49.8358,
+       -42.0107,
+       -83.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 866,
+     "name": "fx Beacon screw M3 toolhead",
+     "studio": 81,
+     "body": [
+      39,
+      0
+     ],
+     "pose": {
+      "r": [
+       0.584304725845,
+       0.811534341451549,
+       -5.583202727916406e-17,
+       0.811534341451549,
+       -0.584304725845,
+       1.089971676536471e-16,
+       5.583202727916406e-17,
+       -1.089971676536471e-16,
+       -1.0
+      ],
+      "t": [
+       59.1847,
+       -29.0262,
+       -83.0
+      ]
+     },
+     "fixed": true,
+     "hidden": false
+    },
+    {
+     "id": 867,
      "name": "Bed",
      "studio": 32,
      "body": [
@@ -111348,7 +112929,7 @@
      "hidden": false
     },
     {
-     "id": 861,
+     "id": 868,
      "name": "Bed heater",
      "studio": 33,
      "body": [
@@ -111377,7 +112958,7 @@
      "hidden": false
     },
     {
-     "id": 862,
+     "id": 869,
      "name": "Bed arm Z1",
      "studio": 45,
      "body": [
@@ -111406,7 +112987,7 @@
      "hidden": false
     },
     {
-     "id": 863,
+     "id": 870,
      "name": "Z1 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -111435,7 +113016,7 @@
      "hidden": false
     },
     {
-     "id": 864,
+     "id": 871,
      "name": "Z1 MGN12H",
      "studio": 21,
      "body": [
@@ -111464,7 +113045,7 @@
      "hidden": false
     },
     {
-     "id": 865,
+     "id": 872,
      "name": "Bed arm Z2",
      "studio": 46,
      "body": [
@@ -111493,7 +113074,7 @@
      "hidden": false
     },
     {
-     "id": 866,
+     "id": 873,
      "name": "Z2 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -111522,7 +113103,7 @@
      "hidden": false
     },
     {
-     "id": 867,
+     "id": 874,
      "name": "Z2 MGN12H",
      "studio": 21,
      "body": [
@@ -111551,7 +113132,7 @@
      "hidden": false
     },
     {
-     "id": 868,
+     "id": 875,
      "name": "Bed arm Z3",
      "studio": 47,
      "body": [
@@ -111580,7 +113161,7 @@
      "hidden": false
     },
     {
-     "id": 869,
+     "id": 876,
      "name": "Z3 Z belt clamp plate",
      "studio": 48,
      "body": [
@@ -111609,7 +113190,7 @@
      "hidden": false
     },
     {
-     "id": 870,
+     "id": 877,
      "name": "Z3 MGN12H",
      "studio": 21,
      "body": [
@@ -111638,7 +113219,7 @@
      "hidden": false
     },
     {
-     "id": 871,
+     "id": 878,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111667,7 +113248,7 @@
      "hidden": false
     },
     {
-     "id": 872,
+     "id": 879,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111696,7 +113277,7 @@
      "hidden": false
     },
     {
-     "id": 873,
+     "id": 880,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111725,7 +113306,7 @@
      "hidden": false
     },
     {
-     "id": 874,
+     "id": 881,
      "name": "fx Z carriage screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111754,7 +113335,7 @@
      "hidden": false
     },
     {
-     "id": 875,
+     "id": 882,
      "name": "fx Z clamp screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111783,7 +113364,7 @@
      "hidden": false
     },
     {
-     "id": 876,
+     "id": 883,
      "name": "fx Z clamp screw M3 Z1",
      "studio": 81,
      "body": [
@@ -111812,7 +113393,7 @@
      "hidden": false
     },
     {
-     "id": 877,
+     "id": 884,
      "name": "fx bed screw M4 Z1",
      "studio": 81,
      "body": [
@@ -111841,7 +113422,7 @@
      "hidden": false
     },
     {
-     "id": 878,
+     "id": 885,
      "name": "fx G10 washer Z1",
      "studio": 49,
      "body": [
@@ -111870,7 +113451,7 @@
      "hidden": false
     },
     {
-     "id": 879,
+     "id": 886,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -111899,7 +113480,7 @@
      "hidden": false
     },
     {
-     "id": 880,
+     "id": 887,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -111928,7 +113509,7 @@
      "hidden": false
     },
     {
-     "id": 881,
+     "id": 888,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -111957,7 +113538,7 @@
      "hidden": false
     },
     {
-     "id": 882,
+     "id": 889,
      "name": "fx Z carriage screw M3 Z2",
      "studio": 81,
      "body": [
@@ -111986,7 +113567,7 @@
      "hidden": false
     },
     {
-     "id": 883,
+     "id": 890,
      "name": "fx Z clamp screw M3 Z2",
      "studio": 81,
      "body": [
@@ -112015,7 +113596,7 @@
      "hidden": false
     },
     {
-     "id": 884,
+     "id": 891,
      "name": "fx Z clamp screw M3 Z2",
      "studio": 81,
      "body": [
@@ -112044,7 +113625,7 @@
      "hidden": false
     },
     {
-     "id": 885,
+     "id": 892,
      "name": "fx bed screw M4 Z2",
      "studio": 81,
      "body": [
@@ -112073,7 +113654,7 @@
      "hidden": false
     },
     {
-     "id": 886,
+     "id": 893,
      "name": "fx G10 washer Z2",
      "studio": 49,
      "body": [
@@ -112102,7 +113683,7 @@
      "hidden": false
     },
     {
-     "id": 887,
+     "id": 894,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112131,7 +113712,7 @@
      "hidden": false
     },
     {
-     "id": 888,
+     "id": 895,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112160,7 +113741,7 @@
      "hidden": false
     },
     {
-     "id": 889,
+     "id": 896,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112189,7 +113770,7 @@
      "hidden": false
     },
     {
-     "id": 890,
+     "id": 897,
      "name": "fx Z carriage screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112218,7 +113799,7 @@
      "hidden": false
     },
     {
-     "id": 891,
+     "id": 898,
      "name": "fx Z clamp screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112247,7 +113828,7 @@
      "hidden": false
     },
     {
-     "id": 892,
+     "id": 899,
      "name": "fx Z clamp screw M3 Z3",
      "studio": 81,
      "body": [
@@ -112276,7 +113857,7 @@
      "hidden": false
     },
     {
-     "id": 893,
+     "id": 900,
      "name": "fx bed screw M4 Z3",
      "studio": 81,
      "body": [
@@ -112305,7 +113886,7 @@
      "hidden": false
     },
     {
-     "id": 894,
+     "id": 901,
      "name": "fx G10 washer Z3",
      "studio": 49,
      "body": [
@@ -112335,7 +113916,7 @@
     }
    ],
    "mates": [],
-   "next_id": 894,
+   "next_id": 901,
    "relations": []
   }
  ],

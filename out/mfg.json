@@ -87,7 +87,7 @@
  "Toolhead plate": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "6 mm 7075: contour, air outlet, holes and countersinks from the top; cbores from the bottom (2 setups)"
+  "notes": "7075 block 82 x 61 x 57, machined in its own (diagonal) frame. From the bottom: motor flange and cheeks, cbores; from the top: contour, air outlet, filament hole, holes and countersinks; from the flange face: motor pilot and M3 holes (3 setups)"
  },
  "Neck air adapter": {
   "method": "print",
@@ -497,16 +497,26 @@
  "Part-cooling duct (fed through the hollow neck)": {
   "method": "print",
   "material": "PPS-CF",
-  "notes": "PPS-CF, printed mount face down; channel roofs are <= 11 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts"
+  "notes": "PPS-CF, printed plenum face down; channel roofs are <= 13 mm bridges and the ring channel a 4 mm bridge, no supports; M3 heat-set inserts"
  },
- "Extruder (Sherpa Heavy style)": {
+ "Extruder gearbox (Sherpa Heavy style, pinion on the jackshaft)": {
   "method": "buy",
   "material": "",
   "notes": ""
  },
- "Extruder motor (LDO high-temp)": {
+ "Extruder motor (LDO high-temp, 36 mm)": {
   "method": "buy",
   "material": "",
+  "notes": ""
+ },
+ "Extruder shaft coupling (5-5 beam coupling D14)": {
+  "method": "buy",
+  "material": "Aluminium 6061",
+  "notes": ""
+ },
+ "Extruder jackshaft (5 mm ground, in two 685 bearings in the gearbox)": {
+  "method": "buy",
+  "material": "Steel",
   "notes": ""
  },
  "Chube Conduction hotend": {

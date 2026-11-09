@@ -114,7 +114,13 @@
   "build_centre": [
    18,
    25
-  ]
+  ],
+  "toolhead_com": [
+   0.31,
+   -0.24,
+   -3.24
+  ],
+  "toolhead_mass_g": 660
  },
  "moving": {
   "xcar_back": 691,
@@ -153,7 +159,9 @@
   "tdet3": 724,
   "tdet4": 725,
   "tdet5": 726,
-  "bcnb": 727
+  "tdet6": 727,
+  "tdet7": 728,
+  "bcnb": 729
  },
  "start": [
   40,
