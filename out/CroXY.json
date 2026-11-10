@@ -6125,6 +6125,11 @@
           "id": 3,
           "x": 18.0,
           "y": 49.5
+         },
+         {
+          "id": 5,
+          "x": 18.5,
+          "y": 29.15
          }
         ],
         "curves": [
@@ -6141,10 +6146,17 @@
           "c": 3,
           "r": 2.25,
           "construction": false
+         },
+         {
+          "id": 6,
+          "type": "circle",
+          "c": 5,
+          "r": 1.7,
+          "construction": false
          }
         ],
         "constraints": [],
-        "next_id": 4,
+        "next_id": 6,
         "texts": []
        },
        "frame": {
@@ -6194,224 +6206,10 @@
           18.25625866631745,
           49.26222670544231
          ]
-        }
-       ],
-       "end": "blind",
-       "depth": "5.0",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
-     },
-     {
-      "id": 10,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 11,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 10
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": 5.5,
-          "y": 49.5
-         },
-         {
-          "id": 3,
-          "x": 18.0,
-          "y": 49.5
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 4.0,
-          "construction": false
-         },
-         {
-          "id": 4,
-          "type": "circle",
-          "c": 3,
-          "r": 4.0,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 4,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 12,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 11,
-         "point": [
-          4.965761522675202,
-          49.69444690374593
-         ]
         },
         {
          "kind": "region",
-         "sketch": 11,
-         "point": [
-          17.4657615226752,
-          49.69444690374593
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "2.05",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
-     },
-     {
-      "id": 13,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 14,
-      "name": "Screw holes",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 13
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": 18.5,
-          "y": 29.15
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 1.7,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 2,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 15,
-      "name": "Screw holes",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 14,
+         "sketch": 8,
          "point": [
           18.5,
           28.762377170897576
@@ -6427,111 +6225,10 @@
        "op": "remove",
        "draft": "0"
       }
-     },
-     {
-      "id": 16,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 17,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 16
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": 18.5,
-          "y": 29.15
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 3.0,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 2,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 18,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 17,
-         "point": [
-          18.5,
-          29.149999999999995
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "1.6",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
      }
     ],
     "rollback": null,
-    "next_id": 18,
+    "next_id": 9,
     "parts": {
      "3:0": {
       "name": "Belt clamp plate, right hand",
@@ -6903,6 +6600,11 @@
           "id": 3,
           "x": -18.0,
           "y": 49.5
+         },
+         {
+          "id": 5,
+          "x": -18.5,
+          "y": 29.15
          }
         ],
         "curves": [
@@ -6919,10 +6621,17 @@
           "c": 3,
           "r": 2.25,
           "construction": false
+         },
+         {
+          "id": 6,
+          "type": "circle",
+          "c": 5,
+          "r": 1.7,
+          "construction": false
          }
         ],
         "constraints": [],
-        "next_id": 4,
+        "next_id": 6,
         "texts": []
        },
        "frame": {
@@ -6972,224 +6681,10 @@
           -17.74374133368255,
           49.26222670544231
          ]
-        }
-       ],
-       "end": "blind",
-       "depth": "5.0",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
-     },
-     {
-      "id": 10,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 11,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 10
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": -5.5,
-          "y": 49.5
-         },
-         {
-          "id": 3,
-          "x": -18.0,
-          "y": 49.5
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 4.0,
-          "construction": false
-         },
-         {
-          "id": 4,
-          "type": "circle",
-          "c": 3,
-          "r": 4.0,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 4,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 12,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 11,
-         "point": [
-          -6.034238477324798,
-          49.69444690374593
-         ]
         },
         {
          "kind": "region",
-         "sketch": 11,
-         "point": [
-          -18.5342384773248,
-          49.69444690374593
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "2.05",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
-     },
-     {
-      "id": 13,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 14,
-      "name": "Screw holes",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 13
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": -18.5,
-          "y": 29.15
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 1.7,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 2,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 15,
-      "name": "Screw holes",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 14,
+         "sketch": 8,
          "point": [
           -18.5,
           28.762377170897576
@@ -7205,111 +6700,10 @@
        "op": "remove",
        "draft": "0"
       }
-     },
-     {
-      "id": 16,
-      "name": "Plane y=155.07",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "plane",
-       "base": {
-        "kind": "origin_plane",
-        "plane": "Front"
-       },
-       "offset": "-155.07000000000002",
-       "mode": "offset",
-       "refs": [],
-       "angle": "45",
-       "flip": false
-      }
-     },
-     {
-      "id": 17,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "sketch",
-       "plane": {
-        "kind": "feature_plane",
-        "feature": 16
-       },
-       "sketch": {
-        "points": [
-         {
-          "id": 1,
-          "x": -18.5,
-          "y": 29.15
-         }
-        ],
-        "curves": [
-         {
-          "id": 2,
-          "type": "circle",
-          "c": 1,
-          "r": 3.0,
-          "construction": false
-         }
-        ],
-        "constraints": [],
-        "next_id": 2,
-        "texts": []
-       },
-       "frame": {
-        "origin": [
-         0.0,
-         155.07000000000002,
-         0.0
-        ],
-        "x": [
-         1.0,
-         0.0,
-         0.0
-        ],
-        "y": [
-         0.0,
-         0.0,
-         1.0
-        ],
-        "normal": [
-         0.0,
-         -1.0,
-         0.0
-        ]
-       }
-      }
-     },
-     {
-      "id": 18,
-      "name": "Countersinks",
-      "suppressed": false,
-      "hidden": false,
-      "op": {
-       "type": "extrude",
-       "profiles": [
-        {
-         "kind": "region",
-         "sketch": 17,
-         "point": [
-          -18.5,
-          29.149999999999995
-         ]
-        }
-       ],
-       "end": "blind",
-       "depth": "1.6",
-       "opposite": false,
-       "second": false,
-       "depth2": "10",
-       "up_to": null,
-       "op": "remove",
-       "draft": "0"
-      }
      }
     ],
     "rollback": null,
-    "next_id": 18,
+    "next_id": 9,
     "parts": {
      "3:0": {
       "name": "Belt clamp plate, left hand",
@@ -89694,12 +89088,12 @@
      },
      {
       "id": 33,
-      "name": "ISO 10642 M4x12",
+      "name": "ISO 7380 M4x12",
       "suppressed": false,
       "hidden": false,
       "op": {
        "type": "custom",
-       "name": "ISO 10642 countersunk socket screw",
+       "name": "ISO 7380 button head screw",
        "values": {
         "length": "12",
         "size": "4"
@@ -89711,12 +89105,12 @@
      },
      {
       "id": 34,
-      "name": "ISO 10642 M3x10",
+      "name": "ISO 7380 M3x10",
       "suppressed": false,
       "hidden": false,
       "op": {
        "type": "custom",
-       "name": "ISO 10642 countersunk socket screw",
+       "name": "ISO 7380 button head screw",
        "values": {
         "length": "10",
         "size": "3"
@@ -90082,7 +89476,7 @@
       "hidden": true
      },
      "33:0": {
-      "name": "ISO 10642 M4x12",
+      "name": "ISO 7380 M4x12",
       "color": [
        40,
        42,
@@ -90092,7 +89486,7 @@
       "hidden": true
      },
      "34:0": {
-      "name": "ISO 10642 M3x10",
+      "name": "ISO 7380 M3x10",
       "color": [
        40,
        42,

@@ -52,12 +52,12 @@
  "Belt clamp plate, right hand": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer"
+  "notes": "5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer"
  },
  "Belt clamp plate, left hand": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer"
+  "notes": "5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer"
  },
  "X-end block": {
   "method": "mill",

@@ -179,7 +179,7 @@ for p in NEMA23_H:
 # that rises to the beam, and two side fins outboard of the web, above the belt clamp, that stiffen the web against
 # the beam's push and carry the beam cheeks. The inner strand runs past the web's inner face; the outer strand is
 # clamped straight on its own line: 11 GT2 grooves milled in the web's outer face per belt end, pressed in by a 7075
-# clamp plate (2 x M4 above the belt, 1 x M3 below, all countersunk). Nothing reaches inside v = 138.3 above the base
+# clamp plate (2 x M4 above the belt, 1 x M3 below, button heads). Nothing reaches inside v = 138.3 above the base
 # (the toolhead's envelope at full travel).
 pr_, bt_ = XY["pitch_r"], XY["belt_t"]
 UP0 = B - pr_ + bt_ / 2 + 1.0                  # web inner face: 1 mm outside the passing inner strand
@@ -194,8 +194,8 @@ CP_V = (UP1 + bt_, UP1 + bt_ + CP_T)
 CP_U = (1.0, HW)
 CP_Z = (CARR_FACE + 0.3, BZ + BW / 2 + 9.0)
 ISL = (6.0, 14.0)                              # base island round the outer carriage screw (u 10)
-CP_UP = [(5.5, BZ + BW / 2 + 4.5), (18.0, BZ + BW / 2 + 4.5)]     # M4 countersunk, above the belt
-CP_LO = [(18.5, (CP_Z[0] + BZ - BW / 2) / 2)]                     # M3 countersunk, below the belt
+CP_UP = [(5.5, BZ + BW / 2 + 4.5), (18.0, BZ + BW / 2 + 4.5)]     # M4 button head, above the belt
+CP_LO = [(18.5, (CP_Z[0] + BZ - BW / 2) / 2)]                     # M3 button head, below the belt
 TEETH_U = [1.5 + 2 * k for k in range(11)]     # GT2 grooves 1.2 wide, 0.75 deep (Ø1 end mill, outer face up)
 FIN_V = 158.0                                  # fins reach out to here
 FIN_Z0 = CP_Z[1] + 1.0                         # fins start above the clamp plates
@@ -264,20 +264,17 @@ def clamp_plate(su, name):
     b = new_body(res)
     n0, n1 = sorted((su * (ISL[0] - 0.3), su * (ISL[1] + 0.3)))
     box(n0, n1, CP_V[0] - 1, CP_V[1] + 1, CP_Z[0] - 1, CARR_FACE + BASE_T + 0.5, "remove", "Island notch")
-    for pts, d, cs in ((CP_UP, CLR["M4"], 8.0), (CP_LO, CLR["M3"], 6.0)):
-        sid = sketch(plane_y(CP_V[1]), [circ([su * u, z], d) for u, z in pts], "Screw holes")
-        r("add_feature", kind="extrude", name="Screw holes", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(CP_T), "op": "remove"})
-        sid = sketch(plane_y(CP_V[1]), [circ([su * u, z], cs) for u, z in pts], "Countersinks")
-        r("add_feature", kind="extrude", name="Countersinks", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(cs / 2 - d / 2 + 0.3), "op": "remove"})
+    sid = sketch(plane_y(CP_V[1]), [circ([su * u, z], CLR["M4"]) for u, z in CP_UP] + [circ([su * u, z], CLR["M3"]) for u, z in CP_LO], "Screw holes")
+    r("add_feature", kind="extrude", name="Screw holes", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(CP_T), "op": "remove"})
     name_part(b, name, "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-              notes="5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer")
+              notes="5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer")
     return st, b
 S_BCLP_P, bclp_p = clamp_plate(+1, "Belt clamp plate, right hand")
 S_BCLP_N, bclp_n = clamp_plate(-1, "Belt clamp plate, left hand")
 
 def clamp_joints(key, swap):
     for su in (-1, 1):
-        for (u, z), std, size, L in [(p, "ISO 10642", "M4", 12) for p in CP_UP] + [(p, "ISO 10642", "M3", 10) for p in CP_LO]:
+        for (u, z), std, size, L in [(p, "ISO 7380", "M4", 12) for p in CP_UP] + [(p, "ISO 7380", "M3", 10) for p in CP_LO]:
             p = [CP_V[1], su * u, z] if swap else [su * u, CP_V[1], z]
             J(key, std, size, p, "-x" if swap else "-y", L=L, label="belt clamp screw")
 

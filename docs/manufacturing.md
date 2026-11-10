@@ -12,8 +12,8 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Bed arm Z2 | 1 | Aluminium 7075 | 61 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed arm Z3 | 1 | Aluminium 7075 | 63 g | 7075 block. Top and bottom: 2.5D outline and steps, M4 bed tap; side: carriage holes and cbores; -y side: 2 M3 clamp taps (4 setups, or drill the clamp holes with a jig) |
 | Bed, MIC6 200 x 200 x 8 | 1 | Aluminium 6061 | 862 g | bought MIC6 cast plate cut to size; 3 countersunk M4 holes drilled on the mill (1 setup) |
-| Belt clamp plate, left hand | 4 | Aluminium 7075 | 7 g | 5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer |
-| Belt clamp plate, right hand | 4 | Aluminium 7075 | 7 g | 5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer |
+| Belt clamp plate, left hand | 4 | Aluminium 7075 | 7 g | 5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer |
+| Belt clamp plate, right hand | 4 | Aluminium 7075 | 7 g | 5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer |
 | Corner block plate, lower | 4 | Steel | 63 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the top face (1 setup) |
 | Corner block plate, upper | 4 | Steel | 0 g | 8 mm mild steel plate. 2D contour, Ø10 shaft hole, 8.5 mm idler slot, Ø5.5 rod holes, Ø22 x 7 608 seat from the bottom face, M4 tapped tab holes on the tongue (flip once) |
 | Extruder carrier | 1 | Aluminium 7075 | 79 g | 7075 block 80 x 75 x 42, machined in its own (rotated) frame. From the bottom: motor flange and cheeks, cbores, gearbox taps M3; from the top: contour, filament hole, clearance holes over the carriage screw heads; from the flange face: motor pilot and M3 holes (3 setups) |
@@ -150,8 +150,6 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | Part | Qty | Used for |
 |---|---:|---|
 | Bearing 608 | 14 | - |
-| ISO 10642 M3x10 | 8 | belt clamp screw x8 |
-| ISO 10642 M4x12 | 16 | belt clamp screw x16 |
 | ISO 10642 M4x20 | 3 | bed screw x3 |
 | ISO 4026 M5x10 | 8 | tension jack screw x8 |
 | ISO 4032 M3 | 26 | nut x26 |
@@ -178,7 +176,9 @@ orientation. Rules: CNC parts are 3-axis mill only (each setup is one face up); 
 | ISO 4762 M8x40 | 3 | Z idler axle x3 |
 | ISO 4762 M8x50 | 4 | idler axle x4 |
 | ISO 7089 M8 | 15 | washer x15 |
+| ISO 7380 M3x10 | 8 | belt clamp screw x8 |
 | ISO 7380 M4x10 | 24 | lid screw x14, cover screw x8, base screw x2 |
+| ISO 7380 M4x12 | 16 | belt clamp screw x16 |
 | ISO 7380 M4x16 | 4 | jamb screw x4 |
 | ISO 7380 M4x8 | 17 | base screw x13, hinge screw x4 |
 | Shaft Ø5x159 | 16 | M5 threaded rod x16 |
