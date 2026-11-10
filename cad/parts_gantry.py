@@ -174,82 +174,134 @@ for p in NEMA23_H:
     J("corner", "ISO 4762", "M5", [p[0], p[1], MOTOR_FACE + 6], "-z", L=12, label="NEMA23 motor screw")
 
 # ================================================================ 2. End blocks: one 7075 part each, 3-axis milled
-# Each block bolts to its MGN12H carriage and carries a beam end between two cheeks (high-tension 12 mm GT2).
-# The block anchors the OUTER strand on its own line: the strand runs along the upright's outer face, which has
-# GT2 tooth grooves milled into it (both belt ends meet at the block centre), and a 7075 clamp plate per end with four
-# M4 countersunk screws (two above, two below the belt) presses the belt into the teeth. No wrap, no deep slots.
-# Local frame: X-end block, u = x along the rail, v = y towards the outside.
+# Each block bolts to its MGN12H carriage (4 x M3) and carries a beam end. Section (local X-end frame, u = x along
+# the rail, v = y towards the outside): a full-width base on the carriage, a 10 mm web between the two belt strands
+# that rises to the beam, and two side fins outboard of the web, above the belt clamp, that stiffen the web against
+# the beam's push and carry the beam cheeks. The inner strand runs past the web's inner face; the outer strand is
+# clamped straight on its own line: 11 GT2 grooves milled in the web's outer face per belt end, pressed in by a 7075
+# clamp plate (2 x M4 above the belt, 1 x M3 below, all countersunk). Nothing reaches inside v = 138.3 above the base
+# (the toolhead's envelope at full travel).
 pr_, bt_ = XY["pitch_r"], XY["belt_t"]
-UP0 = B - pr_ + bt_ / 2 + 1.0                  # upright inner face: 1 mm outside the passing inner strand
-UP1 = B + pr_ - bt_ / 2                        # upright outer face = toothed clamp face on the outer strand
-UPM = (UP0 + UP1) / 2                          # beam cross screws: through the flanges into the tower cheeks
+UP0 = B - pr_ + bt_ / 2 + 1.0                  # web inner face: 1 mm outside the passing inner strand
+UP1 = B + pr_ - bt_ / 2                        # web outer face = toothed clamp face on the outer strand
+UPM = (UP0 + UP1) / 2                          # beam cross screws: through the flanges into the cheeks
 CHK_Z = 14.0                                   # cross screw height above the beam bottom
-CP_U = (1.0, 22.7)                             # clamp plate along u (one per belt end)
-CP_Z = (CARR_FACE + 0.5, BZ + BW / 2 + 7.5)
-CP_T = 5.0
-CP_V = (UP1 + bt_, UP1 + bt_ + CP_T)
-CP_SCR = [((CP_U[0] + CP_U[1]) / 2 + du, z) for du in (-6.25, 6.25) for z in (29.0, 49.0)]
-TEETH_U = [1.5 + 2 * k for k in range(11)]     # GT2 tooth grooves 1.2 wide, 0.75 deep (Ø1 end mill from the side)
-HW = 22.7                                      # block half width along the rail
+HW = 22.7                                      # block half width along the rail (= MGN12H length / 2)
+BASE_V = (RO - 13.5, RO + 13.5)                # base = carriage footprint
 CAR12 = [[sx * 10, sy * 10] for sx in (-1, 1) for sy in (-1, 1)]
+CP_T = 5.0                                     # clamp plate
+CP_V = (UP1 + bt_, UP1 + bt_ + CP_T)
+CP_U = (1.0, HW)
+CP_Z = (CARR_FACE + 0.3, BZ + BW / 2 + 9.0)
+ISL = (6.0, 14.0)                              # base island round the outer carriage screw (u 10)
+CP_UP = [(5.5, BZ + BW / 2 + 4.5), (18.0, BZ + BW / 2 + 4.5)]     # M4 countersunk, above the belt
+CP_LO = [(18.5, (CP_Z[0] + BZ - BW / 2) / 2)]                     # M3 countersunk, below the belt
+TEETH_U = [1.5 + 2 * k for k in range(11)]     # GT2 grooves 1.2 wide, 0.75 deep (Ø1 end mill, outer face up)
+FIN_V = 158.0                                  # fins reach out to here
+FIN_Z0 = CP_Z[1] + 1.0                         # fins start above the clamp plates
 
-def end_block(swap, top_z, seat, nm):
-    """swap=False: X-end frame (u = x along the rail, v = y towards the outside). swap=True: Y-end (u = y, v = x)."""
+def try_fillet(points, radius, name):
+    try:
+        r("add_feature", kind="fillet", name=name, rollback=True,
+          params={"edges": [{"kind": "edge", "point": p} for p in points], "radius": radius})
+    except RuntimeError as e:
+        print("  fillet skipped:", name, str(e)[:120])
+
+def end_block(swap, web_top, fin_top, seat, nm):
+    """swap=False: X-end frame (u = x along the rail, v = y outwards). swap=True: Y-end (u = y, v = x)."""
     def bx(u0, u1, v0, v1, z0, z1, op, name):
         return box(v0, v1, u0, u1, z0, z1, op, name) if swap else box(u0, u1, v0, v1, z0, z1, op, name)
-    def pt(u, v):
-        return [v, u] if swap else [u, v]
-    res = bx(-HW, HW, RO - 13.5, UP1, CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
+    def pt(u, v, z=None):
+        p = [v, u] if swap else [u, v]
+        return p if z is None else p + [z]
+    res = bx(-HW, HW, BASE_V[0], BASE_V[1], CARR_FACE, CARR_FACE + BASE_T, "new", "Base")
     body = new_body(res)
-    bx(-HW, HW, UP0, UP1, CARR_FACE + BASE_T, top_z, "add", "Upright")
-    seat()
+    bx(-HW, HW, UP0, UP1, CARR_FACE + BASE_T, web_top, "add", "Web")
     for su in (-1, 1):
+        bx(*sorted((su * BWD / 2, su * HW)), UP0, FIN_V, FIN_Z0, fin_top, "add", "Fin and cheek")
+    seat()
+    # clamp seats: the plates' lower edges drop through the base beside the outer carriage-screw islands
+    for su in (-1, 1):
+        for u0, u1 in ((CP_U[0] - 0.2, ISL[0]), (ISL[1], HW + 1)):
+            bx(*sorted((su * u0, su * u1)), CP_V[0], BASE_V[1] + 1, CARR_FACE - 1, CARR_FACE + BASE_T + 1, "remove", "Clamp seat")
         for tu in TEETH_U:
             bx(su * tu - 0.6, su * tu + 0.6, UP1 - 0.75, UP1 + 1, BZ - BW / 2 - 0.5, BZ + BW / 2 + 0.5, "remove", "Tooth groove")
-    taps = [circ([su * u, z], TAP["M4"]) for su in (-1, 1) for u, z in CP_SCR]
-    if swap:
-        holes_x(taps, UP1, 8, -1, "Clamp plate taps M4")
-    else:
-        holes_y(taps, UP1 - 8, 8, +1, "Clamp plate taps M4")
+    up = [circ([su * u, z], TAP["M4"]) for su in (-1, 1) for u, z in CP_UP]
+    lo = [circ([su * u, z], TAP["M3"]) for su in (-1, 1) for u, z in CP_LO]
+    for items, nm_ in ((up, "Clamp taps M4"), (lo, "Clamp taps M3")):
+        if swap:
+            holes_x(items, UP1, 8, -1, nm_)
+        else:
+            holes_y(items, UP1 - 8, 8, +1, nm_)
     ch = [pt(c[0], RO + c[1]) for c in CAR12]
     pocket_z([circ(p, CB["M3"][0]) for p in ch], CARR_FACE + BASE_T, CB["M3"][1], "Cbores")
     cut_through([circ(p, CLR["M3"]) for p in ch], CARR_FACE + BASE_T, "Carriage screws")
+    # fin underside chamfer (cut on the end setups, tool along u) and a lightening pocket in the web between the fins
+    for su in (-1, 1):
+        tri = [{"type": "polyline", "closed": True, "points": [[FIN_V - 6, FIN_Z0 - 1], [FIN_V + 1, FIN_Z0 - 1], [FIN_V + 1, FIN_Z0 + 7]]}]
+        lo_, hi_ = sorted((su * BWD / 2, su * HW))
+        dep = str(hi_ - lo_ + 1)
+        if swap:
+            sid = sketch(plane_y(hi_ + 0.5), tri, "Fin chamfer")
+        else:
+            sid = sketch(plane_x(lo_ - 0.5), tri, "Fin chamfer")
+        r("add_feature", kind="extrude", name="Fin chamfer", params={"profiles": [{"sketch": sid, "all": True}], "depth": dep, "op": "remove"})
+    zm = (FIN_Z0 + fin_top) / 2
+    for su in (-1, 1):
+        try_fillet([pt(su * HW, FIN_V, zm), pt(su * BWD / 2, FIN_V, zm)], 2.0, "Fin edges")
+        try_fillet([pt(su * BWD / 2, UP1, zm)], 3.0, "Fin root")
+        try_fillet([pt(su * HW, BASE_V[0], CARR_FACE + BASE_T / 2)], 3.0, "Base corner")
+    pk_top = (YB_BOT if swap else web_top) - 12
+    if pk_top - FIN_Z0 > 12:
+        bx(-(BWD / 2 - 1.5), BWD / 2 - 1.5, UP1 - 6, UP1 + 1, FIN_Z0 + 2, pk_top, "remove", "Web pocket")
     return body, ch
 
-# ---- belt clamp plate, centred on u = 0 in the X-end frame (placed at u = +-CP_UC; Rz(-90) for the Y-end blocks)
-CP_UC = (CP_U[0] + CP_U[1]) / 2
-CP_HW = (CP_U[1] - CP_U[0]) / 2
-S_BCLP = studio("Belt clamp plate")
-res = box(-CP_HW, CP_HW, CP_V[0], CP_V[1], CP_Z[0], CP_Z[1], "new", "Plate")
-bclp_body = new_body(res)
-sid = sketch(plane_y(CP_V[1]), [circ([u - CP_UC, z], CLR["M4"]) for u, z in CP_SCR], "Screw holes")
-r("add_feature", kind="extrude", name="Screw holes", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(CP_T), "op": "remove"})
-sid = sketch(plane_y(CP_V[1]), [circ([u - CP_UC, z], 8.0) for u, z in CP_SCR], "Countersinks")
-r("add_feature", kind="extrude", name="Countersinks", params={"profiles": [{"sketch": sid, "all": True}], "depth": "2.2", "op": "remove"})
-name_part(bclp_body, "Belt clamp plate", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="21.7 x 27 x 5 7075 bar, 4 drilled and countersunk holes from the outer face (1 setup). 8 per printer")
+def clamp_plate(su, name):
+    """Belt clamp plate for the su side of the X-end frame (the Y-end blocks use the other hand, turned Rz(-90))."""
+    st = studio(name)
+    u0, u1 = sorted((su * CP_U[0], su * CP_U[1]))
+    res = box(u0, u1, CP_V[0], CP_V[1], CP_Z[0], CP_Z[1], "new", "Plate")
+    b = new_body(res)
+    n0, n1 = sorted((su * (ISL[0] - 0.3), su * (ISL[1] + 0.3)))
+    box(n0, n1, CP_V[0] - 1, CP_V[1] + 1, CP_Z[0] - 1, CARR_FACE + BASE_T + 0.5, "remove", "Island notch")
+    for pts, d, cs in ((CP_UP, CLR["M4"], 8.0), (CP_LO, CLR["M3"], 6.0)):
+        sid = sketch(plane_y(CP_V[1]), [circ([su * u, z], d) for u, z in pts], "Screw holes")
+        r("add_feature", kind="extrude", name="Screw holes", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(CP_T), "op": "remove"})
+        sid = sketch(plane_y(CP_V[1]), [circ([su * u, z], cs) for u, z in pts], "Countersinks")
+        r("add_feature", kind="extrude", name="Countersinks", params={"profiles": [{"sketch": sid, "all": True}], "depth": str(cs / 2 - d / 2 + 0.3), "op": "remove"})
+    name_part(b, name, "Aluminium 7075", "#c0c6cc", "metal", method="mill",
+              notes="5 mm 7075 plate: 2D profile with the island notch, 3 countersunk holes (1 setup). 4 of each hand per printer")
+    return st, b
+S_BCLP_P, bclp_p = clamp_plate(+1, "Belt clamp plate, right hand")
+S_BCLP_N, bclp_n = clamp_plate(-1, "Belt clamp plate, left hand")
 
-# ---- X-end block: the upright rises to the X beam, which drops into a slot between two cheeks
+def clamp_joints(key, swap):
+    for su in (-1, 1):
+        for (u, z), std, size, L in [(p, "ISO 10642", "M4", 12) for p in CP_UP] + [(p, "ISO 10642", "M3", 10) for p in CP_LO]:
+            p = [CP_V[1], su * u, z] if swap else [su * u, CP_V[1], z]
+            J(key, std, size, p, "-x" if swap else "-y", L=L, label="belt clamp screw")
+
+MILL3 = ("Setup 2, outer face up: pocket between the fins and under them, 6 mm lightening pocket in the web, the clamp seats through the base, "
+         "2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep), clamp taps 4 x M4 and 2 x M3. "
+         "Setup 3, on each end: fin underside chamfer, cheek taps M4 through (3 setups)")
+
+# ---- X-end block: the web rises to the X beam, which drops between the cheeks on top of the fins
 S_XEND = studio("X-end block")
 def _xseat():
-    for sx in (-1, 1):
-        x0_, x1_ = sorted((sx * (BWD / 2), sx * HW))
-        box(x0_, x1_, UP0, UP1, XB_BOT, XB_BOT + 20, "add", "Cheek")
     holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], BWD / 2, HW - BWD / 2, +1, "Cheek tap")
     holes_x([circ([UPM, XB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, HW - BWD / 2, -1, "Cheek tap")
     pocket_z([circ([sx * 6, B - 1.5], TAP["M4"]) for sx in (-1, 1)], XB_BOT, 10, "Beam screws M4")
-xend_body, xc_h = end_block(False, XB_BOT, _xseat, "X")
+xend_body, xc_h = end_block(False, XB_BOT, XB_BOT + 20, _xseat, "X")
 name_part(xend_body, "X-end block", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. "
-                "Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups)")
+          notes=f"One part from 7075 bar 45.4 x {FIN_V - BASE_V[0]:.1f} x {XB_BOT + 20 - CARR_FACE:.0f}. Setup 1, bottom face down: "
+                "profile, step down to the base, slot between the cheeks, carriage cbores, beam screw taps M4. " + MILL3)
 for c in xc_h:
     J("xend", "ISO 4762", "M3", [c[0], c[1], CARR_FACE + BASE_T - CB["M3"][1]], "-z", L=8, label="carriage screw")
 for sx in (-1, 1):
     J("xend", "ISO 4762", "M4", [sx * 6, B - 1.5, XB_BOT + BT], "-z", L=12, label="beam screw")
-    for u, z in CP_SCR:
-        J("xend", "ISO 10642", "M4", [sx * u, CP_V[1], z], "-y", L=12, label="belt clamp screw")
+clamp_joints("xend", False)
 
-# ---- Y-end block (local: right block, Y beam at y = 0): the beam sits in a seat between the two ears
+# ---- Y-end block (local: right block, Y beam at y = 0): the beam sits in a seat between the fins' cheeks
 S_YEND = studio("Y-end block")
 EAR_Z = YB_BOT + 21
 def _yseat():
@@ -257,17 +309,15 @@ def _yseat():
     holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], BWD / 2, HW - BWD / 2, +1, "Cheek tap")
     holes_y([circ([UPM, YB_BOT + CHK_Z], TAP["M4"])], -BWD / 2, HW - BWD / 2, -1, "Cheek tap")
     pocket_z([circ([B - 1.5, sy * 6], TAP["M4"]) for sy in (-1, 1)], YB_BOT, 10, "Beam screws M4")
-yend_body, yc_h = end_block(True, EAR_Z, _yseat, "Y")
+yend_body, yc_h = end_block(True, EAR_Z, EAR_Z, _yseat, "Y")
 name_part(yend_body, "Y-end block", "Aluminium 7075", "#c0c6cc", "metal", method="mill",
-          notes="One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, "
-                "beam seat slot, carriage cbores, beam screw taps M4. "
-                "Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (Ø1 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups)")
+          notes=f"One part from 7075 bar {FIN_V - BASE_V[0]:.1f} x 45.4 x {EAR_Z - CARR_FACE:.0f}. Setup 1, bottom face down: "
+                "profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. " + MILL3)
 for c in yc_h:
     J("yend", "ISO 4762", "M3", [c[0], c[1], CARR_FACE + BASE_T - CB["M3"][1]], "-z", L=8, label="carriage screw")
 for sy in (-1, 1):
     J("yend", "ISO 4762", "M4", [B - 1.5, sy * 6, YB_BOT + BT], "-z", L=12, label="beam screw")
-    for u, z in CP_SCR:
-        J("yend", "ISO 10642", "M4", [CP_V[1], sy * u, z], "-x", L=12, label="belt clamp screw")
+clamp_joints("yend", True)
 
 # ================================================================ 4. Beam backer: SCS bent U channel, web at the bottom
 S_BEAM = studio("Beam backer")
