@@ -183,6 +183,12 @@ layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "bel
 
 # ================================================================ Part Studios
 exec(open(os.path.join(HERE, "parts_gantry.py")).read())
+if os.environ.get("CROXY_PREVIEW_END_BLOCKS"):
+    for st, nm in ((S_XEND, "xend"), (S_YEND, "yend"), (S_BCLP_P, "clamp")):
+        r("switch_part_studio", index=st)
+        for v in ("iso_back_left", "iso_front_right"):
+            r("render", view=v, width=900, height=900, path=f"preview-{nm}-{v}.png")
+    sys.exit(0)
 
 # ---- 7. Bought parts (stand-ins), one Part Studio each, modelled in their own frames
 buy = {}
@@ -517,18 +523,16 @@ def gantry_parts():
         f = lambda tx, ty: [tx, 0, 0]
         g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
         g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end block {nm}"))
-        for su in (-1, 1):
-            o = mvec(R, [su * CP_UC, 0, 0])
-            g.append((f"xclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [tx + o[0], o[1], 0], R, f"Belt clamp plate X {nm}"))
+        for k, sb in (("p", (S_BCLP_P, bclp_p)), ("n", (S_BCLP_N, bclp_n))):
+            g.append((f"xclp_{nm}_{k}", sb, f, R, f"Belt clamp plate X {nm}"))
         jg.append(("xend", R, f, f"X-end {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
         f = lambda tx, ty: [0, ty, 0]
         g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
         g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end block {nm}"))
-        for su in (-1, 1):
-            o = mvec(R, [0, su * CP_UC, 0])
-            g.append((f"yclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [o[0], ty + o[1], 0], mm(R, Rz(-90)), f"Belt clamp plate Y {nm}"))
+        for k, sb in (("p", (S_BCLP_P, bclp_p)), ("n", (S_BCLP_N, bclp_n))):
+            g.append((f"yclp_{nm}_{k}", sb, f, mm(R, Rz(-90)), f"Belt clamp plate Y {nm}"))
         jg.append(("yend", R, f, f"Y-end {nm}"))
     fx_ = lambda tx, ty: [tx, 0, XB_BOT]
     fy_ = lambda tx, ty: [0, ty, YB_BOT]

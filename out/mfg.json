@@ -49,20 +49,25 @@
   "material": "Steel",
   "notes": "DIN 988 shim washer"
  },
- "Belt clamp plate": {
+ "Belt clamp plate, right hand": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "21.7 x 27 x 5 7075 bar, 4 drilled and countersunk holes from the outer face (1 setup). 8 per printer"
+  "notes": "5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer"
+ },
+ "Belt clamp plate, left hand": {
+  "method": "mill",
+  "material": "Aluminium 7075",
+  "notes": "5 mm 7075 plate: 2D profile with the island notch and 3 drilled through holes, one setup (or SCS laser cut). 4 of each hand per printer"
  },
  "X-end block": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "One part from 7075 bar 45.4 x 19.2 x 85. Setup 1, bottom face down: profile, step down to the base, carriage cbores, beam screw taps M4. Setup 2, on each side: cheek taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (\u00d81 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups)"
+  "notes": "One part from 7075 bar 45.4 x 28.5 x 124. Setup 1, bottom face down: profile, step down to the base, slot between the cheeks, carriage cbores, beam screw taps M4. Setup 2, outer face up: pocket between the fins and under them, 6 mm lightening pocket in the web, the clamp seats through the base, 2 x 11 GT2 tooth grooves (\u00d81 end mill, 0.75 deep), clamp taps 4 x M4 and 2 x M3. Setup 3, on each end: fin underside chamfer, cheek taps M4 through (3 setups)"
  },
  "Y-end block": {
   "method": "mill",
   "material": "Aluminium 7075",
-  "notes": "One part from 7075 bar 19.2 x 45.4 x 43. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, on each side: ear taps M4 through. Setup 3, outer face up: 2 x 11 GT2 tooth grooves (\u00d81 end mill, 0.75 deep) and 8 clamp plate taps M4 (3 setups)"
+  "notes": "One part from 7075 bar 28.5 x 45.4 x 82. Setup 1, bottom face down: profile, step down to the base, beam seat slot, carriage cbores, beam screw taps M4. Setup 2, outer face up: pocket between the fins and under them, 6 mm lightening pocket in the web, the clamp seats through the base, 2 x 11 GT2 tooth grooves (\u00d81 end mill, 0.75 deep), clamp taps 4 x M4 and 2 x M3. Setup 3, on each end: fin underside chamfer, cheek taps M4 through (3 setups)"
  },
  "Beam backer (U channel)": {
   "method": "SCS + mill",
