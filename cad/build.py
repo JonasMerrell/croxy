@@ -160,21 +160,35 @@ YB_TOP, XB_TOP = YB_BOT + BH, XB_BOT + BH
 X_CAR_FACE = XB_BOT - 10                  # MGN9H face under the X beam
 Y_CAR_FACE = YB_BOT - 10                  # MGN9H face under the Y beam
 YOKE_T = 6
-TH_TOP = TH["body_top"]                   # toolhead body hangs below the plate
-NECK_TOP = Y_CAR_FACE - YOKE_T            # underside of the yoke
 FX, FY = TH["offset"]                     # nozzle / filament axis relative to the beam cross
-NOZ = TH_TOP - TH["height"]
+NOZ = TH["nozzle_z"]
 MOTOR_PLATE = (XB_TOP + 1, XB_TOP + 7)    # motor plate clears the X beam
 MOTOR_FACE = MOTOR_PLATE[1]
-assert BLK_BOT[0] > CARR_FACE - 10 and NECK_TOP > PT + F["shutter_h"] and TH_TOP < 0, "stack does not fit"
+assert BLK_BOT[0] > CARR_FACE - 10, "stack does not fit"
+assert MOTOR_FACE + XY["motor_len"] < P["enclosure"]["lid_z"] - 5, "NEMA23s do not fit under the lid"
+
+# toolhead layout, centre of mass and fit (cad/toolhead.py): the extruder rides above the plate under the yoke,
+# drawn in its own frame (rotated THL["rot"] about z)
+import toolhead as THM
+THL = THM.layout(P)
+TH_ROT = Rz(THL["rot"])
+TH_REPORT, TH_COM, TH_MASS = THM.report(P)
+assert math.hypot(TH_COM[0], TH_COM[1]) < 1.0, "toolhead centre of mass is off the rail lines (re-solve with cad/toolhead.py):\n" + TH_REPORT
+assert not THM.fit_problems(P, THL), THM.fit_problems(P, THL)
 
 layout = {"drive_FL": D_FL, "idler_FL": I_FL, "pulley_z": [PUL_Z0, PUL_Z1], "belt_z": BZ,
           "x_beam": [XB_BOT, XB_TOP], "y_beam": [YB_BOT, YB_TOP], "motor_face": MOTOR_FACE,
-          "toolhead_top": TH_TOP, "nozzle_z": NOZ, "nozzle_offset": [FX, FY],
-          "build_centre": [FX, FY]}
+          "nozzle_z": NOZ, "nozzle_offset": [FX, FY],
+          "build_centre": [FX, FY], "toolhead_com": [round(v, 2) for v in TH_COM], "toolhead_mass_g": round(TH_MASS)}
 
 # ================================================================ Part Studios
 exec(open(os.path.join(HERE, "parts_gantry.py")).read())
+if os.environ.get("CROXY_PREVIEW_END_BLOCKS"):
+    for st, nm in ((S_XEND, "xend"), (S_YEND, "yend"), (S_BCLP_P, "clamp")):
+        r("switch_part_studio", index=st)
+        for v in ("iso_back_left", "iso_front_right"):
+            r("render", view=v, width=900, height=900, path=f"preview-{nm}-{v}.png")
+    sys.exit(0)
 
 # ---- 7. Bought parts (stand-ins), one Part Studio each, modelled in their own frames
 buy = {}
@@ -509,18 +523,16 @@ def gantry_parts():
         f = lambda tx, ty: [tx, 0, 0]
         g.append((f"xcar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [tx, s * RO, PT], I3, f"MGN12H X {nm}"))
         g.append((f"xend_{nm}", (S_XEND, xend_body), f, R, f"X-end block {nm}"))
-        for su in (-1, 1):
-            o = mvec(R, [su * CP_UC, 0, 0])
-            g.append((f"xclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [tx + o[0], o[1], 0], R, f"Belt clamp plate X {nm}"))
+        for k, sb in (("p", (S_BCLP_P, bclp_p)), ("n", (S_BCLP_N, bclp_n))):
+            g.append((f"xclp_{nm}_{k}", sb, f, R, f"Belt clamp plate X {nm}"))
         jg.append(("xend", R, f, f"X-end {nm}"))
     for sgn, nm in ((1, "right"), (-1, "left")):
         R = I3 if sgn > 0 else Rz(180)
         f = lambda tx, ty: [0, ty, 0]
         g.append((f"ycar_{nm}", buy["mgn12h"], lambda tx, ty, s=sgn: [s * RO, ty, PT], Rz(90), f"MGN12H Y {nm}"))
         g.append((f"yend_{nm}", (S_YEND, yend_body), f, R, f"Y-end block {nm}"))
-        for su in (-1, 1):
-            o = mvec(R, [0, su * CP_UC, 0])
-            g.append((f"yclp_{nm}_{su}", (S_BCLP, bclp_body), lambda tx, ty, o=o: [o[0], ty + o[1], 0], mm(R, Rz(-90)), f"Belt clamp plate Y {nm}"))
+        for k, sb in (("p", (S_BCLP_P, bclp_p)), ("n", (S_BCLP_N, bclp_n))):
+            g.append((f"yclp_{nm}_{k}", sb, f, mm(R, Rz(-90)), f"Belt clamp plate Y {nm}"))
         jg.append(("yend", R, f, f"Y-end {nm}"))
     fx_ = lambda tx, ty: [tx, 0, XB_BOT]
     fy_ = lambda tx, ty: [0, ty, YB_BOT]
@@ -533,16 +545,13 @@ def gantry_parts():
           ("ycar9", buy["mgn9h"], lambda tx, ty: [tx, ty, YB_BOT], RX180, "MGN9H on Y beam"),
           ("yoke", (S_YOKE, yoke_body), fh, I3, "Yoke U"),
           ("ytop", (S_YTOP, ytop_body), fh, I3, "Yoke top plate"),
-          ("neck", (S_NECK, neck_body), fh, I3, "Toolhead neck"),
-          ("tpl", (S_TPL, tpl_body), fh, I3, "Toolhead plate"),
-          ("adapt", (S_ADAPT, adapt_body), fh, I3, "Neck air adapter"),
+          ("carrier", (S_CAR, car_body), fh, TH_ROT, "Extruder carrier"),
           ("strip", (S_STRIP, strip_body), lambda tx, ty: [0, ty, 0], I3, "Shutter strip"),
-          ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter neck plate"),
+          ("nplate", (S_NPLATE, nplate_body), fh, I3, "Shutter column plate"),
           ("tube", (S_TUBE, tube_body), fh, I3, "Filament tube")]
-    g += [(f"tdet{k}", (S_TDET, b_), fh, I3, nm_) for k, (b_, nm_) in enumerate(tdet)]
-    g.append(("bcnb", (S_BCNB, bcnb_body), fh, I3, "Beacon bracket"))
+    g += [(f"tdet{k}", (S_TDET, b_), fh, TH_ROT, nm_) for k, (b_, nm_) in enumerate(tdet)]
     jg += [("beam", Rz(90), fx_, "X beam"), ("beam", I3, fy_, "Y beam"),
-           ("yoke", I3, fh, "yoke"), ("neck", I3, fh, "neck")]
+           ("yoke", I3, fh, "yoke"), ("th", TH_ROT, fh, "toolhead")]
     return g, jg
 
 GP, GJ = gantry_parts()
@@ -584,10 +593,11 @@ def pose(tx, ty):
 
 # stand-in pairs that overlap on purpose (no bores in the stand-ins, belt on the pulley pitch line)
 EXPECTED = ("Drive pulley", "Idler", "Drive shaft", "Coupling", "NEMA23", "608", "belt", "Z idler", "Z drive pulley", "Z belt", "NEMA17", "Z jackshaft", "Z 608", "Z reduction")
-PASS = [("Heater shaft", "Chamber heater"), ("Heater shaft", "Heater fan motor")]
+PASS = [("Heater shaft", "Chamber heater"), ("Heater shaft", "Heater fan motor"),
+        ("Extruder jackshaft", "Extruder gearbox"), ("Extruder jackshaft", "Extruder shaft coupling")]
 # fasteners that thread into a stand-in without modelled holes, or into a tapped hole modelled at nominal size
 FX_PASS = [("post bolt", "Post"), ("NEMA23 motor screw", "NEMA23"), ("NEMA17 screw", "NEMA17"),
-           ("extruder screw", "Extruder"), ("duct screw", "Part-cooling duct"), ("Beacon bracket screw", "Beacon"),
+           ("extruder screw", "Extruder"), ("extruder motor screw", "Extruder motor"), ("duct screw", "Part-cooling duct"), ("carrier screw", "Yoke U"),
            ("M5 threaded rod", "nut"), ("M5 threaded rod", "Top plate"), ("M5 threaded rod", "Motor plate"), ("M8 tie rod", "Bay leg"),
            ("heater screw", "Chamber heater"), ("heater motor screw", "Heater fan motor"), ("fan screw", "fan"),
            ("blower screw", "blower"), ("electronics screw", "Kraken"), ("electronics screw", "PSU"), ("electronics screw", "Raspberry"),
